@@ -1,10 +1,10 @@
 package.xdc
 package.xs
 package/xconfig_empty.sch
-package/.vers_g200
-package/.vers_r200
-package/.vers_b200
-package/.xdc-H32
+package/.vers_g180
+package/.vers_r170
+package/.vers_b160
+package/.xdc-B06
 package/xconfig_empty.java
 package/xconfig_empty.class
 package/package_xconfig_empty.c
