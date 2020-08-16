@@ -12,8 +12,8 @@ iADC1.$assign = "ADC1";
 iADC1.AIN0.$assign = "PE3"; // pin number - 6
 // Used
 iADC1.AIN9.$used = false;
-// Used
-iADC1.AIN4.$used = false;
+// Assign pin
+iADC1.AIN4.$assign = "PD3"; // pin number - 64
 // Used
 iADC1.AIN8.$used = false;
 // Used
@@ -22,8 +22,8 @@ iADC1.AIN6.$used = false;
 iADC1.AIN1.$assign = "PE2"; // pin number - 7
 // Assign pin
 iADC1.AIN2.$assign = "PE1"; // pin number - 8
-// Assign pin
-iADC1.AIN3.$assign = "PE0"; // pin number - 9
+// Used
+iADC1.AIN3.$used = false;
 // Used
 iADC1.AIN11.$used = false;
 // Used
@@ -36,26 +36,26 @@ var iGPIO1 = scripting.addPeripheral("GPIO");
 // Number of GPIO pins
 iGPIO1.$numPins = 4;
 // IO
-iGPIO1["0"].io = "output";
+iGPIO1["0"].io = "outputOpenDrain";
 // Assign pin
 iGPIO1["0"].$assign = "PB6"; // pin number - 1
 // IO
-iGPIO1["1"].io = "output";
+iGPIO1["1"].io = "outputOpenDrain";
 // Assign pin
 iGPIO1["1"].$assign = "PB7"; // pin number - 4
 // IO
-iGPIO1["2"].io = "output";
+iGPIO1["2"].io = "outputOpenDrain";
 // Assign pin
 iGPIO1["2"].$assign = "PD7"; // pin number - 10
 // IO
-iGPIO1["3"].io = "output";
+iGPIO1["3"].io = "outputOpenDrain";
 // Assign pin
 iGPIO1["3"].$assign = "PC7"; // pin number - 13
 // Name
 iGPIO1.$name = "HSD_ENABLE";
 var iGPIO2 = scripting.addPeripheral("GPIO");
 // IO
-iGPIO2["0"].io = "output";
+iGPIO2["0"].io = "outputOpenDrain";
 // Assign pin
 iGPIO2["0"].$assign = "PC6"; // pin number - 14
 // Name
@@ -67,6 +67,8 @@ iGPIO3.$numPins = 5;
 iGPIO3["0"].io = "output";
 // Assign pin
 iGPIO3["0"].$assign = "PF1"; // pin number - 29
+// Used
+iGPIO3["0"].$used = false;
 // IO
 iGPIO3["1"].io = "output";
 // Assign pin
@@ -90,10 +92,33 @@ var iGPIO4 = scripting.addPeripheral("GPIO");
 iGPIO4.$numPins = 2;
 // Assign pin
 iGPIO4["0"].$assign = "PD0"; // pin number - 61
+// Used
+iGPIO4["0"].$used = false;
 // Assign pin
 iGPIO4["1"].$assign = "PD1"; // pin number - 62
+// Used
+iGPIO4["1"].$used = false;
 // Name
 iGPIO4.$name = "Random_LaunchPad_Jumpers";
+var iGPIO5 = scripting.addPeripheral("GPIO");
+// IO
+iGPIO5["0"].io = "outputOpenDrain";
+// Assign pin
+iGPIO5["0"].$assign = "PC5"; // pin number - 15
+// Name
+iGPIO5.$name = "ESP_RST";
+var iGPIO6 = scripting.addPeripheral("GPIO");
+// Assign pin
+iGPIO6["0"].$assign = "PC4"; // pin number - 16
+// Name
+iGPIO6.$name = "RTC_SQW";
+var iGPIO7 = scripting.addPeripheral("GPIO");
+// IO
+iGPIO7["0"].io = "outputOpenDrain";
+// Assign pin
+iGPIO7["0"].$assign = "PA2"; // pin number - 19
+// Name
+iGPIO7.$name = "BUF_OE";
 var iI2C1 = scripting.addPeripheral("I2C");
 // Name
 iI2C1.$name = "IO";
@@ -121,6 +146,19 @@ iI2C3.$assign = "I2C0";
 iI2C3.SCL.$assign = "PB2"; // pin number - 47
 // Assign pin
 iI2C3.SDA.$assign = "PB3"; // pin number - 48
+var iSSI1 = scripting.addPeripheral("SSI");
+// Name
+iSSI1.$name = "MySSI1";
+// Use Peripheral
+iSSI1.$assign = "SSI1";
+// Used
+iSSI1.RX.$used = false;
+// Used
+iSSI1.FSS.$used = false;
+// Assign pin
+iSSI1.TX.$assign = "PF1"; // pin number - 29
+// Assign pin
+iSSI1.CLK.$assign = "PD0"; // pin number - 61
 var iUART1 = scripting.addPeripheral("UART");
 // Name
 iUART1.$name = "DBG";
