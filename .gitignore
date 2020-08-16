@@ -52,6 +52,6 @@ Mkfile.old
 dkms.conf
 
 /Debug/
-/.config/
-/.xdchelp
-/.launches/
+.config/
+.xdchelp
+.launches/
