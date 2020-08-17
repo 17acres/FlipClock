@@ -108,6 +108,8 @@ iGPIO5["0"].$assign = "PC5"; // pin number - 15
 // Name
 iGPIO5.$name = "ESP_RST";
 var iGPIO6 = scripting.addPeripheral("GPIO");
+// PU/PD
+iGPIO6["0"].pu_pd = "pu";
 // Assign pin
 iGPIO6["0"].$assign = "PC4"; // pin number - 16
 // Name

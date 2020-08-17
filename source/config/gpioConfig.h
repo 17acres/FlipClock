@@ -30,70 +30,43 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* XDCtools Header files */
-#include <xdc/std.h>
-#include <xdc/runtime/System.h>
+#ifndef __GPIO_CONFIG_H
+#define __GPIO_CONFIG_H
 
-/* BIOS Header files */
-#include <ti/sysbios/BIOS.h>
-#include <ti/sysbios/knl/Task.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-/* TI-RTOS Header files */
-#include <ti/drivers/GPIO.h>
-// #include <ti/drivers/I2C.h>
-// #include <ti/drivers/SDSPI.h>
-// #include <ti/drivers/SPI.h>
-// #include <ti/drivers/UART.h>
-// #include <ti/drivers/Watchdog.h>
-// #include <ti/drivers/WiFi.h>
+typedef enum GPIONames {
+    RTC_SQW = 0,
+	LAUNCHPAD_SW1,
+	LAUNCHPAD_SW2,
+    HSD_DISABLE_0, //high is disable
+	HSD_DISABLE_1,
+	HSD_DISABLE_2,
+	HSD_ENABLE_3,
+	IO_RESET, //high is reset
+	ESP_ENABLE, //high is enable
+	BUF_DISABLE, //high is disable
+	LAUNCHPAD_LED_BLUE,
+	LAUNCHPAD_LED_GREEN,
+    GPIOCOUNT
+} EK_TM4C123GXL_GPIOName;
 
+extern void initGPIO(void);
 
-#include <"boardInit.c">
-
-#define TASKSTACKSIZE   512
-
-Task_Struct task0Struct;
-Char task0Stack[TASKSTACKSIZE];
-
-/*
- *  ======== heartBeatFxn ========
- *  Toggle the Board_LED0. The Task_sleep is determined by arg0 which
- *  is configured for the heartBeat Task instance.
+/*!
+ *  @brief  Initialize board specific I2C settings
+ *
+ *  This function initializes the board specific I2C settings and then calls
+ *  the I2C_init API to initialize the I2C module.
+ *
+ *  The I2C peripherals controlled by the I2C module are determined by the
+ *  I2C_config variable.
  */
-Void heartBeatFxn(UArg arg0, UArg arg1)
-{
-    while (1) {
-        Task_sleep((UInt)arg0);
-        GPIO_toggle(Board_LED0);
-    }
+
+#ifdef __cplusplus
 }
+#endif
 
-/*
- *  ======== main ========
- */
-int main(void)
-{
-    Task_Params taskParams;
-
-    initPins();
-
-    /* Construct heartBeat Task  thread */
-    Task_Params_init(&taskParams);
-    taskParams.arg0 = 1000;
-    taskParams.stackSize = TASKSTACKSIZE;
-    taskParams.stack = &task0Stack;
-    Task_construct(&task0Struct, (Task_FuncPtr)heartBeatFxn, &taskParams, NULL);
-
-    /* Turn on user LED */
-    GPIO_write(Board_LED0, Board_LED_ON);
-
-    System_printf("Starting the example\nSystem provider is set to SysMin. "
-                  "Halt the target to view any SysMin contents in ROV.\n");
-    /* SysMin will only print to the console when you call flush or exit */
-    System_flush();
-
-    /* Start BIOS */
-    BIOS_start();
-
-    return (0);
-}
+#endif

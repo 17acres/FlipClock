@@ -1,6 +1,6 @@
 #
 # This file was generated based on the configuration script:
-#     N:\classmate\FlipClock\empty.cfg
+#     C:\Users\Dan\Documents\GitHub\FlipClock\rtosConfig.cfg
 #
 # This makefile may be included in other makefiles that need to build
 # the libraries containing the compiled source files generated as
@@ -14,7 +14,7 @@
 #
 # The absolute path to the generated source directory (at the time the
 # sources were generated) is:
-#    N:\classmate\FlipClock\src
+#    C:\Users\Dan\Documents\GitHub\FlipClock\src
 #
 GEN_SRC_DIR ?= ../src
 
