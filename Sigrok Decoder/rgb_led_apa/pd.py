@@ -20,35 +20,6 @@
 ## along with this program; if not, see <http://www.gnu.org/licenses/>.
 ##
 
-## End frame length calculation formula:
-## https://github.com/pololu/apa102-arduino/blob/master/APA102.h
-
-## Copyright (c) 2015-2017 Pololu Corporation.  For more information, see
-
-## http://www.pololu.com/
-## http://forum.pololu.com/
-
-## Permission is hereby granted, free of charge, to any person
-## obtaining a copy of this software and associated documentation
-## files (the "Software"), to deal in the Software without
-## restriction, including without limitation the rights to use,
-## copy, modify, merge, publish, distribute, sublicense, and/or sell
-## copies of the Software, and to permit persons to whom the
-## Software is furnished to do so, subject to the following
-## conditions:
-
-## The above copyright notice and this permission notice shall be
-## included in all copies or substantial portions of the Software.
-
-## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-## EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-## OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-## NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-## HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-## WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-## FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-## OTHER DEALINGS IN THE SOFTWARE.
-
 import sigrokdecode as srd
 
 class Decoder(srd.Decoder):
@@ -124,9 +95,10 @@ class Decoder(srd.Decoder):
                 pass
 
             try:
+                # End frame length calculation from: https://github.com/pololu/apa102-arduino/blob/master/APA102.h
                 endLength=len(self.nullStarts)-4 #subtract 4 for next start
                 ledsTerminated=endLength*16+1
-                self.put(self.nullStarts[0],self.nullEnds[-5], self.out_ann, [6, ['End Frame, <%x LEDs' % (ledsTerminated+1), 'End Frame','EF','E']])
+                self.put(self.nullStarts[0],self.nullEnds[-5], self.out_ann, [6, ['End Frame, <%d LEDs' % (ledsTerminated+1), 'End Frame','EF','E']])
             except:
                 pass
 
