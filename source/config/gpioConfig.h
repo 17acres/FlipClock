@@ -33,15 +33,8 @@
 #ifndef __GPIO_CONFIG_H
 #define __GPIO_CONFIG_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 typedef enum GPIONames {
-    RTC_SQW = 0,
-	LAUNCHPAD_SW1,
-	LAUNCHPAD_SW2,
-    HSD_DISABLE_0, //high is disable
+	RTC_SQW = 0, LAUNCHPAD_SW1, LAUNCHPAD_SW2, HSD_DISABLE_0, //high is disable
 	HSD_DISABLE_1,
 	HSD_DISABLE_2,
 	HSD_ENABLE_3,
@@ -50,7 +43,7 @@ typedef enum GPIONames {
 	BUF_DISABLE, //high is disable
 	LAUNCHPAD_LED_BLUE,
 	LAUNCHPAD_LED_GREEN,
-    GPIOCOUNT
+	GPIOCOUNT
 } EK_TM4C123GXL_GPIOName;
 
 extern void initGPIO(void);
@@ -64,9 +57,5 @@ extern void initGPIO(void);
  *  The I2C peripherals controlled by the I2C module are determined by the
  *  I2C_config variable.
  */
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

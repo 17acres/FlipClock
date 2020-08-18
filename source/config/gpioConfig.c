@@ -120,15 +120,21 @@ GPIOTiva_PF_3 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH };
  * NOTE: Pins not used for interrupts can be omitted from callbacks array to
  *       reduce memory usage (if placed at end of gpioPinConfigs array).
  */
+
 GPIO_CallbackFxn gpioCallbackFunctions[] = {
 NULL, /* RTC_SQW */
 NULL, /* LAUNCHPAD_SW1 */
 NULL /* LAUNCHPAD_SW2 */
 };
 
+GPIO_CallbackFxn gpioCallbackFunctions[] = { NULL, NULL, NULL };
+
 /* The device-specific GPIO_config structure */
-const GPIOTiva_Config GPIOTiva_config = { .pinConfigs = (GPIO_PinConfig *) gpioPinConfigs, .callbacks = (GPIO_CallbackFxn *) gpioCallbackFunctions,
-		.numberOfPinConfigs = sizeof(gpioPinConfigs) / sizeof(GPIO_PinConfig), .numberOfCallbacks = sizeof(gpioCallbackFunctions) / sizeof(GPIO_CallbackFxn),
+const GPIOTiva_Config GPIOTiva_config = {
+		.pinConfigs = (GPIO_PinConfig *) gpioPinConfigs,
+		.callbacks = (GPIO_CallbackFxn *) gpioCallbackFunctions,
+		.numberOfPinConfigs = sizeof(gpioPinConfigs) / sizeof(GPIO_PinConfig),
+		.numberOfCallbacks = sizeof(gpioCallbackFunctions) / sizeof(GPIO_CallbackFxn),
 		.intPriority = (~0) };
 
 void initGPIO(void) {

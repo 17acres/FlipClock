@@ -14,5 +14,4 @@ SPI_Handle ledSPIHandle;
 
 extern void initSPI();
 
-
 #endif /* SOURCE_CONFIG_SPICONFIG_H_ */

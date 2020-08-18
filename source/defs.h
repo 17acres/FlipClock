@@ -8,8 +8,7 @@
 #ifndef SOURCE_DEFS_H_
 #define SOURCE_DEFS_H_
 
-
-#define LED_FPS 30
-
+#define LED_FPS 240
+#define LED_BITRATE 1000000
 
 #endif /* SOURCE_DEFS_H_ */

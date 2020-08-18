@@ -63,13 +63,13 @@
 #include <ti/drivers/spi/SPITivaDMA.h>
 
 #include "spiConfig.h"
+#include "../defs.h"
 
 SPI_Handle ledSPIHandle;
 
+void spiCallback(SPI_Handle handle, SPI_Transaction *transaction) {
 
-void spiCallback(SPI_Handle handle, SPI_Transaction *transaction){
-
-	System_printf("SPI Callback: Frame index %d, status %d",(uint32_t) transaction->arg, transaction->status);
+	System_printf("SPI Callback: Frame index %d, status %d", (uint32_t) transaction->arg, transaction->status);
 }
 
 /*
@@ -87,33 +87,30 @@ static Hwi_Struct dmaHwiStruct;
 /*
  *  ======== dmaErrorHwi ========
  */
-static Void dmaErrorHwi(UArg arg)
-{
-    System_printf("DMA error code: %d\n", uDMAErrorStatusGet());
-    uDMAErrorStatusClear();
-    System_abort("DMA error!!");
+static Void dmaErrorHwi(UArg arg) {
+	System_printf("DMA error code: %d\n", uDMAErrorStatusGet());
+	uDMAErrorStatusClear();
+	System_abort("DMA error!!");
 }
 
-void initDMA(void)
-{
-    Error_Block eb;
-    Hwi_Params  hwiParams;
+void initDMA(void) {
+	Error_Block eb;
+	Hwi_Params hwiParams;
 
-    if (!dmaInitialized) {
-        Error_init(&eb);
-        Hwi_Params_init(&hwiParams);
-        Hwi_construct(&(dmaHwiStruct), INT_UDMAERR, dmaErrorHwi,
-                      &hwiParams, &eb);
-        if (Error_check(&eb)) {
-            System_abort("Couldn't construct DMA error hwi");
-        }
+	if (!dmaInitialized) {
+		Error_init(&eb);
+		Hwi_Params_init(&hwiParams);
+		Hwi_construct(&(dmaHwiStruct), INT_UDMAERR, dmaErrorHwi, &hwiParams, &eb);
+		if (Error_check(&eb)) {
+			System_abort("Couldn't construct DMA error hwi");
+		}
 
-        SysCtlPeripheralEnable(SYSCTL_PERIPH_UDMA);
-        uDMAEnable();
-        uDMAControlBaseSet(dmaControlTable);
+		SysCtlPeripheralEnable(SYSCTL_PERIPH_UDMA);
+		uDMAEnable();
+		uDMAControlBaseSet(dmaControlTable);
 
-        dmaInitialized = true;
-    }
+		dmaInitialized = true;
+	}
 }
 
 #include <ti/drivers/SPI.h>
@@ -125,28 +122,19 @@ SPITivaDMA_Object spiTivaDMAObject;
 
 uint32_t spiTivaDMAscratchBuf;
 
-const SPITivaDMA_HWAttrs spiTivaDMAHWAttr=
-    {
-        .baseAddr = SSI1_BASE,
-        .intNum = INT_SSI1,
-        .intPriority = (~0),
-        .scratchBufPtr = &spiTivaDMAscratchBuf,
-        .defaultTxBufValue = 0,
-        .rxChannelIndex = UDMA_CHANNEL_SSI1RX,
-        .txChannelIndex = UDMA_CHANNEL_SSI1TX,
-        .channelMappingFxn = uDMAChannelAssign,
-        .rxChannelMappingFxnArg = UDMA_CH10_SSI1RX,
-        .txChannelMappingFxnArg = UDMA_CH11_SSI1TX
-    };
+const SPITivaDMA_HWAttrs spiTivaDMAHWAttr = {
+		.baseAddr = SSI1_BASE,
+		.intNum = INT_SSI1,
+		.intPriority = (~0),
+		.scratchBufPtr = &spiTivaDMAscratchBuf,
+		.defaultTxBufValue = 0,
+		.rxChannelIndex = UDMA_CHANNEL_SSI1RX,
+		.txChannelIndex = UDMA_CHANNEL_SSI1TX,
+		.channelMappingFxn = uDMAChannelAssign,
+		.rxChannelMappingFxnArg = UDMA_CH10_SSI1RX,
+		.txChannelMappingFxnArg = UDMA_CH11_SSI1TX };
 
-const SPI_Config SPI_config[] = {
-    {
-        .fxnTablePtr = &SPITivaDMA_fxnTable,
-        .object = &spiTivaDMAObject,
-        .hwAttrs = &spiTivaDMAHWAttr
-    },
-	{NULL, NULL, NULL}
-};
+const SPI_Config SPI_config[] = { { .fxnTablePtr = &SPITivaDMA_fxnTable, .object = &spiTivaDMAObject, .hwAttrs = &spiTivaDMAHWAttr }, { NULL, NULL, NULL } };
 
 void initSPI(void) {
 	initDMA();
@@ -164,8 +152,8 @@ void initSPI(void) {
 
 	SPI_Params params;
 	SPI_Params_init(&params);
-	params.bitRate = 1000000;
-	params.dataSize = 8;//bits
+	params.bitRate = LED_BITRATE;
+	params.dataSize = 8; //bits
 	params.frameFormat = SPI_POL1_PHA0;
 	params.mode = SPI_MASTER;
 	params.transferMode = SPI_MODE_BLOCKING;

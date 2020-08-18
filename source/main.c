@@ -71,24 +71,30 @@ Char sysMonitorStack[TASKSTACKSIZE];
 void heartBeatFxn(UArg arg0, UArg arg1) {
 	while (1) {
 		Task_sleep((UInt) arg0);
-		GPIO_toggle(LAUNCHPAD_LED_BLUE);
+		GPIO_toggle(LAUNCHPAD_LED_GREEN);
 	}
 }
 
 uint8_t frameBuf[]={0xFF,0xFF,0xFF,0xFF,
-					0x00,0x00,0xFF,0xFF,
+					0x00,0x00,0x00,0x00,
 					0x00,0xFF,0x00,0xFF,
 					0x00,0xFF,0xFF,0x00,
 					0xFF,0xFF};
+uint8_t rxbuf[18];
 
 void updateLEDs(UArg arg0, UArg arg1){
 
 	while (1) {
-		GPIO_toggle(LAUNCHPAD_LED_GREEN);
-
+		GPIO_toggle(LAUNCHPAD_LED_BLUE);
+		++frameBuf[15];
+		frameBuf[14]+=2;
+		--frameBuf[13];
+		--frameBuf[4];
+		frameBuf[4]&=0x1F;
 		SPI_Transaction transaction;
 		transaction.count=sizeof(frameBuf);
 		transaction.txBuf=frameBuf;
+		transaction.rxBuf=rxbuf;
 		bool success;
 		success = SPI_transfer(ledSPIHandle,&transaction);
 		if(!success){
@@ -100,7 +106,7 @@ void updateLEDs(UArg arg0, UArg arg1){
 }
 
 void sysMonitor(UArg arg0, UArg arg1){
-	GPIO_write(IO_RESET, TRUE);
+	GPIO_write(IO_RESET, FALSE);
 	GPIO_write(ESP_ENABLE, TRUE);
 	GPIO_write(BUF_DISABLE, FALSE);
 
@@ -151,6 +157,8 @@ int main(void) {
 			"Halt the target to view any SysMin contents in ROV.\n");
 	/* SysMin will only print to the console when you call flush or exit */
 	System_flush();
+
+	GPIO_toggle(LAUNCHPAD_LED_GREEN);
 
 	/* Start BIOS */
 	BIOS_start();
