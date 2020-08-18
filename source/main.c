@@ -50,6 +50,7 @@
 #include "boardInit.h"
 #include "config/gpioConfig.h"
 #include "defs.h"
+#include "config/spiConfig.h"
 
 #define TASKSTACKSIZE   512
 
@@ -74,10 +75,26 @@ void heartBeatFxn(UArg arg0, UArg arg1) {
 	}
 }
 
+uint8_t frameBuf[]={0xFF,0xFF,0xFF,0xFF,
+					0x00,0x00,0xFF,0xFF,
+					0x00,0xFF,0x00,0xFF,
+					0x00,0xFF,0xFF,0x00,
+					0xFF,0xFF};
 
 void updateLEDs(UArg arg0, UArg arg1){
+
 	while (1) {
 		GPIO_toggle(LAUNCHPAD_LED_GREEN);
+
+		SPI_Transaction transaction;
+		transaction.count=sizeof(frameBuf);
+		transaction.txBuf=frameBuf;
+		bool success;
+		success = SPI_transfer(ledSPIHandle,&transaction);
+		if(!success){
+			System_printf("SPI Transaction Failed, status %d",transaction.status);
+		}
+
 		Task_sleep(1000/LED_FPS);
 	}
 }
