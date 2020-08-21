@@ -25,4 +25,10 @@
 		<nature>org.eclipse.cdt.core.ccnature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>fastled</name>
+			<value>file:/C:/Users/Dan/Documents/GitHub/FastLED</value>
+		</variable>
+	</variableList>
 </projectDescription>

@@ -31,6 +31,7 @@
  */
 
 /* XDCtools Header files */
+
 #include <xdc/std.h>
 #include <xdc/runtime/System.h>
 
@@ -49,10 +50,14 @@
 
 #include "boardInit.h"
 #include "config/gpioConfig.h"
+#include "config/serialConfig.h"
 #include "defs.h"
-#include "config/spiConfig.h"
-
+#include "ioDriver.h"
 #define TASKSTACKSIZE   512
+
+#include "Leds.h"
+
+extern void updateLeds(UArg arg0, UArg arg1);
 
 Task_Struct heartbeatStruct;
 Char heartbeatStack[TASKSTACKSIZE];
@@ -75,35 +80,6 @@ void heartBeatFxn(UArg arg0, UArg arg1) {
 	}
 }
 
-uint8_t frameBuf[]={0xFF,0xFF,0xFF,0xFF,
-					0x00,0x00,0x00,0x00,
-					0x00,0xFF,0x00,0xFF,
-					0x00,0xFF,0xFF,0x00,
-					0xFF,0xFF};
-uint8_t rxbuf[18];
-
-void updateLEDs(UArg arg0, UArg arg1){
-
-	while (1) {
-		GPIO_toggle(LAUNCHPAD_LED_BLUE);
-		++frameBuf[15];
-		frameBuf[14]+=2;
-		--frameBuf[13];
-		--frameBuf[4];
-		frameBuf[4]&=0x1F;
-		SPI_Transaction transaction;
-		transaction.count=sizeof(frameBuf);
-		transaction.txBuf=frameBuf;
-		transaction.rxBuf=rxbuf;
-		bool success;
-		success = SPI_transfer(ledSPIHandle,&transaction);
-		if(!success){
-			System_printf("SPI Transaction Failed, status %d",transaction.status);
-		}
-
-		Task_sleep(1000/LED_FPS);
-	}
-}
 
 void sysMonitor(UArg arg0, UArg arg1){
 	GPIO_write(IO_RESET, FALSE);
@@ -112,6 +88,7 @@ void sysMonitor(UArg arg0, UArg arg1){
 
 	while (1) {
 		Task_sleep(1000);
+		checkIOPresence();
 	}
 }
 
@@ -138,7 +115,7 @@ int main(void) {
 	updateLEDsParams.stackSize = TASKSTACKSIZE;
 	updateLEDsParams.stack = &updateLEDsStack;
 	updateLEDsParams.priority = 6;
-	Task_construct(&updateLEDsStruct, (Task_FuncPtr) updateLEDs, &updateLEDsParams, NULL);
+	Task_construct(&updateLEDsStruct, (Task_FuncPtr) updateLeds, &updateLEDsParams, NULL);
 
 
 	/* Construct sysMonitor Task  thread */

@@ -5,13 +5,14 @@
  *      Author: Dan
  */
 
-#ifndef SOURCE_CONFIG_SPICONFIG_H_
-#define SOURCE_CONFIG_SPICONFIG_H_
+#ifndef SOURCE_CONFIG_SERIALCONFIG_H_
+#define SOURCE_CONFIG_SERIALCONFIG_H_
 
 #include <ti/drivers/SPI.h>
 
 SPI_Handle ledSPIHandle;
 
 extern void initSPI();
+extern void initI2C();
 
-#endif /* SOURCE_CONFIG_SPICONFIG_H_ */
+#endif /* SOURCE_CONFIG_SERIALCONFIG_H_ */

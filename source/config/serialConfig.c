@@ -60,17 +60,17 @@
 #include <driverlib/sysctl.h>
 #include <driverlib/uart.h>
 #include <driverlib/udma.h>
+#include <source/config/serialConfig.h>
 #include <ti/drivers/spi/SPITivaDMA.h>
-
-#include "spiConfig.h"
+#include <ti/drivers/i2c/I2CTiva.h>
 #include "../defs.h"
 
 SPI_Handle ledSPIHandle;
 
-void spiCallback(SPI_Handle handle, SPI_Transaction *transaction) {
-
-	System_printf("SPI Callback: Frame index %d, status %d", (uint32_t) transaction->arg, transaction->status);
-}
+//void spiCallback(SPI_Handle handle, SPI_Transaction *transaction) {
+//
+//	System_printf("SPI Callback: Frame index %d, status %d", (uint32_t) transaction->arg, transaction->status);
+//}
 
 /*
  *  =============================== DMA ===============================
@@ -113,8 +113,7 @@ void initDMA(void) {
 	}
 }
 
-#include <ti/drivers/SPI.h>
-#include <ti/drivers/spi/SPITivaDMA.h>
+
 
 SPITivaDMA_Object spiTivaDMAObject;
 
@@ -161,4 +160,20 @@ void initSPI(void) {
 	ledSPIHandle = SPI_open(0, &params);
 	if (!ledSPIHandle)
 		System_printf("Failed to open SPI");
+}
+
+void initI2C(void) {
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C2);
+
+	MAP_GPIOPinConfigure(GPIO_PE5_I2C2SDA);
+	MAP_GPIOPinTypeI2C(GPIO_PORTE_BASE, GPIO_PIN_5);
+
+	MAP_GPIOPinConfigure(GPIO_PE4_I2C2SCL);
+	MAP_GPIOPinTypeI2CSCL(GPIO_PORTE_BASE, GPIO_PIN_4);
+
+	GPIOPadConfigSet(GPIO_PORTE_BASE, GPIO_PIN_5, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_OD);
+	GPIOPadConfigSet(GPIO_PORTE_BASE, GPIO_PIN_4, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU);
+
+	MAP_I2CMasterInitExpClk(I2C2_BASE, SysCtlClockGet(), true);
+
 }

@@ -127,7 +127,6 @@ NULL, /* LAUNCHPAD_SW1 */
 NULL /* LAUNCHPAD_SW2 */
 };
 
-GPIO_CallbackFxn gpioCallbackFunctions[] = { NULL, NULL, NULL };
 
 /* The device-specific GPIO_config structure */
 const GPIOTiva_Config GPIOTiva_config = {
