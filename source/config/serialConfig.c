@@ -64,6 +64,7 @@
 #include <ti/drivers/spi/SPITivaDMA.h>
 #include <ti/drivers/i2c/I2CTiva.h>
 #include "../defs.h"
+#include "../ioDriver.h"
 
 SPI_Handle ledSPIHandle;
 
@@ -175,5 +176,7 @@ void initI2C(void) {
 	GPIOPadConfigSet(GPIO_PORTE_BASE, GPIO_PIN_4, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU);
 
 	MAP_I2CMasterInitExpClk(I2C2_BASE, SysCtlClockGet(), true);
-
+	MAP_I2CMasterTimeoutSet(I2C2_BASE, (10*400)/16);//10ms timeout
+	initIOSemaphore();
+	initIOHwi();
 }

@@ -85,10 +85,18 @@ void sysMonitor(UArg arg0, UArg arg1){
 	GPIO_write(IO_RESET, FALSE);
 	GPIO_write(ESP_ENABLE, TRUE);
 	GPIO_write(BUF_DISABLE, FALSE);
-
+	int loopCount=0;
 	while (1) {
 		Task_sleep(1000);
-		checkIOPresence();
+		if(loopCount%10==0)
+			checkIOPresence(IO_0_ADDR);
+		writeData(IO_0_ADDR,0xDEAD);
+		writeData(IO_0_ADDR,0xBEEF);
+		GPIO_toggle(HSD_DISABLE_0);
+		GPIO_toggle(HSD_DISABLE_1);
+		GPIO_toggle(HSD_DISABLE_2);
+		GPIO_toggle(HSD_DISABLE_3);
+		++loopCount;
 	}
 }
 

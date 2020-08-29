@@ -36,8 +36,6 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
 	initFrameBuf();
 
 	while (1) {
-		GPIO_toggle(LAUNCHPAD_LED_BLUE);
-
 		//fill_rainbow(leds, NUM_LEDS, frameIdx, 20);
 		fill_solid(leds, NUM_LEDS,CRGB::White);
 		if(frameIdx%240==0)

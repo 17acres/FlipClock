@@ -16,4 +16,10 @@
 
 #define IO_BITRATE I2C_400kHz
 
+//AD0, AD1 (AD0 is MSB)
+#define IO_0_ADDR (0x48>>1)
+#define IO_1_ADDR (0x4C>>1)
+#define IO_2_ADDR (0x4A>>1)
+#define IO_3_ADDR (0x4E>>1)
+
 #endif /* SOURCE_DEFS_H_ */

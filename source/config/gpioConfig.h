@@ -34,10 +34,13 @@
 #define __GPIO_CONFIG_H
 
 typedef enum GPIONames {
-	RTC_SQW = 0, LAUNCHPAD_SW1, LAUNCHPAD_SW2, HSD_DISABLE_0, //high is disable
+	RTC_SQW = 0,
+	LAUNCHPAD_SW1,
+	LAUNCHPAD_SW2,
+	HSD_DISABLE_0, //high is disable
 	HSD_DISABLE_1,
 	HSD_DISABLE_2,
-	HSD_ENABLE_3,
+	HSD_DISABLE_3,
 	IO_RESET, //high is reset
 	ESP_ENABLE, //high is enable
 	BUF_DISABLE, //high is disable
