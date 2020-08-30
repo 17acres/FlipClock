@@ -55,6 +55,7 @@
 #include "defs.h"
 #include "ioDriver.h"
 #include "hsd.h"
+#include "dtc.h"
 #define TASKSTACKSIZE   512
 
 #include "Leds.h"
@@ -82,19 +83,21 @@ void heartBeatFxn(UArg arg0, UArg arg1) {
 	}
 }
 
-
-void sysMonitor(UArg arg0, UArg arg1){
+void sysMonitor(UArg arg0, UArg arg1) {
 	GPIO_write(IO_RESET, FALSE);
 	GPIO_write(ESP_ENABLE, TRUE);
 	GPIO_write(BUF_DISABLE, FALSE);
-	int loopCount=0;
+	int loopCount = 0;
 	while (1) {
 		Task_sleep(1000);
-		if(loopCount%10==0)
+		if (loopCount % 10 == 0) {
 			checkIOPresence(IO_0_ADDR);
-		writeData(IO_0_ADDR,0xFF7F);
+			printDtcs();
+		}
+
+		writeData(IO_0_ADDR, 0xFF7F);
 		Task_sleep(300);
-		writeData(IO_0_ADDR,0xFFFF);
+		writeData(IO_0_ADDR, 0xFFFF);
 		GPIO_toggle(HSD_DISABLE_0);
 		GPIO_toggle(HSD_DISABLE_1);
 		GPIO_toggle(HSD_DISABLE_2);
@@ -102,7 +105,6 @@ void sysMonitor(UArg arg0, UArg arg1){
 		++loopCount;
 	}
 }
-
 
 /*
  *  ======== main ========
@@ -122,24 +124,19 @@ int main(void) {
 
 	/* Construct updateLEDs Task  thread */
 	Task_Params updateLEDsParams;
-	Task_Params_init (&updateLEDsParams);
+	Task_Params_init(&updateLEDsParams);
 	updateLEDsParams.stackSize = TASKSTACKSIZE;
 	updateLEDsParams.stack = &updateLEDsStack;
 	updateLEDsParams.priority = 6;
 	Task_construct(&updateLEDsStruct, (Task_FuncPtr) updateLeds, &updateLEDsParams, NULL);
 
-
 	/* Construct sysMonitor Task  thread */
-		Task_Params sysMonitorParams;
-		Task_Params_init (&sysMonitorParams);
-		sysMonitorParams.stackSize = TASKSTACKSIZE;
-		sysMonitorParams.stack = &sysMonitorStack;
-		sysMonitorParams.priority = 15;
-		Task_construct(&sysMonitorStruct, (Task_FuncPtr) sysMonitor, &sysMonitorParams, NULL);
-
-
-
-
+	Task_Params sysMonitorParams;
+	Task_Params_init(&sysMonitorParams);
+	sysMonitorParams.stackSize = TASKSTACKSIZE;
+	sysMonitorParams.stack = &sysMonitorStack;
+	sysMonitorParams.priority = 7;
+	Task_construct(&sysMonitorStruct, (Task_FuncPtr) sysMonitor, &sysMonitorParams, NULL);
 
 	System_printf("Starting the example\nSystem provider is set to SysMin. "
 			"Halt the target to view any SysMin contents in ROV.\n");

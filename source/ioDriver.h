@@ -8,6 +8,8 @@
 #ifndef SOURCE_IODRIVER_H_
 #define SOURCE_IODRIVER_H_
 
+#include <stdint.h>
+#include <stdbool.h>
 #include <ti/sysbios/knl/Semaphore.h>
 
 Semaphore_Handle ioSemaphore;
