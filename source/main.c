@@ -51,8 +51,10 @@
 #include "boardInit.h"
 #include "config/gpioConfig.h"
 #include "config/serialConfig.h"
+#include "config/adcConfig.h"
 #include "defs.h"
 #include "ioDriver.h"
+#include "hsd.h"
 #define TASKSTACKSIZE   512
 
 #include "Leds.h"
@@ -90,8 +92,9 @@ void sysMonitor(UArg arg0, UArg arg1){
 		Task_sleep(1000);
 		if(loopCount%10==0)
 			checkIOPresence(IO_0_ADDR);
-		writeData(IO_0_ADDR,0xDEAD);
-		writeData(IO_0_ADDR,0xBEEF);
+		writeData(IO_0_ADDR,0xFF7F);
+		Task_sleep(300);
+		writeData(IO_0_ADDR,0xFFFF);
 		GPIO_toggle(HSD_DISABLE_0);
 		GPIO_toggle(HSD_DISABLE_1);
 		GPIO_toggle(HSD_DISABLE_2);
