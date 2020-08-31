@@ -137,8 +137,8 @@ bool writeData(uint8_t slaveAddress, uint16_t data) {
 
 	bool semResult = Semaphore_pend(ioTxCompleteSemaphore, 100);
 	Semaphore_reset(ioTxCompleteSemaphore, 0);
-	if (!semResult|| MAP_I2CMasterErr(I2C2_BASE)) {
-		handleIOFailure(possibleCode, 0, "writing byte 1");
+	if (!semResult || MAP_I2CMasterErr(I2C2_BASE)) {
+		handleIOFailure(possibleCode, data, "writing byte 1");
 		Semaphore_post(ioSemaphore);
 		return (false);
 	}
@@ -146,7 +146,7 @@ bool writeData(uint8_t slaveAddress, uint16_t data) {
 	semResult = Semaphore_pend(ioBusySemaphore, 100);
 	Semaphore_reset(ioBusySemaphore, 0);
 	if (!semResult || MAP_I2CMasterErr(I2C2_BASE)) {
-		handleIOFailure(possibleCode, 0, "writing byte 2");
+		handleIOFailure(possibleCode, data, "writing byte 2");
 		Semaphore_post(ioSemaphore);
 		return (false);
 	}
@@ -157,7 +157,6 @@ bool writeData(uint8_t slaveAddress, uint16_t data) {
 
 void ioIsr(UArg arg) {
 	MAP_I2CMasterIntClear(I2C2_BASE);
-	GPIO_toggle(LAUNCHPAD_LED_BLUE);
 	if (transactionStarted) {
 		if (MAP_I2CMasterErr(I2C2_BASE) == I2C_MASTER_ERR_NONE) {
 			MAP_I2CMasterDataPut(I2C2_BASE, secondByte);

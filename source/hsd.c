@@ -17,6 +17,9 @@
 
 volatile uint32_t rawAdcValues[5];
 volatile struct processedAdcVals analogData;
+volatile struct processedAdcVals maxAnalogData;
+void processRawAdcValues();
+void updateMaxVals();
 
 Hwi_Handle hwiHandle;
 
@@ -25,6 +28,7 @@ void adcIsr(UArg arg) {
 	MAP_ADCIntClear(ADC0_BASE, 0);
 	MAP_ADCSequenceDataGet(ADC0_BASE, 0, rawAdcValues);
 	processRawAdcValues();
+	updateMaxVals();
 	MAP_ADCProcessorTrigger(ADC0_BASE, 0);
 }
 
@@ -39,4 +43,39 @@ void processRawAdcValues() {
 	analogData.hsdCurrents[1] = ((double) rawAdcValues[1]) * 3.3 / 4096;
 	analogData.hsdCurrents[2] = ((double) rawAdcValues[2]) * 3.3 / 4096;
 	analogData.hsdCurrents[3] = ((double) rawAdcValues[3]) * 3.3 / 4096;
+	if (++analogData.sampleCount == 3) {
+		analogData.qf = true;
+		clearMaxAdcVals();
+	}
+
+}
+
+void updateMaxVals() {
+	bool newMaxFound = false;
+	for (int i = 0; i < 4; i++) {
+		if (analogData.hsdCurrents[i] > maxAnalogData.hsdCurrents[i]) {
+			maxAnalogData.hsdCurrents[i] = analogData.hsdCurrents[i];
+			newMaxFound = true;
+		}
+	}
+	if (analogData.mcuTemp > maxAnalogData.mcuTemp) {
+		maxAnalogData.mcuTemp = analogData.mcuTemp;
+		newMaxFound = true;
+	}
+	if (newMaxFound)
+		maxAnalogData.sampleCount = analogData.sampleCount;
+}
+
+void clearMaxAdcVals() {
+	UInt key = Hwi_disable();
+
+	maxAnalogData.hsdCurrents[0] = analogData.hsdCurrents[0];
+	maxAnalogData.hsdCurrents[1] = analogData.hsdCurrents[1];
+	maxAnalogData.hsdCurrents[2] = analogData.hsdCurrents[2];
+	maxAnalogData.hsdCurrents[3] = analogData.hsdCurrents[3];
+	maxAnalogData.mcuTemp = analogData.mcuTemp;
+	maxAnalogData.sampleCount = analogData.sampleCount;
+	maxAnalogData.qf = analogData.qf;
+
+	Hwi_restore(key);
 }

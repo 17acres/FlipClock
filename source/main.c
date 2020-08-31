@@ -87,21 +87,23 @@ void sysMonitor(UArg arg0, UArg arg1) {
 	GPIO_write(IO_RESET, FALSE);
 	GPIO_write(ESP_ENABLE, TRUE);
 	GPIO_write(BUF_DISABLE, FALSE);
+	GPIO_write(HSD_DISABLE_0, FALSE);
 	int loopCount = 0;
+	Task_sleep(100);
+	clearMaxAdcVals();
 	while (1) {
 		Task_sleep(1000);
 		if (loopCount % 10 == 0) {
 			checkIOPresence(IO_0_ADDR);
 			printDtcs();
+			writeData(IO_0_ADDR, 0xFF7F);
+			Task_sleep(300);
+			writeData(IO_0_ADDR, 0xFFFF);
 		}
-
-		writeData(IO_0_ADDR, 0xFF7F);
-		Task_sleep(300);
-		writeData(IO_0_ADDR, 0xFFFF);
-		GPIO_toggle(HSD_DISABLE_0);
-		GPIO_toggle(HSD_DISABLE_1);
-		GPIO_toggle(HSD_DISABLE_2);
-		GPIO_toggle(HSD_DISABLE_3);
+//		GPIO_toggle(HSD_DISABLE_0);
+//		GPIO_toggle(HSD_DISABLE_1);
+//		GPIO_toggle(HSD_DISABLE_2);
+//		GPIO_toggle(HSD_DISABLE_3);
 		++loopCount;
 	}
 }
