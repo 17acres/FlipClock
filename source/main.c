@@ -91,9 +91,10 @@ void sysMonitor(UArg arg0, UArg arg1) {
 	int loopCount = 0;
 	Task_sleep(100);
 	clearMaxAdcVals();
+	bool flip=false;
+
 	while (1) {
 		Task_sleep(1000);
-		bool flip=false;
 		if (loopCount % 10 == 0) {
 			checkIOPresence(IO_0_ADDR);
 			printDtcs();
