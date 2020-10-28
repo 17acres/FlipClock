@@ -38,11 +38,11 @@ void initAdcHwi() {
 }
 
 void processRawAdcValues() {
-	analogData.mcuTemp = 147.5 - (247.5 * ((double) rawAdcValues[4]) / 4096.0);
-	analogData.hsdCurrents[0] = ((double) rawAdcValues[0]) * 3.3 / 4096;
-	analogData.hsdCurrents[1] = ((double) rawAdcValues[1]) * 3.3 / 4096;
-	analogData.hsdCurrents[2] = ((double) rawAdcValues[2]) * 3.3 / 4096;
-	analogData.hsdCurrents[3] = ((double) rawAdcValues[3]) * 3.3 / 4096;
+	analogData.mcuTemp = 147.5 - (247.5 * ((float) rawAdcValues[4]) / 4096.0);
+	analogData.hsdCurrents[0] = ((float) rawAdcValues[0]) * 3.3 / 4096;
+	analogData.hsdCurrents[1] = ((float) rawAdcValues[1]) * 3.3 / 4096;
+	analogData.hsdCurrents[2] = ((float) rawAdcValues[2]) * 3.3 / 4096;
+	analogData.hsdCurrents[3] = ((float) rawAdcValues[3]) * 3.3 / 4096;
 	if (++analogData.sampleCount == 3) {
 		analogData.qf = true;
 		clearMaxAdcVals();

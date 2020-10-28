@@ -12,10 +12,10 @@
 volatile uint32_t rawAdcValues[5];
 
 volatile struct processedAdcVals {
-	double hsdCurrents[4];
-	double mcuTemp;
+	float hsdCurrents[4];
+	float mcuTemp;
 	bool qf;
-	uint32_t sampleCount;
+	uint16_t sampleCount;
 } analogData;
 
 

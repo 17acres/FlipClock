@@ -18,7 +18,7 @@ typedef enum DtcStatus {
 
 typedef struct DtcStruct {
 	DtcStatus status;
-	uint32_t count;
+	uint8_t count;
 	String errMessage;
 	uint32_t detailVal;
 } DtcStruct;

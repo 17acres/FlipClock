@@ -93,10 +93,17 @@ void sysMonitor(UArg arg0, UArg arg1) {
 	clearMaxAdcVals();
 	while (1) {
 		Task_sleep(1000);
+		bool flip=false;
 		if (loopCount % 10 == 0) {
 			checkIOPresence(IO_0_ADDR);
 			printDtcs();
-			writeData(IO_0_ADDR, 0xFF7F);
+			if(flip){
+				writeData(IO_0_ADDR, 0xFF7F);
+				flip=false;
+			}else{
+				writeData(IO_0_ADDR, 0xFFBF);
+				flip=true;
+			}
 			Task_sleep(300);
 			writeData(IO_0_ADDR, 0xFFFF);
 		}
