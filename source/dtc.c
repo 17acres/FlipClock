@@ -6,10 +6,18 @@
  */
 
 #include "dtc.h"
+#include <stdint.h>
+#include <stdbool.h>
+#include <xdc/std.h>
 #include <driverlib/rom.h>
 #include <driverlib/rom_map.h>
 #include <xdc/runtime/System.h>
 #include <ti/sysbios/BIOS.h>
+#include <inc/hw_ints.h>
+#include <inc/hw_memmap.h>
+#include <inc/hw_types.h>
+#include <driverlib/gpio.h>
+#include <ti/drivers/GPIO.h>
 #include "ioDriver.h"
 #include "config/gpioConfig.h"
 
