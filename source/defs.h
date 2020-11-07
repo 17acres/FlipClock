@@ -12,7 +12,7 @@
 
 #define LED_FPS 240
 #define LED_BITRATE 1000000
-#define NUM_LEDS 3
+#define NUM_LEDS 3*8
 
 #define IO_BITRATE I2C_400kHz
 

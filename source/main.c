@@ -99,10 +99,10 @@ void sysMonitor(UArg arg0, UArg arg1) {
 			checkIOPresence(IO_0_ADDR);
 			printDtcs();
 			if(flip){
-				writeData(IO_0_ADDR, 0xFF7F);
+				writeData(IO_0_ADDR, 0xAAAA);
 				flip=false;
 			}else{
-				writeData(IO_0_ADDR, 0xFFBF);
+				writeData(IO_0_ADDR, 0x5555);
 				flip=true;
 			}
 			Task_sleep(300);
