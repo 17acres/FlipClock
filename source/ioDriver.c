@@ -21,7 +21,7 @@
 #include "ioDriver.h"
 #include "config/gpioConfig.h"
 #include "dtc.h"
-#include "defs.h"
+#include "utils/ioDefs.h"
 
 Semaphore_Handle ioTxCompleteSemaphore;
 Semaphore_Handle ioBusySemaphore;
