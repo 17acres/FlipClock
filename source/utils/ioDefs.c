@@ -44,7 +44,7 @@ SegState unionSeg(SegState s0, SegState s1) {
 	return s0;
 }
 
-SegState subtractSeg(SegState newState, segState oldState) {
+SegState subtractSeg(SegState newState, SegState oldState) {
 
 	if (oldState.a == newState.a)
 		newState.a = DRV_COAST;
@@ -533,4 +533,81 @@ const SegState segValHideExtra={
 		.f=SEG_OFF,
 		.g=SEG_OFF,
 		.extra=SEG_HIDE
+};
+
+const SegState segValAOnly={
+        .a=SEG_SHOW,
+        .b=SEG_HIDE,
+        .c=SEG_HIDE,
+        .d=SEG_HIDE,
+        .e=SEG_HIDE,
+        .f=SEG_HIDE,
+        .g=SEG_HIDE,
+        .extra=SEG_OFF
+};
+
+const SegState segValBOnly={
+        .a=SEG_HIDE,
+        .b=SEG_SHOW,
+        .c=SEG_HIDE,
+        .d=SEG_HIDE,
+        .e=SEG_HIDE,
+        .f=SEG_HIDE,
+        .g=SEG_HIDE,
+        .extra=SEG_OFF
+};
+
+const SegState segValCOnly={
+        .a=SEG_HIDE,
+        .b=SEG_HIDE,
+        .c=SEG_SHOW,
+        .d=SEG_HIDE,
+        .e=SEG_HIDE,
+        .f=SEG_HIDE,
+        .g=SEG_HIDE,
+        .extra=SEG_OFF
+};
+
+const SegState segValDOnly={
+        .a=SEG_HIDE,
+        .b=SEG_HIDE,
+        .c=SEG_HIDE,
+        .d=SEG_SHOW,
+        .e=SEG_HIDE,
+        .f=SEG_HIDE,
+        .g=SEG_HIDE,
+        .extra=SEG_OFF
+};
+
+const SegState segValEOnly={
+        .a=SEG_HIDE,
+        .b=SEG_HIDE,
+        .c=SEG_HIDE,
+        .d=SEG_HIDE,
+        .e=SEG_SHOW,
+        .f=SEG_HIDE,
+        .g=SEG_HIDE,
+        .extra=SEG_OFF
+};
+
+const SegState segValFOnly={
+        .a=SEG_HIDE,
+        .b=SEG_HIDE,
+        .c=SEG_HIDE,
+        .d=SEG_HIDE,
+        .e=SEG_HIDE,
+        .f=SEG_SHOW,
+        .g=SEG_HIDE,
+        .extra=SEG_OFF
+};
+
+const SegState segValGOnly={
+        .a=SEG_HIDE,
+        .b=SEG_HIDE,
+        .c=SEG_HIDE,
+        .d=SEG_HIDE,
+        .e=SEG_HIDE,
+        .f=SEG_HIDE,
+        .g=SEG_SHOW,
+        .extra=SEG_OFF
 };

@@ -29,8 +29,8 @@
 #define DRV_BRAKE 0x3
 #define DRV_COAST 0x0
 
-#define SEG_SHOW DRV_FWD
-#define SEG_HIDE DRV_REV
+#define SEG_SHOW DRV_REV
+#define SEG_HIDE DRV_FWD
 #define SEG_OFF DRV_COAST //no need for brake mode
 
 /* Segment Arrangement https://en.wikipedia.org/wiki/Seven-segment_display#/media/File:7_Segment_Display_with_Labeled_Segments.svg
@@ -68,18 +68,20 @@
  * P17	S0R
  */
 
-typedef union SegState {
-	struct { //right ordering for io driver
-		uint16_t d :2;
-		uint16_t e :2;
-		uint16_t g :2;
-		uint16_t f :2;
-		uint16_t a :2;
-		uint16_t b :2;
-		uint16_t extra :2;
-		uint16_t c :2;
-	};
-	uint16_t rawWord;
+typedef union SegState
+{
+    struct
+    { //right ordering for io driver
+        uint16_t a :2;
+        uint16_t b :2;
+        uint16_t extra :2;
+        uint16_t c :2;
+        uint16_t d :2;
+        uint16_t e :2;
+        uint16_t g :2;
+        uint16_t f :2;
+    };
+    uint16_t rawWord;
 } SegState;
 
 extern const SegState segVal0;
@@ -127,6 +129,14 @@ extern const SegState segValOff;
 extern const SegState segValShowExtra;
 extern const SegState segValHideExtra;
 
+extern const SegState segValAOnly;
+extern const SegState segValBOnly;
+extern const SegState segValCOnly;
+extern const SegState segValDOnly;
+extern const SegState segValEOnly;
+extern const SegState segValFOnly;
+extern const SegState segValGOnly;
+
 //if any conflict or brake, do coast
 SegState unionSeg(SegState s0, SegState s1);
 
@@ -135,6 +145,7 @@ SegState subtractSeg(SegState newState, SegState oldState);
 
 //set state then turn off after delayms
 bool applySegState(uint8_t slaveAddress, SegState state, uint32_t onTimeMs);
-bool applySegDelta(uint8_t slaveAddress, SegState oldState, SegState newState, uint32_t onTimeMs);
+bool applySegDelta(uint8_t slaveAddress, SegState oldState, SegState newState,
+                   uint32_t onTimeMs);
 
 #endif
