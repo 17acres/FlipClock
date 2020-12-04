@@ -122,69 +122,19 @@ extern const SegState segValQuestion;
 
 extern const SegState segValBlank;
 extern const SegState segValAll;
+extern const SegState segValOff;
 
 extern const SegState segValShowExtra;
 extern const SegState segValHideExtra;
 
 //if any conflict or brake, do coast
-SegState unionSeg(SegState s0, SegState s1) {
-	s0.rawWord |= s1.rawWord;
-
-	if (s0.a == DRV_BRAKE)
-		s0.a = DRV_COAST;
-
-	if (s0.b == DRV_BRAKE)
-		s0.b = DRV_COAST;
-
-	if (s0.c == DRV_BRAKE)
-		s0.c = DRV_COAST;
-
-	if (s0.d == DRV_BRAKE)
-		s0.d = DRV_COAST;
-
-	if (s0.e == DRV_BRAKE)
-		s0.e = DRV_COAST;
-
-	if (s0.f == DRV_BRAKE)
-		s0.f = DRV_COAST;
-
-	if (s0.g == DRV_BRAKE)
-		s0.g = DRV_COAST;
-
-	if (s0.extra == DRV_BRAKE)
-		s0.extra = DRV_COAST;
-
-	return s0;
-}
+SegState unionSeg(SegState s0, SegState s1);
 
 //Return new state or 0 if new state is the same is old. Does not care if anything is set to brake. Only periodically do a full set, usually just delta segments
-SegState segDifference(SegState s0, SegState s1) {
+SegState subtractSeg(SegState newState, SegState oldState);
 
-	if (s0.a == s1.a)
-		s1.a = DRV_COAST;
-
-	if (s0.b == s1.b)
-		s1.b = DRV_COAST;
-
-	if (s0.c == s1.c)
-		s1.c = DRV_COAST;
-
-	if (s0.d == s1.d)
-		s1.d = DRV_COAST;
-
-	if (s0.e == s1.e)
-		s1.e = DRV_COAST;
-
-	if (s0.f == s1.f)
-		s1.f = DRV_COAST;
-
-	if (s0.g == s1.g)
-		s1.h = DRV_COAST;
-
-	if (s0.extra == s1.extra)
-		s1.extra = DRV_COAST;
-
-	return s1;
-}
+//set state then turn off after delayms
+bool applySegState(uint8_t slaveAddress, SegState state, uint32_t onTimeMs);
+bool applySegDelta(uint8_t slaveAddress, SegState oldState, SegState newState, uint32_t onTimeMs);
 
 #endif

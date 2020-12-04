@@ -38,7 +38,7 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
 	while (1) {
 		fill_rainbow(leds, NUM_LEDS, frameIdx, 20);
 		//fill_solid(leds, NUM_LEDS,CRGB::White);
-		if(frameIdx%240==0)
+		if(frameIdx%60==0)
 			brightness++;
 
 		buildFrameBuf();

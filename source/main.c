@@ -91,27 +91,85 @@ void sysMonitor(UArg arg0, UArg arg1) {
 	int loopCount = 0;
 	Task_sleep(100);
 	clearMaxAdcVals();
-	bool flip=false;
 
+	SegState stateList[] = {
+			segVal0,
+			segVal1,
+			segVal2,
+			segVal3,
+			segVal4,
+			segVal5,
+			segVal6,
+			segVal7,
+			segVal8,
+			segVal9,
+			segVal9,
+			segVal_A,
+			segVal_b,
+			segVal_C,
+			segVal_c,
+			segVal_d,
+			segVal_E,
+			segVal_F,
+			segVal_G,
+			segVal_H,
+			segVal_h,
+			segVal_I,
+			segVal_i,
+			segVal_J,
+			segVal_L,
+			segVal_n,
+			segVal_O,
+			segVal_o,
+			segVal_P,
+			segVal_q,
+			segVal_r,
+			segVal_S,
+			segVal_t,
+			segVal_U,
+			segVal_u,
+			segVal_y,
+			segValQuestion,
+			segValBlank,
+			segValAll };
+
+	SegState lastState = segValBlank;
 	while (1) {
-		Task_sleep(1000);
-		if (loopCount % 10 == 0) {
-			checkIOPresence(IO_0_ADDR);
-			printDtcs();
-			if(flip){
-				writeData(IO_0_ADDR, 0xAAAA);
-				flip=false;
-			}else{
-				writeData(IO_0_ADDR, 0x5555);
-				flip=true;
-			}
-			Task_sleep(300);
-			writeData(IO_0_ADDR, 0xFFFF);
+		checkIOPresence(IO_0_ADDR);
+		printDtcs();
+
+		if (getDtcStatus(lookupDtc(IO_0_ADDR)) == DTC_SET) {
+			GPIO_write(HSD_DISABLE_0, true);
+		} else {
+			GPIO_write(HSD_DISABLE_0, false);
 		}
-//		GPIO_toggle(HSD_DISABLE_0);
-//		GPIO_toggle(HSD_DISABLE_1);
-//		GPIO_toggle(HSD_DISABLE_2);
-//		GPIO_toggle(HSD_DISABLE_3);
+
+		SegState thisState = stateList[loopCount % 39];
+		applySegDelta(IO_0_ADDR, lastState, thisState, 300);
+
+		SegState nextState = stateList[(loopCount+1) % 39];
+		SegState lastThisDiff=subtractSeg(thisState,lastState);
+		SegState thisNextDiff=subtractSeg(nextState,thisState);
+		SegState diffUnion=unionSeg(lastThisDiff, thisNextDiff);
+		SegState diffDiff=subtractSeg(thisNextDiff,lastThisDiff);
+
+		/*diffUnion will be 00 if a segment was set to something different last time than if it was this time.
+		 * But it will return 00 if a segment was floating in both cases.
+		 * If the difference between the differences is nonzero then that means the segment changed,
+		 * or that the segment was off before. So it is only a problem to flip quickly if diffDiff-diffUnion is nonzero
+		 * since that means that in the next cycle we will be changing a segment at the next interval and we changed it
+		 * differently at the last interval. If it changed from 00 to something then diffDiff and diffUnion will be the same.
+		 * But if it changed from 01 to 10 then diffUnion will be 00 and diffDiff will be 10 which is not OK.
+		 */
+		SegState diffSuperDelta=subtractSeg(diffDiff,diffUnion);
+
+		if(diffSuperDelta.rawWord!=0){
+			Task_sleep(10000);
+		}else{
+			Task_sleep(5000);
+		}
+
+		lastState = thisState;
 		++loopCount;
 	}
 }

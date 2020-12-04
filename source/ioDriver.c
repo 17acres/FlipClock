@@ -29,7 +29,6 @@ Hwi_Handle hwiHandle;
 volatile uint8_t secondByte;
 void ioIsr(UArg arg);
 void handleIOFailure(Dtc code, uint32_t detail, String message);
-Dtc lookupDtc(uint8_t slaveAddress);
 volatile bool transactionStarted = false;
 
 bool checkIOPresence(uint8_t slaveAddress) {
