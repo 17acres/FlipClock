@@ -94,7 +94,6 @@ extern const SegState segVal6;
 extern const SegState segVal7;
 extern const SegState segVal8;
 extern const SegState segVal9;
-extern const SegState segVal9;
 extern const SegState segVal_A;
 extern const SegState segVal_b;
 extern const SegState segVal_C;

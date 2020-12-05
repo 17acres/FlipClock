@@ -123,7 +123,7 @@ void sysMonitor(UArg arg0, UArg arg1)
         }
 
         SegState thisState = stateList[loopCount % 39];
-        applySegDelta(IO_0_ADDR, lastState, thisState, 300);
+        applySegDelta(IO_0_ADDR, lastState, thisState, 350);
 
         SegState nextState = stateList[(loopCount + 1) % 39];
         SegState lastThisDiff = subtractSeg(thisState, lastState);
