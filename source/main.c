@@ -56,7 +56,7 @@
 #include "ioDriver.h"
 #include "hsd.h"
 #include "dtc.h"
-#define TASKSTACKSIZE   512
+#define TASKSTACKSIZE   1024
 
 #include "Leds.h"
 
@@ -94,10 +94,8 @@ void sysMonitor(UArg arg0, UArg arg1)
     int loopCount = 0;
     Task_sleep(100);
     clearMaxAdcVals();
-
-    SegState stateList[] = { segValAOnly, segValBOnly, segValCOnly, segValDOnly,
-                             segValEOnly, segValFOnly, segValGOnly,
-                             segValShowExtra, segVal0, segVal1, segVal2,
+//segValAOnly, segValBOnly, segValCOnly, segValDOnly,segValEOnly, segValFOnly, segValGOnly,segValShowExtra,
+    SegState stateList[] = { segVal0, segVal1, segVal2,
                              segVal3, segVal4, segVal5, segVal6, segVal7,
                              segVal8, segVal9, segVal9, segVal_A, segVal_b,
                              segVal_C, segVal_c, segVal_d, segVal_E, segVal_F,
