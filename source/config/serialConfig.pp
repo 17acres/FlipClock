@@ -1,4 +1,11 @@
-# 1 "../source/config/gpioConfig.c"
+# 1 "../source/config/serialConfig.c"
+/*
+ * spiConfig.c
+ *
+ *  Created on: Aug 17, 2020
+ *      Author: Dan
+ */
+
 /*
  * Copyright (c) 2015, Texas Instruments Incorporated
  * All rights reserved.
@@ -1423,7 +1430,7 @@ _Pragma("diag_pop")
 
 _Pragma("diag_pop")
 
-# 34 "../source/config/gpioConfig.c"
+# 41 "../source/config/serialConfig.c"
 # 1 "C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_20.2.3.LTS/include/stdbool.h"
 /*
  * Copyright (c) 2000 Jeroen Ruigrok van der Werven <asmodai@FreeBSD.org>
@@ -1481,7 +1488,7 @@ _Pragma("CHECK_MISRA(\"-19.11\")")
 
 _Pragma("diag_pop")
 
-# 35 "../source/config/gpioConfig.c"
+# 42 "../source/config/serialConfig.c"
 
 # 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/std.h"
 /* 
@@ -2191,7 +2198,7 @@ typedef xdc_Bits64      Bits64;
  *  @(#) xdc; 1, 1, 1,0; 12-9-2015 17:34:58; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
  */
 
-# 37 "../source/config/gpioConfig.c"
+# 44 "../source/config/serialConfig.c"
 # 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
 /*
  *  Do not modify this file; it is automatically 
@@ -6429,7 +6436,7 @@ static inline void xdc_runtime_Error_Module_setMask( xdc_Bits16 mask )
  *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:45; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
  */
 
-# 38 "../source/config/gpioConfig.c"
+# 45 "../source/config/serialConfig.c"
 # 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/System.h"
 /*
  *  Do not modify this file; it is automatically 
@@ -9477,7 +9484,7 @@ static inline void xdc_runtime_System_Module_setMask( xdc_Bits16 mask )
  *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:49; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
  */
 
-# 39 "../source/config/gpioConfig.c"
+# 46 "../source/config/serialConfig.c"
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/family/arm/m3/Hwi.h"
 /*
  *  Do not modify this file; it is automatically 
@@ -14578,7 +14585,7 @@ static inline ti_sysbios_family_arm_m3_Hwi_Struct *ti_sysbios_family_arm_m3_Hwi_
 /* module prefix */
 # 1341 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/family/arm/m3/Hwi.h"
 
-# 40 "../source/config/gpioConfig.c"
+# 47 "../source/config/serialConfig.c"
 
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/inc/hw_ints.h"
 //*****************************************************************************
@@ -14692,7 +14699,7 @@ static inline ti_sysbios_family_arm_m3_Hwi_Struct *ti_sysbios_family_arm_m3_Hwi_
 
 
 
-# 42 "../source/config/gpioConfig.c"
+# 49 "../source/config/serialConfig.c"
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/inc/hw_memmap.h"
 //*****************************************************************************
 //
@@ -14754,7 +14761,7 @@ static inline ti_sysbios_family_arm_m3_Hwi_Struct *ti_sysbios_family_arm_m3_Hwi_
                                             // Accelerator (DES)
 # 150 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/inc/hw_memmap.h"
 
-# 43 "../source/config/gpioConfig.c"
+# 50 "../source/config/serialConfig.c"
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/inc/hw_types.h"
 //*****************************************************************************
 //
@@ -14888,7 +14895,7 @@ static inline ti_sysbios_family_arm_m3_Hwi_Struct *ti_sysbios_family_arm_m3_Hwi_
 
 
 
-# 44 "../source/config/gpioConfig.c"
+# 51 "../source/config/serialConfig.c"
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/inc/hw_gpio.h"
 //*****************************************************************************
 //
@@ -15058,7 +15065,7 @@ static inline ti_sysbios_family_arm_m3_Hwi_Struct *ti_sysbios_family_arm_m3_Hwi_
                                             // bit adds an additional 4 mA
 # 212 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/inc/hw_gpio.h"
 
-# 45 "../source/config/gpioConfig.c"
+# 52 "../source/config/serialConfig.c"
 
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/driverlib/rom.h"
 //*****************************************************************************
@@ -15351,7 +15358,7 @@ static inline ti_sysbios_family_arm_m3_Hwi_Struct *ti_sysbios_family_arm_m3_Hwi_
 //*****************************************************************************
 # 7783 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/driverlib/rom.h"
 
-# 47 "../source/config/gpioConfig.c"
+# 54 "../source/config/serialConfig.c"
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/driverlib/rom_map.h"
 //*****************************************************************************
 //
@@ -15627,7 +15634,7 @@ static inline ti_sysbios_family_arm_m3_Hwi_Struct *ti_sysbios_family_arm_m3_Hwi_
 //*****************************************************************************
 # 6408 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/driverlib/rom_map.h"
 
-# 48 "../source/config/gpioConfig.c"
+# 55 "../source/config/serialConfig.c"
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/driverlib/gpio.h"
 //*****************************************************************************
 //
@@ -15793,7 +15800,7 @@ extern void GPIOADCTriggerDisable(uint32_t ui32Port, uint8_t ui8Pins);
 
 
 
-# 49 "../source/config/gpioConfig.c"
+# 56 "../source/config/serialConfig.c"
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/driverlib/i2c.h"
 //*****************************************************************************
 //
@@ -16021,7 +16028,7 @@ extern uint32_t I2CSlaveStatus(uint32_t ui32Base);
 
 
 
-# 50 "../source/config/gpioConfig.c"
+# 57 "../source/config/serialConfig.c"
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/driverlib/pin_map.h"
 //*****************************************************************************
 //
@@ -16711,7 +16718,7 @@ extern uint32_t I2CSlaveStatus(uint32_t ui32Base);
 //*****************************************************************************
 # 20952 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/driverlib/pin_map.h"
 
-# 51 "../source/config/gpioConfig.c"
+# 58 "../source/config/serialConfig.c"
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/driverlib/pwm.h"
 //*****************************************************************************
 //
@@ -16962,7 +16969,7 @@ extern void PWMOutputUpdateMode(uint32_t ui32Base,
 
 
 
-# 52 "../source/config/gpioConfig.c"
+# 59 "../source/config/serialConfig.c"
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/driverlib/ssi.h"
 //*****************************************************************************
 //
@@ -17103,7 +17110,7 @@ extern void SSIAdvFrameHoldDisable(uint32_t ui32Base);
 
 
 
-# 53 "../source/config/gpioConfig.c"
+# 60 "../source/config/serialConfig.c"
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/driverlib/sysctl.h"
 //*****************************************************************************
 //
@@ -17396,7 +17403,7 @@ extern void SysCtlVoltageEventClear(uint32_t ui32Status);
 
 
 
-# 54 "../source/config/gpioConfig.c"
+# 61 "../source/config/serialConfig.c"
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/driverlib/uart.h"
 //*****************************************************************************
 //
@@ -17626,7 +17633,7 @@ extern void UART9BitAddrSend(uint32_t ui32Base, uint8_t ui8Addr);
 
 
 
-# 55 "../source/config/gpioConfig.c"
+# 62 "../source/config/serialConfig.c"
 # 1 "C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/driverlib/udma.h"
 //*****************************************************************************
 //
@@ -18092,84 +18099,19 @@ extern void uDMAChannelSelectSecondary(uint32_t ui32SecPeriphs);
 
 
 
-# 56 "../source/config/gpioConfig.c"
-
-# 1 "..\\source\\config\\gpioConfig.h"
+# 63 "../source/config/serialConfig.c"
+# 1 "C:/Users/Dan/Documents/GitHub/FlipClock/source/config/serialConfig.h"
 /*
- * Copyright (c) 2015, Texas Instruments Incorporated
- * All rights reserved.
+ * spiConfig.h
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * *  Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *
- * *  Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *
- * *  Neither the name of Texas Instruments Incorporated nor the names of
- *    its contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *  Created on: Aug 17, 2020
+ *      Author: Dan
  */
 
 
 
 
-typedef enum GPIONames {
-	RTC_SQW = 0,
-	LAUNCHPAD_SW1,
-	LAUNCHPAD_SW2,
-	HSD_DISABLE_0, //high is disable
-	HSD_DISABLE_1,
-	HSD_DISABLE_2,
-	HSD_DISABLE_3,
-	IO_RESET, //high is reset
-	ESP_ENABLE, //high is enable
-	BUF_DISABLE, //high is disable
-	LAUNCHPAD_LED_BLUE,
-	LAUNCHPAD_LED_GREEN,
-	LAUNCHPAD_LED_RED,
-	GPIOCOUNT
-} EK_TM4C123GXL_GPIOName;
-
-extern void initGPIO(void);
-
-/*!
- *  @brief  Initialize board specific I2C settings
- *
- *  This function initializes the board specific I2C settings and then calls
- *  the I2C_init API to initialize the I2C module.
- *
- *  The I2C peripherals controlled by the I2C module are determined by the
- *  I2C_config variable.
- */
-
-# 58 "../source/config/gpioConfig.c"
-
-/*
- *  =============================== GPIO ===============================
- */
-/* Place into subsections to allow the TI linker to remove items properly */
-
-#pragma DATA_SECTION(GPIOTiva_config, ".const:GPIOTiva_config")
-
-
-# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/GPIO.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/SPI.h"
 /*
  * Copyright (c) 2015, Texas Instruments Incorporated
  * All rights reserved.
@@ -18202,388 +18144,111 @@ extern void initGPIO(void);
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 /** ============================================================================
- *  @file       GPIO.h
+ *  @file       SPI.h
  *
- *  @brief      GPIO driver
+ *  @brief      SPI driver interface
  *
- *  The GPIO header file should be included in an application as follows:
+ *  The SPI header file should be included in an application as follows:
  *  @code
- *  #include <ti/drivers/GPIO.h>
+ *  #include <ti/drivers/SPI.h>
  *  @endcode
  *
  *  # Operation #
+ *  The SPI driver in TI-RTOS is designed to serve a means to move data
+ *  between SPI peripherals. This driver does not interpret any of the data sent
+ *  to or received from this peripheral.
  *
- *  The GPIO module allows you to manage General Purpose I/O pins via
- *  simple and portable APIs. GPIO pin behaviour can be configured completely
- *  statically, or dynamically defined at runtime.
+ *  The APIs in this driver serve as an interface to a typical TI-RTOS
+ *  application. The specific peripheral implementations are responsible to
+ *  create all the SYS/BIOS specific primitives to allow for thread-safe
+ *  operation.
  *
- *  The application is required to supply a device
- *  specific GPIOXXX_Config structure to the module. This structure
- *  communicates to the GPIO module how to configure the pins that will be used
- *  by the application (See the description of GPIO_PinConfig).
+ *  The SPI driver operates on some key definitions and assumptions:
+ *  - The driver operates transparent from the chip select. Some SPI controllers
+ *    feature a hardware chip select to assert SPI slave peripherals. See the
+ *    specific peripheral implementations on chip select requirements.
  *
- *  The application is required to call GPIO_init(). This function will
- *  initialize all the GPIO pins defined in the GPIO_PinConfig table to the
- *  configurations specified. Once that is completed the other APIs can be
- *  used to access the pins.
+ *  - The SPI protocol does not account for a built-in handshaking mechanism and
+ *    neither does this SPI driver. Therefore, when operating in ::SPI_SLAVE
+ *    mode, the application must provide such a mechanism to ensure that the
+ *    SPI slave is ready for the SPI master. The SPI slave must call
+ *    SPI_transfer() *before* the SPI master starts transmitting. Some example
+ *    application mechanisms could include:
+ *    - Timed delays on the SPI master to guarantee the SPI slave is be ready
+ *      for a SPI transaction.
+ *    - A form of GPIO flow control from the slave to the SPI master to notify
+ *      the master when ready.
  *
- *  Asserts are used to verify that the driver has been initialized and
- *  to validate pin indexes within the various APIs.
+ *  ## Opening the driver #
  *
- *  See the device specific GPIO header file for configuration details.
- *
- *  ============================================================================
- */
-
-
-
-
-
-
-
-
-
-
-/*!
- *  @brief  GPIO pin configuration settings
- *
- *  The upper 16 bits of the 32 bit PinConfig is reserved
- *  for pin configuration settings.
- *
- *  The lower 16 bits are reserved for device-specific
- *  port/pin identifications
- */
-typedef uint32_t GPIO_PinConfig;
-
-/*!
- *  @cond NODOC
- *  Internally used configuration bit access macros.
- */
-# 101 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/GPIO.h"
-/*! @endcond */
-
-/** @name GPIO_PinConfig pin direction configuration macros
- *  @{
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/** @} */
-
-/** @name GPIO_PinConfig pin interrupt configuration macros
- *  @{
- */
-# 134 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/GPIO.h"
-/** @} */
-
-/** @name Special GPIO_PinConfig configuration macros
- *  @{
- */
-
-/*!
- *  @brief 'Or' in this GPIO_PinConfig definition to inform GPIO_setConfig()
- *  to only configure the interrupt attributes of a GPIO input pin.
- */
-
-
-/*!
- *  @brief Use this GPIO_PinConfig definition to inform GPIO_init()
- *  NOT to configure the corresponding pin
- */
-
-
-/** @} */
-
-/*!
- *  @brief  GPIO callback function type
- *
- *  @param      index       GPIO index.  This is the same index that
- *                          was passed to GPIO_setCallback().  This allows
- *                          you to use the same callback function for multiple
- *                          GPIO interrupts, by using the index to identify
- *                          the GPIO that caused the interrupt.
- */
-typedef void (*GPIO_CallbackFxn)(unsigned int index);
-
-/*!
- *  @brief      Clear a GPIO pin interrupt flag
- *
- *  Clears the GPIO interrupt for the specified index.
- *
- *  Note: It is not necessary to call this API within a
- *  callback assigned to a pin.
- *
- *  @param      index       GPIO index
- */
-extern void GPIO_clearInt(unsigned int index);
-
-/*!
- *  @brief      Disable a GPIO pin interrupt
- *
- *  Disables interrupts for the specified GPIO index.
- *
- *  @param      index       GPIO index
- */
-extern void GPIO_disableInt(unsigned int index);
-
-/*!
- *  @brief      Enable a GPIO pin interrupt
- *
- *  Enables GPIO interrupts for the selected index to occur.
- *
- *  Note:  Prior to enabling a GPIO pin interrupt, make sure
- *  that a corresponding callback function has been provided.
- *  Use the GPIO_setCallback() API for this purpose at runtime.
- *  Alternatively, the callback function can be statically
- *  configured in the GPIO_CallbackFxn array provided.
- *
- *  @param      index       GPIO index
- */
-extern void GPIO_enableInt(unsigned int index);
-
-/*!
- *  @brief  Initializes the GPIO module
- *
- *  The pins defined in the application-provided *GPIOXXX_config* structure
- *  are initialized accordingly.
- *
- *  @pre    The GPIO_config structure must exist and be persistent before this
- *          function can be called. This function must also be called before
- *          any other GPIO driver APIs.
- */
-extern void GPIO_init();
-
-/*!
- *  @brief      Reads the value of a GPIO pin
- *
- *  The value returned will either be zero or one depending on the
- *  state of the pin.
- *
- *  @param      index  GPIO index
- *
- *  @return     0 or 1, depending on the state of the pin.
- */
-extern unsigned int GPIO_read(unsigned int index);
-
-/*!
- *  @brief      Bind a callback function to a GPIO pin interrupt
- *
- *  Associate a callback function with a particular GPIO pin interrupt.
- *
- *  Callbacks can be changed at any time, making it easy to switch between
- *  efficient, state-specific interrupt handlers.
- *
- *  Note: The callback function is called within the context of an interrupt
- *  handler.
- *
- *  Note: This API does not enable the GPIO pin interrupt.
- *  Use GPIO_enableInt() and GPIO_disableInt() to enable
- *  and disable the pin interrupt as necessary.
- *
- *  Note: it is not necessary to call GPIO_clearInt() within a callback.
- *  That operation is performed internally before the callback is invoked.
- *
- *  @param      index       GPIO index
- *  @param      callback    address of the callback function
- */
-extern void GPIO_setCallback(unsigned int index, GPIO_CallbackFxn callback);
-
-/*!
- *  @brief      Configure the gpio pin
- *
- *  Dynamically configure a gpio pin to a device specific setting.
- *  For many applications, the pin configurations provided in the static
- *  GPIO_PinConfig array is sufficient.
- *
- *  For input pins with interrupt configurations, a corresponding interrupt
- *  object will be created as needed.
- *
- *  @param      index       GPIO index
- *  @param      pinConfig   device specific pin configuration settings
- */
-extern void GPIO_setConfig(unsigned int index, GPIO_PinConfig pinConfig);
-
-/*!
- *  @brief      Toggles the current state of a GPIO
- *
- *  @param      index  GPIO index
- */
-extern void GPIO_toggle(unsigned int index);
-
-/*!
- *  @brief     Writes the value to a GPIO pin
- *
- *  @param      index    GPIO index
- *  @param      value    must be either 0 or 1
- */
-extern void GPIO_write(unsigned int index, unsigned int value);
-
-
-
-
-
-# 68 "../source/config/gpioConfig.c"
-# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-/*
- * Copyright (c) 2015, Texas Instruments Incorporated
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * *  Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *
- * *  Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *
- * *  Neither the name of Texas Instruments Incorporated nor the names of
- *    its contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-/** ============================================================================
- *  @file       GPIOTiva.h
- *
- *  @brief      Tiva GPIO driver
- *
- *  The GPIO header file should be included in an application as follows:
  *  @code
- *  #include <ti/drivers/gpio/GPIOTiva.h>
- *  @endcode
+ *  SPI_Handle      handle;
+ *  SPI_Params      params;
+ *  SPI_Transaction spiTransaction;
  *
- *  Refer to @ref GPIO.h for a complete description of APIs.
- *
- *  # Operation #
- *
- *  The GPIO module allows you to manage General Purpose I/O pins via simple
- *  and portable APIs. The application is required to supply a GPIOTiva_Config
- *  structure to the module (see example below). This structure communicates to
- *  the GPIO module how to configure the pins used by the application (See the
- *  description of GPIO_PinConfig in the GPIO.h file).
- *
- *  The application is required to call GPIO_init(). This function will
- *  initialize all the GPIO pins defined in the GPIO_PinConfig table to the
- *  configurations specified. Once completed the other APIs can be used to
- *  access the pins.
- *
- *  Asserts are used to verify that the driver has been initialized, and is
- *  reading/writing a valid index.
- *
- *  The following is an example of the code required to use 2 switches and
- *  2 LEDs on an EK_TM4C1294XL Launchpad board.
- *
- *  Board header file:
- *  @code
- *  // Enum of GPIO names on the EK_TM4C1294XL dev board
- *  typedef enum EK_TM4C1294XL_GPIOName {
- *      EK_TM4C1294XL_USR_SW1 = 0,
- *      EK_TM4C1294XL_USR_SW2,
- *      EK_TM4C1294XL_D1,
- *      EK_TM4C1294XL_D2,
- *
- *      EK_TM4C1294XL_GPIOCOUNT
- *  } EK_TM4C1294XL_GPIOName;
- *  @endcode
- *
- *  Board initialization code:
- *  @code
- *  #include <ti/drivers/GPIO.h>
- *  #include <ti/drivers/gpio/GPIOTiva.h>
- *
- *  // Array of pin configurations
- *  // NOTE: The order of the pin configurations must coincide with what was
- *  //       defined in EK_TM4C1294XL.h
- *  // NOTE: Pins not used for interrupts should be placed at the end of the
- *           array.  Callback entries can be omitted from callbacks array to
- *           reduce memory usage.
- *  const GPIO_PinConfig gpioPinConfigs[] = {
- *      // Input pins
- *      // EK_TM4C1294XL_USR_SW1
- *      GPIOTiva_PJ_0 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
- *      // EK_TM4C1294XL_USR_SW2
- *      GPIOTiva_PJ_1 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
- *
- *      // Output pins
- *      // EK_TM4C1294XL_USR_D1
- *      GPIOTiva_PN_1 | GPIO_CFG_OUTPUT | GPIO_CFG_OUT_STR_HIGH,
- *      // EK_TM4C1294XL_USR_D2
- *      GPIOTiva_PN_0 | GPIO_CFG_OUTPUT | GPIO_CFG_OUT_STR_HIGH
- *  };
- *
- *  // Array of callback function pointers
- *  // NOTE: The order of the pin configurations must coincide with what was
- *  //       defined in EK_TM4C1294XL.h
- *  // NOTE: Pins not used for interrupts can be omitted from callbacks array to
- *           reduce memory usage (if placed at end of gpioPinConfigs array).
- *  const GPIO_callbackFxn gpioCallbackFunctions[] = {
- *      NULL,       // EK_TM4C1294XL_USR_SW1
- *      NULL        // EK_TM4C1294XL_USR_SW2
- *  };
- *
- *  // The device-specific GPIO_config structure
- *  const GPIOTiva_Config GPIOTiva_config = {
- *      .pinConfigs = (GPIO_PinConfig *) gpioPinConfigs,
- *      .callbacks = (GPIO_CallbackFxn *) gpioCallbackFunctions,
- *      .numberOfPinConfigs = sizeof(gpioPinConfigs) / sizeof(GPIO_PinConfig),
- *      .numberOfCallbacks = sizeof(gpioCallbackFunctions) / sizeof(GPIO_CallbackFxn),
- *      .intPriority = (~0)
- *  };
- *
- *  // Initialize peripheral and pins
- *  void EK_TM4C1294XL_initGPIO(void)
- *  {
- *      GPIO_init();
+ *  SPI_Params_init(&params);
+ *  params.bitRate  = someNewBitRate;
+ *  handle = SPI_open(someSPI_configIndexValue, &params);
+ *  if (!handle) {
+ *      System_printf("SPI did not open");
  *  }
  *  @endcode
  *
- *  Keep in mind that the callback functions will be called in the context of
- *  an interrupt service routine and should be designed accordingly.  When an
- *  interrupt is triggered, the interrupt status of all (interrupt enabled) pins
- *  on a port will be read, cleared, and the respective callbacks will be
- *  executed.  Callbacks will be called in order from least significant bit to
- *  most significant bit.
+ *  ## Transferring data #
+ *  Data transmitted and received by the SPI peripheral is performed using
+ *  SPI_transfer(). SPI_transfer() accepts a pointer to a SPI_Transaction
+ *  structure that dictates what quantity of data is sent and received.
  *
- *  On select Tiva devices, ports P & Q are capable of per-pin interrupts (each
- *  pin has its own interrupt vector).  If multiple interrupts on port P (or Q)
- *  are triggered, the first interrupt will clear all flags and execute the
- *  respective callbacks.  Interrupts for other pins on P (or Q) will run, but
- *  will not execute callbacks.
+ *  @code
+ *  SPI_Transaction spiTransaction;
+ *
+ *  spiTransaction.count = someIntegerValue;
+ *  spiTransaction.txBuf = transmitBufferPointer;
+ *  spiTransaction.rxBuf = receiveBufferPointer;
+ *
+ *  ret = SPI_transfer(handle, &spiTransaction);
+ *  if (!ret) {
+ *      System_printf("Unsuccessful SPI transfer");
+ *  }
+ *  @endcode
+ *
+ *  ## Canceling a transaction #
+ *  SPI_transferCancel() is used to cancel a SPI transaction when the driver is
+ *  used in ::SPI_MODE_CALLBACK mode.
+ *
+ *  Calling this API while no transfer is in progress has no effect. If a
+ *  transfer is in progress, it canceled and a callback on the ::SPI_CallbackFxn
+ *  is performed. The ::SPI_Status status field in the ::SPI_Transaction struct
+ *  can be examined within the callback to determine if the transaction was
+ *  successful.
+ *
+ *  @code
+ *  SPI_transferCancel(handle);
+ *  @endcode
+ *
+ *  # Implementation #
+ *
+ *  This module serves as the main interface for TI-RTOS applications. Its
+ *  purpose is to redirect the module's APIs to specific peripheral
+ *  implementations which are specified using a pointer to a SPI_FxnTable.
+ *
+ *  The SPI driver interface module is joined (at link time) to a
+ *  NULL-terminated array of SPI_Config data structures named *SPI_config*.
+ *  *SPI_config* is implemented in the application with each entry being an
+ *  instance of a SPI peripheral. Each entry in *SPI_config* contains a:
+ *  - (SPI_FxnTable *) to a set of functions that implement a SPI peripheral
+ *  - (void *) data object that is associated with the SPI_FxnTable
+ *  - (void *) hardware attributes that are associated to the SPI_FxnTable
  *
  *  # Instrumentation #
- *  The GPIO driver interface produces log statements if instrumentation is
+ *
+ *  The SPI driver interface produces log statements if instrumentation is
  *  enabled.
  *
  *  Diagnostics Mask | Log details |
  *  ---------------- | ----------- |
  *  Diags_USER1      | basic operations performed |
+ *  Diags_USER2      | detailed operations performed |
  *
  *  ============================================================================
  */
@@ -18599,182 +18264,9928 @@ extern void GPIO_write(unsigned int index, unsigned int value);
 
 
 
-/*!
- *  @brief  GPIO device specific driver configuration structure
+/**
+ *  @defgroup SPI_CONTROL SPI_control command and status codes
+ *  These SPI macros are reservations for SPI.h
+ *  @{
  */
-typedef struct GPIOTiva_Config {
-    /*! Pointer to the board's PinConfig array */
-    GPIO_PinConfig *pinConfigs;
-
-    /*! Pointer to the board's callback array */
-    GPIO_CallbackFxn *callbacks;
-
-    /*! Number of pin configs defined */
-    uint32_t numberOfPinConfigs;
-
-    /*! Number of callbacks defined */
-    uint32_t numberOfCallbacks;
-
-    /*! Interrupt priority used for call back interrupts.
-     *
-     *  intPriority is the interrupt priority, as defined by the
-     *  underlying OS.  It is passed unmodified to the underlying OS's
-     *  interrupt handler creation code, so you need to refer to the OS
-     *  documentation for usage.  For example, for SYS/BIOS applications,
-     *  refer to the ti.sysbios.family.arm.m3.Hwi documentation for SYS/BIOS
-     *  usage of interrupt priorities.  If the driver uses the ti.drivers.ports
-     *  interface instead of making OS calls directly, then the HwiP port
-     *  handles the interrupt priority in an OS specific way.  In the case
-     *  of the SYS/BIOS port, intPriority is passed unmodified to Hwi_create().
-     *
-     *  Setting ~0 will configure the lowest possible priority
-     */
-    uint32_t intPriority;
-} GPIOTiva_Config;
 
 /*!
- *  @brief  Device specific port/pin definition macros
+ * Common SPI_control command code reservation offset.
+ * SPI driver implementations should offset command codes with SPI_CMD_RESERVED
+ * growing positively
  *
- *  Below are the port/pin definitions to be used within the board's pin
- *  configuration table.  These macros should be OR'd in with the respective pin
- *  configuration settings.
+ * Example implementation specific command codes:
+ * @code
+ * #define SPIXYZ_CMD_COMMAND0     SPI_CMD_RESERVED + 0
+ * #define SPIXYZ_CMD_COMMAND1     SPI_CMD_RESERVED + 1
+ * @endcode
  */
 
 
-# 212 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 221 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 230 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 239 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 248 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 257 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 266 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 275 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 284 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 293 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 302 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 311 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 320 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 330 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 339 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 348 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
-
-# 357 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
+/*!
+ * Common SPI_control status code reservation offset.
+ * SPI driver implementations should offset status codes with
+ * SPI_STATUS_RESERVED growing negatively.
+ *
+ * Example implementation specific status codes:
+ * @code
+ * #define SPIXYZ_STATUS_ERROR0    SPI_STATUS_RESERVED - 0
+ * #define SPIXYZ_STATUS_ERROR1    SPI_STATUS_RESERVED - 1
+ * #define SPIXYZ_STATUS_ERROR2    SPI_STATUS_RESERVED - 2
+ * @endcode
+ */
 
 
+/**
+ *  @defgroup SPI_STATUS Status Codes
+ *  SPI_STATUS_* macros are general status codes returned by SPI_control()
+ *  @{
+ *  @ingroup SPI_CONTROL
+ */
+
+/*!
+ * @brief   Successful status code returned by SPI_control().
+ *
+ * SPI_control() returns SPI_STATUS_SUCCESS if the control code was executed
+ * successfully.
+ */
+
+
+/*!
+ * @brief   Generic error status code returned by SPI_control().
+ *
+ * SPI_control() returns SPI_STATUS_ERROR if the control code was not executed
+ * successfully.
+ */
+
+
+/*!
+ * @brief   An error status code returned by SPI_control() for undefined
+ * command codes.
+ *
+ * SPI_control() returns SPI_STATUS_UNDEFINEDCMD if the control code is not
+ * recognized by the driver implementation.
+ */
+
+/** @}*/
+
+/**
+ *  @defgroup SPI_CMD Command Codes
+ *  SPI_CMD_* macros are general command codes for SPI_control(). Not all SPI
+ *  driver implementations support these command codes.
+ *  @{
+ *  @ingroup SPI_CONTROL
+ */
+
+/* Add SPI_CMD_<commands> here */
+
+/** @}*/
+
+/** @}*/
+
+/*!
+ *  @brief    Wait forever define
+ */
+
+
+/*!
+ *  @brief      A handle that is returned from a SPI_open() call.
+ */
+typedef struct SPI_Config      *SPI_Handle;
+
+/*!
+ *  @brief      Status codes that are set by the SPI driver.
+ */
+typedef enum SPI_Status {
+    SPI_TRANSFER_COMPLETED = 0,
+    SPI_TRANSFER_STARTED,
+    SPI_TRANSFER_CANCELED,
+    SPI_TRANSFER_FAILED,
+    SPI_TRANSFER_CSN_DEASSERT
+} SPI_Status;
+
+/*!
+ *  @brief
+ *  A ::SPI_Transaction data structure is used with SPI_transfer(). It indicates
+ *  how many ::SPI_FrameFormat frames are sent and received from the buffers
+ *  pointed to txBuf and rxBuf.
+ *  The arg variable is an user-definable argument which gets passed to the
+ *  ::SPI_CallbackFxn when the SPI driver is in ::SPI_MODE_CALLBACK.
+ */
+typedef struct SPI_Transaction {
+    /* User input (write-only) fields */
+    size_t     count;      /*!< Number of frames for this transaction */
+    void      *txBuf;      /*!< void * to a buffer with data to be transmitted */
+    void      *rxBuf;      /*!< void * to a buffer to receive data */
+    void      *arg;        /*!< Argument to be passed to the callback function */
+
+    /* User output (read-only) fields */
+    SPI_Status status;     /*!< Status code set by SPI_transfer */
+
+    /* Driver-use only fields */
+} SPI_Transaction;
+
+/*!
+ *  @brief      The definition of a callback function used by the SPI driver
+ *              when used in ::SPI_MODE_CALLBACK
+ *
+ *  @param      SPI_Handle          SPI_Handle
+ *  @param      SPI_Transaction*    SPI_Transaction*
+ */
+typedef void        (*SPI_CallbackFxn) (SPI_Handle handle,
+                                        SPI_Transaction * transaction);
+/*!
+ *  @brief
+ *  Definitions for various SPI modes of operation.
+ */
+typedef enum SPI_Mode {
+    SPI_MASTER      = 0,    /*!< SPI in master mode */
+    SPI_SLAVE       = 1     /*!< SPI in slave mode */
+} SPI_Mode;
+
+/*!
+ *  @brief
+ *  Definitions for various SPI data frame formats.
+ */
+typedef enum SPI_FrameFormat {
+    SPI_POL0_PHA0   = 0,    /*!< SPI mode Polarity 0 Phase 0 */
+    SPI_POL0_PHA1   = 1,    /*!< SPI mode Polarity 0 Phase 1 */
+    SPI_POL1_PHA0   = 2,    /*!< SPI mode Polarity 1 Phase 0 */
+    SPI_POL1_PHA1   = 3,    /*!< SPI mode Polarity 1 Phase 1 */
+    SPI_TI          = 4,    /*!< TI mode */
+    SPI_MW          = 5     /*!< Micro-wire mode */
+} SPI_FrameFormat;
+
+/*!
+ *  @brief
+ *
+ *  SPI transfer mode determines the whether the SPI controller operates
+ *  synchronously or asynchronously. In ::SPI_MODE_BLOCKING mode SPI_transfer()
+ *  blocks code execution until the SPI transaction has completed. In
+ *  ::SPI_MODE_CALLBACK SPI_transfer() does not block code execution and instead
+ *  calls a ::SPI_CallbackFxn callback function when the transaction has
+ *  completed.
+ */
+typedef enum SPI_TransferMode {
+    /*!
+     * SPI_transfer() blocks execution. This mode can only be used when called
+     * within a Task context
+     */
+    SPI_MODE_BLOCKING,
+    /*!
+     * SPI_transfer() does not block code execution and will call a
+     * ::SPI_CallbackFxn. This mode can be used in a Task, Swi, or Hwi context.
+     */
+    SPI_MODE_CALLBACK
+} SPI_TransferMode;
+
+/*!
+ *  @brief SPI Parameters
+ *
+ *  SPI Parameters are used to with the SPI_open() call. Default values for
+ *  these parameters are set using SPI_Params_init().
+ *
+ *  @sa         SPI_Params_init()
+ */
+typedef struct SPI_Params {
+    SPI_TransferMode    transferMode;       /*!< Blocking or Callback mode */
+    uint32_t            transferTimeout;    /*!< Transfer timeout in system
+                                                 ticks (Not supported with all
+                                                 implementations */
+    SPI_CallbackFxn     transferCallbackFxn;/*!< Callback function pointer */
+    SPI_Mode            mode;               /*!< Master or Slave mode */
+    uint32_t            bitRate;            /*!< SPI bit rate in Hz */
+    uint32_t            dataSize;           /*!< SPI data frame size in bits */
+    SPI_FrameFormat     frameFormat;        /*!< SPI frame format */
+    uintptr_t           custom;             /*!< Custom argument used by driver
+                                                 implementation */
+} SPI_Params;
+
+/*!
+ *  @brief      A function pointer to a driver specific implementation of
+ *              SPI_close().
+ */
+typedef void        (*SPI_CloseFxn)          (SPI_Handle handle);
+
+/*!
+ *  @brief      A function pointer to a driver specific implementation of
+ *              SPI_control().
+ */
+typedef int         (*SPI_ControlFxn)        (SPI_Handle handle,
+                                              unsigned int cmd,
+                                              void *arg);
+
+/*!
+ *  @brief      A function pointer to a driver specific implementation of
+ *              SPI_init().
+ */
+typedef void        (*SPI_InitFxn)           (SPI_Handle handle);
+
+/*!
+ *  @brief      A function pointer to a driver specific implementation of
+ *              SPI_open().
+ */
+typedef SPI_Handle  (*SPI_OpenFxn)           (SPI_Handle handle,
+                                              SPI_Params *params);
+
+/*!
+ *  @brief      A function pointer to a driver specific implementation of
+ *              SPI_serviceISR().
+ */
+typedef void        (*SPI_ServiceISRFxn)     (SPI_Handle handle);
+
+/*!
+ *  @brief      A function pointer to a driver specific implementation of
+ *              SPI_transfer().
+ */
+typedef _Bool        (*SPI_TransferFxn)       (SPI_Handle handle,
+                                              SPI_Transaction *transaction);
+
+/*!
+ *  @brief      A function pointer to a driver specific implementation of
+ *              SPI_transferCancel().
+ */
+typedef void        (*SPI_TransferCancelFxn) (SPI_Handle handle);
+
+/*!
+ *  @brief      The definition of a SPI function table that contains the
+ *              required set of functions to control a specific SPI driver
+ *              implementation.
+ */
+typedef struct SPI_FxnTable {
+    /*! Function to close the specified peripheral */
+    SPI_CloseFxn            closeFxn;
+
+    /*! Function to implementation specific control function */
+    SPI_ControlFxn          controlFxn;
+
+    /*! Function to initialize the given data object */
+    SPI_InitFxn             initFxn;
+
+    /*! Function to open the specified peripheral */
+    SPI_OpenFxn             openFxn;
+
+    /*! Function to initiate a SPI data transfer */
+    SPI_TransferFxn         transferFxn;
+
+    /*! Function to cancel SPI data transfer */
+    SPI_TransferCancelFxn   transferCancelFxn;
+
+    /*! Function to service the SPI instance */
+    SPI_ServiceISRFxn       serviceISRFxn;
+} SPI_FxnTable;
+
+/*!
+ *  @brief SPI Global configuration
+ *
+ *  The SPI_Config structure contains a set of pointers used to characterize
+ *  the SPI driver implementation.
+ *
+ *  This structure needs to be defined before calling SPI_init() and it must
+ *  not be changed thereafter.
+ *
+ *  @sa     SPI_init()
+ */
+typedef struct SPI_Config {
+    /*! Pointer to a table of driver-specific implementations of SPI APIs */
+    SPI_FxnTable const *fxnTablePtr;
+
+    /*! Pointer to a driver specific data object */
+    void               *object;
+
+    /*! Pointer to a driver specific hardware attributes structure */
+    void         const *hwAttrs;
+} SPI_Config;
+
+/*!
+ *  @brief  Function to close a SPI peripheral specified by the SPI handle
+ *
+ *  @pre    SPI_open() has to be called first.
+ *
+ *  @param  handle A SPI handle returned from SPI_open()
+ *
+ *  @sa     SPI_open()
+ */
+extern void SPI_close(SPI_Handle handle);
+
+/*!
+ *  @brief  Function performs implementation specific features on a given
+ *          SPI_Handle.
+ *
+ *  Commands for SPI_control can originate from SPI.h or from implementation
+ *  specific SPI*.h (_SPICC26XX.h_, _SPITiva.h_, etc.. ) files.
+ *  While commands from SPI.h are API portable across driver implementations,
+ *  not all implementations may support all these commands.
+ *  Conversely, commands from driver implementation specific SPI*.h files add
+ *  unique driver capabilities but are not API portable across all SPI driver
+ *  implementations.
+ *
+ *  Commands supported by SPI.h follow a SPI_CMD_\<cmd\> naming
+ *  convention.<br>
+ *  Commands supported by SPI*.h follow a SPI*_CMD_\<cmd\> naming
+ *  convention.<br>
+ *  Each control command defines @b arg differently. The types of @b arg are
+ *  documented with each command.
+ *
+ *  See @ref SPI_CMD "SPI_control command codes" for command codes.
+ *
+ *  See @ref SPI_STATUS "SPI_control return status codes" for status codes.
+ *
+ *  @pre    SPI_open() has to be called first.
+ *
+ *  @param  handle      A SPI handle returned from SPI_open()
+ *
+ *  @param  cmd         SPI.h or SPI*.h commands.
+ *
+ *  @param  arg         An optional R/W (read/write) command argument
+ *                      accompanied with cmd
+ *
+ *  @return Implementation specific return codes. Negative values indicate
+ *          unsuccessful operations.
+ *
+ *  @sa     SPI_open()
+ */
+extern int SPI_control(SPI_Handle handle, unsigned int cmd, void *arg);
+
+/*!
+ *  @brief  This function initializes the SPI module.
+ *
+ *  @pre    The SPI_config structure must exist and be persistent before this
+ *          function can be called. This function must also be called before
+ *          any other SPI driver APIs. This function call does not modify any
+ *          peripheral registers.
+ */
+extern void SPI_init(void);
+
+/*!
+ *  @brief  This function opens a given SPI peripheral.
+ *
+ *  @pre    SPI controller has been initialized using SPI_init()
+ *
+ *  @param  index         Logical peripheral number for the SPI indexed into
+ *                        the SPI_config table
+ *
+ *  @param  params        Pointer to an parameter block, if NULL it will use
+ *                        default values. All the fields in this structure are
+ *                        RO (read-only).
+ *
+ *  @return A SPI_Handle on success or a NULL on an error or if it has been
+ *          opened already.
+ *
+ *  @sa     SPI_init()
+ *  @sa     SPI_close()
+ */
+extern SPI_Handle SPI_open(unsigned int index, SPI_Params *params);
+
+/*!
+ *  @brief  Function to initialize the SPI_Params struct to its defaults
+ *
+ *  @param  params      An pointer to SPI_Params structure for
+ *                      initialization
+ *
+ *  Defaults values are:
+ *      transferMode        = SPI_MODE_BLOCKING
+ *      transferTimeout     = SPI_WAIT_FOREVER
+ *      transferCallbackFxn = NULL
+ *      mode                = SPI_MASTER
+ *      bitRate             = 1000000 (Hz)
+ *      dataSize            = 8 (bits)
+ *      frameFormat         = SPI_POL0_PHA0
+ */
+extern void SPI_Params_init(SPI_Params *params);
+
+/*!
+ *  @brief  Function to service the SPI module's interrupt service routine
+ *
+ *  This function is not supported on all driver implementations.  Refer to
+ *  implementation specific documentation for details.
+ *
+ *  @param  handle      A SPI_Handle
+ */
+extern void SPI_serviceISR(SPI_Handle handle);
+
+/*!
+ *  @brief  Function to perform SPI transactions
+ *
+ *  If the SPI is in ::SPI_MASTER mode, it will immediately start the
+ *  transaction. If the SPI is in ::SPI_SLAVE mode, it prepares itself for a
+ *  transaction with a SPI master.
+ *
+ *  In ::SPI_MODE_BLOCKING, SPI_transfer will block task execution until the
+ *  transaction has completed.
+ *
+ *  In ::SPI_MODE_CALLBACK, SPI_transfer() does not block task execution and
+ *  calls a ::SPI_CallbackFxn. This makes the SPI_tranfer() safe to be used
+ *  within a Task, Swi, or Hwi context. The ::SPI_Transaction structure must
+ *  stay persistent until the SPI_transfer function has completed!
+ *
+ *  @param  handle      A SPI_Handle
+ *
+ *  @param  transaction A pointer to a SPI_Transaction. All of the fields within
+ *                      transaction except SPI_Transaction.count and
+ *                      SPI_Transaction.status are WO (write-only) unless
+ *                      otherwise noted in the driver implementations. If a
+ *                      transaction timeout has occured, SPI_Transaction.count
+ *                      will contain the number of frames that were transferred.
+ *
+ *  @return true if started successfully; else false
+ *
+ *  @sa     SPI_open
+ *  @sa     SPI_transferCancel
+ */
+extern _Bool SPI_transfer(SPI_Handle handle, SPI_Transaction *transaction);
+
+/*!
+ *  @brief  Function to cancel SPI transactions
+ *
+ *  In ::SPI_MODE_BLOCKING, SPI_transferCancel has no effect.
+ *
+ *  In ::SPI_MODE_CALLBACK, SPI_transferCancel() will stop an SPI transfer if
+ *  if one is in progress.
+ *  If a transaction was in progress, its callback function will be called
+ *  in context from which this API is called from. The ::SPI_CallbackFxn
+ *  function can determine if the transaction was successful or not by reading
+ *  the ::SPI_Status status value in the ::SPI_Transaction structure.
+ *
+ *  @param  handle      A SPI_Handle
+ *
+ *  @sa     SPI_open
+ *  @sa     SPI_transfer
+ */
+extern void SPI_transferCancel(SPI_Handle handle);
 
 
 
 
-# 400 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/gpio/GPIOTiva.h"
+
+# 12 "C:/Users/Dan/Documents/GitHub/FlipClock/source/config/serialConfig.h"
+
+SPI_Handle ledSPIHandle;
+
+extern void initSPI();
+extern void initI2C();
+
+# 64 "../source/config/serialConfig.c"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/spi/SPITivaDMA.h"
+/*
+ * Copyright (c) 2015, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+/** ============================================================================
+ *  @file       SPITivaDMA.h
+ *
+ *  @brief      SPI driver implementation for a TivaSPIcontroller using
+ *              the micro DMA controller.
+ *
+ *  The SPI header file should be included in an application as follows:
+ *  @code
+ *  #include <ti/drivers/SPI.h>
+ *  #include <ti/drivers/spi/SPITivaDMA.h>
+ *  @endcode
+ *
+ *  Refer to @ref SPI.h for a complete description of APIs & example of use.
+ *
+ *  This SPI driver implementation is designed to operate on a Tiva SPI
+ *  controller using a micro DMA controller.
+ *
+ *  ## SPI Chip Select #
+ *  This SPI controller supports a hardware chip select pin. Refer to the
+ *  device's user manual on how this hardware chip select pin behaves in regards
+ *  to the SPI frame format.
+ *
+ *  <table>
+ *  <tr>
+ *  <th>Chip select type</th>
+ *  <th>SPI_MASTER mode</th>
+ *  <th>SPI_SLAVE mode</th>
+ *  </tr>
+ *  <tr>
+ *  <td>Hardware chip select</td>
+ *  <td>No action is needed by the application to select the peripheral.</td>
+ *  <td>See the device documentation on it's chip select requirements.</td>
+ *  </tr>
+ *  <tr>
+ *  <td>Software chip select</td>
+ *  <td>The application is responsible to ensure that correct SPI slave is
+ *      selected before performing a SPI_transfer().</td>
+ *  <td>See the device documentation on it's chip select requirements.</td>
+ *  </tr>
+ *  </table>
+ *
+ *  ## DMA Interrupts #
+ *  This driver is designed to operation on a micro DMA. The micro DMA generates
+ *  IRQ on the perpheral's interrupt vector. This implementation automatically
+ *  installs a DMA aware Hwi (interrupt) to service the assigned micro DMA
+ *  channels.
+ *
+ *  ## Scratch Buffers #
+ *  A uint32_t scratch buffer is used to allow SPI_transfers where txBuf or rxBuf
+ *  are NULL. Rather than requiring txBuf or rxBuf to have a dummy buffer of size
+ *  of the transfer count, a single DMA accessible uint32_t scratch buffer is used.
+ *  When rxBuf is NULL, the uDMA will transfer all the SPI data receives into the
+ *  scratch buffer as a "bit-bucket".
+ *  When rxBuf is NULL, the scratch buffer is initialized to defaultTxBufValue
+ *  so the uDMA will send some known value.
+ *  Each SPI driver instance should uses its own scratch buffer.
+ *
+ *  ## SPI data frames #
+ *
+ *  SPI data frames can be any size from 4-bits to 16-bits. If the dataSize in
+ *  ::SPI_Params is greater that 8-bits, then the SPITivaDMA driver
+ *  implementation will assume that the ::SPI_Transaction txBuf and rxBuf
+ *  point to an array of 16-bit uint16_t elements.
+ *
+ *  dataSize  | buffer element size |
+ *  --------  | ------------------- |
+ *  4-8 bits  | uint8_t             |
+ *  9-16 bits | uint16_t            |
+ *
+ *  ## DMA transfer size limit #
+ *
+ *  The Tiva micro DMA contoller only supports data transfers of upto 1024
+ *  data frames. A data frame can be 4 to 16 bits in length.
+ *
+ *  ## DMA accessible memory #
+ *
+ *  As this driver uses uDMA to transfer data/from data buffers, it is the
+ *  responsibility of the application to ensure that theses buffers reside in
+ *  memory that is accessible by the DMA.
+ *
+ *  For example, on Concerto devices local SRAM C0 and C1 are NOT accessible the
+ *  DMA.
+ *
+ *  ============================================================================
+ */
 
 
 
 
 
-# 69 "../source/config/gpioConfig.c"
+
+
+
+
+
+
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
 
 /*
- * Array of Pin configurations
- * NOTE: The order of the pin configurations must coincide with what was
- *       defined in EK_TM4C123GXL.h
- * NOTE: Pins not used for interrupts should be placed at the end of the
- *       array.  Callback entries can be omitted from callbacks array to
- *       reduce memory usage.
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
  */
 
-GPIO_PinConfig gpioPinConfigs[] = {
-/* RTC_SQW */
-0x0210 | (((uint32_t) 3) << 16) | (((uint32_t) 2) << 24),
-
-/* LAUNCHPAD_SW1 */
-0x0510 | (((uint32_t) 3) << 16) | (((uint32_t) 2) << 24),
-
-/* LAUNCHPAD_SW2 */
-0x0501 | (((uint32_t) 3) << 16) | (((uint32_t) 2) << 24),
-
-/* HSD_DISABLE_0 */
-0x0380 | (((uint32_t) 4) << 16) | (((uint32_t) 0) << 20) | (((uint32_t) 1) << 19),
-
-/* HSD_DISABLE_1 */
-0x0140 | (((uint32_t) 4) << 16) | (((uint32_t) 0) << 20) | (((uint32_t) 1) << 19),
-
-/* HSD_DISABLE_2 */
-0x0280 | (((uint32_t) 4) << 16) | (((uint32_t) 0) << 20) | (((uint32_t) 1) << 19),
-
-/* HSD_DISABLE_3 */
-0x0180 | (((uint32_t) 4) << 16) | (((uint32_t) 0) << 20) | (((uint32_t) 1) << 19),
-
-/* IO_RESET */
-0x0240 | (((uint32_t) 4) << 16) | (((uint32_t) 0) << 20) | (((uint32_t) 1) << 19),
-
-/* ESP_ENABLE */
-0x0220 | (((uint32_t) 4) << 16) | (((uint32_t) 0) << 20) | (((uint32_t) 0) << 19),
-
-/* BUF_DISABLE */
-0x0004 | (((uint32_t) 4) << 16) | (((uint32_t) 0) << 20) | (((uint32_t) 1) << 19),
-
-/* LAUNCHPAD_LED_BLUE */
-0x0504 | (((uint32_t) 0) << 16) | (((uint32_t) 0) << 20) | (((uint32_t) 0) << 19),
-
-/* LAUNCHPAD_LED_GREEN */
-0x0508 | (((uint32_t) 0) << 16) | (((uint32_t) 0) << 20) | (((uint32_t) 1) << 19),
-
-/* LAUNCHPAD_LED_RED */
-0x0302 | (((uint32_t) 0) << 16) | (((uint32_t) 0) << 20) | (((uint32_t) 0) << 19)};
 
 /*
- * Array of callback function pointers
- * NOTE: The order of the pin configurations must coincide with what was
- *       defined in EK_TM4C123GXL.h
- * NOTE: Pins not used for interrupts can be omitted from callbacks array to
- *       reduce memory usage (if placed at end of gpioPinConfigs array).
+ * ======== PROLOGUE ========
  */
 
-GPIO_CallbackFxn gpioCallbackFunctions[] = {
-0, /* RTC_SQW */
-0, /* LAUNCHPAD_SW1 */
-0 /* LAUNCHPAD_SW2 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * ======== INCLUDES ========
+ */
+
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 362 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 423 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:49; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 56 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 132 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 155 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 57 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/package/package.defs.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+
+
+
+
+/*
+ * ======== module ti.sysbios.knl.Clock ========
+ */
+
+typedef struct ti_sysbios_knl_Clock_Module_State ti_sysbios_knl_Clock_Module_State;
+typedef struct ti_sysbios_knl_Clock_Params ti_sysbios_knl_Clock_Params;
+typedef struct ti_sysbios_knl_Clock_Object ti_sysbios_knl_Clock_Object;
+typedef struct ti_sysbios_knl_Clock_Struct ti_sysbios_knl_Clock_Struct;
+typedef ti_sysbios_knl_Clock_Object* ti_sysbios_knl_Clock_Handle;
+typedef struct ti_sysbios_knl_Clock_Object__ ti_sysbios_knl_Clock_Instance_State;
+typedef ti_sysbios_knl_Clock_Object* ti_sysbios_knl_Clock_Instance;
+
+/*
+ * ======== module ti.sysbios.knl.Idle ========
+ */
+
+
+/*
+ * ======== module ti.sysbios.knl.Intrinsics ========
+ */
+
+typedef struct ti_sysbios_knl_Intrinsics_Fxns__ ti_sysbios_knl_Intrinsics_Fxns__;
+typedef const ti_sysbios_knl_Intrinsics_Fxns__* ti_sysbios_knl_Intrinsics_Module;
+
+/*
+ * ======== module ti.sysbios.knl.Event ========
+ */
+
+typedef struct ti_sysbios_knl_Event_PendElem ti_sysbios_knl_Event_PendElem;
+typedef struct ti_sysbios_knl_Event_Params ti_sysbios_knl_Event_Params;
+typedef struct ti_sysbios_knl_Event_Object ti_sysbios_knl_Event_Object;
+typedef struct ti_sysbios_knl_Event_Struct ti_sysbios_knl_Event_Struct;
+typedef ti_sysbios_knl_Event_Object* ti_sysbios_knl_Event_Handle;
+typedef struct ti_sysbios_knl_Event_Object__ ti_sysbios_knl_Event_Instance_State;
+typedef ti_sysbios_knl_Event_Object* ti_sysbios_knl_Event_Instance;
+
+/*
+ * ======== module ti.sysbios.knl.Mailbox ========
+ */
+
+typedef struct ti_sysbios_knl_Mailbox_MbxElem ti_sysbios_knl_Mailbox_MbxElem;
+typedef struct ti_sysbios_knl_Mailbox_Params ti_sysbios_knl_Mailbox_Params;
+typedef struct ti_sysbios_knl_Mailbox_Object ti_sysbios_knl_Mailbox_Object;
+typedef struct ti_sysbios_knl_Mailbox_Struct ti_sysbios_knl_Mailbox_Struct;
+typedef ti_sysbios_knl_Mailbox_Object* ti_sysbios_knl_Mailbox_Handle;
+typedef struct ti_sysbios_knl_Mailbox_Object__ ti_sysbios_knl_Mailbox_Instance_State;
+typedef ti_sysbios_knl_Mailbox_Object* ti_sysbios_knl_Mailbox_Instance;
+
+/*
+ * ======== module ti.sysbios.knl.Queue ========
+ */
+
+typedef struct ti_sysbios_knl_Queue_Elem ti_sysbios_knl_Queue_Elem;
+typedef struct ti_sysbios_knl_Queue_Params ti_sysbios_knl_Queue_Params;
+typedef struct ti_sysbios_knl_Queue_Object ti_sysbios_knl_Queue_Object;
+typedef struct ti_sysbios_knl_Queue_Struct ti_sysbios_knl_Queue_Struct;
+typedef ti_sysbios_knl_Queue_Object* ti_sysbios_knl_Queue_Handle;
+typedef struct ti_sysbios_knl_Queue_Object__ ti_sysbios_knl_Queue_Instance_State;
+typedef ti_sysbios_knl_Queue_Object* ti_sysbios_knl_Queue_Instance;
+
+/*
+ * ======== module ti.sysbios.knl.Semaphore ========
+ */
+
+typedef struct ti_sysbios_knl_Semaphore_PendElem ti_sysbios_knl_Semaphore_PendElem;
+typedef struct ti_sysbios_knl_Semaphore_Params ti_sysbios_knl_Semaphore_Params;
+typedef struct ti_sysbios_knl_Semaphore_Object ti_sysbios_knl_Semaphore_Object;
+typedef struct ti_sysbios_knl_Semaphore_Struct ti_sysbios_knl_Semaphore_Struct;
+typedef ti_sysbios_knl_Semaphore_Object* ti_sysbios_knl_Semaphore_Handle;
+typedef struct ti_sysbios_knl_Semaphore_Object__ ti_sysbios_knl_Semaphore_Instance_State;
+typedef ti_sysbios_knl_Semaphore_Object* ti_sysbios_knl_Semaphore_Instance;
+
+/*
+ * ======== module ti.sysbios.knl.Swi ========
+ */
+
+typedef struct ti_sysbios_knl_Swi_HookSet ti_sysbios_knl_Swi_HookSet;
+typedef struct ti_sysbios_knl_Swi_Module_State ti_sysbios_knl_Swi_Module_State;
+typedef struct ti_sysbios_knl_Swi_Params ti_sysbios_knl_Swi_Params;
+typedef struct ti_sysbios_knl_Swi_Object ti_sysbios_knl_Swi_Object;
+typedef struct ti_sysbios_knl_Swi_Struct ti_sysbios_knl_Swi_Struct;
+typedef ti_sysbios_knl_Swi_Object* ti_sysbios_knl_Swi_Handle;
+typedef struct ti_sysbios_knl_Swi_Object__ ti_sysbios_knl_Swi_Instance_State;
+typedef ti_sysbios_knl_Swi_Object* ti_sysbios_knl_Swi_Instance;
+
+/*
+ * ======== module ti.sysbios.knl.Task ========
+ */
+
+typedef struct ti_sysbios_knl_Task_Stat ti_sysbios_knl_Task_Stat;
+typedef struct ti_sysbios_knl_Task_HookSet ti_sysbios_knl_Task_HookSet;
+typedef struct ti_sysbios_knl_Task_PendElem ti_sysbios_knl_Task_PendElem;
+typedef struct ti_sysbios_knl_Task_Module_State ti_sysbios_knl_Task_Module_State;
+typedef struct ti_sysbios_knl_Task_RunQEntry ti_sysbios_knl_Task_RunQEntry;
+typedef struct ti_sysbios_knl_Task_Module_StateSmp ti_sysbios_knl_Task_Module_StateSmp;
+typedef struct ti_sysbios_knl_Task_Params ti_sysbios_knl_Task_Params;
+typedef struct ti_sysbios_knl_Task_Object ti_sysbios_knl_Task_Object;
+typedef struct ti_sysbios_knl_Task_Struct ti_sysbios_knl_Task_Struct;
+typedef ti_sysbios_knl_Task_Object* ti_sysbios_knl_Task_Handle;
+typedef struct ti_sysbios_knl_Task_Object__ ti_sysbios_knl_Task_Instance_State;
+typedef ti_sysbios_knl_Task_Object* ti_sysbios_knl_Task_Instance;
+
+/*
+ * ======== module ti.sysbios.knl.Clock_TimerProxy ========
+ */
+
+typedef struct ti_sysbios_knl_Clock_TimerProxy_Fxns__ ti_sysbios_knl_Clock_TimerProxy_Fxns__;
+typedef const ti_sysbios_knl_Clock_TimerProxy_Fxns__* ti_sysbios_knl_Clock_TimerProxy_Module;
+typedef struct ti_sysbios_knl_Clock_TimerProxy_Params ti_sysbios_knl_Clock_TimerProxy_Params;
+typedef struct ti_sysbios_interfaces_ITimer___Object *ti_sysbios_knl_Clock_TimerProxy_Handle;
+
+/*
+ * ======== module ti.sysbios.knl.Intrinsics_SupportProxy ========
+ */
+
+typedef struct ti_sysbios_knl_Intrinsics_SupportProxy_Fxns__ ti_sysbios_knl_Intrinsics_SupportProxy_Fxns__;
+typedef const ti_sysbios_knl_Intrinsics_SupportProxy_Fxns__* ti_sysbios_knl_Intrinsics_SupportProxy_Module;
+
+/*
+ * ======== module ti.sysbios.knl.Task_SupportProxy ========
+ */
+
+typedef struct ti_sysbios_knl_Task_SupportProxy_Fxns__ ti_sysbios_knl_Task_SupportProxy_Fxns__;
+typedef const ti_sysbios_knl_Task_SupportProxy_Fxns__* ti_sysbios_knl_Task_SupportProxy_Module;
+
+
+# 58 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 315 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 330 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 389 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:45; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 60 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 293 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 308 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 390 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:47; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 61 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 223 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 238 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 264 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:43; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 62 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * ======== INCLUDES ========
+ */
+
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 362 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 423 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:49; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 55 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 132 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 155 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 56 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 104 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 121 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 59 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+
+
+/*
+ * ======== AUXILIARY DEFINITIONS ========
+ */
+
+/* Elem */
+struct ti_sysbios_knl_Queue_Elem {
+    ti_sysbios_knl_Queue_Elem *volatile next;
+    ti_sysbios_knl_Queue_Elem *volatile prev;
 };
 
 
-/* The device-specific GPIO_config structure */
-const GPIOTiva_Config GPIOTiva_config = {
-		.pinConfigs = (GPIO_PinConfig *) gpioPinConfigs,
-		.callbacks = (GPIO_CallbackFxn *) gpioCallbackFunctions,
-		.numberOfPinConfigs = sizeof(gpioPinConfigs) / sizeof(GPIO_PinConfig),
-		.numberOfCallbacks = sizeof(gpioCallbackFunctions) / sizeof(GPIO_CallbackFxn),
-		.intPriority = (~0) };
+/*
+ * ======== INTERNAL DEFINITIONS ========
+ */
 
-void initGPIO(void) {
-	SysCtlPeripheralEnable(0xf0000800);
-	SysCtlPeripheralEnable(0xf0000801);
-	SysCtlPeripheralEnable(0xf0000802);
-	SysCtlPeripheralEnable(0xf0000803);
-	SysCtlPeripheralEnable(0xf0000804);
-	SysCtlPeripheralEnable(0xf0000805);
 
-	(*((volatile uint32_t *)(0x40007000+0x00000520))) = 0x4C4F434B;
-	(*((volatile uint32_t *)(0x40007000+0x00000524))) |= 0x00000080;
-	(*((volatile uint32_t *)(0x40007000+0x00000520))) = 0x0;
-	(*((volatile uint32_t *)(0x40025000+0x00000520))) = 0x4C4F434B;
-	(*((volatile uint32_t *)(0x40025000+0x00000524))) |= 0x00000001;
-	(*((volatile uint32_t *)(0x40025000+0x00000520))) = 0x0;
+/*
+ * ======== MODULE-WIDE CONFIGS ========
+ */
 
-	/* Initialize peripheral and pins */
-	GPIO_init();
+/* Module__diagsEnabled */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Queue_Module__diagsEnabled;
+extern  const CT__ti_sysbios_knl_Queue_Module__diagsEnabled ti_sysbios_knl_Queue_Module__diagsEnabled__C;
+
+/* Module__diagsIncluded */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Queue_Module__diagsIncluded;
+extern  const CT__ti_sysbios_knl_Queue_Module__diagsIncluded ti_sysbios_knl_Queue_Module__diagsIncluded__C;
+
+/* Module__diagsMask */
+typedef xdc_Bits16 *CT__ti_sysbios_knl_Queue_Module__diagsMask;
+extern  const CT__ti_sysbios_knl_Queue_Module__diagsMask ti_sysbios_knl_Queue_Module__diagsMask__C;
+
+/* Module__gateObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Queue_Module__gateObj;
+extern  const CT__ti_sysbios_knl_Queue_Module__gateObj ti_sysbios_knl_Queue_Module__gateObj__C;
+
+/* Module__gatePrms */
+typedef xdc_Ptr CT__ti_sysbios_knl_Queue_Module__gatePrms;
+extern  const CT__ti_sysbios_knl_Queue_Module__gatePrms ti_sysbios_knl_Queue_Module__gatePrms__C;
+
+/* Module__id */
+typedef xdc_runtime_Types_ModuleId CT__ti_sysbios_knl_Queue_Module__id;
+extern  const CT__ti_sysbios_knl_Queue_Module__id ti_sysbios_knl_Queue_Module__id__C;
+
+/* Module__loggerDefined */
+typedef xdc_Bool CT__ti_sysbios_knl_Queue_Module__loggerDefined;
+extern  const CT__ti_sysbios_knl_Queue_Module__loggerDefined ti_sysbios_knl_Queue_Module__loggerDefined__C;
+
+/* Module__loggerObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Queue_Module__loggerObj;
+extern  const CT__ti_sysbios_knl_Queue_Module__loggerObj ti_sysbios_knl_Queue_Module__loggerObj__C;
+
+/* Module__loggerFxn0 */
+typedef xdc_runtime_Types_LoggerFxn0 CT__ti_sysbios_knl_Queue_Module__loggerFxn0;
+extern  const CT__ti_sysbios_knl_Queue_Module__loggerFxn0 ti_sysbios_knl_Queue_Module__loggerFxn0__C;
+
+/* Module__loggerFxn1 */
+typedef xdc_runtime_Types_LoggerFxn1 CT__ti_sysbios_knl_Queue_Module__loggerFxn1;
+extern  const CT__ti_sysbios_knl_Queue_Module__loggerFxn1 ti_sysbios_knl_Queue_Module__loggerFxn1__C;
+
+/* Module__loggerFxn2 */
+typedef xdc_runtime_Types_LoggerFxn2 CT__ti_sysbios_knl_Queue_Module__loggerFxn2;
+extern  const CT__ti_sysbios_knl_Queue_Module__loggerFxn2 ti_sysbios_knl_Queue_Module__loggerFxn2__C;
+
+/* Module__loggerFxn4 */
+typedef xdc_runtime_Types_LoggerFxn4 CT__ti_sysbios_knl_Queue_Module__loggerFxn4;
+extern  const CT__ti_sysbios_knl_Queue_Module__loggerFxn4 ti_sysbios_knl_Queue_Module__loggerFxn4__C;
+
+/* Module__loggerFxn8 */
+typedef xdc_runtime_Types_LoggerFxn8 CT__ti_sysbios_knl_Queue_Module__loggerFxn8;
+extern  const CT__ti_sysbios_knl_Queue_Module__loggerFxn8 ti_sysbios_knl_Queue_Module__loggerFxn8__C;
+
+/* Module__startupDoneFxn */
+typedef xdc_Bool (*CT__ti_sysbios_knl_Queue_Module__startupDoneFxn)(void);
+extern  const CT__ti_sysbios_knl_Queue_Module__startupDoneFxn ti_sysbios_knl_Queue_Module__startupDoneFxn__C;
+
+/* Object__count */
+typedef xdc_Int CT__ti_sysbios_knl_Queue_Object__count;
+extern  const CT__ti_sysbios_knl_Queue_Object__count ti_sysbios_knl_Queue_Object__count__C;
+
+/* Object__heap */
+typedef xdc_runtime_IHeap_Handle CT__ti_sysbios_knl_Queue_Object__heap;
+extern  const CT__ti_sysbios_knl_Queue_Object__heap ti_sysbios_knl_Queue_Object__heap__C;
+
+/* Object__sizeof */
+typedef xdc_SizeT CT__ti_sysbios_knl_Queue_Object__sizeof;
+extern  const CT__ti_sysbios_knl_Queue_Object__sizeof ti_sysbios_knl_Queue_Object__sizeof__C;
+
+/* Object__table */
+typedef xdc_Ptr CT__ti_sysbios_knl_Queue_Object__table;
+extern  const CT__ti_sysbios_knl_Queue_Object__table ti_sysbios_knl_Queue_Object__table__C;
+
+
+/*
+ * ======== PER-INSTANCE TYPES ========
+ */
+
+/* Params */
+struct ti_sysbios_knl_Queue_Params {
+    size_t __size;
+    const void *__self;
+    void *__fxns;
+    xdc_runtime_IInstance_Params *instance;
+    xdc_runtime_IInstance_Params __iprms;
+};
+
+/* Struct */
+struct ti_sysbios_knl_Queue_Struct {
+    ti_sysbios_knl_Queue_Elem __f0;
+    xdc_runtime_Types_CordAddr __name;
+};
+
+
+/*
+ * ======== FUNCTION DECLARATIONS ========
+ */
+
+/* Module_startup */
+
+
+/* Instance_init__E */
+
+extern void ti_sysbios_knl_Queue_Instance_init__E(ti_sysbios_knl_Queue_Object *, const ti_sysbios_knl_Queue_Params *);
+
+/* Handle__label__S */
+
+extern xdc_runtime_Types_Label *ti_sysbios_knl_Queue_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+
+/* Module__startupDone__S */
+
+extern xdc_Bool ti_sysbios_knl_Queue_Module__startupDone__S( void );
+
+/* Object__create__S */
+
+extern xdc_Ptr ti_sysbios_knl_Queue_Object__create__S( xdc_Ptr __oa, xdc_SizeT __osz, xdc_Ptr __aa, const xdc_UChar *__pa, xdc_SizeT __psz, xdc_runtime_Error_Block *__eb );
+
+/* create */
+
+extern ti_sysbios_knl_Queue_Handle ti_sysbios_knl_Queue_create( const ti_sysbios_knl_Queue_Params *__prms, xdc_runtime_Error_Block *__eb );
+
+/* construct */
+
+extern void ti_sysbios_knl_Queue_construct( ti_sysbios_knl_Queue_Struct *__obj, const ti_sysbios_knl_Queue_Params *__prms );
+
+/* Object__delete__S */
+
+extern void ti_sysbios_knl_Queue_Object__delete__S( xdc_Ptr instp );
+
+/* delete */
+
+extern void ti_sysbios_knl_Queue_delete(ti_sysbios_knl_Queue_Handle *instp);
+
+/* Object__destruct__S */
+
+extern void ti_sysbios_knl_Queue_Object__destruct__S( xdc_Ptr objp );
+
+/* destruct */
+
+extern void ti_sysbios_knl_Queue_destruct(ti_sysbios_knl_Queue_Struct *obj);
+
+/* Object__get__S */
+
+extern xdc_Ptr ti_sysbios_knl_Queue_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+
+/* Object__first__S */
+
+extern xdc_Ptr ti_sysbios_knl_Queue_Object__first__S( void );
+
+/* Object__next__S */
+
+extern xdc_Ptr ti_sysbios_knl_Queue_Object__next__S( xdc_Ptr obj );
+
+/* Params__init__S */
+
+extern void ti_sysbios_knl_Queue_Params__init__S( xdc_Ptr dst, const void *src, xdc_SizeT psz, xdc_SizeT isz );
+
+/* elemClear__E */
+
+
+extern void ti_sysbios_knl_Queue_elemClear__E( ti_sysbios_knl_Queue_Elem *qelem );
+
+/* insert__E */
+
+
+extern void ti_sysbios_knl_Queue_insert__E( ti_sysbios_knl_Queue_Elem *qelem, ti_sysbios_knl_Queue_Elem *elem );
+
+/* next__E */
+
+
+extern xdc_Ptr ti_sysbios_knl_Queue_next__E( ti_sysbios_knl_Queue_Elem *qelem );
+
+/* prev__E */
+
+
+extern xdc_Ptr ti_sysbios_knl_Queue_prev__E( ti_sysbios_knl_Queue_Elem *qelem );
+
+/* remove__E */
+
+
+extern void ti_sysbios_knl_Queue_remove__E( ti_sysbios_knl_Queue_Elem *qelem );
+
+/* isQueued__E */
+
+
+extern xdc_Bool ti_sysbios_knl_Queue_isQueued__E( ti_sysbios_knl_Queue_Elem *qelem );
+
+/* dequeue__E */
+
+
+extern xdc_Ptr ti_sysbios_knl_Queue_dequeue__E( ti_sysbios_knl_Queue_Handle __inst );
+
+/* empty__E */
+
+
+extern xdc_Bool ti_sysbios_knl_Queue_empty__E( ti_sysbios_knl_Queue_Handle __inst );
+
+/* enqueue__E */
+
+
+extern void ti_sysbios_knl_Queue_enqueue__E( ti_sysbios_knl_Queue_Handle __inst, ti_sysbios_knl_Queue_Elem *elem );
+
+/* get__E */
+
+
+extern xdc_Ptr ti_sysbios_knl_Queue_get__E( ti_sysbios_knl_Queue_Handle __inst );
+
+/* getTail__E */
+
+
+extern xdc_Ptr ti_sysbios_knl_Queue_getTail__E( ti_sysbios_knl_Queue_Handle __inst );
+
+/* head__E */
+
+
+extern xdc_Ptr ti_sysbios_knl_Queue_head__E( ti_sysbios_knl_Queue_Handle __inst );
+
+/* put__E */
+
+
+extern void ti_sysbios_knl_Queue_put__E( ti_sysbios_knl_Queue_Handle __inst, ti_sysbios_knl_Queue_Elem *elem );
+
+/* putHead__E */
+
+
+extern void ti_sysbios_knl_Queue_putHead__E( ti_sysbios_knl_Queue_Handle __inst, ti_sysbios_knl_Queue_Elem *elem );
+
+
+/*
+ * ======== SYSTEM FUNCTIONS ========
+ */
+
+/* Module_startupDone */
+
+
+/* Object_heap */
+
+
+/* Module_heap */
+
+
+/* Module_id */
+static inline CT__ti_sysbios_knl_Queue_Module__id ti_sysbios_knl_Queue_Module_id( void ) 
+{
+    return ti_sysbios_knl_Queue_Module__id__C;
+}
+
+/* Module_hasMask */
+static inline xdc_Bool ti_sysbios_knl_Queue_Module_hasMask( void ) 
+{
+    return ti_sysbios_knl_Queue_Module__diagsMask__C != 0;
+}
+
+/* Module_getMask */
+static inline xdc_Bits16 ti_sysbios_knl_Queue_Module_getMask( void ) 
+{
+    return ti_sysbios_knl_Queue_Module__diagsMask__C != 0 ? *ti_sysbios_knl_Queue_Module__diagsMask__C : 0;
+}
+
+/* Module_setMask */
+static inline void ti_sysbios_knl_Queue_Module_setMask( xdc_Bits16 mask ) 
+{
+    if (ti_sysbios_knl_Queue_Module__diagsMask__C != 0) *ti_sysbios_knl_Queue_Module__diagsMask__C = mask;
+}
+
+/* Params_init */
+static inline void ti_sysbios_knl_Queue_Params_init( ti_sysbios_knl_Queue_Params *prms ) 
+{
+    if (prms) {
+        ti_sysbios_knl_Queue_Params__init__S(prms, 0, sizeof(ti_sysbios_knl_Queue_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+/* Params_copy */
+static inline void ti_sysbios_knl_Queue_Params_copy(ti_sysbios_knl_Queue_Params *dst, const ti_sysbios_knl_Queue_Params *src) 
+{
+    if (dst) {
+        ti_sysbios_knl_Queue_Params__init__S(dst, (const void *)src, sizeof(ti_sysbios_knl_Queue_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+/* Object_count */
+
+
+/* Object_sizeof */
+
+
+/* Object_get */
+static inline ti_sysbios_knl_Queue_Handle ti_sysbios_knl_Queue_Object_get(ti_sysbios_knl_Queue_Instance_State *oarr, int i) 
+{
+    return (ti_sysbios_knl_Queue_Handle)ti_sysbios_knl_Queue_Object__get__S(oarr, i);
+}
+
+/* Object_first */
+static inline ti_sysbios_knl_Queue_Handle ti_sysbios_knl_Queue_Object_first( void )
+{
+    return (ti_sysbios_knl_Queue_Handle)ti_sysbios_knl_Queue_Object__first__S();
+}
+
+/* Object_next */
+static inline ti_sysbios_knl_Queue_Handle ti_sysbios_knl_Queue_Object_next( ti_sysbios_knl_Queue_Object *obj )
+{
+    return (ti_sysbios_knl_Queue_Handle)ti_sysbios_knl_Queue_Object__next__S(obj);
+}
+
+/* Handle_label */
+static inline xdc_runtime_Types_Label *ti_sysbios_knl_Queue_Handle_label( ti_sysbios_knl_Queue_Handle inst, xdc_runtime_Types_Label *lab )
+{
+    return ti_sysbios_knl_Queue_Handle__label__S(inst, lab);
+}
+
+/* Handle_name */
+static inline xdc_String ti_sysbios_knl_Queue_Handle_name( ti_sysbios_knl_Queue_Handle inst )
+{
+    xdc_runtime_Types_Label lab;
+    return ti_sysbios_knl_Queue_Handle__label__S(inst, &lab)->iname;
+}
+
+/* handle */
+static inline ti_sysbios_knl_Queue_Handle ti_sysbios_knl_Queue_handle( ti_sysbios_knl_Queue_Struct *str )
+{
+    return (ti_sysbios_knl_Queue_Handle)str;
+}
+
+/* struct */
+static inline ti_sysbios_knl_Queue_Struct *ti_sysbios_knl_Queue_struct( ti_sysbios_knl_Queue_Handle inst )
+{
+    return (ti_sysbios_knl_Queue_Struct*)inst;
+}
+
+
+/*
+ * ======== EPILOGUE ========
+ */
+
+
+
+
+
+
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 439 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 63 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * ======== INCLUDES ========
+ */
+
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 362 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 423 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:49; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 56 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 132 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 155 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 57 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task__prologue.h"
+/*
+ * Copyright (c) 2012, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+# 58 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 369 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 425 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:45; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 61 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 223 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 238 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 264 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:43; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 62 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 315 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 330 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 389 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:45; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 63 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 293 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 308 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 390 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:47; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 64 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IHeap.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 202 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IHeap.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 238 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IHeap.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 65 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 420 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 439 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 66 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 104 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 121 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 67 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/interfaces/ITaskSupport.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * ======== INCLUDES ========
+ */
+
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 362 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 423 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:49; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 52 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/interfaces/ITaskSupport.h"
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 369 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 425 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:45; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 55 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/interfaces/ITaskSupport.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 104 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 121 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 56 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/interfaces/ITaskSupport.h"
+
+
+/*
+ * ======== AUXILIARY DEFINITIONS ========
+ */
+
+/* FuncPtr */
+typedef void (*ti_sysbios_interfaces_ITaskSupport_FuncPtr)(void);
+
+
+/*
+ * ======== VIRTUAL FUNCTIONS ========
+ */
+
+/* Fxns__ */
+struct ti_sysbios_interfaces_ITaskSupport_Fxns__ {
+    xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2 *__sysp;
+    xdc_Ptr (*start)(xdc_Ptr, ti_sysbios_interfaces_ITaskSupport_FuncPtr, ti_sysbios_interfaces_ITaskSupport_FuncPtr, xdc_runtime_Error_Block*);
+    void (*swap)(xdc_Ptr*, xdc_Ptr*);
+    xdc_Bool (*checkStack)(xdc_Char*, xdc_SizeT);
+    xdc_SizeT (*stackUsed)(xdc_Char*, xdc_SizeT);
+    xdc_UInt (*getStackAlignment)(void);
+    xdc_SizeT (*getDefaultStackSize)(void);
+    xdc_runtime_Types_SysFxns2 __sfxns;
+};
+
+/* Interface__BASE__C */
+extern const xdc_runtime_Types_Base ti_sysbios_interfaces_ITaskSupport_Interface__BASE__C;
+
+
+/*
+ * ======== FUNCTION STUBS ========
+ */
+
+/* Module_id */
+static inline xdc_runtime_Types_ModuleId ti_sysbios_interfaces_ITaskSupport_Module_id( ti_sysbios_interfaces_ITaskSupport_Module mod )
+{
+    return mod->__sysp->__mid;
+}
+
+/* start */
+static inline xdc_Ptr ti_sysbios_interfaces_ITaskSupport_start( ti_sysbios_interfaces_ITaskSupport_Module __inst, xdc_Ptr curTask, ti_sysbios_interfaces_ITaskSupport_FuncPtr enter, ti_sysbios_interfaces_ITaskSupport_FuncPtr exit, xdc_runtime_Error_Block *eb )
+{
+    return __inst->start(curTask, enter, exit, eb);
+}
+
+/* swap */
+static inline void ti_sysbios_interfaces_ITaskSupport_swap( ti_sysbios_interfaces_ITaskSupport_Module __inst, xdc_Ptr *oldtskContext, xdc_Ptr *newtskContext )
+{
+    __inst->swap(oldtskContext, newtskContext);
+}
+
+/* checkStack */
+static inline xdc_Bool ti_sysbios_interfaces_ITaskSupport_checkStack( ti_sysbios_interfaces_ITaskSupport_Module __inst, xdc_Char *stack, xdc_SizeT size )
+{
+    return __inst->checkStack(stack, size);
+}
+
+/* stackUsed */
+static inline xdc_SizeT ti_sysbios_interfaces_ITaskSupport_stackUsed( ti_sysbios_interfaces_ITaskSupport_Module __inst, xdc_Char *stack, xdc_SizeT size )
+{
+    return __inst->stackUsed(stack, size);
+}
+
+/* getStackAlignment */
+static inline xdc_UInt ti_sysbios_interfaces_ITaskSupport_getStackAlignment( ti_sysbios_interfaces_ITaskSupport_Module __inst )
+{
+    return __inst->getStackAlignment();
+}
+
+/* getDefaultStackSize */
+static inline xdc_SizeT ti_sysbios_interfaces_ITaskSupport_getDefaultStackSize( ti_sysbios_interfaces_ITaskSupport_Module __inst )
+{
+    return __inst->getDefaultStackSize();
+}
+
+
+/*
+ * ======== FUNCTION SELECTORS ========
+ */
+
+/* These functions return function pointers for module and instance functions.
+ * The functions accept modules and instances declared as types defined in this
+ * interface, but they return functions defined for the actual objects passed
+ * as parameters. These functions are not invoked by any generated code or
+ * XDCtools internal code.
+ */
+
+/* start_{FxnT,fxnP} */
+typedef xdc_Ptr (*ti_sysbios_interfaces_ITaskSupport_start_FxnT)(xdc_Ptr, ti_sysbios_interfaces_ITaskSupport_FuncPtr, ti_sysbios_interfaces_ITaskSupport_FuncPtr, xdc_runtime_Error_Block*);
+static inline ti_sysbios_interfaces_ITaskSupport_start_FxnT ti_sysbios_interfaces_ITaskSupport_start_fxnP( ti_sysbios_interfaces_ITaskSupport_Module __inst )
+{
+    return (ti_sysbios_interfaces_ITaskSupport_start_FxnT)__inst->start;
+}
+
+/* swap_{FxnT,fxnP} */
+typedef void (*ti_sysbios_interfaces_ITaskSupport_swap_FxnT)(xdc_Ptr*, xdc_Ptr*);
+static inline ti_sysbios_interfaces_ITaskSupport_swap_FxnT ti_sysbios_interfaces_ITaskSupport_swap_fxnP( ti_sysbios_interfaces_ITaskSupport_Module __inst )
+{
+    return (ti_sysbios_interfaces_ITaskSupport_swap_FxnT)__inst->swap;
+}
+
+/* checkStack_{FxnT,fxnP} */
+typedef xdc_Bool (*ti_sysbios_interfaces_ITaskSupport_checkStack_FxnT)(xdc_Char*, xdc_SizeT);
+static inline ti_sysbios_interfaces_ITaskSupport_checkStack_FxnT ti_sysbios_interfaces_ITaskSupport_checkStack_fxnP( ti_sysbios_interfaces_ITaskSupport_Module __inst )
+{
+    return (ti_sysbios_interfaces_ITaskSupport_checkStack_FxnT)__inst->checkStack;
+}
+
+/* stackUsed_{FxnT,fxnP} */
+typedef xdc_SizeT (*ti_sysbios_interfaces_ITaskSupport_stackUsed_FxnT)(xdc_Char*, xdc_SizeT);
+static inline ti_sysbios_interfaces_ITaskSupport_stackUsed_FxnT ti_sysbios_interfaces_ITaskSupport_stackUsed_fxnP( ti_sysbios_interfaces_ITaskSupport_Module __inst )
+{
+    return (ti_sysbios_interfaces_ITaskSupport_stackUsed_FxnT)__inst->stackUsed;
+}
+
+/* getStackAlignment_{FxnT,fxnP} */
+typedef xdc_UInt (*ti_sysbios_interfaces_ITaskSupport_getStackAlignment_FxnT)(void);
+static inline ti_sysbios_interfaces_ITaskSupport_getStackAlignment_FxnT ti_sysbios_interfaces_ITaskSupport_getStackAlignment_fxnP( ti_sysbios_interfaces_ITaskSupport_Module __inst )
+{
+    return (ti_sysbios_interfaces_ITaskSupport_getStackAlignment_FxnT)__inst->getStackAlignment;
+}
+
+/* getDefaultStackSize_{FxnT,fxnP} */
+typedef xdc_SizeT (*ti_sysbios_interfaces_ITaskSupport_getDefaultStackSize_FxnT)(void);
+static inline ti_sysbios_interfaces_ITaskSupport_getDefaultStackSize_FxnT ti_sysbios_interfaces_ITaskSupport_getDefaultStackSize_fxnP( ti_sysbios_interfaces_ITaskSupport_Module __inst )
+{
+    return (ti_sysbios_interfaces_ITaskSupport_getDefaultStackSize_FxnT)__inst->getDefaultStackSize;
+}
+
+
+/*
+ * ======== EPILOGUE ========
+ */
+
+
+
+
+
+
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 68 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * ======== INCLUDES ========
+ */
+
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 362 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 423 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:49; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 56 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 132 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 155 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 57 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 223 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 238 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 264 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:43; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 60 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 315 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 330 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 389 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:45; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 61 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 293 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 308 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 390 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:47; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 62 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 104 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 121 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 63 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/interfaces/ITimer.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * ======== INCLUDES ========
+ */
+
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 362 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 423 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:49; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 54 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/interfaces/ITimer.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 132 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 155 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 55 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/interfaces/ITimer.h"
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 362 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 423 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:49; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 58 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/interfaces/ITimer.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 104 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 121 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 59 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/interfaces/ITimer.h"
+
+
+/*
+ * ======== AUXILIARY DEFINITIONS ========
+ */
+
+/* FuncPtr */
+typedef void (*ti_sysbios_interfaces_ITimer_FuncPtr)(xdc_UArg);
+
+/* ANY */
+
+
+/* StartMode */
+enum ti_sysbios_interfaces_ITimer_StartMode {
+    ti_sysbios_interfaces_ITimer_StartMode_AUTO,
+    ti_sysbios_interfaces_ITimer_StartMode_USER
+};
+typedef enum ti_sysbios_interfaces_ITimer_StartMode ti_sysbios_interfaces_ITimer_StartMode;
+
+/* RunMode */
+enum ti_sysbios_interfaces_ITimer_RunMode {
+    ti_sysbios_interfaces_ITimer_RunMode_CONTINUOUS,
+    ti_sysbios_interfaces_ITimer_RunMode_ONESHOT,
+    ti_sysbios_interfaces_ITimer_RunMode_DYNAMIC
+};
+typedef enum ti_sysbios_interfaces_ITimer_RunMode ti_sysbios_interfaces_ITimer_RunMode;
+
+/* Status */
+enum ti_sysbios_interfaces_ITimer_Status {
+    ti_sysbios_interfaces_ITimer_Status_INUSE,
+    ti_sysbios_interfaces_ITimer_Status_FREE
+};
+typedef enum ti_sysbios_interfaces_ITimer_Status ti_sysbios_interfaces_ITimer_Status;
+
+/* PeriodType */
+enum ti_sysbios_interfaces_ITimer_PeriodType {
+    ti_sysbios_interfaces_ITimer_PeriodType_MICROSECS,
+    ti_sysbios_interfaces_ITimer_PeriodType_COUNTS
+};
+typedef enum ti_sysbios_interfaces_ITimer_PeriodType ti_sysbios_interfaces_ITimer_PeriodType;
+
+
+/*
+ * ======== CREATE ARGS ========
+ */
+
+/* Args__create */
+typedef struct ti_sysbios_interfaces_ITimer_Args__create {
+    xdc_Int id;
+    ti_sysbios_interfaces_ITimer_FuncPtr tickFxn;
+} ti_sysbios_interfaces_ITimer_Args__create;
+
+
+/*
+ * ======== PER-INSTANCE TYPES ========
+ */
+
+/* Params */
+struct ti_sysbios_interfaces_ITimer_Params {
+    size_t __size;
+    const void *__self;
+    void *__fxns;
+    xdc_runtime_IInstance_Params *instance;
+    ti_sysbios_interfaces_ITimer_RunMode runMode;
+    ti_sysbios_interfaces_ITimer_StartMode startMode;
+    xdc_UArg arg;
+    xdc_UInt32 period;
+    ti_sysbios_interfaces_ITimer_PeriodType periodType;
+    xdc_runtime_Types_FreqHz extFreq;
+};
+
+
+/*
+ * ======== VIRTUAL FUNCTIONS ========
+ */
+
+/* Fxns__ */
+struct ti_sysbios_interfaces_ITimer_Fxns__ {
+    xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2 *__sysp;
+    xdc_UInt (*getNumTimers)(void);
+    ti_sysbios_interfaces_ITimer_Status (*getStatus)(xdc_UInt);
+    void (*startup)(void);
+    xdc_UInt32 (*getMaxTicks)(void*);
+    void (*setNextTick)(void*, xdc_UInt32);
+    void (*start)(void*);
+    void (*stop)(void*);
+    void (*setPeriod)(void*, xdc_UInt32);
+    xdc_Bool (*setPeriodMicroSecs)(void*, xdc_UInt32);
+    xdc_UInt32 (*getPeriod)(void*);
+    xdc_UInt32 (*getCount)(void*);
+    void (*getFreq)(void*, xdc_runtime_Types_FreqHz*);
+    ti_sysbios_interfaces_ITimer_FuncPtr (*getFunc)(void*, xdc_UArg*);
+    void (*setFunc)(void*, ti_sysbios_interfaces_ITimer_FuncPtr, xdc_UArg);
+    void (*trigger)(void*, xdc_UInt32);
+    xdc_UInt32 (*getExpiredCounts)(void*);
+    xdc_UInt32 (*getExpiredTicks)(void*, xdc_UInt32);
+    xdc_UInt32 (*getCurrentTick)(void*, xdc_Bool);
+    xdc_runtime_Types_SysFxns2 __sfxns;
+};
+
+/* Interface__BASE__C */
+extern const xdc_runtime_Types_Base ti_sysbios_interfaces_ITimer_Interface__BASE__C;
+
+
+/*
+ * ======== FUNCTION STUBS ========
+ */
+
+/* create */
+
+extern ti_sysbios_interfaces_ITimer_Handle ti_sysbios_interfaces_ITimer_create(ti_sysbios_interfaces_ITimer_Module, xdc_Int id, ti_sysbios_interfaces_ITimer_FuncPtr tickFxn, const ti_sysbios_interfaces_ITimer_Params *, xdc_runtime_Error_Block *__eb);
+
+/* delete */
+
+extern void ti_sysbios_interfaces_ITimer_delete(ti_sysbios_interfaces_ITimer_Handle *);
+
+/* Handle_to_Module */
+static inline ti_sysbios_interfaces_ITimer_Module ti_sysbios_interfaces_ITimer_Handle_to_Module( ti_sysbios_interfaces_ITimer_Handle inst )
+{
+    return inst->__fxns;
+}
+
+/* Handle_label */
+static inline xdc_runtime_Types_Label *ti_sysbios_interfaces_ITimer_Handle_label( ti_sysbios_interfaces_ITimer_Handle inst, xdc_runtime_Types_Label *lab )
+{
+    return inst->__fxns->__sysp->__label(inst, lab);
+}
+
+/* Module_id */
+static inline xdc_runtime_Types_ModuleId ti_sysbios_interfaces_ITimer_Module_id( ti_sysbios_interfaces_ITimer_Module mod )
+{
+    return mod->__sysp->__mid;
+}
+
+/* getNumTimers */
+static inline xdc_UInt ti_sysbios_interfaces_ITimer_getNumTimers( ti_sysbios_interfaces_ITimer_Module __inst )
+{
+    return __inst->getNumTimers();
+}
+
+/* getStatus */
+static inline ti_sysbios_interfaces_ITimer_Status ti_sysbios_interfaces_ITimer_getStatus( ti_sysbios_interfaces_ITimer_Module __inst, xdc_UInt id )
+{
+    return __inst->getStatus(id);
+}
+
+/* startup */
+static inline void ti_sysbios_interfaces_ITimer_startup( ti_sysbios_interfaces_ITimer_Module __inst )
+{
+    __inst->startup();
+}
+
+/* getMaxTicks */
+static inline xdc_UInt32 ti_sysbios_interfaces_ITimer_getMaxTicks( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return __inst->__fxns->getMaxTicks((void*)__inst);
+}
+
+/* setNextTick */
+static inline void ti_sysbios_interfaces_ITimer_setNextTick( ti_sysbios_interfaces_ITimer_Handle __inst, xdc_UInt32 ticks )
+{
+    __inst->__fxns->setNextTick((void*)__inst, ticks);
+}
+
+/* start */
+static inline void ti_sysbios_interfaces_ITimer_start( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    __inst->__fxns->start((void*)__inst);
+}
+
+/* stop */
+static inline void ti_sysbios_interfaces_ITimer_stop( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    __inst->__fxns->stop((void*)__inst);
+}
+
+/* setPeriod */
+static inline void ti_sysbios_interfaces_ITimer_setPeriod( ti_sysbios_interfaces_ITimer_Handle __inst, xdc_UInt32 period )
+{
+    __inst->__fxns->setPeriod((void*)__inst, period);
+}
+
+/* setPeriodMicroSecs */
+static inline xdc_Bool ti_sysbios_interfaces_ITimer_setPeriodMicroSecs( ti_sysbios_interfaces_ITimer_Handle __inst, xdc_UInt32 microsecs )
+{
+    return __inst->__fxns->setPeriodMicroSecs((void*)__inst, microsecs);
+}
+
+/* getPeriod */
+static inline xdc_UInt32 ti_sysbios_interfaces_ITimer_getPeriod( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return __inst->__fxns->getPeriod((void*)__inst);
+}
+
+/* getCount */
+static inline xdc_UInt32 ti_sysbios_interfaces_ITimer_getCount( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return __inst->__fxns->getCount((void*)__inst);
+}
+
+/* getFreq */
+static inline void ti_sysbios_interfaces_ITimer_getFreq( ti_sysbios_interfaces_ITimer_Handle __inst, xdc_runtime_Types_FreqHz *freq )
+{
+    __inst->__fxns->getFreq((void*)__inst, freq);
+}
+
+/* getFunc */
+static inline ti_sysbios_interfaces_ITimer_FuncPtr ti_sysbios_interfaces_ITimer_getFunc( ti_sysbios_interfaces_ITimer_Handle __inst, xdc_UArg *arg )
+{
+    return __inst->__fxns->getFunc((void*)__inst, arg);
+}
+
+/* setFunc */
+static inline void ti_sysbios_interfaces_ITimer_setFunc( ti_sysbios_interfaces_ITimer_Handle __inst, ti_sysbios_interfaces_ITimer_FuncPtr fxn, xdc_UArg arg )
+{
+    __inst->__fxns->setFunc((void*)__inst, fxn, arg);
+}
+
+/* trigger */
+static inline void ti_sysbios_interfaces_ITimer_trigger( ti_sysbios_interfaces_ITimer_Handle __inst, xdc_UInt32 cycles )
+{
+    __inst->__fxns->trigger((void*)__inst, cycles);
+}
+
+/* getExpiredCounts */
+static inline xdc_UInt32 ti_sysbios_interfaces_ITimer_getExpiredCounts( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return __inst->__fxns->getExpiredCounts((void*)__inst);
+}
+
+/* getExpiredTicks */
+static inline xdc_UInt32 ti_sysbios_interfaces_ITimer_getExpiredTicks( ti_sysbios_interfaces_ITimer_Handle __inst, xdc_UInt32 tickPeriod )
+{
+    return __inst->__fxns->getExpiredTicks((void*)__inst, tickPeriod);
+}
+
+/* getCurrentTick */
+static inline xdc_UInt32 ti_sysbios_interfaces_ITimer_getCurrentTick( ti_sysbios_interfaces_ITimer_Handle __inst, xdc_Bool save )
+{
+    return __inst->__fxns->getCurrentTick((void*)__inst, save);
+}
+
+
+/*
+ * ======== FUNCTION SELECTORS ========
+ */
+
+/* These functions return function pointers for module and instance functions.
+ * The functions accept modules and instances declared as types defined in this
+ * interface, but they return functions defined for the actual objects passed
+ * as parameters. These functions are not invoked by any generated code or
+ * XDCtools internal code.
+ */
+
+/* getNumTimers_{FxnT,fxnP} */
+typedef xdc_UInt (*ti_sysbios_interfaces_ITimer_getNumTimers_FxnT)(void);
+static inline ti_sysbios_interfaces_ITimer_getNumTimers_FxnT ti_sysbios_interfaces_ITimer_getNumTimers_fxnP( ti_sysbios_interfaces_ITimer_Module __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_getNumTimers_FxnT)__inst->getNumTimers;
+}
+
+/* getStatus_{FxnT,fxnP} */
+typedef ti_sysbios_interfaces_ITimer_Status (*ti_sysbios_interfaces_ITimer_getStatus_FxnT)(xdc_UInt);
+static inline ti_sysbios_interfaces_ITimer_getStatus_FxnT ti_sysbios_interfaces_ITimer_getStatus_fxnP( ti_sysbios_interfaces_ITimer_Module __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_getStatus_FxnT)__inst->getStatus;
+}
+
+/* startup_{FxnT,fxnP} */
+typedef void (*ti_sysbios_interfaces_ITimer_startup_FxnT)(void);
+static inline ti_sysbios_interfaces_ITimer_startup_FxnT ti_sysbios_interfaces_ITimer_startup_fxnP( ti_sysbios_interfaces_ITimer_Module __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_startup_FxnT)__inst->startup;
+}
+
+/* getMaxTicks_{FxnT,fxnP} */
+typedef xdc_UInt32 (*ti_sysbios_interfaces_ITimer_getMaxTicks_FxnT)(void *);
+static inline ti_sysbios_interfaces_ITimer_getMaxTicks_FxnT ti_sysbios_interfaces_ITimer_getMaxTicks_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_getMaxTicks_FxnT)__inst->__fxns->getMaxTicks;
+}
+
+/* setNextTick_{FxnT,fxnP} */
+typedef void (*ti_sysbios_interfaces_ITimer_setNextTick_FxnT)(void *, xdc_UInt32);
+static inline ti_sysbios_interfaces_ITimer_setNextTick_FxnT ti_sysbios_interfaces_ITimer_setNextTick_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_setNextTick_FxnT)__inst->__fxns->setNextTick;
+}
+
+/* start_{FxnT,fxnP} */
+typedef void (*ti_sysbios_interfaces_ITimer_start_FxnT)(void *);
+static inline ti_sysbios_interfaces_ITimer_start_FxnT ti_sysbios_interfaces_ITimer_start_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_start_FxnT)__inst->__fxns->start;
+}
+
+/* stop_{FxnT,fxnP} */
+typedef void (*ti_sysbios_interfaces_ITimer_stop_FxnT)(void *);
+static inline ti_sysbios_interfaces_ITimer_stop_FxnT ti_sysbios_interfaces_ITimer_stop_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_stop_FxnT)__inst->__fxns->stop;
+}
+
+/* setPeriod_{FxnT,fxnP} */
+typedef void (*ti_sysbios_interfaces_ITimer_setPeriod_FxnT)(void *, xdc_UInt32);
+static inline ti_sysbios_interfaces_ITimer_setPeriod_FxnT ti_sysbios_interfaces_ITimer_setPeriod_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_setPeriod_FxnT)__inst->__fxns->setPeriod;
+}
+
+/* setPeriodMicroSecs_{FxnT,fxnP} */
+typedef xdc_Bool (*ti_sysbios_interfaces_ITimer_setPeriodMicroSecs_FxnT)(void *, xdc_UInt32);
+static inline ti_sysbios_interfaces_ITimer_setPeriodMicroSecs_FxnT ti_sysbios_interfaces_ITimer_setPeriodMicroSecs_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_setPeriodMicroSecs_FxnT)__inst->__fxns->setPeriodMicroSecs;
+}
+
+/* getPeriod_{FxnT,fxnP} */
+typedef xdc_UInt32 (*ti_sysbios_interfaces_ITimer_getPeriod_FxnT)(void *);
+static inline ti_sysbios_interfaces_ITimer_getPeriod_FxnT ti_sysbios_interfaces_ITimer_getPeriod_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_getPeriod_FxnT)__inst->__fxns->getPeriod;
+}
+
+/* getCount_{FxnT,fxnP} */
+typedef xdc_UInt32 (*ti_sysbios_interfaces_ITimer_getCount_FxnT)(void *);
+static inline ti_sysbios_interfaces_ITimer_getCount_FxnT ti_sysbios_interfaces_ITimer_getCount_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_getCount_FxnT)__inst->__fxns->getCount;
+}
+
+/* getFreq_{FxnT,fxnP} */
+typedef void (*ti_sysbios_interfaces_ITimer_getFreq_FxnT)(void *, xdc_runtime_Types_FreqHz*);
+static inline ti_sysbios_interfaces_ITimer_getFreq_FxnT ti_sysbios_interfaces_ITimer_getFreq_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_getFreq_FxnT)__inst->__fxns->getFreq;
+}
+
+/* getFunc_{FxnT,fxnP} */
+typedef ti_sysbios_interfaces_ITimer_FuncPtr (*ti_sysbios_interfaces_ITimer_getFunc_FxnT)(void *, xdc_UArg*);
+static inline ti_sysbios_interfaces_ITimer_getFunc_FxnT ti_sysbios_interfaces_ITimer_getFunc_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_getFunc_FxnT)__inst->__fxns->getFunc;
+}
+
+/* setFunc_{FxnT,fxnP} */
+typedef void (*ti_sysbios_interfaces_ITimer_setFunc_FxnT)(void *, ti_sysbios_interfaces_ITimer_FuncPtr, xdc_UArg);
+static inline ti_sysbios_interfaces_ITimer_setFunc_FxnT ti_sysbios_interfaces_ITimer_setFunc_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_setFunc_FxnT)__inst->__fxns->setFunc;
+}
+
+/* trigger_{FxnT,fxnP} */
+typedef void (*ti_sysbios_interfaces_ITimer_trigger_FxnT)(void *, xdc_UInt32);
+static inline ti_sysbios_interfaces_ITimer_trigger_FxnT ti_sysbios_interfaces_ITimer_trigger_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_trigger_FxnT)__inst->__fxns->trigger;
+}
+
+/* getExpiredCounts_{FxnT,fxnP} */
+typedef xdc_UInt32 (*ti_sysbios_interfaces_ITimer_getExpiredCounts_FxnT)(void *);
+static inline ti_sysbios_interfaces_ITimer_getExpiredCounts_FxnT ti_sysbios_interfaces_ITimer_getExpiredCounts_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_getExpiredCounts_FxnT)__inst->__fxns->getExpiredCounts;
+}
+
+/* getExpiredTicks_{FxnT,fxnP} */
+typedef xdc_UInt32 (*ti_sysbios_interfaces_ITimer_getExpiredTicks_FxnT)(void *, xdc_UInt32);
+static inline ti_sysbios_interfaces_ITimer_getExpiredTicks_FxnT ti_sysbios_interfaces_ITimer_getExpiredTicks_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_getExpiredTicks_FxnT)__inst->__fxns->getExpiredTicks;
+}
+
+/* getCurrentTick_{FxnT,fxnP} */
+typedef xdc_UInt32 (*ti_sysbios_interfaces_ITimer_getCurrentTick_FxnT)(void *, xdc_Bool);
+static inline ti_sysbios_interfaces_ITimer_getCurrentTick_FxnT ti_sysbios_interfaces_ITimer_getCurrentTick_fxnP( ti_sysbios_interfaces_ITimer_Handle __inst )
+{
+    return (ti_sysbios_interfaces_ITimer_getCurrentTick_FxnT)__inst->__fxns->getCurrentTick;
+}
+
+
+/*
+ * ======== EPILOGUE ========
+ */
+
+
+
+
+
+
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 64 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 420 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 439 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 65 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Swi.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * ======== INCLUDES ========
+ */
+
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 362 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 423 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:49; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 56 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Swi.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 132 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 155 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 57 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Swi.h"
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 369 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 425 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:45; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 60 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Swi.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 223 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 238 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 264 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:43; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 61 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Swi.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 315 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 330 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 389 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:45; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 62 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Swi.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 293 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 308 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 390 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:47; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 63 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Swi.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 420 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 439 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 64 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Swi.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 104 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 121 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 65 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Swi.h"
+
+
+/*
+ * ======== AUXILIARY DEFINITIONS ========
+ */
+
+/* FuncPtr */
+typedef void (*ti_sysbios_knl_Swi_FuncPtr)(xdc_UArg, xdc_UArg);
+
+/* HookSet */
+struct ti_sysbios_knl_Swi_HookSet {
+    void (*registerFxn)(xdc_Int);
+    void (*createFxn)(ti_sysbios_knl_Swi_Handle, xdc_runtime_Error_Block*);
+    void (*readyFxn)(ti_sysbios_knl_Swi_Handle);
+    void (*beginFxn)(ti_sysbios_knl_Swi_Handle);
+    void (*endFxn)(ti_sysbios_knl_Swi_Handle);
+    void (*deleteFxn)(ti_sysbios_knl_Swi_Handle);
+};
+
+
+/*
+ * ======== CREATE ARGS ========
+ */
+
+/* Args__create */
+typedef struct ti_sysbios_knl_Swi_Args__create {
+    ti_sysbios_knl_Swi_FuncPtr swiFxn;
+} ti_sysbios_knl_Swi_Args__create;
+
+
+/*
+ * ======== INTERNAL DEFINITIONS ========
+ */
+
+/* Instance_State */
+typedef xdc_Ptr __T1_ti_sysbios_knl_Swi_Instance_State__hookEnv;
+typedef xdc_Ptr *__ARRAY1_ti_sysbios_knl_Swi_Instance_State__hookEnv;
+typedef __ARRAY1_ti_sysbios_knl_Swi_Instance_State__hookEnv __TA_ti_sysbios_knl_Swi_Instance_State__hookEnv;
+
+/* Module_State */
+typedef ti_sysbios_knl_Queue_Instance_State __T1_ti_sysbios_knl_Swi_Module_State__readyQ;
+typedef ti_sysbios_knl_Queue_Instance_State *__ARRAY1_ti_sysbios_knl_Swi_Module_State__readyQ;
+typedef __ARRAY1_ti_sysbios_knl_Swi_Module_State__readyQ __TA_ti_sysbios_knl_Swi_Module_State__readyQ;
+typedef ti_sysbios_knl_Swi_Handle __T1_ti_sysbios_knl_Swi_Module_State__constructedSwis;
+typedef ti_sysbios_knl_Swi_Handle *__ARRAY1_ti_sysbios_knl_Swi_Module_State__constructedSwis;
+typedef __ARRAY1_ti_sysbios_knl_Swi_Module_State__constructedSwis __TA_ti_sysbios_knl_Swi_Module_State__constructedSwis;
+
+
+/*
+ * ======== MODULE-WIDE CONFIGS ========
+ */
+
+/* Module__diagsEnabled */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Swi_Module__diagsEnabled;
+extern  const CT__ti_sysbios_knl_Swi_Module__diagsEnabled ti_sysbios_knl_Swi_Module__diagsEnabled__C;
+
+/* Module__diagsIncluded */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Swi_Module__diagsIncluded;
+extern  const CT__ti_sysbios_knl_Swi_Module__diagsIncluded ti_sysbios_knl_Swi_Module__diagsIncluded__C;
+
+/* Module__diagsMask */
+typedef xdc_Bits16 *CT__ti_sysbios_knl_Swi_Module__diagsMask;
+extern  const CT__ti_sysbios_knl_Swi_Module__diagsMask ti_sysbios_knl_Swi_Module__diagsMask__C;
+
+/* Module__gateObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Swi_Module__gateObj;
+extern  const CT__ti_sysbios_knl_Swi_Module__gateObj ti_sysbios_knl_Swi_Module__gateObj__C;
+
+/* Module__gatePrms */
+typedef xdc_Ptr CT__ti_sysbios_knl_Swi_Module__gatePrms;
+extern  const CT__ti_sysbios_knl_Swi_Module__gatePrms ti_sysbios_knl_Swi_Module__gatePrms__C;
+
+/* Module__id */
+typedef xdc_runtime_Types_ModuleId CT__ti_sysbios_knl_Swi_Module__id;
+extern  const CT__ti_sysbios_knl_Swi_Module__id ti_sysbios_knl_Swi_Module__id__C;
+
+/* Module__loggerDefined */
+typedef xdc_Bool CT__ti_sysbios_knl_Swi_Module__loggerDefined;
+extern  const CT__ti_sysbios_knl_Swi_Module__loggerDefined ti_sysbios_knl_Swi_Module__loggerDefined__C;
+
+/* Module__loggerObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Swi_Module__loggerObj;
+extern  const CT__ti_sysbios_knl_Swi_Module__loggerObj ti_sysbios_knl_Swi_Module__loggerObj__C;
+
+/* Module__loggerFxn0 */
+typedef xdc_runtime_Types_LoggerFxn0 CT__ti_sysbios_knl_Swi_Module__loggerFxn0;
+extern  const CT__ti_sysbios_knl_Swi_Module__loggerFxn0 ti_sysbios_knl_Swi_Module__loggerFxn0__C;
+
+/* Module__loggerFxn1 */
+typedef xdc_runtime_Types_LoggerFxn1 CT__ti_sysbios_knl_Swi_Module__loggerFxn1;
+extern  const CT__ti_sysbios_knl_Swi_Module__loggerFxn1 ti_sysbios_knl_Swi_Module__loggerFxn1__C;
+
+/* Module__loggerFxn2 */
+typedef xdc_runtime_Types_LoggerFxn2 CT__ti_sysbios_knl_Swi_Module__loggerFxn2;
+extern  const CT__ti_sysbios_knl_Swi_Module__loggerFxn2 ti_sysbios_knl_Swi_Module__loggerFxn2__C;
+
+/* Module__loggerFxn4 */
+typedef xdc_runtime_Types_LoggerFxn4 CT__ti_sysbios_knl_Swi_Module__loggerFxn4;
+extern  const CT__ti_sysbios_knl_Swi_Module__loggerFxn4 ti_sysbios_knl_Swi_Module__loggerFxn4__C;
+
+/* Module__loggerFxn8 */
+typedef xdc_runtime_Types_LoggerFxn8 CT__ti_sysbios_knl_Swi_Module__loggerFxn8;
+extern  const CT__ti_sysbios_knl_Swi_Module__loggerFxn8 ti_sysbios_knl_Swi_Module__loggerFxn8__C;
+
+/* Module__startupDoneFxn */
+typedef xdc_Bool (*CT__ti_sysbios_knl_Swi_Module__startupDoneFxn)(void);
+extern  const CT__ti_sysbios_knl_Swi_Module__startupDoneFxn ti_sysbios_knl_Swi_Module__startupDoneFxn__C;
+
+/* Object__count */
+typedef xdc_Int CT__ti_sysbios_knl_Swi_Object__count;
+extern  const CT__ti_sysbios_knl_Swi_Object__count ti_sysbios_knl_Swi_Object__count__C;
+
+/* Object__heap */
+typedef xdc_runtime_IHeap_Handle CT__ti_sysbios_knl_Swi_Object__heap;
+extern  const CT__ti_sysbios_knl_Swi_Object__heap ti_sysbios_knl_Swi_Object__heap__C;
+
+/* Object__sizeof */
+typedef xdc_SizeT CT__ti_sysbios_knl_Swi_Object__sizeof;
+extern  const CT__ti_sysbios_knl_Swi_Object__sizeof ti_sysbios_knl_Swi_Object__sizeof__C;
+
+/* Object__table */
+typedef xdc_Ptr CT__ti_sysbios_knl_Swi_Object__table;
+extern  const CT__ti_sysbios_knl_Swi_Object__table ti_sysbios_knl_Swi_Object__table__C;
+
+/* LM_begin */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Swi_LM_begin;
+extern  const CT__ti_sysbios_knl_Swi_LM_begin ti_sysbios_knl_Swi_LM_begin__C;
+
+/* LD_end */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Swi_LD_end;
+extern  const CT__ti_sysbios_knl_Swi_LD_end ti_sysbios_knl_Swi_LD_end__C;
+
+/* LM_post */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Swi_LM_post;
+extern  const CT__ti_sysbios_knl_Swi_LM_post ti_sysbios_knl_Swi_LM_post__C;
+
+/* A_swiDisabled */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Swi_A_swiDisabled;
+extern  const CT__ti_sysbios_knl_Swi_A_swiDisabled ti_sysbios_knl_Swi_A_swiDisabled__C;
+
+/* A_badPriority */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Swi_A_badPriority;
+extern  const CT__ti_sysbios_knl_Swi_A_badPriority ti_sysbios_knl_Swi_A_badPriority__C;
+
+/* numPriorities */
+
+
+
+
+typedef xdc_UInt CT__ti_sysbios_knl_Swi_numPriorities;
+extern  const CT__ti_sysbios_knl_Swi_numPriorities ti_sysbios_knl_Swi_numPriorities__C;
+
+
+/* hooks */
+
+typedef ti_sysbios_knl_Swi_HookSet __T1_ti_sysbios_knl_Swi_hooks;
+typedef struct { int length; ti_sysbios_knl_Swi_HookSet *elem; } __ARRAY1_ti_sysbios_knl_Swi_hooks;
+typedef __ARRAY1_ti_sysbios_knl_Swi_hooks __TA_ti_sysbios_knl_Swi_hooks;
+typedef __TA_ti_sysbios_knl_Swi_hooks CT__ti_sysbios_knl_Swi_hooks;
+extern  const CT__ti_sysbios_knl_Swi_hooks ti_sysbios_knl_Swi_hooks__C;
+
+/* taskDisable */
+
+typedef xdc_UInt (*CT__ti_sysbios_knl_Swi_taskDisable)(void);
+extern  const CT__ti_sysbios_knl_Swi_taskDisable ti_sysbios_knl_Swi_taskDisable__C;
+
+/* taskRestore */
+
+typedef void (*CT__ti_sysbios_knl_Swi_taskRestore)(xdc_UInt);
+extern  const CT__ti_sysbios_knl_Swi_taskRestore ti_sysbios_knl_Swi_taskRestore__C;
+
+/* numConstructedSwis */
+
+
+
+
+typedef xdc_UInt CT__ti_sysbios_knl_Swi_numConstructedSwis;
+extern  const CT__ti_sysbios_knl_Swi_numConstructedSwis ti_sysbios_knl_Swi_numConstructedSwis__C;
+
+
+
+/*
+ * ======== PER-INSTANCE TYPES ========
+ */
+
+/* Params */
+struct ti_sysbios_knl_Swi_Params {
+    size_t __size;
+    const void *__self;
+    void *__fxns;
+    xdc_runtime_IInstance_Params *instance;
+    xdc_UArg arg0;
+    xdc_UArg arg1;
+    xdc_UInt priority;
+    xdc_UInt trigger;
+    xdc_runtime_IInstance_Params __iprms;
+};
+
+/* Struct */
+struct ti_sysbios_knl_Swi_Struct {
+    ti_sysbios_knl_Queue_Elem __f0;
+    ti_sysbios_knl_Swi_FuncPtr __f1;
+    xdc_UArg __f2;
+    xdc_UArg __f3;
+    xdc_UInt __f4;
+    xdc_UInt __f5;
+    xdc_Bool __f6;
+    xdc_UInt __f7;
+    xdc_UInt __f8;
+    ti_sysbios_knl_Queue_Handle __f9;
+    __TA_ti_sysbios_knl_Swi_Instance_State__hookEnv __f10;
+    xdc_runtime_Types_CordAddr __name;
+};
+
+
+/*
+ * ======== FUNCTION DECLARATIONS ========
+ */
+
+/* Module_startup */
+
+
+extern xdc_Int ti_sysbios_knl_Swi_Module_startup__E( xdc_Int state );
+
+extern xdc_Int ti_sysbios_knl_Swi_Module_startup__F( xdc_Int state );
+
+/* Instance_init__E */
+
+extern xdc_Int ti_sysbios_knl_Swi_Instance_init__E(ti_sysbios_knl_Swi_Object *, ti_sysbios_knl_Swi_FuncPtr swiFxn, const ti_sysbios_knl_Swi_Params *, xdc_runtime_Error_Block *);
+
+/* Instance_finalize__E */
+
+extern void ti_sysbios_knl_Swi_Instance_finalize__E( ti_sysbios_knl_Swi_Object* , int );
+
+/* Handle__label__S */
+
+extern xdc_runtime_Types_Label *ti_sysbios_knl_Swi_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+
+/* Module__startupDone__S */
+
+extern xdc_Bool ti_sysbios_knl_Swi_Module__startupDone__S( void );
+
+/* Object__create__S */
+
+extern xdc_Ptr ti_sysbios_knl_Swi_Object__create__S( xdc_Ptr __oa, xdc_SizeT __osz, xdc_Ptr __aa, const xdc_UChar *__pa, xdc_SizeT __psz, xdc_runtime_Error_Block *__eb );
+
+/* create */
+
+extern ti_sysbios_knl_Swi_Handle ti_sysbios_knl_Swi_create( ti_sysbios_knl_Swi_FuncPtr swiFxn, const ti_sysbios_knl_Swi_Params *__prms, xdc_runtime_Error_Block *__eb );
+
+/* construct */
+
+extern void ti_sysbios_knl_Swi_construct( ti_sysbios_knl_Swi_Struct *__obj, ti_sysbios_knl_Swi_FuncPtr swiFxn, const ti_sysbios_knl_Swi_Params *__prms, xdc_runtime_Error_Block *__eb );
+
+/* Object__delete__S */
+
+extern void ti_sysbios_knl_Swi_Object__delete__S( xdc_Ptr instp );
+
+/* delete */
+
+extern void ti_sysbios_knl_Swi_delete(ti_sysbios_knl_Swi_Handle *instp);
+
+/* Object__destruct__S */
+
+extern void ti_sysbios_knl_Swi_Object__destruct__S( xdc_Ptr objp );
+
+/* destruct */
+
+extern void ti_sysbios_knl_Swi_destruct(ti_sysbios_knl_Swi_Struct *obj);
+
+/* Object__get__S */
+
+extern xdc_Ptr ti_sysbios_knl_Swi_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+
+/* Object__first__S */
+
+extern xdc_Ptr ti_sysbios_knl_Swi_Object__first__S( void );
+
+/* Object__next__S */
+
+extern xdc_Ptr ti_sysbios_knl_Swi_Object__next__S( xdc_Ptr obj );
+
+/* Params__init__S */
+
+extern void ti_sysbios_knl_Swi_Params__init__S( xdc_Ptr dst, const void *src, xdc_SizeT psz, xdc_SizeT isz );
+
+/* startup__E */
+
+
+extern void ti_sysbios_knl_Swi_startup__E( void );
+
+/* enabled__E */
+
+
+extern xdc_Bool ti_sysbios_knl_Swi_enabled__E( void );
+
+/* unlockSched__E */
+
+
+extern void ti_sysbios_knl_Swi_unlockSched__E( void );
+
+/* disable__E */
+
+
+extern xdc_UInt ti_sysbios_knl_Swi_disable__E( void );
+
+/* enable__E */
+
+
+extern void ti_sysbios_knl_Swi_enable__E( void );
+
+/* restore__E */
+
+
+extern void ti_sysbios_knl_Swi_restore__E( xdc_UInt key );
+
+/* restoreHwi__E */
+
+
+extern void ti_sysbios_knl_Swi_restoreHwi__E( xdc_UInt key );
+
+/* self__E */
+
+
+extern ti_sysbios_knl_Swi_Handle ti_sysbios_knl_Swi_self__E( void );
+
+/* getTrigger__E */
+
+
+extern xdc_UInt ti_sysbios_knl_Swi_getTrigger__E( void );
+
+/* raisePri__E */
+
+
+extern xdc_UInt ti_sysbios_knl_Swi_raisePri__E( xdc_UInt priority );
+
+/* restorePri__E */
+
+
+extern void ti_sysbios_knl_Swi_restorePri__E( xdc_UInt key );
+
+/* andn__E */
+
+
+extern void ti_sysbios_knl_Swi_andn__E( ti_sysbios_knl_Swi_Handle __inst, xdc_UInt mask );
+
+/* dec__E */
+
+
+extern void ti_sysbios_knl_Swi_dec__E( ti_sysbios_knl_Swi_Handle __inst );
+
+/* getHookContext__E */
+
+
+extern xdc_Ptr ti_sysbios_knl_Swi_getHookContext__E( ti_sysbios_knl_Swi_Handle __inst, xdc_Int id );
+
+/* setHookContext__E */
+
+
+extern void ti_sysbios_knl_Swi_setHookContext__E( ti_sysbios_knl_Swi_Handle __inst, xdc_Int id, xdc_Ptr hookContext );
+
+/* getPri__E */
+
+
+extern xdc_UInt ti_sysbios_knl_Swi_getPri__E( ti_sysbios_knl_Swi_Handle __inst );
+
+/* getFunc__E */
+
+
+extern ti_sysbios_knl_Swi_FuncPtr ti_sysbios_knl_Swi_getFunc__E( ti_sysbios_knl_Swi_Handle __inst, xdc_UArg *arg0, xdc_UArg *arg1 );
+
+/* getAttrs__E */
+
+
+extern void ti_sysbios_knl_Swi_getAttrs__E( ti_sysbios_knl_Swi_Handle __inst, ti_sysbios_knl_Swi_FuncPtr *swiFxn, ti_sysbios_knl_Swi_Params *params );
+
+/* setAttrs__E */
+
+
+extern void ti_sysbios_knl_Swi_setAttrs__E( ti_sysbios_knl_Swi_Handle __inst, ti_sysbios_knl_Swi_FuncPtr swiFxn, ti_sysbios_knl_Swi_Params *params );
+
+/* inc__E */
+
+
+extern void ti_sysbios_knl_Swi_inc__E( ti_sysbios_knl_Swi_Handle __inst );
+
+/* or__E */
+
+
+extern void ti_sysbios_knl_Swi_or__E( ti_sysbios_knl_Swi_Handle __inst, xdc_UInt mask );
+
+/* post__E */
+
+
+extern void ti_sysbios_knl_Swi_post__E( ti_sysbios_knl_Swi_Handle __inst );
+
+/* schedule__I */
+
+
+extern void ti_sysbios_knl_Swi_schedule__I( void );
+
+/* runLoop__I */
+
+
+extern void ti_sysbios_knl_Swi_runLoop__I( void );
+
+/* run__I */
+
+
+extern void ti_sysbios_knl_Swi_run__I( ti_sysbios_knl_Swi_Object *swi );
+
+/* postInit__I */
+
+
+extern xdc_Int ti_sysbios_knl_Swi_postInit__I( ti_sysbios_knl_Swi_Object *swi, xdc_runtime_Error_Block *eb );
+
+/* restoreSMP__I */
+
+
+extern void ti_sysbios_knl_Swi_restoreSMP__I( void );
+
+
+/*
+ * ======== SYSTEM FUNCTIONS ========
+ */
+
+/* Module_startupDone */
+
+
+/* Object_heap */
+
+
+/* Module_heap */
+
+
+/* Module_id */
+static inline CT__ti_sysbios_knl_Swi_Module__id ti_sysbios_knl_Swi_Module_id( void ) 
+{
+    return ti_sysbios_knl_Swi_Module__id__C;
+}
+
+/* Module_hasMask */
+static inline xdc_Bool ti_sysbios_knl_Swi_Module_hasMask( void ) 
+{
+    return ti_sysbios_knl_Swi_Module__diagsMask__C != 0;
+}
+
+/* Module_getMask */
+static inline xdc_Bits16 ti_sysbios_knl_Swi_Module_getMask( void ) 
+{
+    return ti_sysbios_knl_Swi_Module__diagsMask__C != 0 ? *ti_sysbios_knl_Swi_Module__diagsMask__C : 0;
+}
+
+/* Module_setMask */
+static inline void ti_sysbios_knl_Swi_Module_setMask( xdc_Bits16 mask ) 
+{
+    if (ti_sysbios_knl_Swi_Module__diagsMask__C != 0) *ti_sysbios_knl_Swi_Module__diagsMask__C = mask;
+}
+
+/* Params_init */
+static inline void ti_sysbios_knl_Swi_Params_init( ti_sysbios_knl_Swi_Params *prms ) 
+{
+    if (prms) {
+        ti_sysbios_knl_Swi_Params__init__S(prms, 0, sizeof(ti_sysbios_knl_Swi_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+/* Params_copy */
+static inline void ti_sysbios_knl_Swi_Params_copy(ti_sysbios_knl_Swi_Params *dst, const ti_sysbios_knl_Swi_Params *src) 
+{
+    if (dst) {
+        ti_sysbios_knl_Swi_Params__init__S(dst, (const void *)src, sizeof(ti_sysbios_knl_Swi_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+/* Object_count */
+
+
+/* Object_sizeof */
+
+
+/* Object_get */
+static inline ti_sysbios_knl_Swi_Handle ti_sysbios_knl_Swi_Object_get(ti_sysbios_knl_Swi_Instance_State *oarr, int i) 
+{
+    return (ti_sysbios_knl_Swi_Handle)ti_sysbios_knl_Swi_Object__get__S(oarr, i);
+}
+
+/* Object_first */
+static inline ti_sysbios_knl_Swi_Handle ti_sysbios_knl_Swi_Object_first( void )
+{
+    return (ti_sysbios_knl_Swi_Handle)ti_sysbios_knl_Swi_Object__first__S();
+}
+
+/* Object_next */
+static inline ti_sysbios_knl_Swi_Handle ti_sysbios_knl_Swi_Object_next( ti_sysbios_knl_Swi_Object *obj )
+{
+    return (ti_sysbios_knl_Swi_Handle)ti_sysbios_knl_Swi_Object__next__S(obj);
+}
+
+/* Handle_label */
+static inline xdc_runtime_Types_Label *ti_sysbios_knl_Swi_Handle_label( ti_sysbios_knl_Swi_Handle inst, xdc_runtime_Types_Label *lab )
+{
+    return ti_sysbios_knl_Swi_Handle__label__S(inst, lab);
+}
+
+/* Handle_name */
+static inline xdc_String ti_sysbios_knl_Swi_Handle_name( ti_sysbios_knl_Swi_Handle inst )
+{
+    xdc_runtime_Types_Label lab;
+    return ti_sysbios_knl_Swi_Handle__label__S(inst, &lab)->iname;
+}
+
+/* handle */
+static inline ti_sysbios_knl_Swi_Handle ti_sysbios_knl_Swi_handle( ti_sysbios_knl_Swi_Struct *str )
+{
+    return (ti_sysbios_knl_Swi_Handle)str;
+}
+
+/* struct */
+static inline ti_sysbios_knl_Swi_Struct *ti_sysbios_knl_Swi_struct( ti_sysbios_knl_Swi_Handle inst )
+{
+    return (ti_sysbios_knl_Swi_Struct*)inst;
+}
+
+
+/*
+ * ======== EPILOGUE ========
+ */
+
+
+
+
+
+
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 647 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Swi.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 66 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/package/Clock_TimerProxy.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION DECLARATIONS
+ *     CONVERTORS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * ======== INCLUDES ========
+ */
+
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 362 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 423 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:49; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 56 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/package/Clock_TimerProxy.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 132 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 155 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 57 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/package/Clock_TimerProxy.h"
+
+
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/interfaces/ITimer.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 450 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/interfaces/ITimer.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 60 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/package/Clock_TimerProxy.h"
+
+
+/*
+ * ======== AUXILIARY DEFINITIONS ========
+ */
+
+/* FuncPtr */
+typedef ti_sysbios_interfaces_ITimer_FuncPtr ti_sysbios_knl_Clock_TimerProxy_FuncPtr;
+
+/* ANY */
+
+
+/* StartMode */
+typedef ti_sysbios_interfaces_ITimer_StartMode ti_sysbios_knl_Clock_TimerProxy_StartMode;
+
+/* RunMode */
+typedef ti_sysbios_interfaces_ITimer_RunMode ti_sysbios_knl_Clock_TimerProxy_RunMode;
+
+/* Status */
+typedef ti_sysbios_interfaces_ITimer_Status ti_sysbios_knl_Clock_TimerProxy_Status;
+
+/* PeriodType */
+typedef ti_sysbios_interfaces_ITimer_PeriodType ti_sysbios_knl_Clock_TimerProxy_PeriodType;
+
+
+/*
+ * ======== CREATE ARGS ========
+ */
+
+/* Args__create */
+typedef struct ti_sysbios_knl_Clock_TimerProxy_Args__create {
+    xdc_Int id;
+    ti_sysbios_interfaces_ITimer_FuncPtr tickFxn;
+} ti_sysbios_knl_Clock_TimerProxy_Args__create;
+
+
+/*
+ * ======== MODULE-WIDE CONFIGS ========
+ */
+
+/* Module__diagsEnabled */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Clock_TimerProxy_Module__diagsEnabled;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__diagsEnabled ti_sysbios_knl_Clock_TimerProxy_Module__diagsEnabled__C;
+
+/* Module__diagsIncluded */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Clock_TimerProxy_Module__diagsIncluded;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__diagsIncluded ti_sysbios_knl_Clock_TimerProxy_Module__diagsIncluded__C;
+
+/* Module__diagsMask */
+typedef xdc_Bits16 *CT__ti_sysbios_knl_Clock_TimerProxy_Module__diagsMask;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__diagsMask ti_sysbios_knl_Clock_TimerProxy_Module__diagsMask__C;
+
+/* Module__gateObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Clock_TimerProxy_Module__gateObj;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__gateObj ti_sysbios_knl_Clock_TimerProxy_Module__gateObj__C;
+
+/* Module__gatePrms */
+typedef xdc_Ptr CT__ti_sysbios_knl_Clock_TimerProxy_Module__gatePrms;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__gatePrms ti_sysbios_knl_Clock_TimerProxy_Module__gatePrms__C;
+
+/* Module__id */
+typedef xdc_runtime_Types_ModuleId CT__ti_sysbios_knl_Clock_TimerProxy_Module__id;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__id ti_sysbios_knl_Clock_TimerProxy_Module__id__C;
+
+/* Module__loggerDefined */
+typedef xdc_Bool CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerDefined;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerDefined ti_sysbios_knl_Clock_TimerProxy_Module__loggerDefined__C;
+
+/* Module__loggerObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerObj;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerObj ti_sysbios_knl_Clock_TimerProxy_Module__loggerObj__C;
+
+/* Module__loggerFxn0 */
+typedef xdc_runtime_Types_LoggerFxn0 CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn0;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn0 ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn0__C;
+
+/* Module__loggerFxn1 */
+typedef xdc_runtime_Types_LoggerFxn1 CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn1;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn1 ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn1__C;
+
+/* Module__loggerFxn2 */
+typedef xdc_runtime_Types_LoggerFxn2 CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn2;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn2 ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn2__C;
+
+/* Module__loggerFxn4 */
+typedef xdc_runtime_Types_LoggerFxn4 CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn4;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn4 ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn4__C;
+
+/* Module__loggerFxn8 */
+typedef xdc_runtime_Types_LoggerFxn8 CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn8;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn8 ti_sysbios_knl_Clock_TimerProxy_Module__loggerFxn8__C;
+
+/* Module__startupDoneFxn */
+typedef xdc_Bool (*CT__ti_sysbios_knl_Clock_TimerProxy_Module__startupDoneFxn)(void);
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Module__startupDoneFxn ti_sysbios_knl_Clock_TimerProxy_Module__startupDoneFxn__C;
+
+/* Object__count */
+typedef xdc_Int CT__ti_sysbios_knl_Clock_TimerProxy_Object__count;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Object__count ti_sysbios_knl_Clock_TimerProxy_Object__count__C;
+
+/* Object__heap */
+typedef xdc_runtime_IHeap_Handle CT__ti_sysbios_knl_Clock_TimerProxy_Object__heap;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Object__heap ti_sysbios_knl_Clock_TimerProxy_Object__heap__C;
+
+/* Object__sizeof */
+typedef xdc_SizeT CT__ti_sysbios_knl_Clock_TimerProxy_Object__sizeof;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Object__sizeof ti_sysbios_knl_Clock_TimerProxy_Object__sizeof__C;
+
+/* Object__table */
+typedef xdc_Ptr CT__ti_sysbios_knl_Clock_TimerProxy_Object__table;
+extern  const CT__ti_sysbios_knl_Clock_TimerProxy_Object__table ti_sysbios_knl_Clock_TimerProxy_Object__table__C;
+
+
+/*
+ * ======== PER-INSTANCE TYPES ========
+ */
+
+/* Params */
+struct ti_sysbios_knl_Clock_TimerProxy_Params {
+    size_t __size;
+    const void *__self;
+    void *__fxns;
+    xdc_runtime_IInstance_Params *instance;
+    ti_sysbios_interfaces_ITimer_RunMode runMode;
+    ti_sysbios_interfaces_ITimer_StartMode startMode;
+    xdc_UArg arg;
+    xdc_UInt32 period;
+    ti_sysbios_interfaces_ITimer_PeriodType periodType;
+    xdc_runtime_Types_FreqHz extFreq;
+    xdc_runtime_IInstance_Params __iprms;
+};
+
+/* Struct */
+struct ti_sysbios_knl_Clock_TimerProxy_Struct {
+    const ti_sysbios_knl_Clock_TimerProxy_Fxns__ *__fxns;
+    xdc_runtime_Types_CordAddr __name;
+};
+
+
+/*
+ * ======== VIRTUAL FUNCTIONS ========
+ */
+
+/* Fxns__ */
+struct ti_sysbios_knl_Clock_TimerProxy_Fxns__ {
+    xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2 *__sysp;
+    xdc_UInt (*getNumTimers)(void);
+    ti_sysbios_interfaces_ITimer_Status (*getStatus)(xdc_UInt);
+    void (*startup)(void);
+    xdc_UInt32 (*getMaxTicks)(ti_sysbios_knl_Clock_TimerProxy_Handle);
+    void (*setNextTick)(ti_sysbios_knl_Clock_TimerProxy_Handle, xdc_UInt32);
+    void (*start)(ti_sysbios_knl_Clock_TimerProxy_Handle);
+    void (*stop)(ti_sysbios_knl_Clock_TimerProxy_Handle);
+    void (*setPeriod)(ti_sysbios_knl_Clock_TimerProxy_Handle, xdc_UInt32);
+    xdc_Bool (*setPeriodMicroSecs)(ti_sysbios_knl_Clock_TimerProxy_Handle, xdc_UInt32);
+    xdc_UInt32 (*getPeriod)(ti_sysbios_knl_Clock_TimerProxy_Handle);
+    xdc_UInt32 (*getCount)(ti_sysbios_knl_Clock_TimerProxy_Handle);
+    void (*getFreq)(ti_sysbios_knl_Clock_TimerProxy_Handle, xdc_runtime_Types_FreqHz*);
+    ti_sysbios_interfaces_ITimer_FuncPtr (*getFunc)(ti_sysbios_knl_Clock_TimerProxy_Handle, xdc_UArg*);
+    void (*setFunc)(ti_sysbios_knl_Clock_TimerProxy_Handle, ti_sysbios_interfaces_ITimer_FuncPtr, xdc_UArg);
+    void (*trigger)(ti_sysbios_knl_Clock_TimerProxy_Handle, xdc_UInt32);
+    xdc_UInt32 (*getExpiredCounts)(ti_sysbios_knl_Clock_TimerProxy_Handle);
+    xdc_UInt32 (*getExpiredTicks)(ti_sysbios_knl_Clock_TimerProxy_Handle, xdc_UInt32);
+    xdc_UInt32 (*getCurrentTick)(ti_sysbios_knl_Clock_TimerProxy_Handle, xdc_Bool);
+    xdc_runtime_Types_SysFxns2 __sfxns;
+};
+
+/* Module__FXNS__C */
+extern const ti_sysbios_knl_Clock_TimerProxy_Fxns__ ti_sysbios_knl_Clock_TimerProxy_Module__FXNS__C;
+
+
+/*
+ * ======== FUNCTION DECLARATIONS ========
+ */
+
+/* Module_startup */
+
+
+/* Handle__label__S */
+
+extern xdc_runtime_Types_Label *ti_sysbios_knl_Clock_TimerProxy_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+
+/* Module__startupDone__S */
+
+extern xdc_Bool ti_sysbios_knl_Clock_TimerProxy_Module__startupDone__S( void );
+
+/* Object__create__S */
+
+extern xdc_Ptr ti_sysbios_knl_Clock_TimerProxy_Object__create__S( xdc_Ptr __oa, xdc_SizeT __osz, xdc_Ptr __aa, const xdc_UChar *__pa, xdc_SizeT __psz, xdc_runtime_Error_Block *__eb );
+
+/* create */
+
+extern ti_sysbios_knl_Clock_TimerProxy_Handle ti_sysbios_knl_Clock_TimerProxy_create( xdc_Int id, ti_sysbios_interfaces_ITimer_FuncPtr tickFxn, const ti_sysbios_knl_Clock_TimerProxy_Params *__prms, xdc_runtime_Error_Block *__eb );
+
+/* Object__delete__S */
+
+extern void ti_sysbios_knl_Clock_TimerProxy_Object__delete__S( xdc_Ptr instp );
+
+/* delete */
+
+extern void ti_sysbios_knl_Clock_TimerProxy_delete(ti_sysbios_knl_Clock_TimerProxy_Handle *instp);
+
+/* Object__destruct__S */
+
+extern void ti_sysbios_knl_Clock_TimerProxy_Object__destruct__S( xdc_Ptr objp );
+
+/* Object__get__S */
+
+extern xdc_Ptr ti_sysbios_knl_Clock_TimerProxy_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+
+/* Object__first__S */
+
+extern xdc_Ptr ti_sysbios_knl_Clock_TimerProxy_Object__first__S( void );
+
+/* Object__next__S */
+
+extern xdc_Ptr ti_sysbios_knl_Clock_TimerProxy_Object__next__S( xdc_Ptr obj );
+
+/* Params__init__S */
+
+extern void ti_sysbios_knl_Clock_TimerProxy_Params__init__S( xdc_Ptr dst, const void *src, xdc_SizeT psz, xdc_SizeT isz );
+
+/* Proxy__abstract__S */
+
+extern xdc_Bool ti_sysbios_knl_Clock_TimerProxy_Proxy__abstract__S( void );
+
+/* Proxy__delegate__S */
+
+extern xdc_Ptr ti_sysbios_knl_Clock_TimerProxy_Proxy__delegate__S( void );
+
+/* getNumTimers__E */
+
+
+extern xdc_UInt ti_sysbios_knl_Clock_TimerProxy_getNumTimers__E( void );
+
+/* getStatus__E */
+
+
+extern ti_sysbios_interfaces_ITimer_Status ti_sysbios_knl_Clock_TimerProxy_getStatus__E( xdc_UInt id );
+
+/* startup__E */
+
+
+extern void ti_sysbios_knl_Clock_TimerProxy_startup__E( void );
+
+/* getMaxTicks__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_TimerProxy_getMaxTicks__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst );
+
+/* setNextTick__E */
+
+
+extern void ti_sysbios_knl_Clock_TimerProxy_setNextTick__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst, xdc_UInt32 ticks );
+
+/* start__E */
+
+
+extern void ti_sysbios_knl_Clock_TimerProxy_start__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst );
+
+/* stop__E */
+
+
+extern void ti_sysbios_knl_Clock_TimerProxy_stop__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst );
+
+/* setPeriod__E */
+
+
+extern void ti_sysbios_knl_Clock_TimerProxy_setPeriod__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst, xdc_UInt32 period );
+
+/* setPeriodMicroSecs__E */
+
+
+extern xdc_Bool ti_sysbios_knl_Clock_TimerProxy_setPeriodMicroSecs__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst, xdc_UInt32 microsecs );
+
+/* getPeriod__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_TimerProxy_getPeriod__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst );
+
+/* getCount__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_TimerProxy_getCount__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst );
+
+/* getFreq__E */
+
+
+extern void ti_sysbios_knl_Clock_TimerProxy_getFreq__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst, xdc_runtime_Types_FreqHz *freq );
+
+/* getFunc__E */
+
+
+extern ti_sysbios_interfaces_ITimer_FuncPtr ti_sysbios_knl_Clock_TimerProxy_getFunc__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst, xdc_UArg *arg );
+
+/* setFunc__E */
+
+
+extern void ti_sysbios_knl_Clock_TimerProxy_setFunc__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst, ti_sysbios_interfaces_ITimer_FuncPtr fxn, xdc_UArg arg );
+
+/* trigger__E */
+
+
+extern void ti_sysbios_knl_Clock_TimerProxy_trigger__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst, xdc_UInt32 cycles );
+
+/* getExpiredCounts__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_TimerProxy_getExpiredCounts__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst );
+
+/* getExpiredTicks__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_TimerProxy_getExpiredTicks__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst, xdc_UInt32 tickPeriod );
+
+/* getCurrentTick__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_TimerProxy_getCurrentTick__E( ti_sysbios_knl_Clock_TimerProxy_Handle __inst, xdc_Bool save );
+
+
+/*
+ * ======== CONVERTORS ========
+ */
+
+/* Module_upCast */
+static inline ti_sysbios_interfaces_ITimer_Module ti_sysbios_knl_Clock_TimerProxy_Module_upCast( void )
+{
+    return (ti_sysbios_interfaces_ITimer_Module)ti_sysbios_knl_Clock_TimerProxy_Proxy__delegate__S();
+}
+
+/* Module_to_ti_sysbios_interfaces_ITimer */
+
+
+/* Handle_upCast */
+static inline ti_sysbios_interfaces_ITimer_Handle ti_sysbios_knl_Clock_TimerProxy_Handle_upCast( ti_sysbios_knl_Clock_TimerProxy_Handle i )
+{
+    return (ti_sysbios_interfaces_ITimer_Handle)i;
+}
+
+/* Handle_to_ti_sysbios_interfaces_ITimer */
+
+
+/* Handle_downCast */
+static inline ti_sysbios_knl_Clock_TimerProxy_Handle ti_sysbios_knl_Clock_TimerProxy_Handle_downCast( ti_sysbios_interfaces_ITimer_Handle i )
+{
+    ti_sysbios_interfaces_ITimer_Handle i2 = (ti_sysbios_interfaces_ITimer_Handle)i;
+if (ti_sysbios_knl_Clock_TimerProxy_Proxy__abstract__S()) return (ti_sysbios_knl_Clock_TimerProxy_Handle)i;
+    return (void*)i2->__fxns == (void*)ti_sysbios_knl_Clock_TimerProxy_Proxy__delegate__S() ? (ti_sysbios_knl_Clock_TimerProxy_Handle)i : 0;
+}
+
+/* Handle_from_ti_sysbios_interfaces_ITimer */
+
+
+
+/*
+ * ======== SYSTEM FUNCTIONS ========
+ */
+
+/* Module_startupDone */
+
+
+/* Object_heap */
+
+
+/* Module_heap */
+
+
+/* Module_id */
+static inline CT__ti_sysbios_knl_Clock_TimerProxy_Module__id ti_sysbios_knl_Clock_TimerProxy_Module_id( void ) 
+{
+    return ti_sysbios_knl_Clock_TimerProxy_Module__id__C;
+}
+
+/* Proxy_abstract */
+
+
+/* Proxy_delegate */
+
+
+/* Params_init */
+static inline void ti_sysbios_knl_Clock_TimerProxy_Params_init( ti_sysbios_knl_Clock_TimerProxy_Params *prms ) 
+{
+    if (prms) {
+        ti_sysbios_knl_Clock_TimerProxy_Params__init__S(prms, 0, sizeof(ti_sysbios_knl_Clock_TimerProxy_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+/* Params_copy */
+static inline void ti_sysbios_knl_Clock_TimerProxy_Params_copy(ti_sysbios_knl_Clock_TimerProxy_Params *dst, const ti_sysbios_knl_Clock_TimerProxy_Params *src) 
+{
+    if (dst) {
+        ti_sysbios_knl_Clock_TimerProxy_Params__init__S(dst, (const void *)src, sizeof(ti_sysbios_knl_Clock_TimerProxy_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+
+/*
+ * ======== EPILOGUE ========
+ */
+
+
+
+
+
+
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 67 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+
+
+/*
+ * ======== AUXILIARY DEFINITIONS ========
+ */
+
+/* TickSource */
+enum ti_sysbios_knl_Clock_TickSource {
+    ti_sysbios_knl_Clock_TickSource_TIMER,
+    ti_sysbios_knl_Clock_TickSource_USER,
+    ti_sysbios_knl_Clock_TickSource_NULL
+};
+typedef enum ti_sysbios_knl_Clock_TickSource ti_sysbios_knl_Clock_TickSource;
+
+/* TickMode */
+enum ti_sysbios_knl_Clock_TickMode {
+    ti_sysbios_knl_Clock_TickMode_PERIODIC,
+    ti_sysbios_knl_Clock_TickMode_DYNAMIC
+};
+typedef enum ti_sysbios_knl_Clock_TickMode ti_sysbios_knl_Clock_TickMode;
+
+/* FuncPtr */
+typedef void (*ti_sysbios_knl_Clock_FuncPtr)(xdc_UArg);
+
+
+/*
+ * ======== CREATE ARGS ========
+ */
+
+/* Args__create */
+typedef struct ti_sysbios_knl_Clock_Args__create {
+    ti_sysbios_knl_Clock_FuncPtr clockFxn;
+    xdc_UInt timeout;
+} ti_sysbios_knl_Clock_Args__create;
+
+
+/*
+ * ======== INTERNAL DEFINITIONS ========
+ */
+
+
+/*
+ * ======== MODULE-WIDE CONFIGS ========
+ */
+
+/* Module__diagsEnabled */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Clock_Module__diagsEnabled;
+extern  const CT__ti_sysbios_knl_Clock_Module__diagsEnabled ti_sysbios_knl_Clock_Module__diagsEnabled__C;
+
+/* Module__diagsIncluded */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Clock_Module__diagsIncluded;
+extern  const CT__ti_sysbios_knl_Clock_Module__diagsIncluded ti_sysbios_knl_Clock_Module__diagsIncluded__C;
+
+/* Module__diagsMask */
+typedef xdc_Bits16 *CT__ti_sysbios_knl_Clock_Module__diagsMask;
+extern  const CT__ti_sysbios_knl_Clock_Module__diagsMask ti_sysbios_knl_Clock_Module__diagsMask__C;
+
+/* Module__gateObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Clock_Module__gateObj;
+extern  const CT__ti_sysbios_knl_Clock_Module__gateObj ti_sysbios_knl_Clock_Module__gateObj__C;
+
+/* Module__gatePrms */
+typedef xdc_Ptr CT__ti_sysbios_knl_Clock_Module__gatePrms;
+extern  const CT__ti_sysbios_knl_Clock_Module__gatePrms ti_sysbios_knl_Clock_Module__gatePrms__C;
+
+/* Module__id */
+typedef xdc_runtime_Types_ModuleId CT__ti_sysbios_knl_Clock_Module__id;
+extern  const CT__ti_sysbios_knl_Clock_Module__id ti_sysbios_knl_Clock_Module__id__C;
+
+/* Module__loggerDefined */
+typedef xdc_Bool CT__ti_sysbios_knl_Clock_Module__loggerDefined;
+extern  const CT__ti_sysbios_knl_Clock_Module__loggerDefined ti_sysbios_knl_Clock_Module__loggerDefined__C;
+
+/* Module__loggerObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Clock_Module__loggerObj;
+extern  const CT__ti_sysbios_knl_Clock_Module__loggerObj ti_sysbios_knl_Clock_Module__loggerObj__C;
+
+/* Module__loggerFxn0 */
+typedef xdc_runtime_Types_LoggerFxn0 CT__ti_sysbios_knl_Clock_Module__loggerFxn0;
+extern  const CT__ti_sysbios_knl_Clock_Module__loggerFxn0 ti_sysbios_knl_Clock_Module__loggerFxn0__C;
+
+/* Module__loggerFxn1 */
+typedef xdc_runtime_Types_LoggerFxn1 CT__ti_sysbios_knl_Clock_Module__loggerFxn1;
+extern  const CT__ti_sysbios_knl_Clock_Module__loggerFxn1 ti_sysbios_knl_Clock_Module__loggerFxn1__C;
+
+/* Module__loggerFxn2 */
+typedef xdc_runtime_Types_LoggerFxn2 CT__ti_sysbios_knl_Clock_Module__loggerFxn2;
+extern  const CT__ti_sysbios_knl_Clock_Module__loggerFxn2 ti_sysbios_knl_Clock_Module__loggerFxn2__C;
+
+/* Module__loggerFxn4 */
+typedef xdc_runtime_Types_LoggerFxn4 CT__ti_sysbios_knl_Clock_Module__loggerFxn4;
+extern  const CT__ti_sysbios_knl_Clock_Module__loggerFxn4 ti_sysbios_knl_Clock_Module__loggerFxn4__C;
+
+/* Module__loggerFxn8 */
+typedef xdc_runtime_Types_LoggerFxn8 CT__ti_sysbios_knl_Clock_Module__loggerFxn8;
+extern  const CT__ti_sysbios_knl_Clock_Module__loggerFxn8 ti_sysbios_knl_Clock_Module__loggerFxn8__C;
+
+/* Module__startupDoneFxn */
+typedef xdc_Bool (*CT__ti_sysbios_knl_Clock_Module__startupDoneFxn)(void);
+extern  const CT__ti_sysbios_knl_Clock_Module__startupDoneFxn ti_sysbios_knl_Clock_Module__startupDoneFxn__C;
+
+/* Object__count */
+typedef xdc_Int CT__ti_sysbios_knl_Clock_Object__count;
+extern  const CT__ti_sysbios_knl_Clock_Object__count ti_sysbios_knl_Clock_Object__count__C;
+
+/* Object__heap */
+typedef xdc_runtime_IHeap_Handle CT__ti_sysbios_knl_Clock_Object__heap;
+extern  const CT__ti_sysbios_knl_Clock_Object__heap ti_sysbios_knl_Clock_Object__heap__C;
+
+/* Object__sizeof */
+typedef xdc_SizeT CT__ti_sysbios_knl_Clock_Object__sizeof;
+extern  const CT__ti_sysbios_knl_Clock_Object__sizeof ti_sysbios_knl_Clock_Object__sizeof__C;
+
+/* Object__table */
+typedef xdc_Ptr CT__ti_sysbios_knl_Clock_Object__table;
+extern  const CT__ti_sysbios_knl_Clock_Object__table ti_sysbios_knl_Clock_Object__table__C;
+
+/* LW_delayed */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Clock_LW_delayed;
+extern  const CT__ti_sysbios_knl_Clock_LW_delayed ti_sysbios_knl_Clock_LW_delayed__C;
+
+/* LM_tick */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Clock_LM_tick;
+extern  const CT__ti_sysbios_knl_Clock_LM_tick ti_sysbios_knl_Clock_LM_tick__C;
+
+/* LM_begin */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Clock_LM_begin;
+extern  const CT__ti_sysbios_knl_Clock_LM_begin ti_sysbios_knl_Clock_LM_begin__C;
+
+/* A_clockDisabled */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Clock_A_clockDisabled;
+extern  const CT__ti_sysbios_knl_Clock_A_clockDisabled ti_sysbios_knl_Clock_A_clockDisabled__C;
+
+/* A_badThreadType */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Clock_A_badThreadType;
+extern  const CT__ti_sysbios_knl_Clock_A_badThreadType ti_sysbios_knl_Clock_A_badThreadType__C;
+
+/* serviceMargin */
+
+
+
+
+typedef xdc_UInt32 CT__ti_sysbios_knl_Clock_serviceMargin;
+extern  const CT__ti_sysbios_knl_Clock_serviceMargin ti_sysbios_knl_Clock_serviceMargin__C;
+
+
+/* tickSource */
+
+typedef ti_sysbios_knl_Clock_TickSource CT__ti_sysbios_knl_Clock_tickSource;
+extern  const CT__ti_sysbios_knl_Clock_tickSource ti_sysbios_knl_Clock_tickSource__C;
+
+/* tickMode */
+
+typedef ti_sysbios_knl_Clock_TickMode CT__ti_sysbios_knl_Clock_tickMode;
+extern  const CT__ti_sysbios_knl_Clock_tickMode ti_sysbios_knl_Clock_tickMode__C;
+
+/* timerId */
+
+
+
+
+typedef xdc_UInt CT__ti_sysbios_knl_Clock_timerId;
+extern  const CT__ti_sysbios_knl_Clock_timerId ti_sysbios_knl_Clock_timerId__C;
+
+
+/* tickPeriod */
+
+
+
+
+typedef xdc_UInt32 CT__ti_sysbios_knl_Clock_tickPeriod;
+extern  const CT__ti_sysbios_knl_Clock_tickPeriod ti_sysbios_knl_Clock_tickPeriod__C;
+
+
+/* doTickFunc */
+
+typedef void (*CT__ti_sysbios_knl_Clock_doTickFunc)(xdc_UArg);
+extern  const CT__ti_sysbios_knl_Clock_doTickFunc ti_sysbios_knl_Clock_doTickFunc__C;
+
+/* triggerClock */
+
+typedef ti_sysbios_knl_Clock_Handle CT__ti_sysbios_knl_Clock_triggerClock;
+extern  const CT__ti_sysbios_knl_Clock_triggerClock ti_sysbios_knl_Clock_triggerClock__C;
+
+
+/*
+ * ======== PER-INSTANCE TYPES ========
+ */
+
+/* Params */
+struct ti_sysbios_knl_Clock_Params {
+    size_t __size;
+    const void *__self;
+    void *__fxns;
+    xdc_runtime_IInstance_Params *instance;
+    xdc_Bool startFlag;
+    xdc_UInt32 period;
+    xdc_UArg arg;
+    xdc_runtime_IInstance_Params __iprms;
+};
+
+/* Struct */
+struct ti_sysbios_knl_Clock_Struct {
+    ti_sysbios_knl_Queue_Elem __f0;
+    xdc_UInt32 __f1;
+    xdc_UInt32 __f2;
+    xdc_UInt32 __f3;
+    volatile xdc_Bool __f4;
+    ti_sysbios_knl_Clock_FuncPtr __f5;
+    xdc_UArg __f6;
+    xdc_runtime_Types_CordAddr __name;
+};
+
+
+/*
+ * ======== FUNCTION DECLARATIONS ========
+ */
+
+/* Module_startup */
+
+
+extern xdc_Int ti_sysbios_knl_Clock_Module_startup__E( xdc_Int state );
+
+extern xdc_Int ti_sysbios_knl_Clock_Module_startup__F( xdc_Int state );
+
+/* Instance_init__E */
+
+extern void ti_sysbios_knl_Clock_Instance_init__E(ti_sysbios_knl_Clock_Object *, ti_sysbios_knl_Clock_FuncPtr clockFxn, xdc_UInt timeout, const ti_sysbios_knl_Clock_Params *);
+
+/* Instance_finalize__E */
+
+extern void ti_sysbios_knl_Clock_Instance_finalize__E( ti_sysbios_knl_Clock_Object* );
+
+/* Handle__label__S */
+
+extern xdc_runtime_Types_Label *ti_sysbios_knl_Clock_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+
+/* Module__startupDone__S */
+
+extern xdc_Bool ti_sysbios_knl_Clock_Module__startupDone__S( void );
+
+/* Object__create__S */
+
+extern xdc_Ptr ti_sysbios_knl_Clock_Object__create__S( xdc_Ptr __oa, xdc_SizeT __osz, xdc_Ptr __aa, const xdc_UChar *__pa, xdc_SizeT __psz, xdc_runtime_Error_Block *__eb );
+
+/* create */
+
+extern ti_sysbios_knl_Clock_Handle ti_sysbios_knl_Clock_create( ti_sysbios_knl_Clock_FuncPtr clockFxn, xdc_UInt timeout, const ti_sysbios_knl_Clock_Params *__prms, xdc_runtime_Error_Block *__eb );
+
+/* construct */
+
+extern void ti_sysbios_knl_Clock_construct( ti_sysbios_knl_Clock_Struct *__obj, ti_sysbios_knl_Clock_FuncPtr clockFxn, xdc_UInt timeout, const ti_sysbios_knl_Clock_Params *__prms );
+
+/* Object__delete__S */
+
+extern void ti_sysbios_knl_Clock_Object__delete__S( xdc_Ptr instp );
+
+/* delete */
+
+extern void ti_sysbios_knl_Clock_delete(ti_sysbios_knl_Clock_Handle *instp);
+
+/* Object__destruct__S */
+
+extern void ti_sysbios_knl_Clock_Object__destruct__S( xdc_Ptr objp );
+
+/* destruct */
+
+extern void ti_sysbios_knl_Clock_destruct(ti_sysbios_knl_Clock_Struct *obj);
+
+/* Object__get__S */
+
+extern xdc_Ptr ti_sysbios_knl_Clock_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+
+/* Object__first__S */
+
+extern xdc_Ptr ti_sysbios_knl_Clock_Object__first__S( void );
+
+/* Object__next__S */
+
+extern xdc_Ptr ti_sysbios_knl_Clock_Object__next__S( xdc_Ptr obj );
+
+/* Params__init__S */
+
+extern void ti_sysbios_knl_Clock_Params__init__S( xdc_Ptr dst, const void *src, xdc_SizeT psz, xdc_SizeT isz );
+
+/* getTicks__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_getTicks__E( void );
+
+/* getTimerHandle__E */
+
+
+extern ti_sysbios_knl_Clock_TimerProxy_Handle ti_sysbios_knl_Clock_getTimerHandle__E( void );
+
+/* setTicks__E */
+
+
+extern void ti_sysbios_knl_Clock_setTicks__E( xdc_UInt32 ticks );
+
+/* tickStop__E */
+
+
+extern void ti_sysbios_knl_Clock_tickStop__E( void );
+
+/* tickReconfig__E */
+
+
+extern xdc_Bool ti_sysbios_knl_Clock_tickReconfig__E( void );
+
+/* tickStart__E */
+
+
+extern void ti_sysbios_knl_Clock_tickStart__E( void );
+
+/* tick__E */
+
+
+extern void ti_sysbios_knl_Clock_tick__E( void );
+
+/* workFunc__E */
+
+
+extern void ti_sysbios_knl_Clock_workFunc__E( xdc_UArg arg0, xdc_UArg arg1 );
+
+/* workFuncDynamic__E */
+
+
+extern void ti_sysbios_knl_Clock_workFuncDynamic__E( xdc_UArg arg0, xdc_UArg arg1 );
+
+/* logTick__E */
+
+
+extern void ti_sysbios_knl_Clock_logTick__E( void );
+
+/* getCompletedTicks__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_getCompletedTicks__E( void );
+
+/* getTickPeriod__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_getTickPeriod__E( void );
+
+/* getTicksUntilInterrupt__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_getTicksUntilInterrupt__E( void );
+
+/* getTicksUntilTimeout__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_getTicksUntilTimeout__E( void );
+
+/* walkQueueDynamic__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_walkQueueDynamic__E( xdc_Bool service, xdc_UInt32 tick );
+
+/* walkQueuePeriodic__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_walkQueuePeriodic__E( void );
+
+/* scheduleNextTick__E */
+
+
+extern void ti_sysbios_knl_Clock_scheduleNextTick__E( xdc_UInt32 deltaTicks, xdc_UInt32 absTick );
+
+/* addI__E */
+
+
+extern void ti_sysbios_knl_Clock_addI__E( ti_sysbios_knl_Clock_Handle __inst, ti_sysbios_knl_Clock_FuncPtr clockFxn, xdc_UInt32 timeout, xdc_UArg arg );
+
+/* removeI__E */
+
+
+extern void ti_sysbios_knl_Clock_removeI__E( ti_sysbios_knl_Clock_Handle __inst );
+
+/* start__E */
+
+
+extern void ti_sysbios_knl_Clock_start__E( ti_sysbios_knl_Clock_Handle __inst );
+
+/* startI__E */
+
+
+extern void ti_sysbios_knl_Clock_startI__E( ti_sysbios_knl_Clock_Handle __inst );
+
+/* stop__E */
+
+
+extern void ti_sysbios_knl_Clock_stop__E( ti_sysbios_knl_Clock_Handle __inst );
+
+/* setPeriod__E */
+
+
+extern void ti_sysbios_knl_Clock_setPeriod__E( ti_sysbios_knl_Clock_Handle __inst, xdc_UInt32 period );
+
+/* setTimeout__E */
+
+
+extern void ti_sysbios_knl_Clock_setTimeout__E( ti_sysbios_knl_Clock_Handle __inst, xdc_UInt32 timeout );
+
+/* setFunc__E */
+
+
+extern void ti_sysbios_knl_Clock_setFunc__E( ti_sysbios_knl_Clock_Handle __inst, ti_sysbios_knl_Clock_FuncPtr fxn, xdc_UArg arg );
+
+/* getPeriod__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_getPeriod__E( ti_sysbios_knl_Clock_Handle __inst );
+
+/* getTimeout__E */
+
+
+extern xdc_UInt32 ti_sysbios_knl_Clock_getTimeout__E( ti_sysbios_knl_Clock_Handle __inst );
+
+/* isActive__E */
+
+
+extern xdc_Bool ti_sysbios_knl_Clock_isActive__E( ti_sysbios_knl_Clock_Handle __inst );
+
+/* doTick__I */
+
+
+extern void ti_sysbios_knl_Clock_doTick__I( xdc_UArg arg );
+
+/* triggerFunc__I */
+
+
+extern void ti_sysbios_knl_Clock_triggerFunc__I( xdc_UArg arg );
+
+
+/*
+ * ======== SYSTEM FUNCTIONS ========
+ */
+
+/* Module_startupDone */
+
+
+/* Object_heap */
+
+
+/* Module_heap */
+
+
+/* Module_id */
+static inline CT__ti_sysbios_knl_Clock_Module__id ti_sysbios_knl_Clock_Module_id( void ) 
+{
+    return ti_sysbios_knl_Clock_Module__id__C;
+}
+
+/* Module_hasMask */
+static inline xdc_Bool ti_sysbios_knl_Clock_Module_hasMask( void ) 
+{
+    return ti_sysbios_knl_Clock_Module__diagsMask__C != 0;
+}
+
+/* Module_getMask */
+static inline xdc_Bits16 ti_sysbios_knl_Clock_Module_getMask( void ) 
+{
+    return ti_sysbios_knl_Clock_Module__diagsMask__C != 0 ? *ti_sysbios_knl_Clock_Module__diagsMask__C : 0;
+}
+
+/* Module_setMask */
+static inline void ti_sysbios_knl_Clock_Module_setMask( xdc_Bits16 mask ) 
+{
+    if (ti_sysbios_knl_Clock_Module__diagsMask__C != 0) *ti_sysbios_knl_Clock_Module__diagsMask__C = mask;
+}
+
+/* Params_init */
+static inline void ti_sysbios_knl_Clock_Params_init( ti_sysbios_knl_Clock_Params *prms ) 
+{
+    if (prms) {
+        ti_sysbios_knl_Clock_Params__init__S(prms, 0, sizeof(ti_sysbios_knl_Clock_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+/* Params_copy */
+static inline void ti_sysbios_knl_Clock_Params_copy(ti_sysbios_knl_Clock_Params *dst, const ti_sysbios_knl_Clock_Params *src) 
+{
+    if (dst) {
+        ti_sysbios_knl_Clock_Params__init__S(dst, (const void *)src, sizeof(ti_sysbios_knl_Clock_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+/* Object_count */
+
+
+/* Object_sizeof */
+
+
+/* Object_get */
+static inline ti_sysbios_knl_Clock_Handle ti_sysbios_knl_Clock_Object_get(ti_sysbios_knl_Clock_Instance_State *oarr, int i) 
+{
+    return (ti_sysbios_knl_Clock_Handle)ti_sysbios_knl_Clock_Object__get__S(oarr, i);
+}
+
+/* Object_first */
+static inline ti_sysbios_knl_Clock_Handle ti_sysbios_knl_Clock_Object_first( void )
+{
+    return (ti_sysbios_knl_Clock_Handle)ti_sysbios_knl_Clock_Object__first__S();
+}
+
+/* Object_next */
+static inline ti_sysbios_knl_Clock_Handle ti_sysbios_knl_Clock_Object_next( ti_sysbios_knl_Clock_Object *obj )
+{
+    return (ti_sysbios_knl_Clock_Handle)ti_sysbios_knl_Clock_Object__next__S(obj);
+}
+
+/* Handle_label */
+static inline xdc_runtime_Types_Label *ti_sysbios_knl_Clock_Handle_label( ti_sysbios_knl_Clock_Handle inst, xdc_runtime_Types_Label *lab )
+{
+    return ti_sysbios_knl_Clock_Handle__label__S(inst, lab);
+}
+
+/* Handle_name */
+static inline xdc_String ti_sysbios_knl_Clock_Handle_name( ti_sysbios_knl_Clock_Handle inst )
+{
+    xdc_runtime_Types_Label lab;
+    return ti_sysbios_knl_Clock_Handle__label__S(inst, &lab)->iname;
+}
+
+/* handle */
+static inline ti_sysbios_knl_Clock_Handle ti_sysbios_knl_Clock_handle( ti_sysbios_knl_Clock_Struct *str )
+{
+    return (ti_sysbios_knl_Clock_Handle)str;
+}
+
+/* struct */
+static inline ti_sysbios_knl_Clock_Struct *ti_sysbios_knl_Clock_struct( ti_sysbios_knl_Clock_Handle inst )
+{
+    return (ti_sysbios_knl_Clock_Struct*)inst;
+}
+
+
+/*
+ * ======== EPILOGUE ========
+ */
+
+
+
+
+
+
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 670 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 69 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/package/Task_SupportProxy.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     MODULE-WIDE CONFIGS
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION DECLARATIONS
+ *     CONVERTORS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * ======== INCLUDES ========
+ */
+
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 362 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 423 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:49; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 54 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/package/Task_SupportProxy.h"
+
+
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/interfaces/ITaskSupport.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 197 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/interfaces/ITaskSupport.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 57 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/package/Task_SupportProxy.h"
+
+
+/*
+ * ======== AUXILIARY DEFINITIONS ========
+ */
+
+/* FuncPtr */
+typedef ti_sysbios_interfaces_ITaskSupport_FuncPtr ti_sysbios_knl_Task_SupportProxy_FuncPtr;
+
+
+/*
+ * ======== MODULE-WIDE CONFIGS ========
+ */
+
+/* Module__diagsEnabled */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Task_SupportProxy_Module__diagsEnabled;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__diagsEnabled ti_sysbios_knl_Task_SupportProxy_Module__diagsEnabled__C;
+
+/* Module__diagsIncluded */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Task_SupportProxy_Module__diagsIncluded;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__diagsIncluded ti_sysbios_knl_Task_SupportProxy_Module__diagsIncluded__C;
+
+/* Module__diagsMask */
+typedef xdc_Bits16 *CT__ti_sysbios_knl_Task_SupportProxy_Module__diagsMask;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__diagsMask ti_sysbios_knl_Task_SupportProxy_Module__diagsMask__C;
+
+/* Module__gateObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Task_SupportProxy_Module__gateObj;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__gateObj ti_sysbios_knl_Task_SupportProxy_Module__gateObj__C;
+
+/* Module__gatePrms */
+typedef xdc_Ptr CT__ti_sysbios_knl_Task_SupportProxy_Module__gatePrms;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__gatePrms ti_sysbios_knl_Task_SupportProxy_Module__gatePrms__C;
+
+/* Module__id */
+typedef xdc_runtime_Types_ModuleId CT__ti_sysbios_knl_Task_SupportProxy_Module__id;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__id ti_sysbios_knl_Task_SupportProxy_Module__id__C;
+
+/* Module__loggerDefined */
+typedef xdc_Bool CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerDefined;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerDefined ti_sysbios_knl_Task_SupportProxy_Module__loggerDefined__C;
+
+/* Module__loggerObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerObj;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerObj ti_sysbios_knl_Task_SupportProxy_Module__loggerObj__C;
+
+/* Module__loggerFxn0 */
+typedef xdc_runtime_Types_LoggerFxn0 CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn0;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn0 ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn0__C;
+
+/* Module__loggerFxn1 */
+typedef xdc_runtime_Types_LoggerFxn1 CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn1;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn1 ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn1__C;
+
+/* Module__loggerFxn2 */
+typedef xdc_runtime_Types_LoggerFxn2 CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn2;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn2 ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn2__C;
+
+/* Module__loggerFxn4 */
+typedef xdc_runtime_Types_LoggerFxn4 CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn4;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn4 ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn4__C;
+
+/* Module__loggerFxn8 */
+typedef xdc_runtime_Types_LoggerFxn8 CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn8;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn8 ti_sysbios_knl_Task_SupportProxy_Module__loggerFxn8__C;
+
+/* Module__startupDoneFxn */
+typedef xdc_Bool (*CT__ti_sysbios_knl_Task_SupportProxy_Module__startupDoneFxn)(void);
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Module__startupDoneFxn ti_sysbios_knl_Task_SupportProxy_Module__startupDoneFxn__C;
+
+/* Object__count */
+typedef xdc_Int CT__ti_sysbios_knl_Task_SupportProxy_Object__count;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Object__count ti_sysbios_knl_Task_SupportProxy_Object__count__C;
+
+/* Object__heap */
+typedef xdc_runtime_IHeap_Handle CT__ti_sysbios_knl_Task_SupportProxy_Object__heap;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Object__heap ti_sysbios_knl_Task_SupportProxy_Object__heap__C;
+
+/* Object__sizeof */
+typedef xdc_SizeT CT__ti_sysbios_knl_Task_SupportProxy_Object__sizeof;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Object__sizeof ti_sysbios_knl_Task_SupportProxy_Object__sizeof__C;
+
+/* Object__table */
+typedef xdc_Ptr CT__ti_sysbios_knl_Task_SupportProxy_Object__table;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_Object__table ti_sysbios_knl_Task_SupportProxy_Object__table__C;
+
+/* defaultStackSize */
+
+
+
+
+typedef xdc_SizeT CT__ti_sysbios_knl_Task_SupportProxy_defaultStackSize;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_defaultStackSize ti_sysbios_knl_Task_SupportProxy_defaultStackSize__C;
+
+
+/* stackAlignment */
+
+
+
+
+typedef xdc_UInt CT__ti_sysbios_knl_Task_SupportProxy_stackAlignment;
+extern  const CT__ti_sysbios_knl_Task_SupportProxy_stackAlignment ti_sysbios_knl_Task_SupportProxy_stackAlignment__C;
+
+
+
+/*
+ * ======== VIRTUAL FUNCTIONS ========
+ */
+
+/* Fxns__ */
+struct ti_sysbios_knl_Task_SupportProxy_Fxns__ {
+    xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2 *__sysp;
+    xdc_Ptr (*start)(xdc_Ptr, ti_sysbios_interfaces_ITaskSupport_FuncPtr, ti_sysbios_interfaces_ITaskSupport_FuncPtr, xdc_runtime_Error_Block*);
+    void (*swap)(xdc_Ptr*, xdc_Ptr*);
+    xdc_Bool (*checkStack)(xdc_Char*, xdc_SizeT);
+    xdc_SizeT (*stackUsed)(xdc_Char*, xdc_SizeT);
+    xdc_UInt (*getStackAlignment)(void);
+    xdc_SizeT (*getDefaultStackSize)(void);
+    xdc_runtime_Types_SysFxns2 __sfxns;
+};
+
+/* Module__FXNS__C */
+extern const ti_sysbios_knl_Task_SupportProxy_Fxns__ ti_sysbios_knl_Task_SupportProxy_Module__FXNS__C;
+
+
+/*
+ * ======== FUNCTION DECLARATIONS ========
+ */
+
+/* Module_startup */
+
+
+/* Handle__label__S */
+
+extern xdc_runtime_Types_Label *ti_sysbios_knl_Task_SupportProxy_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+
+/* Module__startupDone__S */
+
+extern xdc_Bool ti_sysbios_knl_Task_SupportProxy_Module__startupDone__S( void );
+
+/* Object__create__S */
+
+extern xdc_Ptr ti_sysbios_knl_Task_SupportProxy_Object__create__S( xdc_Ptr __oa, xdc_SizeT __osz, xdc_Ptr __aa, const xdc_UChar *__pa, xdc_SizeT __psz, xdc_runtime_Error_Block *__eb );
+
+/* Object__delete__S */
+
+extern void ti_sysbios_knl_Task_SupportProxy_Object__delete__S( xdc_Ptr instp );
+
+/* Object__destruct__S */
+
+extern void ti_sysbios_knl_Task_SupportProxy_Object__destruct__S( xdc_Ptr objp );
+
+/* Object__get__S */
+
+extern xdc_Ptr ti_sysbios_knl_Task_SupportProxy_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+
+/* Object__first__S */
+
+extern xdc_Ptr ti_sysbios_knl_Task_SupportProxy_Object__first__S( void );
+
+/* Object__next__S */
+
+extern xdc_Ptr ti_sysbios_knl_Task_SupportProxy_Object__next__S( xdc_Ptr obj );
+
+/* Params__init__S */
+
+extern void ti_sysbios_knl_Task_SupportProxy_Params__init__S( xdc_Ptr dst, const void *src, xdc_SizeT psz, xdc_SizeT isz );
+
+/* Proxy__abstract__S */
+
+extern xdc_Bool ti_sysbios_knl_Task_SupportProxy_Proxy__abstract__S( void );
+
+/* Proxy__delegate__S */
+
+extern xdc_Ptr ti_sysbios_knl_Task_SupportProxy_Proxy__delegate__S( void );
+
+/* start__E */
+
+
+extern xdc_Ptr ti_sysbios_knl_Task_SupportProxy_start__E( xdc_Ptr curTask, ti_sysbios_interfaces_ITaskSupport_FuncPtr enter, ti_sysbios_interfaces_ITaskSupport_FuncPtr exit, xdc_runtime_Error_Block *eb );
+
+/* swap__E */
+
+
+extern void ti_sysbios_knl_Task_SupportProxy_swap__E( xdc_Ptr *oldtskContext, xdc_Ptr *newtskContext );
+
+/* checkStack__E */
+
+
+extern xdc_Bool ti_sysbios_knl_Task_SupportProxy_checkStack__E( xdc_Char *stack, xdc_SizeT size );
+
+/* stackUsed__E */
+
+
+extern xdc_SizeT ti_sysbios_knl_Task_SupportProxy_stackUsed__E( xdc_Char *stack, xdc_SizeT size );
+
+/* getStackAlignment__E */
+
+
+extern xdc_UInt ti_sysbios_knl_Task_SupportProxy_getStackAlignment__E( void );
+
+/* getDefaultStackSize__E */
+
+
+extern xdc_SizeT ti_sysbios_knl_Task_SupportProxy_getDefaultStackSize__E( void );
+
+
+/*
+ * ======== CONVERTORS ========
+ */
+
+/* Module_upCast */
+static inline ti_sysbios_interfaces_ITaskSupport_Module ti_sysbios_knl_Task_SupportProxy_Module_upCast( void )
+{
+    return (ti_sysbios_interfaces_ITaskSupport_Module)ti_sysbios_knl_Task_SupportProxy_Proxy__delegate__S();
+}
+
+/* Module_to_ti_sysbios_interfaces_ITaskSupport */
+
+
+
+/*
+ * ======== SYSTEM FUNCTIONS ========
+ */
+
+/* Module_startupDone */
+
+
+/* Object_heap */
+
+
+/* Module_heap */
+
+
+/* Module_id */
+static inline CT__ti_sysbios_knl_Task_SupportProxy_Module__id ti_sysbios_knl_Task_SupportProxy_Module_id( void ) 
+{
+    return ti_sysbios_knl_Task_SupportProxy_Module__id__C;
+}
+
+/* Proxy_abstract */
+
+
+/* Proxy_delegate */
+
+
+
+/*
+ * ======== EPILOGUE ========
+ */
+
+
+
+
+
+
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 70 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+
+
+/*
+ * ======== AUXILIARY DEFINITIONS ========
+ */
+
+/* FuncPtr */
+typedef void (*ti_sysbios_knl_Task_FuncPtr)(xdc_UArg, xdc_UArg);
+
+/* AllBlockedFuncPtr */
+typedef void (*ti_sysbios_knl_Task_AllBlockedFuncPtr)(void);
+
+/* Mode */
+enum ti_sysbios_knl_Task_Mode {
+    ti_sysbios_knl_Task_Mode_RUNNING,
+    ti_sysbios_knl_Task_Mode_READY,
+    ti_sysbios_knl_Task_Mode_BLOCKED,
+    ti_sysbios_knl_Task_Mode_TERMINATED,
+    ti_sysbios_knl_Task_Mode_INACTIVE
+};
+typedef enum ti_sysbios_knl_Task_Mode ti_sysbios_knl_Task_Mode;
+
+/* Stat */
+struct ti_sysbios_knl_Task_Stat {
+    xdc_Int priority;
+    xdc_Ptr stack;
+    xdc_SizeT stackSize;
+    xdc_runtime_IHeap_Handle stackHeap;
+    xdc_Ptr env;
+    ti_sysbios_knl_Task_Mode mode;
+    xdc_Ptr sp;
+    xdc_SizeT used;
+};
+
+/* HookSet */
+struct ti_sysbios_knl_Task_HookSet {
+    void (*registerFxn)(xdc_Int);
+    void (*createFxn)(ti_sysbios_knl_Task_Handle, xdc_runtime_Error_Block*);
+    void (*readyFxn)(ti_sysbios_knl_Task_Handle);
+    void (*switchFxn)(ti_sysbios_knl_Task_Handle, ti_sysbios_knl_Task_Handle);
+    void (*exitFxn)(ti_sysbios_knl_Task_Handle);
+    void (*deleteFxn)(ti_sysbios_knl_Task_Handle);
+};
+
+/* AFFINITY_NONE */
+
+
+
+/*
+ * ======== CREATE ARGS ========
+ */
+
+/* Args__create */
+typedef struct ti_sysbios_knl_Task_Args__create {
+    ti_sysbios_knl_Task_FuncPtr fxn;
+} ti_sysbios_knl_Task_Args__create;
+
+
+/*
+ * ======== INTERNAL DEFINITIONS ========
+ */
+
+/* PendElem */
+struct ti_sysbios_knl_Task_PendElem {
+    ti_sysbios_knl_Queue_Elem qElem;
+    ti_sysbios_knl_Task_Handle task;
+    ti_sysbios_knl_Clock_Handle clock;
+};
+
+/* Instance_State */
+typedef xdc_Char __T1_ti_sysbios_knl_Task_Instance_State__stack;
+typedef xdc_Char *__ARRAY1_ti_sysbios_knl_Task_Instance_State__stack;
+typedef __ARRAY1_ti_sysbios_knl_Task_Instance_State__stack __TA_ti_sysbios_knl_Task_Instance_State__stack;
+typedef xdc_Ptr __T1_ti_sysbios_knl_Task_Instance_State__hookEnv;
+typedef xdc_Ptr *__ARRAY1_ti_sysbios_knl_Task_Instance_State__hookEnv;
+typedef __ARRAY1_ti_sysbios_knl_Task_Instance_State__hookEnv __TA_ti_sysbios_knl_Task_Instance_State__hookEnv;
+
+/* Module_State */
+typedef ti_sysbios_knl_Queue_Instance_State __T1_ti_sysbios_knl_Task_Module_State__readyQ;
+typedef ti_sysbios_knl_Queue_Instance_State *__ARRAY1_ti_sysbios_knl_Task_Module_State__readyQ;
+typedef __ARRAY1_ti_sysbios_knl_Task_Module_State__readyQ __TA_ti_sysbios_knl_Task_Module_State__readyQ;
+typedef volatile xdc_UInt __T1_ti_sysbios_knl_Task_Module_State__smpCurSet;
+typedef volatile xdc_UInt *__ARRAY1_ti_sysbios_knl_Task_Module_State__smpCurSet;
+typedef __ARRAY1_ti_sysbios_knl_Task_Module_State__smpCurSet __TA_ti_sysbios_knl_Task_Module_State__smpCurSet;
+typedef volatile xdc_UInt __T1_ti_sysbios_knl_Task_Module_State__smpCurMask;
+typedef volatile xdc_UInt *__ARRAY1_ti_sysbios_knl_Task_Module_State__smpCurMask;
+typedef __ARRAY1_ti_sysbios_knl_Task_Module_State__smpCurMask __TA_ti_sysbios_knl_Task_Module_State__smpCurMask;
+typedef ti_sysbios_knl_Task_Handle __T1_ti_sysbios_knl_Task_Module_State__smpCurTask;
+typedef ti_sysbios_knl_Task_Handle *__ARRAY1_ti_sysbios_knl_Task_Module_State__smpCurTask;
+typedef __ARRAY1_ti_sysbios_knl_Task_Module_State__smpCurTask __TA_ti_sysbios_knl_Task_Module_State__smpCurTask;
+typedef ti_sysbios_knl_Queue_Handle __T1_ti_sysbios_knl_Task_Module_State__smpReadyQ;
+typedef ti_sysbios_knl_Queue_Handle *__ARRAY1_ti_sysbios_knl_Task_Module_State__smpReadyQ;
+typedef __ARRAY1_ti_sysbios_knl_Task_Module_State__smpReadyQ __TA_ti_sysbios_knl_Task_Module_State__smpReadyQ;
+typedef ti_sysbios_knl_Task_Handle __T1_ti_sysbios_knl_Task_Module_State__idleTask;
+typedef ti_sysbios_knl_Task_Handle *__ARRAY1_ti_sysbios_knl_Task_Module_State__idleTask;
+typedef __ARRAY1_ti_sysbios_knl_Task_Module_State__idleTask __TA_ti_sysbios_knl_Task_Module_State__idleTask;
+typedef ti_sysbios_knl_Task_Handle __T1_ti_sysbios_knl_Task_Module_State__constructedTasks;
+typedef ti_sysbios_knl_Task_Handle *__ARRAY1_ti_sysbios_knl_Task_Module_State__constructedTasks;
+typedef __ARRAY1_ti_sysbios_knl_Task_Module_State__constructedTasks __TA_ti_sysbios_knl_Task_Module_State__constructedTasks;
+
+/* RunQEntry */
+struct ti_sysbios_knl_Task_RunQEntry {
+    ti_sysbios_knl_Queue_Elem elem;
+    xdc_UInt coreId;
+    xdc_Int priority;
+};
+
+/* Module_StateSmp */
+typedef volatile ti_sysbios_knl_Task_RunQEntry __T1_ti_sysbios_knl_Task_Module_StateSmp__smpRunQ;
+typedef volatile ti_sysbios_knl_Task_RunQEntry *__ARRAY1_ti_sysbios_knl_Task_Module_StateSmp__smpRunQ;
+typedef __ARRAY1_ti_sysbios_knl_Task_Module_StateSmp__smpRunQ __TA_ti_sysbios_knl_Task_Module_StateSmp__smpRunQ;
+struct ti_sysbios_knl_Task_Module_StateSmp {
+    ti_sysbios_knl_Queue_Object *sortedRunQ;
+    __TA_ti_sysbios_knl_Task_Module_StateSmp__smpRunQ smpRunQ;
+};
+
+
+/*
+ * ======== MODULE-WIDE CONFIGS ========
+ */
+
+/* Module__diagsEnabled */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Task_Module__diagsEnabled;
+extern  const CT__ti_sysbios_knl_Task_Module__diagsEnabled ti_sysbios_knl_Task_Module__diagsEnabled__C;
+
+/* Module__diagsIncluded */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Task_Module__diagsIncluded;
+extern  const CT__ti_sysbios_knl_Task_Module__diagsIncluded ti_sysbios_knl_Task_Module__diagsIncluded__C;
+
+/* Module__diagsMask */
+typedef xdc_Bits16 *CT__ti_sysbios_knl_Task_Module__diagsMask;
+extern  const CT__ti_sysbios_knl_Task_Module__diagsMask ti_sysbios_knl_Task_Module__diagsMask__C;
+
+/* Module__gateObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Task_Module__gateObj;
+extern  const CT__ti_sysbios_knl_Task_Module__gateObj ti_sysbios_knl_Task_Module__gateObj__C;
+
+/* Module__gatePrms */
+typedef xdc_Ptr CT__ti_sysbios_knl_Task_Module__gatePrms;
+extern  const CT__ti_sysbios_knl_Task_Module__gatePrms ti_sysbios_knl_Task_Module__gatePrms__C;
+
+/* Module__id */
+typedef xdc_runtime_Types_ModuleId CT__ti_sysbios_knl_Task_Module__id;
+extern  const CT__ti_sysbios_knl_Task_Module__id ti_sysbios_knl_Task_Module__id__C;
+
+/* Module__loggerDefined */
+typedef xdc_Bool CT__ti_sysbios_knl_Task_Module__loggerDefined;
+extern  const CT__ti_sysbios_knl_Task_Module__loggerDefined ti_sysbios_knl_Task_Module__loggerDefined__C;
+
+/* Module__loggerObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Task_Module__loggerObj;
+extern  const CT__ti_sysbios_knl_Task_Module__loggerObj ti_sysbios_knl_Task_Module__loggerObj__C;
+
+/* Module__loggerFxn0 */
+typedef xdc_runtime_Types_LoggerFxn0 CT__ti_sysbios_knl_Task_Module__loggerFxn0;
+extern  const CT__ti_sysbios_knl_Task_Module__loggerFxn0 ti_sysbios_knl_Task_Module__loggerFxn0__C;
+
+/* Module__loggerFxn1 */
+typedef xdc_runtime_Types_LoggerFxn1 CT__ti_sysbios_knl_Task_Module__loggerFxn1;
+extern  const CT__ti_sysbios_knl_Task_Module__loggerFxn1 ti_sysbios_knl_Task_Module__loggerFxn1__C;
+
+/* Module__loggerFxn2 */
+typedef xdc_runtime_Types_LoggerFxn2 CT__ti_sysbios_knl_Task_Module__loggerFxn2;
+extern  const CT__ti_sysbios_knl_Task_Module__loggerFxn2 ti_sysbios_knl_Task_Module__loggerFxn2__C;
+
+/* Module__loggerFxn4 */
+typedef xdc_runtime_Types_LoggerFxn4 CT__ti_sysbios_knl_Task_Module__loggerFxn4;
+extern  const CT__ti_sysbios_knl_Task_Module__loggerFxn4 ti_sysbios_knl_Task_Module__loggerFxn4__C;
+
+/* Module__loggerFxn8 */
+typedef xdc_runtime_Types_LoggerFxn8 CT__ti_sysbios_knl_Task_Module__loggerFxn8;
+extern  const CT__ti_sysbios_knl_Task_Module__loggerFxn8 ti_sysbios_knl_Task_Module__loggerFxn8__C;
+
+/* Module__startupDoneFxn */
+typedef xdc_Bool (*CT__ti_sysbios_knl_Task_Module__startupDoneFxn)(void);
+extern  const CT__ti_sysbios_knl_Task_Module__startupDoneFxn ti_sysbios_knl_Task_Module__startupDoneFxn__C;
+
+/* Object__count */
+typedef xdc_Int CT__ti_sysbios_knl_Task_Object__count;
+extern  const CT__ti_sysbios_knl_Task_Object__count ti_sysbios_knl_Task_Object__count__C;
+
+/* Object__heap */
+typedef xdc_runtime_IHeap_Handle CT__ti_sysbios_knl_Task_Object__heap;
+extern  const CT__ti_sysbios_knl_Task_Object__heap ti_sysbios_knl_Task_Object__heap__C;
+
+/* Object__sizeof */
+typedef xdc_SizeT CT__ti_sysbios_knl_Task_Object__sizeof;
+extern  const CT__ti_sysbios_knl_Task_Object__sizeof ti_sysbios_knl_Task_Object__sizeof__C;
+
+/* Object__table */
+typedef xdc_Ptr CT__ti_sysbios_knl_Task_Object__table;
+extern  const CT__ti_sysbios_knl_Task_Object__table ti_sysbios_knl_Task_Object__table__C;
+
+/* LM_switch */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Task_LM_switch;
+extern  const CT__ti_sysbios_knl_Task_LM_switch ti_sysbios_knl_Task_LM_switch__C;
+
+/* LM_sleep */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Task_LM_sleep;
+extern  const CT__ti_sysbios_knl_Task_LM_sleep ti_sysbios_knl_Task_LM_sleep__C;
+
+/* LD_ready */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Task_LD_ready;
+extern  const CT__ti_sysbios_knl_Task_LD_ready ti_sysbios_knl_Task_LD_ready__C;
+
+/* LD_block */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Task_LD_block;
+extern  const CT__ti_sysbios_knl_Task_LD_block ti_sysbios_knl_Task_LD_block__C;
+
+/* LM_yield */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Task_LM_yield;
+extern  const CT__ti_sysbios_knl_Task_LM_yield ti_sysbios_knl_Task_LM_yield__C;
+
+/* LM_setPri */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Task_LM_setPri;
+extern  const CT__ti_sysbios_knl_Task_LM_setPri ti_sysbios_knl_Task_LM_setPri__C;
+
+/* LD_exit */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Task_LD_exit;
+extern  const CT__ti_sysbios_knl_Task_LD_exit ti_sysbios_knl_Task_LD_exit__C;
+
+/* LM_setAffinity */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Task_LM_setAffinity;
+extern  const CT__ti_sysbios_knl_Task_LM_setAffinity ti_sysbios_knl_Task_LM_setAffinity__C;
+
+/* LM_schedule */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Task_LM_schedule;
+extern  const CT__ti_sysbios_knl_Task_LM_schedule ti_sysbios_knl_Task_LM_schedule__C;
+
+/* LM_noWork */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Task_LM_noWork;
+extern  const CT__ti_sysbios_knl_Task_LM_noWork ti_sysbios_knl_Task_LM_noWork__C;
+
+/* E_stackOverflow */
+
+typedef xdc_runtime_Error_Id CT__ti_sysbios_knl_Task_E_stackOverflow;
+extern  const CT__ti_sysbios_knl_Task_E_stackOverflow ti_sysbios_knl_Task_E_stackOverflow__C;
+
+/* E_spOutOfBounds */
+
+typedef xdc_runtime_Error_Id CT__ti_sysbios_knl_Task_E_spOutOfBounds;
+extern  const CT__ti_sysbios_knl_Task_E_spOutOfBounds ti_sysbios_knl_Task_E_spOutOfBounds__C;
+
+/* E_deleteNotAllowed */
+
+typedef xdc_runtime_Error_Id CT__ti_sysbios_knl_Task_E_deleteNotAllowed;
+extern  const CT__ti_sysbios_knl_Task_E_deleteNotAllowed ti_sysbios_knl_Task_E_deleteNotAllowed__C;
+
+/* A_badThreadType */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Task_A_badThreadType;
+extern  const CT__ti_sysbios_knl_Task_A_badThreadType ti_sysbios_knl_Task_A_badThreadType__C;
+
+/* A_badTaskState */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Task_A_badTaskState;
+extern  const CT__ti_sysbios_knl_Task_A_badTaskState ti_sysbios_knl_Task_A_badTaskState__C;
+
+/* A_noPendElem */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Task_A_noPendElem;
+extern  const CT__ti_sysbios_knl_Task_A_noPendElem ti_sysbios_knl_Task_A_noPendElem__C;
+
+/* A_taskDisabled */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Task_A_taskDisabled;
+extern  const CT__ti_sysbios_knl_Task_A_taskDisabled ti_sysbios_knl_Task_A_taskDisabled__C;
+
+/* A_badPriority */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Task_A_badPriority;
+extern  const CT__ti_sysbios_knl_Task_A_badPriority ti_sysbios_knl_Task_A_badPriority__C;
+
+/* A_badTimeout */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Task_A_badTimeout;
+extern  const CT__ti_sysbios_knl_Task_A_badTimeout ti_sysbios_knl_Task_A_badTimeout__C;
+
+/* A_badAffinity */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Task_A_badAffinity;
+extern  const CT__ti_sysbios_knl_Task_A_badAffinity ti_sysbios_knl_Task_A_badAffinity__C;
+
+/* A_sleepTaskDisabled */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Task_A_sleepTaskDisabled;
+extern  const CT__ti_sysbios_knl_Task_A_sleepTaskDisabled ti_sysbios_knl_Task_A_sleepTaskDisabled__C;
+
+/* A_invalidCoreId */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Task_A_invalidCoreId;
+extern  const CT__ti_sysbios_knl_Task_A_invalidCoreId ti_sysbios_knl_Task_A_invalidCoreId__C;
+
+/* numPriorities */
+
+
+
+
+typedef xdc_UInt CT__ti_sysbios_knl_Task_numPriorities;
+extern  const CT__ti_sysbios_knl_Task_numPriorities ti_sysbios_knl_Task_numPriorities__C;
+
+
+/* defaultStackSize */
+
+
+
+
+typedef xdc_SizeT CT__ti_sysbios_knl_Task_defaultStackSize;
+extern  const CT__ti_sysbios_knl_Task_defaultStackSize ti_sysbios_knl_Task_defaultStackSize__C;
+
+
+/* defaultStackHeap */
+
+typedef xdc_runtime_IHeap_Handle CT__ti_sysbios_knl_Task_defaultStackHeap;
+extern  const CT__ti_sysbios_knl_Task_defaultStackHeap ti_sysbios_knl_Task_defaultStackHeap__C;
+
+/* allBlockedFunc */
+
+typedef ti_sysbios_knl_Task_AllBlockedFuncPtr CT__ti_sysbios_knl_Task_allBlockedFunc;
+extern  const CT__ti_sysbios_knl_Task_allBlockedFunc ti_sysbios_knl_Task_allBlockedFunc__C;
+
+/* initStackFlag */
+
+
+
+
+typedef xdc_Bool CT__ti_sysbios_knl_Task_initStackFlag;
+extern  const CT__ti_sysbios_knl_Task_initStackFlag ti_sysbios_knl_Task_initStackFlag__C;
+
+
+/* checkStackFlag */
+
+
+
+
+typedef xdc_Bool CT__ti_sysbios_knl_Task_checkStackFlag;
+extern  const CT__ti_sysbios_knl_Task_checkStackFlag ti_sysbios_knl_Task_checkStackFlag__C;
+
+
+/* deleteTerminatedTasks */
+
+
+
+
+typedef xdc_Bool CT__ti_sysbios_knl_Task_deleteTerminatedTasks;
+extern  const CT__ti_sysbios_knl_Task_deleteTerminatedTasks ti_sysbios_knl_Task_deleteTerminatedTasks__C;
+
+
+/* hooks */
+
+typedef ti_sysbios_knl_Task_HookSet __T1_ti_sysbios_knl_Task_hooks;
+typedef struct { int length; ti_sysbios_knl_Task_HookSet *elem; } __ARRAY1_ti_sysbios_knl_Task_hooks;
+typedef __ARRAY1_ti_sysbios_knl_Task_hooks __TA_ti_sysbios_knl_Task_hooks;
+typedef __TA_ti_sysbios_knl_Task_hooks CT__ti_sysbios_knl_Task_hooks;
+extern  const CT__ti_sysbios_knl_Task_hooks ti_sysbios_knl_Task_hooks__C;
+
+/* numConstructedTasks */
+
+
+
+
+typedef xdc_UInt CT__ti_sysbios_knl_Task_numConstructedTasks;
+extern  const CT__ti_sysbios_knl_Task_numConstructedTasks ti_sysbios_knl_Task_numConstructedTasks__C;
+
+
+/* startupHookFunc */
+
+typedef void (*CT__ti_sysbios_knl_Task_startupHookFunc)(void);
+extern  const CT__ti_sysbios_knl_Task_startupHookFunc ti_sysbios_knl_Task_startupHookFunc__C;
+
+
+/*
+ * ======== PER-INSTANCE TYPES ========
+ */
+
+/* Params */
+struct ti_sysbios_knl_Task_Params {
+    size_t __size;
+    const void *__self;
+    void *__fxns;
+    xdc_runtime_IInstance_Params *instance;
+    xdc_UArg arg0;
+    xdc_UArg arg1;
+    xdc_Int priority;
+    xdc_Ptr stack;
+    xdc_SizeT stackSize;
+    xdc_runtime_IHeap_Handle stackHeap;
+    xdc_Ptr env;
+    xdc_Bool vitalTaskFlag;
+    xdc_UInt affinity;
+    xdc_runtime_IInstance_Params __iprms;
+};
+
+/* Struct */
+struct ti_sysbios_knl_Task_Struct {
+    ti_sysbios_knl_Queue_Elem __f0;
+    volatile xdc_Int __f1;
+    xdc_UInt __f2;
+    xdc_Ptr __f3;
+    ti_sysbios_knl_Task_Mode __f4;
+    ti_sysbios_knl_Task_PendElem *__f5;
+    xdc_SizeT __f6;
+    __TA_ti_sysbios_knl_Task_Instance_State__stack __f7;
+    xdc_runtime_IHeap_Handle __f8;
+    ti_sysbios_knl_Task_FuncPtr __f9;
+    xdc_UArg __f10;
+    xdc_UArg __f11;
+    xdc_Ptr __f12;
+    __TA_ti_sysbios_knl_Task_Instance_State__hookEnv __f13;
+    xdc_Bool __f14;
+    ti_sysbios_knl_Queue_Handle __f15;
+    xdc_UInt __f16;
+    xdc_UInt __f17;
+    xdc_runtime_Types_CordAddr __name;
+};
+
+
+/*
+ * ======== FUNCTION DECLARATIONS ========
+ */
+
+/* Module_startup */
+
+
+extern xdc_Int ti_sysbios_knl_Task_Module_startup__E( xdc_Int state );
+
+extern xdc_Int ti_sysbios_knl_Task_Module_startup__F( xdc_Int state );
+
+/* Instance_init__E */
+
+extern xdc_Int ti_sysbios_knl_Task_Instance_init__E(ti_sysbios_knl_Task_Object *, ti_sysbios_knl_Task_FuncPtr fxn, const ti_sysbios_knl_Task_Params *, xdc_runtime_Error_Block *);
+
+/* Instance_finalize__E */
+
+extern void ti_sysbios_knl_Task_Instance_finalize__E( ti_sysbios_knl_Task_Object* , int );
+
+/* Handle__label__S */
+
+extern xdc_runtime_Types_Label *ti_sysbios_knl_Task_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+
+/* Module__startupDone__S */
+
+extern xdc_Bool ti_sysbios_knl_Task_Module__startupDone__S( void );
+
+/* Object__create__S */
+
+extern xdc_Ptr ti_sysbios_knl_Task_Object__create__S( xdc_Ptr __oa, xdc_SizeT __osz, xdc_Ptr __aa, const xdc_UChar *__pa, xdc_SizeT __psz, xdc_runtime_Error_Block *__eb );
+
+/* create */
+
+extern ti_sysbios_knl_Task_Handle ti_sysbios_knl_Task_create( ti_sysbios_knl_Task_FuncPtr fxn, const ti_sysbios_knl_Task_Params *__prms, xdc_runtime_Error_Block *__eb );
+
+/* construct */
+
+extern void ti_sysbios_knl_Task_construct( ti_sysbios_knl_Task_Struct *__obj, ti_sysbios_knl_Task_FuncPtr fxn, const ti_sysbios_knl_Task_Params *__prms, xdc_runtime_Error_Block *__eb );
+
+/* Object__delete__S */
+
+extern void ti_sysbios_knl_Task_Object__delete__S( xdc_Ptr instp );
+
+/* delete */
+
+extern void ti_sysbios_knl_Task_delete(ti_sysbios_knl_Task_Handle *instp);
+
+/* Object__destruct__S */
+
+extern void ti_sysbios_knl_Task_Object__destruct__S( xdc_Ptr objp );
+
+/* destruct */
+
+extern void ti_sysbios_knl_Task_destruct(ti_sysbios_knl_Task_Struct *obj);
+
+/* Object__get__S */
+
+extern xdc_Ptr ti_sysbios_knl_Task_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+
+/* Object__first__S */
+
+extern xdc_Ptr ti_sysbios_knl_Task_Object__first__S( void );
+
+/* Object__next__S */
+
+extern xdc_Ptr ti_sysbios_knl_Task_Object__next__S( xdc_Ptr obj );
+
+/* Params__init__S */
+
+extern void ti_sysbios_knl_Task_Params__init__S( xdc_Ptr dst, const void *src, xdc_SizeT psz, xdc_SizeT isz );
+
+/* startup__E */
+
+
+extern void ti_sysbios_knl_Task_startup__E( void );
+
+/* enabled__E */
+
+
+extern xdc_Bool ti_sysbios_knl_Task_enabled__E( void );
+
+/* unlockSched__E */
+
+
+extern void ti_sysbios_knl_Task_unlockSched__E( void );
+
+/* disable__E */
+
+
+extern xdc_UInt ti_sysbios_knl_Task_disable__E( void );
+
+/* enable__E */
+
+
+extern void ti_sysbios_knl_Task_enable__E( void );
+
+/* restore__E */
+
+
+extern void ti_sysbios_knl_Task_restore__E( xdc_UInt key );
+
+/* restoreHwi__E */
+
+
+extern void ti_sysbios_knl_Task_restoreHwi__E( xdc_UInt key );
+
+/* self__E */
+
+
+extern ti_sysbios_knl_Task_Handle ti_sysbios_knl_Task_self__E( void );
+
+/* checkStacks__E */
+
+
+extern void ti_sysbios_knl_Task_checkStacks__E( ti_sysbios_knl_Task_Handle oldTask, ti_sysbios_knl_Task_Handle newTask );
+
+/* exit__E */
+
+
+extern void ti_sysbios_knl_Task_exit__E( void );
+
+/* sleep__E */
+
+
+extern void ti_sysbios_knl_Task_sleep__E( xdc_UInt32 nticks );
+
+/* yield__E */
+
+
+extern void ti_sysbios_knl_Task_yield__E( void );
+
+/* getIdleTask__E */
+
+
+extern ti_sysbios_knl_Task_Handle ti_sysbios_knl_Task_getIdleTask__E( void );
+
+/* getIdleTaskHandle__E */
+
+
+extern ti_sysbios_knl_Task_Handle ti_sysbios_knl_Task_getIdleTaskHandle__E( xdc_UInt coreId );
+
+/* startCore__E */
+
+
+extern void ti_sysbios_knl_Task_startCore__E( xdc_UInt coreId );
+
+/* getArg0__E */
+
+
+extern xdc_UArg ti_sysbios_knl_Task_getArg0__E( ti_sysbios_knl_Task_Handle __inst );
+
+/* getArg1__E */
+
+
+extern xdc_UArg ti_sysbios_knl_Task_getArg1__E( ti_sysbios_knl_Task_Handle __inst );
+
+/* getEnv__E */
+
+
+extern xdc_Ptr ti_sysbios_knl_Task_getEnv__E( ti_sysbios_knl_Task_Handle __inst );
+
+/* getFunc__E */
+
+
+extern ti_sysbios_knl_Task_FuncPtr ti_sysbios_knl_Task_getFunc__E( ti_sysbios_knl_Task_Handle __inst, xdc_UArg *arg0, xdc_UArg *arg1 );
+
+/* getHookContext__E */
+
+
+extern xdc_Ptr ti_sysbios_knl_Task_getHookContext__E( ti_sysbios_knl_Task_Handle __inst, xdc_Int id );
+
+/* getPri__E */
+
+
+extern xdc_Int ti_sysbios_knl_Task_getPri__E( ti_sysbios_knl_Task_Handle __inst );
+
+/* setArg0__E */
+
+
+extern void ti_sysbios_knl_Task_setArg0__E( ti_sysbios_knl_Task_Handle __inst, xdc_UArg arg );
+
+/* setArg1__E */
+
+
+extern void ti_sysbios_knl_Task_setArg1__E( ti_sysbios_knl_Task_Handle __inst, xdc_UArg arg );
+
+/* setEnv__E */
+
+
+extern void ti_sysbios_knl_Task_setEnv__E( ti_sysbios_knl_Task_Handle __inst, xdc_Ptr env );
+
+/* setHookContext__E */
+
+
+extern void ti_sysbios_knl_Task_setHookContext__E( ti_sysbios_knl_Task_Handle __inst, xdc_Int id, xdc_Ptr hookContext );
+
+/* setPri__E */
+
+
+extern xdc_UInt ti_sysbios_knl_Task_setPri__E( ti_sysbios_knl_Task_Handle __inst, xdc_Int newpri );
+
+/* stat__E */
+
+
+extern void ti_sysbios_knl_Task_stat__E( ti_sysbios_knl_Task_Handle __inst, ti_sysbios_knl_Task_Stat *statbuf );
+
+/* getMode__E */
+
+
+extern ti_sysbios_knl_Task_Mode ti_sysbios_knl_Task_getMode__E( ti_sysbios_knl_Task_Handle __inst );
+
+/* setAffinity__E */
+
+
+extern xdc_UInt ti_sysbios_knl_Task_setAffinity__E( ti_sysbios_knl_Task_Handle __inst, xdc_UInt coreId );
+
+/* getAffinity__E */
+
+
+extern xdc_UInt ti_sysbios_knl_Task_getAffinity__E( ti_sysbios_knl_Task_Handle __inst );
+
+/* block__E */
+
+
+extern void ti_sysbios_knl_Task_block__E( ti_sysbios_knl_Task_Handle __inst );
+
+/* unblock__E */
+
+
+extern void ti_sysbios_knl_Task_unblock__E( ti_sysbios_knl_Task_Handle __inst );
+
+/* blockI__E */
+
+
+extern void ti_sysbios_knl_Task_blockI__E( ti_sysbios_knl_Task_Handle __inst );
+
+/* unblockI__E */
+
+
+extern void ti_sysbios_knl_Task_unblockI__E( ti_sysbios_knl_Task_Handle __inst, xdc_UInt hwiKey );
+
+/* schedule__I */
+
+
+extern void ti_sysbios_knl_Task_schedule__I( void );
+
+/* enter__I */
+
+
+extern void ti_sysbios_knl_Task_enter__I( void );
+
+/* sleepTimeout__I */
+
+
+extern void ti_sysbios_knl_Task_sleepTimeout__I( xdc_UArg arg );
+
+/* postInit__I */
+
+
+extern xdc_Int ti_sysbios_knl_Task_postInit__I( ti_sysbios_knl_Task_Object *task, xdc_runtime_Error_Block *eb );
+
+/* allBlockedFunction__I */
+
+
+extern void ti_sysbios_knl_Task_allBlockedFunction__I( void );
+
+/* deleteTerminatedTasksFunc__I */
+
+
+extern void ti_sysbios_knl_Task_deleteTerminatedTasksFunc__I( void );
+
+/* processVitalTaskFlag__I */
+
+
+extern void ti_sysbios_knl_Task_processVitalTaskFlag__I( ti_sysbios_knl_Task_Object *task );
+
+
+/*
+ * ======== SYSTEM FUNCTIONS ========
+ */
+
+/* Module_startupDone */
+
+
+/* Object_heap */
+
+
+/* Module_heap */
+
+
+/* Module_id */
+static inline CT__ti_sysbios_knl_Task_Module__id ti_sysbios_knl_Task_Module_id( void ) 
+{
+    return ti_sysbios_knl_Task_Module__id__C;
+}
+
+/* Module_hasMask */
+static inline xdc_Bool ti_sysbios_knl_Task_Module_hasMask( void ) 
+{
+    return ti_sysbios_knl_Task_Module__diagsMask__C != 0;
+}
+
+/* Module_getMask */
+static inline xdc_Bits16 ti_sysbios_knl_Task_Module_getMask( void ) 
+{
+    return ti_sysbios_knl_Task_Module__diagsMask__C != 0 ? *ti_sysbios_knl_Task_Module__diagsMask__C : 0;
+}
+
+/* Module_setMask */
+static inline void ti_sysbios_knl_Task_Module_setMask( xdc_Bits16 mask ) 
+{
+    if (ti_sysbios_knl_Task_Module__diagsMask__C != 0) *ti_sysbios_knl_Task_Module__diagsMask__C = mask;
+}
+
+/* Params_init */
+static inline void ti_sysbios_knl_Task_Params_init( ti_sysbios_knl_Task_Params *prms ) 
+{
+    if (prms) {
+        ti_sysbios_knl_Task_Params__init__S(prms, 0, sizeof(ti_sysbios_knl_Task_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+/* Params_copy */
+static inline void ti_sysbios_knl_Task_Params_copy(ti_sysbios_knl_Task_Params *dst, const ti_sysbios_knl_Task_Params *src) 
+{
+    if (dst) {
+        ti_sysbios_knl_Task_Params__init__S(dst, (const void *)src, sizeof(ti_sysbios_knl_Task_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+/* Object_count */
+
+
+/* Object_sizeof */
+
+
+/* Object_get */
+static inline ti_sysbios_knl_Task_Handle ti_sysbios_knl_Task_Object_get(ti_sysbios_knl_Task_Instance_State *oarr, int i) 
+{
+    return (ti_sysbios_knl_Task_Handle)ti_sysbios_knl_Task_Object__get__S(oarr, i);
+}
+
+/* Object_first */
+static inline ti_sysbios_knl_Task_Handle ti_sysbios_knl_Task_Object_first( void )
+{
+    return (ti_sysbios_knl_Task_Handle)ti_sysbios_knl_Task_Object__first__S();
+}
+
+/* Object_next */
+static inline ti_sysbios_knl_Task_Handle ti_sysbios_knl_Task_Object_next( ti_sysbios_knl_Task_Object *obj )
+{
+    return (ti_sysbios_knl_Task_Handle)ti_sysbios_knl_Task_Object__next__S(obj);
+}
+
+/* Handle_label */
+static inline xdc_runtime_Types_Label *ti_sysbios_knl_Task_Handle_label( ti_sysbios_knl_Task_Handle inst, xdc_runtime_Types_Label *lab )
+{
+    return ti_sysbios_knl_Task_Handle__label__S(inst, lab);
+}
+
+/* Handle_name */
+static inline xdc_String ti_sysbios_knl_Task_Handle_name( ti_sysbios_knl_Task_Handle inst )
+{
+    xdc_runtime_Types_Label lab;
+    return ti_sysbios_knl_Task_Handle__label__S(inst, &lab)->iname;
+}
+
+/* handle */
+static inline ti_sysbios_knl_Task_Handle ti_sysbios_knl_Task_handle( ti_sysbios_knl_Task_Struct *str )
+{
+    return (ti_sysbios_knl_Task_Handle)str;
+}
+
+/* struct */
+static inline ti_sysbios_knl_Task_Struct *ti_sysbios_knl_Task_struct( ti_sysbios_knl_Task_Handle inst )
+{
+    return (ti_sysbios_knl_Task_Struct*)inst;
+}
+
+
+/*
+ * ======== EPILOGUE ========
+ */
+
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task__epilogue.h"
+/*
+ * Copyright (c) 2012-2014, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+
+
+
+
+/*
+ *  ======== Task_selfMacro ========
+ */
+
+
+
+# 882 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+
+
+
+
+
+
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 959 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 64 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 620 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 670 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 65 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 104 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 121 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 66 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * ======== INCLUDES ========
+ */
+
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 362 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 423 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Types.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:49; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 55 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 132 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 155 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IInstance.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 56 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event__prologue.h"
+/*
+ * Copyright (c) 2012, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+# 57 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event.h"
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 223 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 238 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 264 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Assert.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:43; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 60 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 315 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 330 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 389 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Diags.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:45; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 61 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 293 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 308 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 390 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Log.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:47; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 62 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 420 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 439 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Queue.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 63 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 620 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 670 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Clock.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 64 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 888 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 959 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Task.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 65 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION STUBS
+ *     FUNCTION SELECTORS
+ *     
+ *     EPILOGUE
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 104 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 121 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/IModule.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:46; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 66 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event.h"
+
+
+/*
+ * ======== AUXILIARY DEFINITIONS ========
+ */
+
+/* Id_00 */
+
+
+/* Id_01 */
+
+
+/* Id_02 */
+
+
+/* Id_03 */
+
+
+/* Id_04 */
+
+
+/* Id_05 */
+
+
+/* Id_06 */
+
+
+/* Id_07 */
+
+
+/* Id_08 */
+
+
+/* Id_09 */
+
+
+/* Id_10 */
+
+
+/* Id_11 */
+
+
+/* Id_12 */
+
+
+/* Id_13 */
+
+
+/* Id_14 */
+
+
+/* Id_15 */
+
+
+/* Id_16 */
+
+
+/* Id_17 */
+
+
+/* Id_18 */
+
+
+/* Id_19 */
+
+
+/* Id_20 */
+
+
+/* Id_21 */
+
+
+/* Id_22 */
+
+
+/* Id_23 */
+
+
+/* Id_24 */
+
+
+/* Id_25 */
+
+
+/* Id_26 */
+
+
+/* Id_27 */
+
+
+/* Id_28 */
+
+
+/* Id_29 */
+
+
+/* Id_30 */
+
+
+/* Id_31 */
+
+
+/* Id_NONE */
+
+
+
+/*
+ * ======== INTERNAL DEFINITIONS ========
+ */
+
+/* PendState */
+enum ti_sysbios_knl_Event_PendState {
+    ti_sysbios_knl_Event_PendState_TIMEOUT = 0,
+    ti_sysbios_knl_Event_PendState_POSTED = 1,
+    ti_sysbios_knl_Event_PendState_CLOCK_WAIT = 2,
+    ti_sysbios_knl_Event_PendState_WAIT_FOREVER = 3
+};
+typedef enum ti_sysbios_knl_Event_PendState ti_sysbios_knl_Event_PendState;
+
+/* PendElem */
+struct ti_sysbios_knl_Event_PendElem {
+    ti_sysbios_knl_Task_PendElem tpElem;
+    ti_sysbios_knl_Event_PendState pendState;
+    xdc_UInt matchingEvents;
+    xdc_UInt andMask;
+    xdc_UInt orMask;
+};
+
+
+/*
+ * ======== MODULE-WIDE CONFIGS ========
+ */
+
+/* Module__diagsEnabled */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Event_Module__diagsEnabled;
+extern  const CT__ti_sysbios_knl_Event_Module__diagsEnabled ti_sysbios_knl_Event_Module__diagsEnabled__C;
+
+/* Module__diagsIncluded */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Event_Module__diagsIncluded;
+extern  const CT__ti_sysbios_knl_Event_Module__diagsIncluded ti_sysbios_knl_Event_Module__diagsIncluded__C;
+
+/* Module__diagsMask */
+typedef xdc_Bits16 *CT__ti_sysbios_knl_Event_Module__diagsMask;
+extern  const CT__ti_sysbios_knl_Event_Module__diagsMask ti_sysbios_knl_Event_Module__diagsMask__C;
+
+/* Module__gateObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Event_Module__gateObj;
+extern  const CT__ti_sysbios_knl_Event_Module__gateObj ti_sysbios_knl_Event_Module__gateObj__C;
+
+/* Module__gatePrms */
+typedef xdc_Ptr CT__ti_sysbios_knl_Event_Module__gatePrms;
+extern  const CT__ti_sysbios_knl_Event_Module__gatePrms ti_sysbios_knl_Event_Module__gatePrms__C;
+
+/* Module__id */
+typedef xdc_runtime_Types_ModuleId CT__ti_sysbios_knl_Event_Module__id;
+extern  const CT__ti_sysbios_knl_Event_Module__id ti_sysbios_knl_Event_Module__id__C;
+
+/* Module__loggerDefined */
+typedef xdc_Bool CT__ti_sysbios_knl_Event_Module__loggerDefined;
+extern  const CT__ti_sysbios_knl_Event_Module__loggerDefined ti_sysbios_knl_Event_Module__loggerDefined__C;
+
+/* Module__loggerObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Event_Module__loggerObj;
+extern  const CT__ti_sysbios_knl_Event_Module__loggerObj ti_sysbios_knl_Event_Module__loggerObj__C;
+
+/* Module__loggerFxn0 */
+typedef xdc_runtime_Types_LoggerFxn0 CT__ti_sysbios_knl_Event_Module__loggerFxn0;
+extern  const CT__ti_sysbios_knl_Event_Module__loggerFxn0 ti_sysbios_knl_Event_Module__loggerFxn0__C;
+
+/* Module__loggerFxn1 */
+typedef xdc_runtime_Types_LoggerFxn1 CT__ti_sysbios_knl_Event_Module__loggerFxn1;
+extern  const CT__ti_sysbios_knl_Event_Module__loggerFxn1 ti_sysbios_knl_Event_Module__loggerFxn1__C;
+
+/* Module__loggerFxn2 */
+typedef xdc_runtime_Types_LoggerFxn2 CT__ti_sysbios_knl_Event_Module__loggerFxn2;
+extern  const CT__ti_sysbios_knl_Event_Module__loggerFxn2 ti_sysbios_knl_Event_Module__loggerFxn2__C;
+
+/* Module__loggerFxn4 */
+typedef xdc_runtime_Types_LoggerFxn4 CT__ti_sysbios_knl_Event_Module__loggerFxn4;
+extern  const CT__ti_sysbios_knl_Event_Module__loggerFxn4 ti_sysbios_knl_Event_Module__loggerFxn4__C;
+
+/* Module__loggerFxn8 */
+typedef xdc_runtime_Types_LoggerFxn8 CT__ti_sysbios_knl_Event_Module__loggerFxn8;
+extern  const CT__ti_sysbios_knl_Event_Module__loggerFxn8 ti_sysbios_knl_Event_Module__loggerFxn8__C;
+
+/* Module__startupDoneFxn */
+typedef xdc_Bool (*CT__ti_sysbios_knl_Event_Module__startupDoneFxn)(void);
+extern  const CT__ti_sysbios_knl_Event_Module__startupDoneFxn ti_sysbios_knl_Event_Module__startupDoneFxn__C;
+
+/* Object__count */
+typedef xdc_Int CT__ti_sysbios_knl_Event_Object__count;
+extern  const CT__ti_sysbios_knl_Event_Object__count ti_sysbios_knl_Event_Object__count__C;
+
+/* Object__heap */
+typedef xdc_runtime_IHeap_Handle CT__ti_sysbios_knl_Event_Object__heap;
+extern  const CT__ti_sysbios_knl_Event_Object__heap ti_sysbios_knl_Event_Object__heap__C;
+
+/* Object__sizeof */
+typedef xdc_SizeT CT__ti_sysbios_knl_Event_Object__sizeof;
+extern  const CT__ti_sysbios_knl_Event_Object__sizeof ti_sysbios_knl_Event_Object__sizeof__C;
+
+/* Object__table */
+typedef xdc_Ptr CT__ti_sysbios_knl_Event_Object__table;
+extern  const CT__ti_sysbios_knl_Event_Object__table ti_sysbios_knl_Event_Object__table__C;
+
+/* LM_post */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Event_LM_post;
+extern  const CT__ti_sysbios_knl_Event_LM_post ti_sysbios_knl_Event_LM_post__C;
+
+/* LM_pend */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Event_LM_pend;
+extern  const CT__ti_sysbios_knl_Event_LM_pend ti_sysbios_knl_Event_LM_pend__C;
+
+/* A_nullEventMasks */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Event_A_nullEventMasks;
+extern  const CT__ti_sysbios_knl_Event_A_nullEventMasks ti_sysbios_knl_Event_A_nullEventMasks__C;
+
+/* A_nullEventId */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Event_A_nullEventId;
+extern  const CT__ti_sysbios_knl_Event_A_nullEventId ti_sysbios_knl_Event_A_nullEventId__C;
+
+/* A_eventInUse */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Event_A_eventInUse;
+extern  const CT__ti_sysbios_knl_Event_A_eventInUse ti_sysbios_knl_Event_A_eventInUse__C;
+
+/* A_badContext */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Event_A_badContext;
+extern  const CT__ti_sysbios_knl_Event_A_badContext ti_sysbios_knl_Event_A_badContext__C;
+
+/* A_pendTaskDisabled */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Event_A_pendTaskDisabled;
+extern  const CT__ti_sysbios_knl_Event_A_pendTaskDisabled ti_sysbios_knl_Event_A_pendTaskDisabled__C;
+
+
+/*
+ * ======== PER-INSTANCE TYPES ========
+ */
+
+/* Params */
+struct ti_sysbios_knl_Event_Params {
+    size_t __size;
+    const void *__self;
+    void *__fxns;
+    xdc_runtime_IInstance_Params *instance;
+    xdc_runtime_IInstance_Params __iprms;
+};
+
+/* Struct */
+struct ti_sysbios_knl_Event_Struct {
+    volatile xdc_UInt __f0;
+    ti_sysbios_knl_Queue_Struct __f1;
+    xdc_runtime_Types_CordAddr __name;
+};
+
+
+/*
+ * ======== FUNCTION DECLARATIONS ========
+ */
+
+/* Module_startup */
+
+
+/* Instance_init__E */
+
+extern void ti_sysbios_knl_Event_Instance_init__E(ti_sysbios_knl_Event_Object *, const ti_sysbios_knl_Event_Params *);
+
+/* Handle__label__S */
+
+extern xdc_runtime_Types_Label *ti_sysbios_knl_Event_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+
+/* Module__startupDone__S */
+
+extern xdc_Bool ti_sysbios_knl_Event_Module__startupDone__S( void );
+
+/* Object__create__S */
+
+extern xdc_Ptr ti_sysbios_knl_Event_Object__create__S( xdc_Ptr __oa, xdc_SizeT __osz, xdc_Ptr __aa, const xdc_UChar *__pa, xdc_SizeT __psz, xdc_runtime_Error_Block *__eb );
+
+/* create */
+
+extern ti_sysbios_knl_Event_Handle ti_sysbios_knl_Event_create( const ti_sysbios_knl_Event_Params *__prms, xdc_runtime_Error_Block *__eb );
+
+/* construct */
+
+extern void ti_sysbios_knl_Event_construct( ti_sysbios_knl_Event_Struct *__obj, const ti_sysbios_knl_Event_Params *__prms );
+
+/* Object__delete__S */
+
+extern void ti_sysbios_knl_Event_Object__delete__S( xdc_Ptr instp );
+
+/* delete */
+
+extern void ti_sysbios_knl_Event_delete(ti_sysbios_knl_Event_Handle *instp);
+
+/* Object__destruct__S */
+
+extern void ti_sysbios_knl_Event_Object__destruct__S( xdc_Ptr objp );
+
+/* destruct */
+
+extern void ti_sysbios_knl_Event_destruct(ti_sysbios_knl_Event_Struct *obj);
+
+/* Object__get__S */
+
+extern xdc_Ptr ti_sysbios_knl_Event_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+
+/* Object__first__S */
+
+extern xdc_Ptr ti_sysbios_knl_Event_Object__first__S( void );
+
+/* Object__next__S */
+
+extern xdc_Ptr ti_sysbios_knl_Event_Object__next__S( xdc_Ptr obj );
+
+/* Params__init__S */
+
+extern void ti_sysbios_knl_Event_Params__init__S( xdc_Ptr dst, const void *src, xdc_SizeT psz, xdc_SizeT isz );
+
+/* pend__E */
+
+
+extern xdc_UInt ti_sysbios_knl_Event_pend__E( ti_sysbios_knl_Event_Handle __inst, xdc_UInt andMask, xdc_UInt orMask, xdc_UInt32 timeout );
+
+/* post__E */
+
+
+extern void ti_sysbios_knl_Event_post__E( ti_sysbios_knl_Event_Handle __inst, xdc_UInt eventMask );
+
+/* getPostedEvents__E */
+
+
+extern xdc_UInt ti_sysbios_knl_Event_getPostedEvents__E( ti_sysbios_knl_Event_Handle __inst );
+
+/* sync__E */
+
+
+extern void ti_sysbios_knl_Event_sync__E( ti_sysbios_knl_Event_Handle __inst, xdc_UInt eventId, xdc_UInt count );
+
+/* pendTimeout__I */
+
+
+extern void ti_sysbios_knl_Event_pendTimeout__I( xdc_UArg arg );
+
+/* checkEvents__I */
+
+
+extern xdc_UInt ti_sysbios_knl_Event_checkEvents__I( ti_sysbios_knl_Event_Object *event, xdc_UInt andMask, xdc_UInt orMask );
+
+
+/*
+ * ======== SYSTEM FUNCTIONS ========
+ */
+
+/* Module_startupDone */
+
+
+/* Object_heap */
+
+
+/* Module_heap */
+
+
+/* Module_id */
+static inline CT__ti_sysbios_knl_Event_Module__id ti_sysbios_knl_Event_Module_id( void ) 
+{
+    return ti_sysbios_knl_Event_Module__id__C;
+}
+
+/* Module_hasMask */
+static inline xdc_Bool ti_sysbios_knl_Event_Module_hasMask( void ) 
+{
+    return ti_sysbios_knl_Event_Module__diagsMask__C != 0;
+}
+
+/* Module_getMask */
+static inline xdc_Bits16 ti_sysbios_knl_Event_Module_getMask( void ) 
+{
+    return ti_sysbios_knl_Event_Module__diagsMask__C != 0 ? *ti_sysbios_knl_Event_Module__diagsMask__C : 0;
+}
+
+/* Module_setMask */
+static inline void ti_sysbios_knl_Event_Module_setMask( xdc_Bits16 mask ) 
+{
+    if (ti_sysbios_knl_Event_Module__diagsMask__C != 0) *ti_sysbios_knl_Event_Module__diagsMask__C = mask;
+}
+
+/* Params_init */
+static inline void ti_sysbios_knl_Event_Params_init( ti_sysbios_knl_Event_Params *prms ) 
+{
+    if (prms) {
+        ti_sysbios_knl_Event_Params__init__S(prms, 0, sizeof(ti_sysbios_knl_Event_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+/* Params_copy */
+static inline void ti_sysbios_knl_Event_Params_copy(ti_sysbios_knl_Event_Params *dst, const ti_sysbios_knl_Event_Params *src) 
+{
+    if (dst) {
+        ti_sysbios_knl_Event_Params__init__S(dst, (const void *)src, sizeof(ti_sysbios_knl_Event_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+/* Object_count */
+
+
+/* Object_sizeof */
+
+
+/* Object_get */
+static inline ti_sysbios_knl_Event_Handle ti_sysbios_knl_Event_Object_get(ti_sysbios_knl_Event_Instance_State *oarr, int i) 
+{
+    return (ti_sysbios_knl_Event_Handle)ti_sysbios_knl_Event_Object__get__S(oarr, i);
+}
+
+/* Object_first */
+static inline ti_sysbios_knl_Event_Handle ti_sysbios_knl_Event_Object_first( void )
+{
+    return (ti_sysbios_knl_Event_Handle)ti_sysbios_knl_Event_Object__first__S();
+}
+
+/* Object_next */
+static inline ti_sysbios_knl_Event_Handle ti_sysbios_knl_Event_Object_next( ti_sysbios_knl_Event_Object *obj )
+{
+    return (ti_sysbios_knl_Event_Handle)ti_sysbios_knl_Event_Object__next__S(obj);
+}
+
+/* Handle_label */
+static inline xdc_runtime_Types_Label *ti_sysbios_knl_Event_Handle_label( ti_sysbios_knl_Event_Handle inst, xdc_runtime_Types_Label *lab )
+{
+    return ti_sysbios_knl_Event_Handle__label__S(inst, lab);
+}
+
+/* Handle_name */
+static inline xdc_String ti_sysbios_knl_Event_Handle_name( ti_sysbios_knl_Event_Handle inst )
+{
+    xdc_runtime_Types_Label lab;
+    return ti_sysbios_knl_Event_Handle__label__S(inst, &lab)->iname;
+}
+
+/* handle */
+static inline ti_sysbios_knl_Event_Handle ti_sysbios_knl_Event_handle( ti_sysbios_knl_Event_Struct *str )
+{
+    return (ti_sysbios_knl_Event_Handle)str;
+}
+
+/* struct */
+static inline ti_sysbios_knl_Event_Struct *ti_sysbios_knl_Event_struct( ti_sysbios_knl_Event_Handle inst )
+{
+    return (ti_sysbios_knl_Event_Struct*)inst;
+}
+
+
+/*
+ * ======== EPILOGUE ========
+ */
+
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event__epilogue.h"
+/*
+ * Copyright (c) 2012-2014, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+
+
+
+
+# 75 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event__epilogue.h"
+
+# 530 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event.h"
+
+
+
+
+
+
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 563 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Event.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 67 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+
+
+/*
+ * ======== AUXILIARY DEFINITIONS ========
+ */
+
+/* Mode */
+enum ti_sysbios_knl_Semaphore_Mode {
+    ti_sysbios_knl_Semaphore_Mode_COUNTING = 0x0,
+    ti_sysbios_knl_Semaphore_Mode_BINARY = 0x1,
+    ti_sysbios_knl_Semaphore_Mode_COUNTING_PRIORITY = 0x2,
+    ti_sysbios_knl_Semaphore_Mode_BINARY_PRIORITY = 0x3
+};
+typedef enum ti_sysbios_knl_Semaphore_Mode ti_sysbios_knl_Semaphore_Mode;
+
+
+/*
+ * ======== CREATE ARGS ========
+ */
+
+/* Args__create */
+typedef struct ti_sysbios_knl_Semaphore_Args__create {
+    xdc_Int count;
+} ti_sysbios_knl_Semaphore_Args__create;
+
+
+/*
+ * ======== INTERNAL DEFINITIONS ========
+ */
+
+/* PendState */
+enum ti_sysbios_knl_Semaphore_PendState {
+    ti_sysbios_knl_Semaphore_PendState_TIMEOUT = 0,
+    ti_sysbios_knl_Semaphore_PendState_POSTED = 1,
+    ti_sysbios_knl_Semaphore_PendState_CLOCK_WAIT = 2,
+    ti_sysbios_knl_Semaphore_PendState_WAIT_FOREVER = 3
+};
+typedef enum ti_sysbios_knl_Semaphore_PendState ti_sysbios_knl_Semaphore_PendState;
+
+/* PendElem */
+struct ti_sysbios_knl_Semaphore_PendElem {
+    ti_sysbios_knl_Task_PendElem tpElem;
+    ti_sysbios_knl_Semaphore_PendState pendState;
+};
+
+
+/*
+ * ======== MODULE-WIDE CONFIGS ========
+ */
+
+/* Module__diagsEnabled */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Semaphore_Module__diagsEnabled;
+extern  const CT__ti_sysbios_knl_Semaphore_Module__diagsEnabled ti_sysbios_knl_Semaphore_Module__diagsEnabled__C;
+
+/* Module__diagsIncluded */
+typedef xdc_Bits32 CT__ti_sysbios_knl_Semaphore_Module__diagsIncluded;
+extern  const CT__ti_sysbios_knl_Semaphore_Module__diagsIncluded ti_sysbios_knl_Semaphore_Module__diagsIncluded__C;
+
+/* Module__diagsMask */
+typedef xdc_Bits16 *CT__ti_sysbios_knl_Semaphore_Module__diagsMask;
+extern  const CT__ti_sysbios_knl_Semaphore_Module__diagsMask ti_sysbios_knl_Semaphore_Module__diagsMask__C;
+
+/* Module__gateObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Semaphore_Module__gateObj;
+extern  const CT__ti_sysbios_knl_Semaphore_Module__gateObj ti_sysbios_knl_Semaphore_Module__gateObj__C;
+
+/* Module__gatePrms */
+typedef xdc_Ptr CT__ti_sysbios_knl_Semaphore_Module__gatePrms;
+extern  const CT__ti_sysbios_knl_Semaphore_Module__gatePrms ti_sysbios_knl_Semaphore_Module__gatePrms__C;
+
+/* Module__id */
+typedef xdc_runtime_Types_ModuleId CT__ti_sysbios_knl_Semaphore_Module__id;
+extern  const CT__ti_sysbios_knl_Semaphore_Module__id ti_sysbios_knl_Semaphore_Module__id__C;
+
+/* Module__loggerDefined */
+typedef xdc_Bool CT__ti_sysbios_knl_Semaphore_Module__loggerDefined;
+extern  const CT__ti_sysbios_knl_Semaphore_Module__loggerDefined ti_sysbios_knl_Semaphore_Module__loggerDefined__C;
+
+/* Module__loggerObj */
+typedef xdc_Ptr CT__ti_sysbios_knl_Semaphore_Module__loggerObj;
+extern  const CT__ti_sysbios_knl_Semaphore_Module__loggerObj ti_sysbios_knl_Semaphore_Module__loggerObj__C;
+
+/* Module__loggerFxn0 */
+typedef xdc_runtime_Types_LoggerFxn0 CT__ti_sysbios_knl_Semaphore_Module__loggerFxn0;
+extern  const CT__ti_sysbios_knl_Semaphore_Module__loggerFxn0 ti_sysbios_knl_Semaphore_Module__loggerFxn0__C;
+
+/* Module__loggerFxn1 */
+typedef xdc_runtime_Types_LoggerFxn1 CT__ti_sysbios_knl_Semaphore_Module__loggerFxn1;
+extern  const CT__ti_sysbios_knl_Semaphore_Module__loggerFxn1 ti_sysbios_knl_Semaphore_Module__loggerFxn1__C;
+
+/* Module__loggerFxn2 */
+typedef xdc_runtime_Types_LoggerFxn2 CT__ti_sysbios_knl_Semaphore_Module__loggerFxn2;
+extern  const CT__ti_sysbios_knl_Semaphore_Module__loggerFxn2 ti_sysbios_knl_Semaphore_Module__loggerFxn2__C;
+
+/* Module__loggerFxn4 */
+typedef xdc_runtime_Types_LoggerFxn4 CT__ti_sysbios_knl_Semaphore_Module__loggerFxn4;
+extern  const CT__ti_sysbios_knl_Semaphore_Module__loggerFxn4 ti_sysbios_knl_Semaphore_Module__loggerFxn4__C;
+
+/* Module__loggerFxn8 */
+typedef xdc_runtime_Types_LoggerFxn8 CT__ti_sysbios_knl_Semaphore_Module__loggerFxn8;
+extern  const CT__ti_sysbios_knl_Semaphore_Module__loggerFxn8 ti_sysbios_knl_Semaphore_Module__loggerFxn8__C;
+
+/* Module__startupDoneFxn */
+typedef xdc_Bool (*CT__ti_sysbios_knl_Semaphore_Module__startupDoneFxn)(void);
+extern  const CT__ti_sysbios_knl_Semaphore_Module__startupDoneFxn ti_sysbios_knl_Semaphore_Module__startupDoneFxn__C;
+
+/* Object__count */
+typedef xdc_Int CT__ti_sysbios_knl_Semaphore_Object__count;
+extern  const CT__ti_sysbios_knl_Semaphore_Object__count ti_sysbios_knl_Semaphore_Object__count__C;
+
+/* Object__heap */
+typedef xdc_runtime_IHeap_Handle CT__ti_sysbios_knl_Semaphore_Object__heap;
+extern  const CT__ti_sysbios_knl_Semaphore_Object__heap ti_sysbios_knl_Semaphore_Object__heap__C;
+
+/* Object__sizeof */
+typedef xdc_SizeT CT__ti_sysbios_knl_Semaphore_Object__sizeof;
+extern  const CT__ti_sysbios_knl_Semaphore_Object__sizeof ti_sysbios_knl_Semaphore_Object__sizeof__C;
+
+/* Object__table */
+typedef xdc_Ptr CT__ti_sysbios_knl_Semaphore_Object__table;
+extern  const CT__ti_sysbios_knl_Semaphore_Object__table ti_sysbios_knl_Semaphore_Object__table__C;
+
+/* LM_post */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Semaphore_LM_post;
+extern  const CT__ti_sysbios_knl_Semaphore_LM_post ti_sysbios_knl_Semaphore_LM_post__C;
+
+/* LM_pend */
+
+typedef xdc_runtime_Log_Event CT__ti_sysbios_knl_Semaphore_LM_pend;
+extern  const CT__ti_sysbios_knl_Semaphore_LM_pend ti_sysbios_knl_Semaphore_LM_pend__C;
+
+/* A_noEvents */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Semaphore_A_noEvents;
+extern  const CT__ti_sysbios_knl_Semaphore_A_noEvents ti_sysbios_knl_Semaphore_A_noEvents__C;
+
+/* A_invTimeout */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Semaphore_A_invTimeout;
+extern  const CT__ti_sysbios_knl_Semaphore_A_invTimeout ti_sysbios_knl_Semaphore_A_invTimeout__C;
+
+/* A_badContext */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Semaphore_A_badContext;
+extern  const CT__ti_sysbios_knl_Semaphore_A_badContext ti_sysbios_knl_Semaphore_A_badContext__C;
+
+/* A_overflow */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Semaphore_A_overflow;
+extern  const CT__ti_sysbios_knl_Semaphore_A_overflow ti_sysbios_knl_Semaphore_A_overflow__C;
+
+/* A_pendTaskDisabled */
+
+typedef xdc_runtime_Assert_Id CT__ti_sysbios_knl_Semaphore_A_pendTaskDisabled;
+extern  const CT__ti_sysbios_knl_Semaphore_A_pendTaskDisabled ti_sysbios_knl_Semaphore_A_pendTaskDisabled__C;
+
+/* supportsEvents */
+
+
+
+
+typedef xdc_Bool CT__ti_sysbios_knl_Semaphore_supportsEvents;
+extern  const CT__ti_sysbios_knl_Semaphore_supportsEvents ti_sysbios_knl_Semaphore_supportsEvents__C;
+
+
+/* supportsPriority */
+
+
+
+
+typedef xdc_Bool CT__ti_sysbios_knl_Semaphore_supportsPriority;
+extern  const CT__ti_sysbios_knl_Semaphore_supportsPriority ti_sysbios_knl_Semaphore_supportsPriority__C;
+
+
+/* eventPost */
+
+typedef void (*CT__ti_sysbios_knl_Semaphore_eventPost)(ti_sysbios_knl_Event_Handle, xdc_UInt);
+extern  const CT__ti_sysbios_knl_Semaphore_eventPost ti_sysbios_knl_Semaphore_eventPost__C;
+
+/* eventSync */
+
+typedef void (*CT__ti_sysbios_knl_Semaphore_eventSync)(ti_sysbios_knl_Event_Handle, xdc_UInt, xdc_UInt);
+extern  const CT__ti_sysbios_knl_Semaphore_eventSync ti_sysbios_knl_Semaphore_eventSync__C;
+
+
+/*
+ * ======== PER-INSTANCE TYPES ========
+ */
+
+/* Params */
+struct ti_sysbios_knl_Semaphore_Params {
+    size_t __size;
+    const void *__self;
+    void *__fxns;
+    xdc_runtime_IInstance_Params *instance;
+    ti_sysbios_knl_Event_Handle event;
+    xdc_UInt eventId;
+    ti_sysbios_knl_Semaphore_Mode mode;
+    xdc_runtime_IInstance_Params __iprms;
+};
+
+/* Struct */
+struct ti_sysbios_knl_Semaphore_Struct {
+    ti_sysbios_knl_Event_Handle __f0;
+    xdc_UInt __f1;
+    ti_sysbios_knl_Semaphore_Mode __f2;
+    volatile xdc_UInt16 __f3;
+    ti_sysbios_knl_Queue_Struct __f4;
+    xdc_runtime_Types_CordAddr __name;
+};
+
+
+/*
+ * ======== FUNCTION DECLARATIONS ========
+ */
+
+/* Module_startup */
+
+
+/* Instance_init__E */
+
+extern void ti_sysbios_knl_Semaphore_Instance_init__E(ti_sysbios_knl_Semaphore_Object *, xdc_Int count, const ti_sysbios_knl_Semaphore_Params *);
+
+/* Instance_finalize__E */
+
+extern void ti_sysbios_knl_Semaphore_Instance_finalize__E( ti_sysbios_knl_Semaphore_Object* );
+
+/* Handle__label__S */
+
+extern xdc_runtime_Types_Label *ti_sysbios_knl_Semaphore_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+
+/* Module__startupDone__S */
+
+extern xdc_Bool ti_sysbios_knl_Semaphore_Module__startupDone__S( void );
+
+/* Object__create__S */
+
+extern xdc_Ptr ti_sysbios_knl_Semaphore_Object__create__S( xdc_Ptr __oa, xdc_SizeT __osz, xdc_Ptr __aa, const xdc_UChar *__pa, xdc_SizeT __psz, xdc_runtime_Error_Block *__eb );
+
+/* create */
+
+extern ti_sysbios_knl_Semaphore_Handle ti_sysbios_knl_Semaphore_create( xdc_Int count, const ti_sysbios_knl_Semaphore_Params *__prms, xdc_runtime_Error_Block *__eb );
+
+/* construct */
+
+extern void ti_sysbios_knl_Semaphore_construct( ti_sysbios_knl_Semaphore_Struct *__obj, xdc_Int count, const ti_sysbios_knl_Semaphore_Params *__prms );
+
+/* Object__delete__S */
+
+extern void ti_sysbios_knl_Semaphore_Object__delete__S( xdc_Ptr instp );
+
+/* delete */
+
+extern void ti_sysbios_knl_Semaphore_delete(ti_sysbios_knl_Semaphore_Handle *instp);
+
+/* Object__destruct__S */
+
+extern void ti_sysbios_knl_Semaphore_Object__destruct__S( xdc_Ptr objp );
+
+/* destruct */
+
+extern void ti_sysbios_knl_Semaphore_destruct(ti_sysbios_knl_Semaphore_Struct *obj);
+
+/* Object__get__S */
+
+extern xdc_Ptr ti_sysbios_knl_Semaphore_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+
+/* Object__first__S */
+
+extern xdc_Ptr ti_sysbios_knl_Semaphore_Object__first__S( void );
+
+/* Object__next__S */
+
+extern xdc_Ptr ti_sysbios_knl_Semaphore_Object__next__S( xdc_Ptr obj );
+
+/* Params__init__S */
+
+extern void ti_sysbios_knl_Semaphore_Params__init__S( xdc_Ptr dst, const void *src, xdc_SizeT psz, xdc_SizeT isz );
+
+/* getCount__E */
+
+
+extern xdc_Int ti_sysbios_knl_Semaphore_getCount__E( ti_sysbios_knl_Semaphore_Handle __inst );
+
+/* pend__E */
+
+
+extern xdc_Bool ti_sysbios_knl_Semaphore_pend__E( ti_sysbios_knl_Semaphore_Handle __inst, xdc_UInt32 timeout );
+
+/* post__E */
+
+
+extern void ti_sysbios_knl_Semaphore_post__E( ti_sysbios_knl_Semaphore_Handle __inst );
+
+/* registerEvent__E */
+
+
+extern void ti_sysbios_knl_Semaphore_registerEvent__E( ti_sysbios_knl_Semaphore_Handle __inst, ti_sysbios_knl_Event_Handle event, xdc_UInt eventId );
+
+/* reset__E */
+
+
+extern void ti_sysbios_knl_Semaphore_reset__E( ti_sysbios_knl_Semaphore_Handle __inst, xdc_Int count );
+
+/* pendTimeout__I */
+
+
+extern void ti_sysbios_knl_Semaphore_pendTimeout__I( xdc_UArg arg );
+
+
+/*
+ * ======== SYSTEM FUNCTIONS ========
+ */
+
+/* Module_startupDone */
+
+
+/* Object_heap */
+
+
+/* Module_heap */
+
+
+/* Module_id */
+static inline CT__ti_sysbios_knl_Semaphore_Module__id ti_sysbios_knl_Semaphore_Module_id( void ) 
+{
+    return ti_sysbios_knl_Semaphore_Module__id__C;
+}
+
+/* Module_hasMask */
+static inline xdc_Bool ti_sysbios_knl_Semaphore_Module_hasMask( void ) 
+{
+    return ti_sysbios_knl_Semaphore_Module__diagsMask__C != 0;
+}
+
+/* Module_getMask */
+static inline xdc_Bits16 ti_sysbios_knl_Semaphore_Module_getMask( void ) 
+{
+    return ti_sysbios_knl_Semaphore_Module__diagsMask__C != 0 ? *ti_sysbios_knl_Semaphore_Module__diagsMask__C : 0;
+}
+
+/* Module_setMask */
+static inline void ti_sysbios_knl_Semaphore_Module_setMask( xdc_Bits16 mask ) 
+{
+    if (ti_sysbios_knl_Semaphore_Module__diagsMask__C != 0) *ti_sysbios_knl_Semaphore_Module__diagsMask__C = mask;
+}
+
+/* Params_init */
+static inline void ti_sysbios_knl_Semaphore_Params_init( ti_sysbios_knl_Semaphore_Params *prms ) 
+{
+    if (prms) {
+        ti_sysbios_knl_Semaphore_Params__init__S(prms, 0, sizeof(ti_sysbios_knl_Semaphore_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+/* Params_copy */
+static inline void ti_sysbios_knl_Semaphore_Params_copy(ti_sysbios_knl_Semaphore_Params *dst, const ti_sysbios_knl_Semaphore_Params *src) 
+{
+    if (dst) {
+        ti_sysbios_knl_Semaphore_Params__init__S(dst, (const void *)src, sizeof(ti_sysbios_knl_Semaphore_Params), sizeof(xdc_runtime_IInstance_Params));
+    }
+}
+
+/* Object_count */
+
+
+/* Object_sizeof */
+
+
+/* Object_get */
+static inline ti_sysbios_knl_Semaphore_Handle ti_sysbios_knl_Semaphore_Object_get(ti_sysbios_knl_Semaphore_Instance_State *oarr, int i) 
+{
+    return (ti_sysbios_knl_Semaphore_Handle)ti_sysbios_knl_Semaphore_Object__get__S(oarr, i);
+}
+
+/* Object_first */
+static inline ti_sysbios_knl_Semaphore_Handle ti_sysbios_knl_Semaphore_Object_first( void )
+{
+    return (ti_sysbios_knl_Semaphore_Handle)ti_sysbios_knl_Semaphore_Object__first__S();
+}
+
+/* Object_next */
+static inline ti_sysbios_knl_Semaphore_Handle ti_sysbios_knl_Semaphore_Object_next( ti_sysbios_knl_Semaphore_Object *obj )
+{
+    return (ti_sysbios_knl_Semaphore_Handle)ti_sysbios_knl_Semaphore_Object__next__S(obj);
+}
+
+/* Handle_label */
+static inline xdc_runtime_Types_Label *ti_sysbios_knl_Semaphore_Handle_label( ti_sysbios_knl_Semaphore_Handle inst, xdc_runtime_Types_Label *lab )
+{
+    return ti_sysbios_knl_Semaphore_Handle__label__S(inst, lab);
+}
+
+/* Handle_name */
+static inline xdc_String ti_sysbios_knl_Semaphore_Handle_name( ti_sysbios_knl_Semaphore_Handle inst )
+{
+    xdc_runtime_Types_Label lab;
+    return ti_sysbios_knl_Semaphore_Handle__label__S(inst, &lab)->iname;
+}
+
+/* handle */
+static inline ti_sysbios_knl_Semaphore_Handle ti_sysbios_knl_Semaphore_handle( ti_sysbios_knl_Semaphore_Struct *str )
+{
+    return (ti_sysbios_knl_Semaphore_Handle)str;
+}
+
+/* struct */
+static inline ti_sysbios_knl_Semaphore_Struct *ti_sysbios_knl_Semaphore_struct( ti_sysbios_knl_Semaphore_Handle inst )
+{
+    return (ti_sysbios_knl_Semaphore_Struct*)inst;
+}
+
+
+/*
+ * ======== EPILOGUE ========
+ */
+
+
+
+
+
+
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 520 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+
+
+
+
+
+/* module prefix */
+# 593 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+
+# 129 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/spi/SPITivaDMA.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/family/arm/m3/Hwi.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION DECLARATIONS
+ *     CONVERTORS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 1162 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/family/arm/m3/Hwi.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 1207 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/family/arm/m3/Hwi.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 131 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/spi/SPITivaDMA.h"
+
+/**
+ *  @addtogroup SPI_STATUS
+ *  SPITivaDMA_STATUS_* macros are command codes only defined in the
+ *  SPITivaDMA.h driver implementation and need to:
+ *  @code
+ *  #include <ti/drivers/spi/SPITivaDMA.h>
+ *  @endcode
+ *  @{
+ */
+
+/* Add SPITivaDMA_STATUS_* macros here */
+
+/** @}*/
+
+/**
+ *  @addtogroup SPI_CMD
+ *  SPITivaDMA_CMD_* macros are command codes only defined in the
+ *  SPITivaDMA.h driver implementation and need to:
+ *  @code
+ *  #include <ti/drivers/spi/SPITivaDMA.h>
+ *  @endcode
+ *  @{
+ */
+
+/* Add SPITivaDMA_CMD_* macros here */
+
+/** @}*/
+
+
+/* c99 types required by TivaWare */
+
+typedef uint32_t            SPIBaseAddrType;
+typedef uint32_t            SPIDataType;
+
+
+
+
+
+/* SPI function table pointer */
+extern const SPI_FxnTable SPITivaDMA_fxnTable;
+
+/*!
+ *  @brief
+ *  SPITivaDMA data frame size is used to determine how to configure the
+ *  DMA data transfers. This field is to be only used internally.
+ *
+ *  SPITivaDMA_8bit:  txBuf and rxBuf are arrays of uint8_t elements
+ *  SPITivaDMA_16bit: txBuf and rxBuf are arrays of uint16_t elements
+ */
+typedef enum SPITivaDMA_FrameSize {
+    SPITivaDMA_8bit  = 0,
+    SPITivaDMA_16bit = 1
+} SPITivaDMA_FrameSize;
+
+/*!
+ *  @brief  SPITivaDMA Hardware attributes
+ *
+ *  These fields, with the exception of intPriority,
+ *  are used by driverlib APIs and therefore must be populated by
+ *  driverlib macro definitions. For TivaWare these definitions are found in:
+ *      - inc/hw_memmap.h
+ *      - inc/hw_ints.h
+ *      - driverlib/udma.h
+ *
+ *  intPriority is the SPI peripheral's interrupt priority, as defined by the
+ *  underlying OS.  It is passed unmodified to the underlying OS's interrupt
+ *  handler creation code, so you need to refer to the OS documentation
+ *  for usage.  For example, for SYS/BIOS applications, refer to the
+ *  ti.sysbios.family.arm.m3.Hwi documentation for SYS/BIOS usage of
+ *  interrupt priorities.  If the driver uses the ti.drivers.ports interface
+ *  instead of making OS calls directly, then the HwiP port handles the
+ *  interrupt priority in an OS specific way.  In the case of the SYS/BIOS
+ *  port, intPriority is passed unmodified to Hwi_create().
+ *
+ *  A sample structure is shown below:
+ *  @code
+ *  uint32_t spiTivaDMAscratchBuf;
+ *  const SPITivaDMA_HWAttrs spiTivaDMAobjects[] = {
+ *      {
+ *          .baseAddr = SSI0_BASE,
+ *          .intNum = INT_SSI0,
+ *          .intPriority = (~0),
+ *          .scratchBufPtr = &spiTivaDMAscratchBuf,
+ *          .defaultTxBufValue = 0,
+ *          .rxChannelIndex = UDMA_CHANNEL_SSI0RX,
+ *          .txChannelIndex = UDMA_CHANNEL_SSI0TX,
+ *          .channelMappingFxn = uDMAChannelAssign,
+ *          .rxChannelMappingFxnArg = UDMA_CH10_SSI0RX,
+ *          .txChannelMappingFxnArg = UDMA_CH11_SSI0TX
+ *      },
+ *  };
+ *  @endcode
+ */
+typedef struct SPITivaDMA_HWAttrs {
+    /*! SSI Peripheral's base address */
+    SPIBaseAddrType   baseAddr;
+    /*! SSI TivaDMA Peripheral's interrupt vector */
+    unsigned int      intNum;
+
+    /*! SPITivaDMA Peripheral's interrupt priority */
+    uint32_t          intPriority;
+
+    /*! Address of a scratch buffer of size uint32_t */
+    uint32_t         *scratchBufPtr;
+    /*! Default TX value if txBuf == NULL */
+    uint32_t          defaultTxBufValue;
+    /*! uDMA controlTable channel index */
+    uint32_t          rxChannelIndex;
+    /*! uDMA controlTable channel index */
+    uint32_t          txChannelIndex;
+
+    /*! uDMA mapping function that maps the SPI trigger to the DMA channel */
+    void  (*channelMappingFxn)(SPIDataType);
+    /*! uDMA MappingFxn arg to map the Tx channel */
+    uint32_t          rxChannelMappingFxnArg;
+    /*! uDMA MappingFxn arg to map the Rx channel */
+    uint32_t          txChannelMappingFxnArg;
+} SPITivaDMA_HWAttrs;
+
+/*!
+ *  @brief  SPITivaDMA Object
+ *
+ *  The application must not access any member variables of this structure!
+ */
+typedef struct SPITivaDMA_Object {
+    ti_sysbios_knl_Semaphore_Struct      transferComplete;    /* Notify finished SPITivaDMA transfer */
+    ti_sysbios_family_arm_m3_Hwi_Struct hwi;   /* Hwi object handle */
+
+    SPI_TransferMode      transferMode;        /* SPITivaDMA transfer mode */
+    SPI_CallbackFxn       transferCallbackFxn; /* Callback fxn in CALLBACK mode */
+    uint32_t              transferTimeout;     /* Transfer timeout in system ticks */
+
+    SPI_Transaction      *transaction;         /* void * to the current transaction*/
+
+    SPITivaDMA_FrameSize  frameSize;           /* Data frame size variable */
+
+    _Bool                  isOpen;              /* flag to indicate module is open */
+} SPITivaDMA_Object, *SPITivaDMA_Handle;
+
+/* Do not interfere with the app if they include the family Hwi module */
+
+
+
+
+
+
+# 65 "../source/config/serialConfig.c"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/i2c/I2CTiva.h"
+/*
+ * Copyright (c) 2015, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+/** ============================================================================
+ *  @file       I2CTiva.h
+ *
+ *  @brief      I2C driver implementation for a Tiva I2C controller.
+ *
+ *  The I2C header file should be included in an application as follows:
+ *  @code
+ *  #include <ti/drivers/I2C.h>
+ *  #include <ti/drivers/i2c/I2CTiva.h>
+ *  @endcode
+ *
+ *  Refer to @ref I2C.h for a complete description of APIs & example of use.
+ *
+ *  ============================================================================
+ */
+
+
+
+
+
+
+
+
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/I2C.h"
+/*
+ * Copyright (c) 2015, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+/** ============================================================================
+ *  @file       I2C.h
+ *
+ *  @brief      I2C driver interface
+ *
+ *  The I2C header file should be included in an application as follows:
+ *  @code
+ *  #include <ti/drivers/I2C.h>
+ *  @endcode
+ *
+ *  # Operation #
+ *  The I2C driver operates as a master on a single-master I2C bus in either
+ *  I2C_MODE_BLOCKING or I2C_MODE_CALLBACK.
+ *  In blocking mode, the task's execution is blocked during the I2C
+ *  transaction. When the transfer has completed, code execution will resume.
+ *  In callback mode, the task's execution is not blocked, allowing for other
+ *  transactions to be queued up or to process some other code. When the
+ *  transfer has completed, the I2C driver will call a user-specified callback
+ *  function (from a HWI or SWI context, depending on the device).
+ *
+ *  The APIs in this driver serve as an interface to a typical TI-RTOS
+ *  application. The specific peripheral implementations are responsible to
+ *  create all the SYS/BIOS specific primitives to allow for thread-safe
+ *  operation.
+ *
+ *  ## Opening the driver #
+ *
+ *  @code
+ *  I2C_Handle      handle;
+ *  I2C_Params      params;
+ *  I2C_Transaction i2cTransaction;
+ *
+ *  I2C_Params_init(&params);
+ *  params.transferMode  = I2C_MODE_CALLBACK;
+ *  params.transferCallbackFxn = someI2CCallbackFunction;
+ *  handle = I2C_open(someI2C_configIndexValue, &params);
+ *  if (!handle) {
+ *      System_printf("I2C did not open");
+ *  }
+ *  @endcode
+ *
+ *  ## Transferring data #
+ *  A I2C transaction with a I2C peripheral is started by calling
+ *  I2C_transfer(). The details of the I2C transaction is specified with a
+ *  I2C_Transaction data structure. This structure allows for any of the three
+ *  types of transactions: Write, Read, or Write/Read. Each transfer is
+ *  performed atomically with the I2C slave peripheral.
+ *
+ *  @code
+ *  I2C_Transaction i2cTransaction;
+ *
+ *  i2cTransaction.writeBuf = someWriteBuffer;
+ *  i2cTransaction.writeCount = numOfBytesToWrite;
+ *
+ *  i2cTransaction.readBuf = someReadBuffer;
+ *  i2cTransaction.readCount = numOfBytesToRead;
+ *
+ *  i2cTransaction.slaveAddress = some7BitI2CSlaveAddress;
+ *
+ *  ret = I2C_transfer(handle, &i2cTransaction);
+ *  if (!ret) {
+ *      System_printf("Unsuccessful I2C transfer");
+ *  }
+ *  @endcode
+ *
+ *  # Implementation #
+ *
+ *  This module serves as the main interface for TI-RTOS
+ *  applications. Its purpose is to redirect the module's APIs to specific
+ *  peripheral implementations which are specified using a pointer to a
+ *  I2C_FxnTable.
+ *
+ *  The I2C driver interface module is joined (at link time) to a
+ *  NULL-terminated array of I2C_Config data structures named *I2C_config*.
+ *  *I2C_config* is implemented in the application with each entry being an
+ *  instance of a I2C peripheral. Each entry in *I2C_config* contains a:
+ *  - (I2C_FxnTable *) to a set of functions that implement a I2C peripheral
+ *  - (void *) data object that is associated with the I2C_FxnTable
+ *  - (void *) hardware attributes that are associated to the I2C_FxnTable
+ *
+ *  # Instrumentation #
+ *  The I2C driver interface produces log statements if instrumentation is
+ *  enabled.
+ *
+ *  Diagnostics Mask | Log details |
+ *  ---------------- | ----------- |
+ *  Diags_USER1      | basic operations performed |
+ *  Diags_USER2      | detailed operations performed |
+ *
+ *  ============================================================================
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ *  @defgroup I2C_CONTROL I2C_control command and status codes
+ *  These I2C macros are reservations for I2C.h
+ *  @{
+ */
+
+/*!
+ * Common I2C_control command code reservation offset.
+ * I2C driver implementations should offset command codes with I2C_CMD_RESERVED
+ * growing positively
+ *
+ * Example implementation specific command codes:
+ * @code
+ * #define I2CXYZ_CMD_COMMAND0      I2C_CMD_RESERVED + 0
+ * #define I2CXYZ_CMD_COMMAND1      I2C_CMD_RESERVED + 1
+ * @endcode
+ */
+
+
+/*!
+ * Common I2C_control status code reservation offset.
+ * I2C driver implementations should offset status codes with
+ * I2C_STATUS_RESERVED growing negatively.
+ *
+ * Example implementation specific status codes:
+ * @code
+ * #define I2CXYZ_STATUS_ERROR0     I2C_STATUS_RESERVED - 0
+ * #define I2CXYZ_STATUS_ERROR1     I2C_STATUS_RESERVED - 1
+ * #define I2CXYZ_STATUS_ERROR2     I2C_STATUS_RESERVED - 2
+ * @endcode
+ */
+
+
+/**
+ *  @defgroup I2C_STATUS Status Codes
+ *  I2C_STATUS_* macros are general status codes returned by I2C_control()
+ *  @{
+ *  @ingroup I2C_CONTROL
+ */
+
+/*!
+ * @brief   Successful status code returned by I2C_control().
+ *
+ * I2C_control() returns I2C_STATUS_SUCCESS if the control code was executed
+ * successfully.
+ */
+
+
+/*!
+ * @brief   Generic error status code returned by I2C_control().
+ *
+ * I2C_control() returns I2C_STATUS_ERROR if the control code was not executed
+ * successfully.
+ */
+
+
+/*!
+ * @brief   An error status code returned by I2C_control() for undefined
+ * command codes.
+ *
+ * I2C_control() returns I2C_STATUS_UNDEFINEDCMD if the control code is not
+ * recognized by the driver implementation.
+ */
+
+/** @}*/
+
+/**
+ *  @defgroup I2C_CMD Command Codes
+ *  I2C_CMD_* macros are general command codes for I2C_control(). Not all I2C
+ *  driver implementations support these command codes.
+ *  @{
+ *  @ingroup I2C_CONTROL
+ */
+
+/* Add I2C_CMD_<commands> here */
+
+/** @}*/
+
+/** @}*/
+
+/*!
+ *  @brief      A handle that is returned from a I2C_open() call.
+ */
+typedef struct I2C_Config      *I2C_Handle;
+
+/*!
+ *  @brief  I2C transaction
+ *
+ *  This structure defines the nature of the I2C transaction. This structure
+ *  specifies the buffer and buffer's size that is to be written to or read from
+ *  the I2C slave peripheral.
+ *  arg is an optional user supplied argument that will be passed
+ *  to the callback function when the I2C driver is in I2C_MODE_CALLBACK.
+ *  nextPtr is to be only used by the I2C driver.
+ */
+typedef struct I2C_Transaction {
+    void    *writeBuf;    /*!< buffer containing data to be written */
+    size_t  writeCount;   /*!< Number of bytes to be written to the slave */
+
+    void    *readBuf;     /*!< buffer to which data is to be read into */
+    size_t  readCount;    /*!< Number of bytes to be read from the slave */
+
+    unsigned char slaveAddress; /*!< Address of the I2C slave device */
+
+    void    *arg;         /*!< argument to be passed to the callback function */
+    void    *nextPtr;     /*!< used for queuing in I2C_MODE_CALLBACK mode */
+} I2C_Transaction;
+
+/*!
+ *  @brief  I2C transfer mode
+ *
+ *  I2C_MODE_BLOCKING block task execution while a I2C transfer is in progress
+ *  I2C_MODE_CALLBACK does not block task execution; but calls a callback
+ *  function when the I2C transfer has completed
+ */
+typedef enum I2C_TransferMode {
+    I2C_MODE_BLOCKING,  /*!< I2C_transfer blocks execution*/
+    I2C_MODE_CALLBACK   /*!< I2C_transfer queues transactions and does not block */
+} I2C_TransferMode;
+
+/*!
+ *  @brief  I2C callback function
+ *
+ *  User definable callback function prototype. The I2C driver will call the
+ *  defined function and pass in the I2C driver's handle, the pointer to the I2C
+ *  transaction that just completed, and the return value of I2C_transfer.
+ *
+ *  @param  I2C_Handle          I2C_Handle
+
+ *  @param  I2C_Transaction*    Address of the I2C_Transaction performed
+
+ *  @param  bool                Results of the I2C transaction
+ */
+typedef void (*I2C_CallbackFxn)(I2C_Handle, I2C_Transaction *, _Bool);
+
+/*!
+ *  @brief  I2C bitRate
+ *
+ *  Specify one of the standardized I2C bus bit rates for I2C communications.
+ *  The default is I2C_100kHz.
+ */
+typedef enum I2C_BitRate {
+    I2C_100kHz = 0,
+    I2C_400kHz = 1
+} I2C_BitRate;
+
+/*!
+ *  @brief  I2C Parameters
+ *
+ *  I2C parameters are used to with the I2C_open() call. Default values for
+ *  these parameters are set using I2C_Params_init().
+ *
+ *  If I2C_TransferMode is set to I2C_MODE_BLOCKING then I2C_transfer function
+ *  calls will block thread execution until the transaction has completed.
+ *
+ *  If I2C_TransferMode is set to I2C_MODE_CALLBACK then I2C_transfer will not
+ *  block thread execution and it will call the function specified by
+ *  transferCallbackFxn. Sequential calls to I2C_transfer in I2C_MODE_CALLBACK
+ *  mode will put the designated transaction onto an internal queue that
+ *  automatically starts queued transactions after the previous transaction has
+ *  completed. (regardless of error state).
+ *
+ *  I2C_BitRate specifies the I2C bus rate used for I2C communications.
+ *
+ *  @sa     I2C_Params_init()
+ */
+typedef struct I2C_Params {
+    I2C_TransferMode    transferMode; /*!< Blocking or Callback mode */
+    I2C_CallbackFxn     transferCallbackFxn; /*!< Callback function pointer */
+    I2C_BitRate         bitRate; /*!< I2C bus bit rate */
+    uintptr_t           custom;  /*!< Custom argument used by driver
+                                      implementation */
+} I2C_Params;
+
+/*!
+ *  @brief      A function pointer to a driver specific implementation of
+ *              I2C_close().
+ */
+typedef void        (*I2C_CloseFxn)    (I2C_Handle handle);
+
+/*!
+ *  @brief      A function pointer to a driver specific implementation of
+ *              I2C_control().
+ */
+typedef int         (*I2C_ControlFxn)  (I2C_Handle handle,
+                                        unsigned int cmd,
+                                        void *arg);
+
+/*!
+ *  @brief      A function pointer to a driver specific implementation of
+ *              I2C_init().
+ */
+typedef void        (*I2C_InitFxn)     (I2C_Handle handle);
+
+/*!
+ *  @brief      A function pointer to a driver specific implementation of
+ *              I2C_open().
+ */
+typedef I2C_Handle  (*I2C_OpenFxn)     (I2C_Handle handle,
+                                        I2C_Params *params);
+
+/*!
+ *  @brief      A function pointer to a driver specific implementation of
+ *              I2C_transfer().
+ */
+typedef _Bool        (*I2C_TransferFxn) (I2C_Handle handle,
+                                        I2C_Transaction *transaction);
+
+/*!
+ *  @brief      The definition of a I2C function table that contains the
+ *              required set of functions to control a specific I2C driver
+ *              implementation.
+ */
+typedef struct I2C_FxnTable {
+    /*! Function to close the specified peripheral */
+    I2C_CloseFxn        closeFxn;
+
+    /*! Function to implementation specific control function */
+    I2C_ControlFxn      controlFxn;
+
+    /*! Function to initialize the given data object */
+    I2C_InitFxn         initFxn;
+
+    /*! Function to open the specified peripheral */
+    I2C_OpenFxn         openFxn;
+
+    /*! Function to initiate a I2C data transfer */
+    I2C_TransferFxn     transferFxn;
+} I2C_FxnTable;
+
+/*!
+ *  @brief  I2C Global configuration
+ *
+ *  The I2C_Config structure contains a set of pointers used to characterize
+ *  the I2C driver implementation.
+ *
+ *  This structure needs to be defined before calling I2C_init() and it must
+ *  not be changed thereafter.
+ *
+ *  @sa     I2C_init()
+ */
+typedef struct I2C_Config {
+    /*! Pointer to a table of driver-specific implementations of I2C APIs */
+    I2C_FxnTable const *fxnTablePtr;
+
+    /*! Pointer to a driver specific data object */
+    void               *object;
+
+    /*! Pointer to a driver specific hardware attributes structure */
+    void         const *hwAttrs;
+} I2C_Config;
+
+
+/*!
+ *  @brief  Function to close a I2C peripheral specified by the I2C handle
+ *
+ *  @pre    I2C_open() had to be called first.
+ *
+ *  @param  handle  A I2C_Handle returned from I2C_open
+ *
+ *  @sa     I2C_open()
+ */
+extern void I2C_close(I2C_Handle handle);
+
+/*!
+ *  @brief  Function performs implementation specific features on a given
+ *          I2C_Handle.
+ *
+ *  Commands for I2C_control can originate from I2C.h or from implementation
+ *  specific I2C*.h (_I2CCC26XX.h_, _I2CTiva.h_, etc.. ) files.
+ *  While commands from I2C.h are API portable across driver implementations,
+ *  not all implementations may support all these commands.
+ *  Conversely, commands from driver implementation specific I2C*.h files add
+ *  unique driver capabilities but are not API portable across all I2C driver
+ *  implementations.
+ *
+ *  Commands supported by I2C.h follow a I2C_CMD_\<cmd\> naming
+ *  convention.<br>
+ *  Commands supported by I2C*.h follow a I2C*_CMD_\<cmd\> naming
+ *  convention.<br>
+ *  Each control command defines @b arg differently. The types of @b arg are
+ *  documented with each command.
+ *
+ *  See @ref I2C_CMD "I2C_control command codes" for command codes.
+ *
+ *  See @ref I2C_STATUS "I2C_control return status codes" for status codes.
+ *
+ *  @pre    I2C_open() has to be called first.
+ *
+ *  @param  handle      A I2C handle returned from I2C_open()
+ *
+ *  @param  cmd         I2C.h or I2C*.h commands.
+ *
+ *  @param  arg         An optional R/W (read/write) command argument
+ *                      accompanied with cmd
+ *
+ *  @return Implementation specific return codes. Negative values indicate
+ *          unsuccessful operations.
+ *
+ *  @sa     I2C_open()
+ */
+extern int I2C_control(I2C_Handle handle, unsigned int cmd, void *arg);
+
+/*!
+ *  @brief  Function to initializes the I2C module
+ *
+ *  @pre    The I2C_config structure must exist and be persistent before this
+ *          function can be called. This function must also be called before
+ *          any other I2C driver APIs. This function call does not modify any
+ *          peripheral registers.
+ */
+extern void I2C_init(void);
+
+/*!
+ *  @brief  Function to initialize a given I2C peripheral specified by the
+ *          particular index value. The parameter specifies which mode the I2C
+ *          will operate.
+ *
+ *  @pre    I2C controller has been initialized
+ *
+ *  @param  index         Logical peripheral number for the I2C indexed into
+ *                        the I2C_config table
+ *
+ *  @param  params        Pointer to an parameter block, if NULL it will use
+ *                        default values. All the fields in this structure are
+ *                        RO (read-only).
+ *
+ *  @return A I2C_Handle on success or a NULL on an error or if it has been
+ *          opened already.
+ *
+ *  @sa     I2C_init()
+ *  @sa     I2C_close()
+ */
+extern I2C_Handle I2C_open(unsigned int index, I2C_Params *params);
+
+/*!
+ *  @brief  Function to initialize the I2C_Params struct to its defaults
+ *
+ *  @param  params      An pointer to I2C_Params structure for
+ *                      initialization
+ *
+ *  Defaults values are:
+ *      transferMode = I2C_MODE_BLOCKING
+ *      transferCallbackFxn = NULL
+ *      bitRate = I2C_100kHz
+ */
+extern void I2C_Params_init(I2C_Params *params);
+
+/*!
+ *  @brief  Function to perform an I2C transaction with an I2C slave peripheral.
+ *
+ *  This function will start a I2C transfer and can only be called from a Task
+ *  context when in I2C_MODE_BLOCKING.
+ *  The I2C transfer procedure starts with evaluating how many bytes are to be
+ *  written and how many are to be read from the I2C peripheral. Due to common
+ *  I2C data transfer processes, to be written will always sent before any data
+ *  is read.
+ *
+ *  The data written to the peripheral is preceded with the peripheral's 7-bit
+ *  I2C slave address (with the Write bit set).
+ *  After all the data has been transmitted, the driver will evaluate if any
+ *  data needs to be read from the device.
+ *  If so, a Re-START bit is sent, along with the same 7-bit I2C slave address
+ *  (with the Read bit). Else, the transfer is concluded with a STOP bit.
+ *  After the specified number of bytes have been read by the I2C, the transfer
+ *  is ended with a NACK and STOP bit.
+ *
+ *  In I2C_MODE_BLOCKING, I2C_transfer will block task execution until the
+ *  transaction has completed.
+ *
+ *  In I2C_MODE_CALLBACK, I2C_transfer does not block task execution and calls a
+ *  callback function specified by transferCallbackFxn when the transfer
+ *  completed. Success or failure of the transaction is determined via the
+ *  callback function's bool argument. If a transfer is already taking place,
+ *  the transaction is put on an internal queue. The queue is serviced in a
+ *  first come first served basis.
+ *  The I2C_Transaction structure must stay persistent until the I2C_transfer
+ *  function has completed!
+ *
+ *  @param  handle      A I2C_Handle
+ *
+ *  @param  transaction A pointer to a I2C_Transaction. All of the fields within
+ *                      transaction are WO (write-only) unless otherwise noted
+ *                      in the driver implementations.
+ *
+ *  @return In I2C_MODE_BLOCKING: true on successful transfer; false on an
+ *          error, such as an I2C bus fault (NACK).
+ *          In I2C_MODE_CALLBACK: always true. The transferCallbackFxn's bool
+ *          argument will be true if successful; false on an error, such as an
+ *          I2C bus fault (NACK).
+ *
+ *  @sa     I2C_open
+ */
+extern _Bool I2C_transfer(I2C_Handle handle, I2C_Transaction *transaction);
+
+
+
+
+
+# 58 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/i2c/I2CTiva.h"
+
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 490 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 520 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+
+
+# 60 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/i2c/I2CTiva.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/family/arm/m3/Hwi.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION DECLARATIONS
+ *     CONVERTORS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 1162 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/family/arm/m3/Hwi.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 1207 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/family/arm/m3/Hwi.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+# 62 "C:/ti/tirtos_tivac_2_16_00_08/products/tidrivers_tivac_2_16_00_08/packages/ti/drivers/i2c/I2CTiva.h"
+
+/**
+ *  @addtogroup I2C_STATUS
+ *  I2CTiva_STATUS_* macros are command codes only defined in the
+ *  I2CTiva.h driver implementation and need to:
+ *  @code
+ *  #include <ti/drivers/i2c/I2CTiva.h>
+ *  @endcode
+ *  @{
+ */
+
+/* Add I2CTiva_STATUS_* macros here */
+
+/** @}*/
+
+/**
+ *  @addtogroup I2C_CMD
+ *  I2CTiva_CMD_* macros are command codes only defined in the
+ *  I2CTiva.h driver implementation and need to:
+ *  @code
+ *  #include <ti/drivers/i2c/I2CTiva.h>
+ *  @endcode
+ *  @{
+ */
+
+/* Add I2CTiva_CMD_* macros here */
+
+/** @}*/
+
+/* I2C function table pointer */
+extern const I2C_FxnTable I2CTiva_fxnTable;
+
+/*!
+ *  @brief  I2CTiva mode
+ *
+ *  This enum defines the state of the I2C driver's state-machine. Do not
+ *  modify.
+ */
+typedef enum I2CTiva_Mode {
+    I2CTiva_IDLE_MODE = 0,  /* I2C is not performing a transaction */
+    I2CTiva_WRITE_MODE,     /* I2C is currently performing write operations */
+    I2CTiva_READ_MODE,      /* I2C is currently performing read operations */
+    I2CTiva_ERROR = 0xFF    /* I2C error has occurred, exit gracefully */
+} I2CTiva_Mode;
+
+/*!
+ *  @brief  I2CTiva Hardware attributes
+ *
+ *  The baseAddr and intNum fields are used by driverlib APIs and therefore must
+ *  be populated by driverlib macro definitions. For TivaWare these definitions
+ *  are found in:
+ *      - inc/hw_memmap.h
+ *      - inc/hw_ints.h
+ *
+ *  intPriority is the I2C peripheral's interrupt priority, as defined by the
+ *  underlying OS.  It is passed unmodified to the underlying OS's interrupt
+ *  handler creation code, so you need to refer to the OS documentation
+ *  for usage.  For example, for SYS/BIOS applications, refer to the
+ *  ti.sysbios.family.arm.m3.Hwi documentation for SYS/BIOS usage of
+ *  interrupt priorities.  If the driver uses the ti.drivers.ports interface
+ *  instead of making OS calls directly, then the HwiP port handles the
+ *  interrupt priority in an OS specific way.  In the case of the SYS/BIOS
+ *  port, intPriority is passed unmodified to Hwi_create().
+ *
+ *  A sample structure is shown below:
+ *  @code
+ *  const I2CTiva_HWAttrs i2cTivaHWAttrs[] = {
+ *      {
+ *          .baseAddr = I2C1_BASE,
+ *          .intNum = INT_I2C1,
+ *          .intPriority = (~0)
+ *      },
+ *      {
+ *          .baseAddr = I2C3_BASE,
+ *          .intNum = INT_I2C3,
+ *          .intPriority = (~0)
+ *      },
+ *  };
+ *  @endcode
+ */
+typedef struct I2CTiva_HWAttrs {
+    /*! I2C Peripheral's base address */
+    unsigned int baseAddr;
+    /*! I2C Peripheral's interrupt vector */
+    unsigned int intNum;
+    /*! I2C Peripheral's interrupt priority */
+    unsigned int intPriority;
+} I2CTiva_HWAttrs;
+
+/*!
+ *  @brief  I2CTiva Object
+ *
+ *  The application must not access any member variables of this structure!
+ */
+typedef struct I2CTiva_Object {
+    ti_sysbios_knl_Semaphore_Struct    mutex;            /* Grants exclusive access to I2C */
+    ti_sysbios_knl_Semaphore_Struct    transferComplete; /* Notify finished I2C transfer */
+
+    I2C_TransferMode    transferMode;        /* Blocking or Callback mode */
+    I2C_CallbackFxn     transferCallbackFxn; /* Callback function pointer */
+
+    ti_sysbios_family_arm_m3_Hwi_Struct hwi;  /* Hwi object handle */
+
+    volatile I2CTiva_Mode mode;         /* Stores the I2C state */
+
+    I2C_Transaction    *currentTransaction; /* Pointer to current I2C transaction */
+
+    uint8_t            *writeBufIdx;    /* Internal inc. writeBuf index */
+    size_t              writeCountIdx;  /* Internal dec. writeCounter */
+
+    uint8_t            *readBufIdx;     /* Internal inc. readBuf index */
+    size_t              readCountIdx;   /* Internal dec. readCounter */
+
+    /* I2C transaction pointers for I2C_MODE_CALLBACK */
+    I2C_Transaction    *headPtr;        /* Head ptr for queued transactions */
+    I2C_Transaction    *tailPtr;        /* Tail ptr for queued transactions */
+
+    _Bool                isOpen;         /* flag to indicate module is open */
+} I2CTiva_Object;
+
+/* Do not interfere with the app if they include the family Hwi module */
+
+
+
+
+
+
+# 66 "../source/config/serialConfig.c"
+# 1 "..\\source\\config\\../defs.h"
+/*
+ * defs.h
+ *
+ *  Created on: Aug 16, 2020
+ *      Author: Dan
+ */
+
+
+
+
+# 1 "..\\source\\config\\..\\utils/ioDefs.h"
+
+
+
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 347 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 369 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+
+
+# 425 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/Error.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:45; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 6 "..\\source\\config\\..\\utils/ioDefs.h"
+# 1 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/System.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 426 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/System.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 449 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/System.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+
+
+# 516 "C:/ti/xdctools_3_32_00_06_core/packages/xdc/runtime/System.h"
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 12-9-2015 17:36:49; /db/ztree/library/trees/xdc/xdc-B06/src/packages/
+ */
+
+# 7 "..\\source\\config\\..\\utils/ioDefs.h"
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/family/arm/m3/Hwi.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     VIRTUAL FUNCTIONS
+ *     FUNCTION DECLARATIONS
+ *     CONVERTORS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 1162 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/family/arm/m3/Hwi.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 1207 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/family/arm/m3/Hwi.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+
+
+# 8 "..\\source\\config\\..\\utils/ioDefs.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+//AD0, AD1 (AD0 is MSB)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Segment Arrangement https://en.wikipedia.org/wiki/Seven-segment_display#/media/File:7_Segment_Display_with_Labeled_Segments.svg
+ *    A
+ *  F   B
+ *    G
+ *  E   C
+ *    D
+ *
+ * MIRRORED ALONG Z:
+ *    A
+ *  B   F
+ *    G
+ *  C   E
+ *    D
+ */
+
+/* Segment Mapping
+ * Pins of IO Expander in IO Expander order, Motor Driver, Physical Location (from board side) Segment Assignment
+ * P00	S7F Bottom		D
+ * P01 	S7R
+ * P02	S6F	Right Bot	E
+ * P03	S6R
+ * P04	S5F	Right Mid	G
+ * P05	S5R
+ * P06	S4F	Right Top	F
+ * P07	S4R
+ * P10	S3F	Top			A
+ * P11	S3R
+ * P12	S2F	Left Top	B
+ * P13	S2R
+ * P14	S1F	Left Mid	Extra
+ * P15	S1R
+ * P16	S0F	Left Bot	C
+ * P17	S0R
+ */
+
+typedef union SegState
+{
+    struct
+    { //right ordering for io driver
+        uint16_t a :2;
+        uint16_t b :2;
+        uint16_t extra :2;
+        uint16_t c :2;
+        uint16_t d :2;
+        uint16_t e :2;
+        uint16_t g :2;
+        uint16_t f :2;
+    };
+    uint16_t rawWord;
+} SegState;
+
+extern const SegState segVal0;
+extern const SegState segVal1;
+extern const SegState segVal2;
+extern const SegState segVal3;
+extern const SegState segVal4;
+extern const SegState segVal5;
+extern const SegState segVal6;
+extern const SegState segVal7;
+extern const SegState segVal8;
+extern const SegState segVal9;
+extern const SegState segVal_A;
+extern const SegState segVal_b;
+extern const SegState segVal_C;
+extern const SegState segVal_c;
+extern const SegState segVal_d;
+extern const SegState segVal_E;
+extern const SegState segVal_F;
+extern const SegState segVal_G;
+extern const SegState segVal_H;
+extern const SegState segVal_h;
+extern const SegState segVal_I;
+extern const SegState segVal_i;
+extern const SegState segVal_J;
+extern const SegState segVal_L;
+extern const SegState segVal_n;
+extern const SegState segVal_O;
+extern const SegState segVal_o;
+extern const SegState segVal_P;
+extern const SegState segVal_q;
+extern const SegState segVal_r;
+extern const SegState segVal_S;
+extern const SegState segVal_t;
+extern const SegState segVal_U;
+extern const SegState segVal_u;
+extern const SegState segVal_y;
+extern const SegState segValQuestion;
+
+extern const SegState segValBlank;
+extern const SegState segValAll;
+extern const SegState segValOff;
+
+extern const SegState segValShowExtra;
+extern const SegState segValHideExtra;
+
+extern const SegState segValAOnly;
+extern const SegState segValBOnly;
+extern const SegState segValCOnly;
+extern const SegState segValDOnly;
+extern const SegState segValEOnly;
+extern const SegState segValFOnly;
+extern const SegState segValGOnly;
+
+//if any conflict or brake, do coast
+SegState unionSeg(SegState s0, SegState s1);
+
+//Return new state or 0 if new state is the same is old. Does not care if anything is set to brake. Only periodically do a full set, usually just delta segments
+SegState subtractSeg(SegState newState, SegState oldState);
+
+//set state then turn off after delayms
+_Bool applySegState(uint8_t slaveAddress, SegState state, uint32_t onTimeMs);
+_Bool applySegDelta(uint8_t slaveAddress, SegState oldState, SegState newState,
+                   uint32_t onTimeMs);
+
+# 12 "..\\source\\config\\../defs.h"
+
+
+
+
+
+
+# 67 "../source/config/serialConfig.c"
+# 1 "..\\source\\config\\../ioDriver.h"
+/*
+ * ioDriver.h
+ *
+ *  Created on: Aug 21, 2020
+ *      Author: Dan
+ */
+
+
+
+
+# 1 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-B06
+ */
+
+/*
+ * ======== GENERATED SECTIONS ========
+ *     
+ *     PROLOGUE
+ *     INCLUDES
+ *     
+ *     CREATE ARGS
+ *     INTERNAL DEFINITIONS
+ *     MODULE-WIDE CONFIGS
+ *     PER-INSTANCE TYPES
+ *     FUNCTION DECLARATIONS
+ *     SYSTEM FUNCTIONS
+ *     
+ *     EPILOGUE
+ *     STATE STRUCTURES
+ *     PREFIX ALIASES
+ */
+
+
+/*
+ * ======== PROLOGUE ========
+ */
+
+# 490 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+
+
+/*
+ * ======== STATE STRUCTURES ========
+ */
+
+# 520 "C:/ti/tirtos_tivac_2_16_00_08/products/bios_6_45_01_29/packages/ti/sysbios/knl/Semaphore.h"
+
+
+/*
+ * ======== PREFIX ALIASES ========
+ */
+
+
+
+# 14 "..\\source\\config\\../ioDriver.h"
+# 1 "..\\source\\config\\..\\dtc.h"
+/*
+ * dtc.h
+ *
+ *  Created on: Aug 30, 2020
+ *      Author: Dan
+ */
+
+
+
+
+
+typedef enum Dtc {
+	IO_0_FAIL_DTC = 0, IO_1_FAIL_DTC, IO_2_FAIL_DTC, IO_3_FAIL_DTC, IO_GENERIC_FAIL_DTC, DTC_COUNT
+} Dtc;
+typedef enum DtcStatus {
+	DTC_UNSET, DTC_PENDING, DTC_SET
+} DtcStatus;
+
+typedef struct DtcStruct {
+	DtcStatus status;
+	uint8_t count;
+	String errMessage;
+	uint32_t detailVal;
+} DtcStruct;
+
+void setDtc(Dtc code, uint32_t detailVal, String errMessage);
+DtcStatus getDtcStatus(Dtc code);
+void clearDtc(Dtc code);
+void printDtcs();
+# 15 "..\\source\\config\\../ioDriver.h"
+
+ti_sysbios_knl_Semaphore_Handle ioSemaphore;
+
+_Bool checkIOPresence(uint8_t slaveAddress);
+void initIOSemaphore();
+void initIOHwi();
+_Bool writeData(uint8_t slaveAddress, uint16_t data);
+Dtc lookupDtc(uint8_t slaveAddress);
+
+# 68 "../source/config/serialConfig.c"
+
+SPI_Handle ledSPIHandle;
+
+//void spiCallback(SPI_Handle handle, SPI_Transaction *transaction) {
+//
+//	System_printf("SPI Callback: Frame index %d, status %d", (uint32_t) transaction->arg, transaction->status);
+//}
+
+/*
+ *  =============================== DMA ===============================
+ */
+
+#pragma DATA_ALIGN(dmaControlTable, 1024)
+
+static tDMAControlTable dmaControlTable[32];
+static _Bool dmaInitialized = 0;
+
+/* Hwi_Struct used in the initDMA Hwi_construct call */
+static ti_sysbios_family_arm_m3_Hwi_Struct dmaHwiStruct;
+
+/*
+ *  ======== dmaErrorHwi ========
+ */
+static void dmaErrorHwi(UArg arg) {
+	xdc_runtime_System_printf__E("DMA error code: %d\n", uDMAErrorStatusGet());
+	uDMAErrorStatusClear();
+	xdc_runtime_System_abort__E("DMA error!!");
+}
+
+void initDMA(void) {
+	xdc_runtime_Error_Block eb;
+	ti_sysbios_family_arm_m3_Hwi_Params hwiParams;
+
+	if (!dmaInitialized) {
+		xdc_runtime_Error_init__E(&eb);
+		ti_sysbios_family_arm_m3_Hwi_Params_init(&hwiParams);
+		ti_sysbios_family_arm_m3_Hwi_construct(&(dmaHwiStruct), 63, dmaErrorHwi, &hwiParams, &eb);
+		if (xdc_runtime_Error_check__E(&eb)) {
+			xdc_runtime_System_abort__E("Couldn't construct DMA error hwi");
+		}
+
+		SysCtlPeripheralEnable(0xf0000c00);
+		uDMAEnable();
+		uDMAControlBaseSet(dmaControlTable);
+
+		dmaInitialized = 1;
+	}
+}
+
+
+
+SPITivaDMA_Object spiTivaDMAObject;
+
+#pragma DATA_ALIGN(spiTivaDMAscratchBuf, 32)
+
+uint32_t spiTivaDMAscratchBuf;
+
+const SPITivaDMA_HWAttrs spiTivaDMAHWAttr = {
+		.baseAddr = 0x40009000,
+		.intNum = 50,
+		.intPriority = (~0),
+		.scratchBufPtr = &spiTivaDMAscratchBuf,
+		.defaultTxBufValue = 0,
+		.rxChannelIndex = 24,
+		.txChannelIndex = 25,
+		.channelMappingFxn = uDMAChannelAssign,
+		.rxChannelMappingFxnArg = 0x0001000A,
+		.txChannelMappingFxnArg = 0x0001000B };
+
+const SPI_Config SPI_config[] = { { .fxnTablePtr = &SPITivaDMA_fxnTable, .object = &spiTivaDMAObject, .hwAttrs = &spiTivaDMAHWAttr }, { 0, 0, 0 } };
+
+void initSPI(void) {
+	initDMA();
+
+	SysCtlPeripheralEnable(0xf0001c01);
+
+	GPIOPinConfigure(0x00050402);
+	GPIOPinTypeSSI(0x40025000, 0x00000002);
+
+	GPIOPinConfigure(0x00030002);
+	GPIOPinTypeSSI(0x40007000, 0x00000001);
+
+	GPIOPadConfigSet(0x40025000, 0x00000002, 0x00000001, 0x0000000A);
+	GPIOPadConfigSet(0x40007000, 0x00000001, 0x00000001, 0x0000000A);
+
+	SPI_Params params;
+	SPI_Params_init(&params);
+	params.bitRate = 1000000;
+	params.dataSize = 8; //bits
+	params.frameFormat = SPI_POL1_PHA0;
+	params.mode = SPI_MASTER;
+	params.transferMode = SPI_MODE_BLOCKING;
+
+	ledSPIHandle = SPI_open(0, &params);
+	if (!ledSPIHandle)
+		xdc_runtime_System_printf__E("Failed to open SPI");
+}
+
+void initI2C(void) {
+	SysCtlPeripheralEnable(0xf0002002);
+
+	GPIOPinConfigure(0x00041403);
+	GPIOPinTypeI2C(0x40024000, 0x00000020);
+
+	GPIOPinConfigure(0x00041003);
+	GPIOPinTypeI2CSCL(0x40024000, 0x00000010);
+
+	GPIOPadConfigSet(0x40024000, 0x00000020, 0x00000066, 0x00000009);
+	GPIOPadConfigSet(0x40024000, 0x00000010, 0x00000066, 0x0000000A);
+
+	I2CMasterInitExpClk(0x40022000, SysCtlClockGet(), 1);
+	I2CMasterTimeoutSet(0x40022000, (10*400)/16);//10ms timeout
+	initIOSemaphore();
+	initIOHwi();
 }

@@ -15,6 +15,8 @@
 #include "Leds.h"
 #include "defs.h"
 #include "config/gpioConfig.h"
+#include "utils/ledDefs.h"
+#include "utils/iodefs.h"
 
 void buildFrameBuf();
 void initFrameBuf();
@@ -24,7 +26,8 @@ void initFrameBuf();
 
 CRGB colorCorrection=LEDColorCorrection::TypicalLEDStrip;
 CRGB colorTemperature=ColorTemperature::UncorrectedTemperature;
-CRGB leds[NUM_LEDS];
+LedStringVals ledStringVals;
+LedStringMasks ledStringMasks;
 uint8_t brightness;
 
 uint8_t frameBuf[BUFSIZE];
@@ -36,10 +39,13 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
 	initFrameBuf();
 
 	while (1) {
-		fill_rainbow(leds, NUM_LEDS, frameIdx, 20);
-		//fill_solid(leds, NUM_LEDS,CRGB::White);
+		fill_rainbow((CRGB *)ledStringVals.fullArray, NUM_LEDS, frameIdx, 20);
+		//fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::Black);
+		//fill_solid((CRGB *)ledStringVals.fullArray, (frameIdx/10)%NUM_LEDS,CRGB::White);
 		if(frameIdx%60==0)
 			brightness++;
+
+		calculateMask(segValQuestion,ledStringMasks.hoursTens,0);
 
 		buildFrameBuf();
 
@@ -60,15 +66,14 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
 }
 
 void buildFrameBuf() {
-	uint8_t brightByte = ~(brightness | 0xE0);
-	CRGB adjustment = CLEDController::computeAdjustment(255, colorCorrection, colorTemperature);
+	//CRGB adjustment = CLEDController::computeAdjustment(255, colorCorrection, colorTemperature);
 	for (size_t i = 0; i < NUM_LEDS; i++) {
 		size_t bufIdx = i * 4 + 4;
 
-		frameBuf[bufIdx++] = brightByte;
-		frameBuf[bufIdx++] = ~scale8(leds[i].blue, adjustment.blue);
-		frameBuf[bufIdx++] = ~scale8(leds[i].green, adjustment.green);
-		frameBuf[bufIdx] = ~scale8(leds[i].red, adjustment.red);
+		frameBuf[bufIdx++] = ~(((ledStringMasks.fullArray[i])?0:brightness) | 0xE0);
+		frameBuf[bufIdx++] = ~(ledStringVals.fullArray[i]).blue;
+		frameBuf[bufIdx++] = ~(ledStringVals.fullArray[i]).green;
+		frameBuf[bufIdx] = ~(ledStringVals.fullArray[i]).red;
 	}
 
 }
