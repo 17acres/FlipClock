@@ -56,6 +56,8 @@
 #include "ioDriver.h"
 #include "hsd.h"
 #include "dtc.h"
+#include "utils/ledDefs.h"
+
 #define TASKSTACKSIZE   1024
 
 #include "Leds.h"
@@ -119,6 +121,8 @@ void sysMonitor(UArg arg0, UArg arg1) {
 		uint32_t duration = 300;
 
 		applySegDelta(IO_0_ADDR, lastState, thisState, duration);
+		SegmentMaskRequest request=(SegmentMaskRequest){thisState, SEG_LED_ID_HOURS_TENS};
+		requestMaskUpdate(&request, BIOS_WAIT_FOREVER);
 
 		SegState nextState = stateList[(loopCount + 1) % numStates];
 		SegState lastThisDiff = subtractSeg(thisState, lastState);

@@ -41,3 +41,7 @@ void calculateMask(SegState segState, bool returnMaskArray[], uint8_t numExtraLe
 	returnMaskArray[numExtraLeds + LEDS_PER_SEG * 6 + 1] = (segState.d == SEG_HIDE);
 	returnMaskArray[numExtraLeds + LEDS_PER_SEG * 6 + 2] = (segState.d == SEG_HIDE);
 }
+
+void requestMaskUpdate(SegmentMaskRequest *request, uint32_t timeout){
+	Mailbox_post(maskRequestMailbox, request, timeout);
+}

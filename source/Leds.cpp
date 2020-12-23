@@ -10,6 +10,7 @@
 #include <xdc/runtime/System.h>
 #include <ti/sysbios/BIOS.h>
 #include <ti/sysbios/knl/Task.h>
+#include <ti/sysbios/knl/Mailbox.h>
 #include "FastLED/FastLED.h"
 
 #include "Leds.h"
@@ -20,6 +21,7 @@
 
 void buildFrameBuf();
 void initFrameBuf();
+void initMailboxes();
 
 #define TERM_BYTES ((NUM_LEDS+14)/16) //https://github.com/pololu/apa102-arduino/blob/master/APA102.h
 #define BUFSIZE (4+NUM_LEDS*4+TERM_BYTES)
@@ -38,14 +40,24 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
 
 	initFrameBuf();
 
+	initMailboxes();
 	while (1) {
 		fill_rainbow((CRGB *)ledStringVals.fullArray, NUM_LEDS, frameIdx, 20);
 		//fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::Black);
-		//fill_solid((CRGB *)ledStringVals.fullArray, (frameIdx/10)%NUM_LEDS,CRGB::White);
+		//fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::White);
 		if(frameIdx%60==0)
 			brightness++;
 
-		calculateMask(segValQuestion,ledStringMasks.hoursTens,0);
+		SegmentMaskRequest request;
+
+		while(Mailbox_pend(maskRequestMailbox, &request, BIOS_NO_WAIT)){
+			bool *targetArray;
+			if(request.segmentLedId==SEG_LED_ID_HOURS_TENS){
+				targetArray=ledStringMasks.hoursTens;
+			}
+			if(targetArray!=0)
+				calculateMask(request.segState,targetArray,0);
+		}
 
 		buildFrameBuf();
 
@@ -70,7 +82,11 @@ void buildFrameBuf() {
 	for (size_t i = 0; i < NUM_LEDS; i++) {
 		size_t bufIdx = i * 4 + 4;
 
-		frameBuf[bufIdx++] = ~(((ledStringMasks.fullArray[i])?0:brightness) | 0xE0);
+		if(ledStringMasks.fullArray[i]){
+			frameBuf[bufIdx++] = ~(0x0 | 0xE0);
+		}else{
+			frameBuf[bufIdx++] = ~(brightness | 0xE0);
+		}
 		frameBuf[bufIdx++] = ~(ledStringVals.fullArray[i]).blue;
 		frameBuf[bufIdx++] = ~(ledStringVals.fullArray[i]).green;
 		frameBuf[bufIdx] = ~(ledStringVals.fullArray[i]).red;
@@ -88,3 +104,16 @@ void initFrameBuf() {
 		frameBuf[i] = ~0x00;
 	}
 }
+
+void initMailboxes(){
+	Mailbox_Params maskparams;
+	Mailbox_Params_init(&maskparams);
+	maskRequestMailbox=Mailbox_create(sizeof(SegmentMaskRequest),6,&maskparams, NULL);
+}
+
+
+extern "C" void initLeds(){//really has to be done first
+	initMailboxes();
+}
+
+

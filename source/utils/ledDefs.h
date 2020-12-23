@@ -18,6 +18,7 @@ extern "C" {
 #include <xdc/runtime/Error.h>
 #include <xdc/runtime/System.h>
 #include <ti/sysbios/family/arm/m3/Hwi.h>
+#include <ti/sysbios/knl/Mailbox.h>
 
 #include <inc/hw_ints.h>
 #include <inc/hw_memmap.h>
@@ -114,12 +115,17 @@ typedef union LedStringMasks{
 } LedStringMasks;
 
 typedef struct SegmentMaskRequest {
-	bool maskArray[MAX_LEDS_PER_DIGIT];
+	SegState segState;
 	uint8_t segmentLedId;
 } SegmentMaskRequest;
 
 void calculateMask(SegState segState, bool returnMaskArray[], uint8_t numExtraLeds); //returnMaskArray of appropriate size
+void requestMaskUpdate(SegmentMaskRequest *request, uint32_t timeout);
 
+#define NUM_LEDS (sizeof(LedStringVals)/sizeof(CRGB_C))
+
+
+Mailbox_Handle maskRequestMailbox;
 #ifdef __cplusplus
 }
 #endif
