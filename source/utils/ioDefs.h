@@ -68,21 +68,30 @@
  * P17	S0R
  */
 
-typedef union SegState
-{
-    struct
-    { //right ordering for io driver
-        uint16_t a :2;
-        uint16_t b :2;
-        uint16_t extra :2;
-        uint16_t c :2;
-        uint16_t d :2;
-        uint16_t e :2;
-        uint16_t g :2;
-        uint16_t f :2;
-    };
-    uint16_t rawWord;
+typedef union SegState {
+	struct { //right ordering for io driver
+		uint16_t a :2;
+		uint16_t b :2;
+		uint16_t extra :2;
+		uint16_t c :2;
+		uint16_t d :2;
+		uint16_t e :2;
+		uint16_t g :2;
+		uint16_t f :2;
+	};
+	uint16_t rawWord;
 } SegState;
+
+typedef struct SegStateFade{ //255 means full brightness. like SegState but for variable brightness
+	uint8_t a;
+	uint8_t b;
+	uint8_t extra;
+	uint8_t c;
+	uint8_t d;
+	uint8_t e;
+	uint8_t g;
+	uint8_t f;
+} SegStateFade;
 
 extern const SegState segVal0;
 extern const SegState segVal1;
@@ -142,9 +151,10 @@ SegState unionSeg(SegState s0, SegState s1);
 //Return new state or 0 if new state is the same is old. Does not care if anything is set to brake. Only periodically do a full set, usually just delta segments
 SegState subtractSeg(SegState newState, SegState oldState);
 
+SegStateFade calculateFadedSegState(SegState state);
+
 //set state then turn off after delayms
 bool applySegState(uint8_t slaveAddress, SegState state, uint32_t onTimeMs);
-bool applySegDelta(uint8_t slaveAddress, SegState oldState, SegState newState,
-                   uint32_t onTimeMs);
+bool applySegDelta(uint8_t slaveAddress, SegState oldState, SegState newState, uint32_t onTimeMs);
 
 #endif

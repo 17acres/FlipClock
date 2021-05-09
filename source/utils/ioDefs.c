@@ -73,6 +73,19 @@ SegState subtractSeg(SegState newState, SegState oldState) {
 	return newState;
 }
 
+SegStateFade calculateFadedSegState(SegState segState){
+	return (SegStateFade){
+		(segState.a == SEG_SHOW)*255,
+		(segState.b == SEG_SHOW)*255,
+		(segState.extra == SEG_SHOW)*255,
+		(segState.c == SEG_SHOW)*255,
+		(segState.d == SEG_SHOW)*255,
+		(segState.e == SEG_SHOW)*255,
+		(segState.g == SEG_SHOW)*255,
+		(segState.f == SEG_SHOW)*255
+	};
+}
+
 bool applySegState(uint8_t slaveAddress, SegState state, uint32_t onTimeMs){
 	writeData(slaveAddress, state.rawWord);
 	Task_sleep(onTimeMs);

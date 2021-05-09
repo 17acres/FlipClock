@@ -26,10 +26,10 @@ void initMailboxes();
 #define TERM_BYTES ((NUM_LEDS+14)/16) //https://github.com/pololu/apa102-arduino/blob/master/APA102.h
 #define BUFSIZE (4+NUM_LEDS*4+TERM_BYTES)
 
-CRGB colorCorrection=LEDColorCorrection::TypicalLEDStrip;
-CRGB colorTemperature=ColorTemperature::UncorrectedTemperature;
+CRGB colorCorrection = LEDColorCorrection::TypicalLEDStrip;
+CRGB colorTemperature = ColorTemperature::UncorrectedTemperature;
 LedStringVals ledStringVals;
-LedStringMasks ledStringMasks;
+LedStringMasks ledStringMasks; //255 means on
 uint8_t brightness;
 
 uint8_t frameBuf[BUFSIZE];
@@ -42,21 +42,21 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
 
 	initMailboxes();
 	while (1) {
-		fill_rainbow((CRGB *)ledStringVals.fullArray, NUM_LEDS, frameIdx, 20);
+		fill_rainbow((CRGB *) ledStringVals.fullArray, NUM_LEDS, frameIdx, 20);
 		//fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::Black);
 		//fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::White);
-		if(frameIdx%60==0)
+		if (frameIdx % 60 == 0)
 			brightness++;
 
 		SegmentMaskRequest request;
 
-		while(Mailbox_pend(maskRequestMailbox, &request, BIOS_NO_WAIT)){
-			bool *targetArray;
-			if(request.segmentLedId==SEG_LED_ID_HOURS_TENS){
-				targetArray=ledStringMasks.hoursTens;
+		while (Mailbox_pend(maskRequestMailbox, &request, BIOS_NO_WAIT)) {
+			uint8_t *selectedMaskArray;
+			if (request.segmentLedId == SEG_LED_ID_HOURS_TENS) {
+				selectedMaskArray = ledStringMasks.hoursTens;
 			}
-			if(targetArray!=0)
-				calculateMask(request.segState,targetArray,0);
+			if (selectedMaskArray != 0)
+				calculateMask(request.segState, selectedMaskArray, 0);
 		}
 
 		buildFrameBuf();
@@ -65,7 +65,7 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
 		transaction.count = sizeof(frameBuf);
 		transaction.txBuf = frameBuf;
 		transaction.rxBuf = rxbuf;
-		transaction.arg = (void *)frameIdx;
+		transaction.arg = (void *) frameIdx;
 		bool success;
 		success = SPI_transfer(ledSPIHandle, &transaction);
 		if (!success) {
@@ -82,14 +82,10 @@ void buildFrameBuf() {
 	for (size_t i = 0; i < NUM_LEDS; i++) {
 		size_t bufIdx = i * 4 + 4;
 
-		if(ledStringMasks.fullArray[i]){
-			frameBuf[bufIdx++] = ~(0x0 | 0xE0);
-		}else{
-			frameBuf[bufIdx++] = ~(brightness | 0xE0);
-		}
-		frameBuf[bufIdx++] = ~(ledStringVals.fullArray[i]).blue;
-		frameBuf[bufIdx++] = ~(ledStringVals.fullArray[i]).green;
-		frameBuf[bufIdx] = ~(ledStringVals.fullArray[i]).red;
+		frameBuf[bufIdx++] = ~(brightness | 0xE0);
+		frameBuf[bufIdx++] = ~(scale8(ledStringVals.fullArray[i].blue, ledStringMasks.fullArray[i]));
+		frameBuf[bufIdx++] = ~(scale8(ledStringVals.fullArray[i].green, ledStringMasks.fullArray[i]));
+		frameBuf[bufIdx] = ~(scale8(ledStringVals.fullArray[i].red, ledStringMasks.fullArray[i]));
 	}
 
 }
@@ -105,15 +101,13 @@ void initFrameBuf() {
 	}
 }
 
-void initMailboxes(){
+void initMailboxes() {
 	Mailbox_Params maskparams;
 	Mailbox_Params_init(&maskparams);
-	maskRequestMailbox=Mailbox_create(sizeof(SegmentMaskRequest),6,&maskparams, NULL);
+	maskRequestMailbox = Mailbox_create(sizeof(SegmentMaskRequest), 6, &maskparams, NULL);
 }
 
-
-extern "C" void initLeds(){//really has to be done first
+extern "C" void initLeds() {		//really has to be done first
 	initMailboxes();
 }
-
 

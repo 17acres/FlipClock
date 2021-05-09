@@ -109,17 +109,19 @@ typedef union LedStringVals{
 	CRGB_C fullArray[0]; //https://stackoverflow.com/questions/23525861/get-sizeof-anonymous-struct-inside-union
 } LedStringVals;
 
+//255 means on
 typedef union LedStringMasks{
-	GEN_LED_STRING_STRUCT_ELEMENTS(bool);
-	bool fullArray[0];
+	GEN_LED_STRING_STRUCT_ELEMENTS(uint8_t);
+	uint8_t fullArray[0];
 } LedStringMasks;
 
 typedef struct SegmentMaskRequest {
-	SegState segState;
+	SegStateFade segState;
 	uint8_t segmentLedId;
 } SegmentMaskRequest;
 
-void calculateMask(SegState segState, bool returnMaskArray[], uint8_t numExtraLeds); //returnMaskArray of appropriate size
+
+void calculateMask(SegStateFade segState, uint8_t returnMaskArray[], uint8_t numExtraLeds); //returnMaskArray of appropriate size
 void requestMaskUpdate(SegmentMaskRequest *request, uint32_t timeout);
 
 #define NUM_LEDS (sizeof(LedStringVals)/sizeof(CRGB_C))

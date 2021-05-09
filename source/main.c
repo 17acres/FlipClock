@@ -103,7 +103,62 @@ void sysMonitor(UArg arg0, UArg arg1) {
 //                             segVal_P, segVal_q, segVal_r, segVal_S, segVal_t,
 //                             segVal_U, segVal_u, segVal_y, segValQuestion,
 //                             segValBlank, segValAll };
-	SegState stateList[] = { segVal0, segVal1, segVal2, segVal3, segVal4, segVal5, segVal6, segVal7, segVal8, segVal9 };
+	//SegState stateList[] = { segVal0, segVal1, segVal2, segVal3, segVal4, segVal5, segVal6, segVal7, segVal8, segVal9 };
+
+	SegState
+	stateList[]= {
+		segValBlank,
+		segValBlank,
+		segValBlank,
+		segValBlank,
+		segValBlank,
+		segValBlank,
+		segValBlank,
+		segValBlank,
+		segValBlank,
+		segValBlank,
+		(SegState) {.a=SEG_SHOW},
+		(SegState) {.b=SEG_SHOW},
+		(SegState) {.c=SEG_SHOW},
+		(SegState) {.d=SEG_SHOW},
+		(SegState) {.e=SEG_SHOW},
+		(SegState) {.f=SEG_SHOW},
+		(SegState) {.g=SEG_SHOW},
+		(SegState) {.a=SEG_HIDE},
+		(SegState) {.b=SEG_HIDE},
+		(SegState) {.c=SEG_HIDE},
+		(SegState) {.d=SEG_HIDE},
+		(SegState) {.e=SEG_HIDE},
+		(SegState) {.f=SEG_HIDE},
+		(SegState) {.g=SEG_HIDE},
+		(SegState) {.a=SEG_SHOW},
+		(SegState) {.b=SEG_SHOW},
+		(SegState) {.c=SEG_SHOW},
+		(SegState) {.d=SEG_SHOW},
+		(SegState) {.e=SEG_SHOW},
+		(SegState) {.f=SEG_SHOW},
+		(SegState) {.g=SEG_SHOW},
+		(SegState) {.a=SEG_HIDE},
+		(SegState) {.b=SEG_HIDE},
+		(SegState) {.c=SEG_HIDE},
+		(SegState) {.d=SEG_HIDE},
+		(SegState) {.e=SEG_HIDE},
+		(SegState) {.f=SEG_HIDE},
+		(SegState) {.g=SEG_HIDE},
+		segVal0, segVal1, segVal2, segVal3, segVal4, segVal5, segVal6, segVal7, segVal8, segVal9,
+		segVal0,
+		segVal0,
+		segVal0,
+		segVal0,
+		segVal0,
+		segVal0,
+		segVal0,
+		segVal0,
+		segVal0,
+		segVal0,
+		segVal0,
+		segVal0,
+	};
 	uint32_t numStates = sizeof(stateList) / sizeof(stateList[0]);
 	SegState lastState = segValBlank;
 	SegState lastDiffSuperDelta = segValAll; //delay on first time
@@ -120,9 +175,9 @@ void sysMonitor(UArg arg0, UArg arg1) {
 		SegState thisState = stateList[loopCount % numStates];
 		uint32_t duration = 300;
 
-		applySegDelta(IO_0_ADDR, lastState, thisState, duration);
-		SegmentMaskRequest request=(SegmentMaskRequest){thisState, SEG_LED_ID_HOURS_TENS};
+		SegmentMaskRequest request = (SegmentMaskRequest) { calculateFadedSegState(thisState), SEG_LED_ID_HOURS_TENS };
 		requestMaskUpdate(&request, BIOS_WAIT_FOREVER);
+		applySegDelta(IO_0_ADDR, lastState, thisState, duration);
 
 		SegState nextState = stateList[(loopCount + 1) % numStates];
 		SegState lastThisDiff = subtractSeg(thisState, lastState);
@@ -131,7 +186,8 @@ void sysMonitor(UArg arg0, UArg arg1) {
 		SegState diffDiff = subtractSeg(thisNextDiff, lastThisDiff);
 
 		/*diffUnion will be 00 if a segment was set to something different last time than if it was this time.
-		 * But it will return 00 if a segment was floating in both cases.
+		 * But it will return 00 if a se
+		 *gment was floating in both cases.
 		 * If the difference between the differences is nonzero then that means the segment changed,
 		 * or that the segment was off before. So it is only a problem to flip quickly if diffDiff-diffUnion is nonzero
 		 * since that means that in the next cycle we will be changing a segment at the next interval and we changed it
@@ -140,18 +196,20 @@ void sysMonitor(UArg arg0, UArg arg1) {
 		 */
 		SegState diffSuperDelta = subtractSeg(diffDiff, diffUnion);
 
-		uint32_t longDelayTime = 10000;
+		uint32_t longDelayTime = 350;
 		uint32_t shortDelayTime = 1000;
 
-		if (diffSuperDelta.rawWord != 0) {
-			Task_sleep(longDelayTime);
-		} else {
-			if (lastDiffSuperDelta.rawWord != 0)
-				Task_sleep(shortDelayTime);
-			else
-				//if there are two in a row don't get tricked
-				Task_sleep(longDelayTime - shortDelayTime);
-		}
+		Task_sleep(longDelayTime);
+
+//		if (diffSuperDelta.rawWord != 0) {
+//			Task_sleep(longDelayTime);
+//		} else {
+//			if (lastDiffSuperDelta.rawWord != 0)
+//				Task_sleep(shortDelayTime);
+//			else
+//				//if there are two in a row don't get tricked
+//				Task_sleep(longDelayTime - shortDelayTime);
+//		}
 
 		lastState = thisState;
 		lastDiffSuperDelta = diffSuperDelta;
