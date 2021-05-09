@@ -11,6 +11,7 @@
 #include <ti/sysbios/BIOS.h>
 #include <ti/sysbios/knl/Task.h>
 #include <ti/sysbios/knl/Mailbox.h>
+#include <ti/sysbios/knl/Clock.h>
 #include "FastLED/FastLED.h"
 
 #include "Leds.h"
@@ -26,8 +27,6 @@ void initMailboxes();
 #define TERM_BYTES ((NUM_LEDS+14)/16) //https://github.com/pololu/apa102-arduino/blob/master/APA102.h
 #define BUFSIZE (4+NUM_LEDS*4+TERM_BYTES)
 
-CRGB colorCorrection = LEDColorCorrection::TypicalLEDStrip;
-CRGB colorTemperature = ColorTemperature::UncorrectedTemperature;
 LedStringVals ledStringVals;
 LedStringMasks ledStringMasks; //255 means on
 uint8_t brightness;
@@ -38,10 +37,10 @@ uint8_t rxbuf[BUFSIZE]; //Garbage data, required by RTOS drivers
 extern "C" void updateLeds(UArg arg0, UArg arg1) {
 	uint32_t frameIdx = 0;
 
-	initFrameBuf();
-
-	initMailboxes();
 	while (1) {
+
+		uint32_t startTime=Clock_getTicks();
+
 		fill_rainbow((CRGB *) ledStringVals.fullArray, NUM_LEDS, frameIdx, 20);
 		//fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::Black);
 		//fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::White);
@@ -73,12 +72,15 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
 		}
 
 		++frameIdx;
-		Task_sleep(1000 / LED_FPS);
+		uint32_t delayOffset;
+		uint32_t completeTime=Clock_getTicks();
+		if(completeTime>startTime)
+			delayOffset=completeTime-startTime;
+		Task_sleep(1000 / LED_FPS-delayOffset); //make framerate more consistent
 	}
 }
 
 void buildFrameBuf() {
-	//CRGB adjustment = CLEDController::computeAdjustment(255, colorCorrection, colorTemperature);
 	for (size_t i = 0; i < NUM_LEDS; i++) {
 		size_t bufIdx = i * 4 + 4;
 
@@ -109,5 +111,6 @@ void initMailboxes() {
 
 extern "C" void initLeds() {		//really has to be done first
 	initMailboxes();
+	initFrameBuf();
 }
 

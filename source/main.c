@@ -175,7 +175,7 @@ void sysMonitor(UArg arg0, UArg arg1) {
 		SegState thisState = stateList[loopCount % numStates];
 		uint32_t duration = 300;
 
-		SegmentMaskRequest request = (SegmentMaskRequest) { calculateFadedSegState(thisState), SEG_LED_ID_HOURS_TENS };
+		SegmentMaskRequest request = (SegmentMaskRequest) { calculateFadedSegState(thisState)*0.5+128, SEG_LED_ID_HOURS_TENS };
 		requestMaskUpdate(&request, BIOS_WAIT_FOREVER);
 		applySegDelta(IO_0_ADDR, lastState, thisState, duration);
 
