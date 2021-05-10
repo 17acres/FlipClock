@@ -10,7 +10,7 @@
 #include "../ioDriver.h"
 #include <xdc/std.h>
 #include <xdc/runtime/System.h>
-
+#include "../FastLED/lib8tion/scale8c.h"
 #include <ti/sysbios/BIOS.h>
 #include <ti/sysbios/knl/Task.h>
 
@@ -84,6 +84,21 @@ SegStateFade calculateFadedSegState(SegState segState){
 		(segState.g == SEG_SHOW)*255,
 		(segState.f == SEG_SHOW)*255
 	};
+}
+
+SegStateFade rampSegStage(SegState oldState, SegState newState, uint8_t amountOfOverlay){
+    SegStateFade oldFaded=calculateFadedSegState(oldState);
+    SegStateFade newFaded=calculateFadedSegState(newState);
+    return (SegStateFade){
+        blend8(oldFaded.a, newFaded.a, amountOfOverlay),
+        blend8(oldFaded.b, newFaded.b, amountOfOverlay),
+        blend8(oldFaded.extra, newFaded.extra, amountOfOverlay),
+        blend8(oldFaded.c, newFaded.c, amountOfOverlay),
+        blend8(oldFaded.d, newFaded.d, amountOfOverlay),
+        blend8(oldFaded.e, newFaded.e, amountOfOverlay),
+        blend8(oldFaded.g, newFaded.g, amountOfOverlay),
+        blend8(oldFaded.f, newFaded.f, amountOfOverlay)
+    };
 }
 
 bool applySegState(uint8_t slaveAddress, SegState state, uint32_t onTimeMs){

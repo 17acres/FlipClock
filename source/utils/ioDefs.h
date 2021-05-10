@@ -152,6 +152,7 @@ SegState unionSeg(SegState s0, SegState s1);
 SegState subtractSeg(SegState newState, SegState oldState);
 
 SegStateFade calculateFadedSegState(SegState state);
+SegStateFade rampSegStage(SegState oldState, SegState newState, uint8_t amountOfOverlay);
 
 //set state then turn off after delayms
 bool applySegState(uint8_t slaveAddress, SegState state, uint32_t onTimeMs);

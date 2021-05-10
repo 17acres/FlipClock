@@ -78,129 +78,144 @@ Char sysMonitorStack[TASKSTACKSIZE];
  *  Toggle the Board_LED0. The Task_sleep is determined by arg0 which
  *  is configured for the heartBeat Task instance.
  */
-void heartBeatFxn(UArg arg0, UArg arg1) {
-	while (1) {
-		Task_sleep((UInt) arg0);
-		GPIO_toggle(LAUNCHPAD_LED_GREEN);
-	}
+void heartBeatFxn(UArg arg0, UArg arg1)
+{
+    while (1)
+    {
+        Task_sleep((UInt) arg0);
+        GPIO_toggle(LAUNCHPAD_LED_GREEN);
+    }
 }
 
-void sysMonitor(UArg arg0, UArg arg1) {
-	GPIO_write(IO_RESET, FALSE);
-	GPIO_write(ESP_ENABLE, TRUE);
-	GPIO_write(BUF_DISABLE, FALSE);
-	GPIO_write(HSD_DISABLE_0, FALSE);
-	int loopCount = 0;
-	Task_sleep(100);
-	clearMaxAdcVals();
+void sysMonitor(UArg arg0, UArg arg1)
+{
+    GPIO_write(IO_RESET, FALSE);
+    GPIO_write(ESP_ENABLE, TRUE);
+    GPIO_write(BUF_DISABLE, FALSE);
+    GPIO_write(HSD_DISABLE_0, FALSE);
+    int loopCount = 0;
+    Task_sleep(100);
+    clearMaxAdcVals();
 //segValAOnly, segValBOnly, segValCOnly, segValDOnly,segValEOnly, segValFOnly, segValGOnly,segValShowExtra,
-//    SegState stateList[] = { segVal0, segVal1, segVal2,
-//                             segVal3, segVal4, segVal5, segVal6, segVal7,
-//                             segVal8, segVal9, segVal_A, segVal_b,
-//                             segVal_C, segVal_c, segVal_d, segVal_E, segVal_F,
-//                             segVal_G, segVal_H, segVal_h, segVal_I, segVal_i,
-//                             segVal_J, segVal_L, segVal_n, segVal_O, segVal_o,
-//                             segVal_P, segVal_q, segVal_r, segVal_S, segVal_t,
-//                             segVal_U, segVal_u, segVal_y, segValQuestion,
-//                             segValBlank, segValAll };
-	//SegState stateList[] = { segVal0, segVal1, segVal2, segVal3, segVal4, segVal5, segVal6, segVal7, segVal8, segVal9 };
+    SegState stateList[] = { segVal0, segVal1, segVal2, segVal3, segVal4,
+                             segVal5, segVal6, segVal7, segVal8, segVal9,
+                             segVal_A, segVal_b, segVal_C, segVal_c, segVal_d,
+                             segVal_E, segVal_F, segVal_G, segVal_H, segVal_h,
+                             segVal_I, segVal_i, segVal_J, segVal_L, segVal_n,
+                             segVal_O, segVal_o, segVal_P, segVal_q, segVal_r,
+                             segVal_S, segVal_t, segVal_U, segVal_u, segVal_y,
+                             segValQuestion, segValBlank, segValAll };
+    //SegState stateList[] = { segVal0, segVal1, segVal2, segVal3, segVal4, segVal5, segVal6, segVal7, segVal8, segVal9 };
 
-	SegState
-	stateList[]= {
-		segValBlank,
-		segValBlank,
-		segValBlank,
-		segValBlank,
-		segValBlank,
-		segValBlank,
-		segValBlank,
-		segValBlank,
-		segValBlank,
-		segValBlank,
-		(SegState) {.a=SEG_SHOW},
-		(SegState) {.b=SEG_SHOW},
-		(SegState) {.c=SEG_SHOW},
-		(SegState) {.d=SEG_SHOW},
-		(SegState) {.e=SEG_SHOW},
-		(SegState) {.f=SEG_SHOW},
-		(SegState) {.g=SEG_SHOW},
-		(SegState) {.a=SEG_HIDE},
-		(SegState) {.b=SEG_HIDE},
-		(SegState) {.c=SEG_HIDE},
-		(SegState) {.d=SEG_HIDE},
-		(SegState) {.e=SEG_HIDE},
-		(SegState) {.f=SEG_HIDE},
-		(SegState) {.g=SEG_HIDE},
-		(SegState) {.a=SEG_SHOW},
-		(SegState) {.b=SEG_SHOW},
-		(SegState) {.c=SEG_SHOW},
-		(SegState) {.d=SEG_SHOW},
-		(SegState) {.e=SEG_SHOW},
-		(SegState) {.f=SEG_SHOW},
-		(SegState) {.g=SEG_SHOW},
-		(SegState) {.a=SEG_HIDE},
-		(SegState) {.b=SEG_HIDE},
-		(SegState) {.c=SEG_HIDE},
-		(SegState) {.d=SEG_HIDE},
-		(SegState) {.e=SEG_HIDE},
-		(SegState) {.f=SEG_HIDE},
-		(SegState) {.g=SEG_HIDE},
-		segVal0, segVal1, segVal2, segVal3, segVal4, segVal5, segVal6, segVal7, segVal8, segVal9,
-		segVal0,
-		segVal0,
-		segVal0,
-		segVal0,
-		segVal0,
-		segVal0,
-		segVal0,
-		segVal0,
-		segVal0,
-		segVal0,
-		segVal0,
-		segVal0,
-	};
-	uint32_t numStates = sizeof(stateList) / sizeof(stateList[0]);
-	SegState lastState = segValBlank;
-	SegState lastDiffSuperDelta = segValAll; //delay on first time
-	while (1) {
-		checkIOPresence(IO_0_ADDR);
-		printDtcs();
+//	SegState
+//	stateList[]= {
+//		segValBlank,
+//		segValBlank,
+//		segValBlank,
+//		segValBlank,
+//		segValBlank,
+//		segValBlank,
+//		segValBlank,
+//		segValBlank,
+//		segValBlank,
+//		segValBlank,
+//		(SegState) {.a=SEG_SHOW},
+//		(SegState) {.b=SEG_SHOW},
+//		(SegState) {.c=SEG_SHOW},
+//		(SegState) {.d=SEG_SHOW},
+//		(SegState) {.e=SEG_SHOW},
+//		(SegState) {.f=SEG_SHOW},
+//		(SegState) {.g=SEG_SHOW},
+//		(SegState) {.a=SEG_HIDE},
+//		(SegState) {.b=SEG_HIDE},
+//		(SegState) {.c=SEG_HIDE},
+//		(SegState) {.d=SEG_HIDE},
+//		(SegState) {.e=SEG_HIDE},
+//		(SegState) {.f=SEG_HIDE},
+//		(SegState) {.g=SEG_HIDE},
+//		(SegState) {.a=SEG_SHOW},
+//		(SegState) {.b=SEG_SHOW},
+//		(SegState) {.c=SEG_SHOW},
+//		(SegState) {.d=SEG_SHOW},
+//		(SegState) {.e=SEG_SHOW},
+//		(SegState) {.f=SEG_SHOW},
+//		(SegState) {.g=SEG_SHOW},
+//		(SegState) {.a=SEG_HIDE},
+//		(SegState) {.b=SEG_HIDE},
+//		(SegState) {.c=SEG_HIDE},
+//		(SegState) {.d=SEG_HIDE},
+//		(SegState) {.e=SEG_HIDE},
+//		(SegState) {.f=SEG_HIDE},
+//		(SegState) {.g=SEG_HIDE},
+//		segVal0, segVal1, segVal2, segVal3, segVal4, segVal5, segVal6, segVal7, segVal8, segVal9,
+//		segVal0,
+//		segVal0,
+//		segVal0,
+//		segVal0,
+//		segVal0,
+//		segVal0,
+//		segVal0,
+//		segVal0,
+//		segVal0,
+//		segVal0,
+//		segVal0,
+//		segVal0,
+//	};
+    uint32_t numStates = sizeof(stateList) / sizeof(stateList[0]);
+    SegState lastState = segValBlank;
+    SegState lastDiffSuperDelta = segValAll; //delay on first time
+    while (1)
+    {
+        checkIOPresence(IO_0_ADDR);
+        printDtcs();
 
-		if (getDtcStatus(lookupDtc(IO_0_ADDR)) == DTC_SET) {
-			GPIO_write(HSD_DISABLE_0, true);
-		} else {
-			GPIO_write(HSD_DISABLE_0, false);
-		}
+        if (getDtcStatus(lookupDtc(IO_0_ADDR)) == DTC_SET)
+        {
+            GPIO_write(HSD_DISABLE_0, true);
+        }
+        else
+        {
+            GPIO_write(HSD_DISABLE_0, false);
+        }
 
-		SegState thisState = stateList[loopCount % numStates];
-		uint32_t duration = 300;
+        SegState thisState = stateList[loopCount % numStates];
+        uint32_t duration = 300;
 
-		SegmentMaskRequest request = (SegmentMaskRequest) { calculateFadedSegState(thisState)*0.5+128, SEG_LED_ID_HOURS_TENS };
-		requestMaskUpdate(&request, BIOS_WAIT_FOREVER);
-		applySegDelta(IO_0_ADDR, lastState, thisState, duration);
+        applySegDelta(IO_0_ADDR, lastState, thisState, duration);
 
-		SegState nextState = stateList[(loopCount + 1) % numStates];
-		SegState lastThisDiff = subtractSeg(thisState, lastState);
-		SegState thisNextDiff = subtractSeg(nextState, thisState);
-		SegState diffUnion = unionSeg(lastThisDiff, thisNextDiff);
-		SegState diffDiff = subtractSeg(thisNextDiff, lastThisDiff);
+        SegState nextState = stateList[(loopCount + 1) % numStates];
+        SegState lastThisDiff = subtractSeg(thisState, lastState);
+        SegState thisNextDiff = subtractSeg(nextState, thisState);
+        SegState diffUnion = unionSeg(lastThisDiff, thisNextDiff);
+        SegState diffDiff = subtractSeg(thisNextDiff, lastThisDiff);
 
-		/*diffUnion will be 00 if a segment was set to something different last time than if it was this time.
-		 * But it will return 00 if a se
-		 *gment was floating in both cases.
-		 * If the difference between the differences is nonzero then that means the segment changed,
-		 * or that the segment was off before. So it is only a problem to flip quickly if diffDiff-diffUnion is nonzero
-		 * since that means that in the next cycle we will be changing a segment at the next interval and we changed it
-		 * differently at the last interval. If it changed from 00 to something then diffDiff and diffUnion will be the same.
-		 * But if it changed from 01 to 10 then diffUnion will be 00 and diffDiff will be 10 which is not OK.
-		 */
-		SegState diffSuperDelta = subtractSeg(diffDiff, diffUnion);
+        /*diffUnion will be 00 if a segment was set to something different last time than if it was this time.
+         * But it will return 00 if a se
+         *gment was floating in both cases.
+         * If the difference between the differences is nonzero then that means the segment changed,
+         * or that the segment was off before. So it is only a problem to flip quickly if diffDiff-diffUnion is nonzero
+         * since that means that in the next cycle we will be changing a segment at the next interval and we changed it
+         * differently at the last interval. If it changed from 00 to something then diffDiff and diffUnion will be the same.
+         * But if it changed from 01 to 10 then diffUnion will be 00 and diffDiff will be 10 which is not OK.
+         */
+        SegState diffSuperDelta = subtractSeg(diffDiff, diffUnion);
 
-		uint32_t longDelayTime = 350;
-		uint32_t shortDelayTime = 1000;
+        uint32_t longDelayTime = 3000;
+        uint32_t shortDelayTime = 1000;
 
-		Task_sleep(longDelayTime);
-
+        for (int i = 0; i < 64; i++)
+        {
+            Task_sleep(longDelayTime / 255);
+            SegmentMaskRequest request = (SegmentMaskRequest ) {
+                            rampSegStage(lastState, thisState, i*4),
+                            SEG_LED_ID_HOURS_TENS };
+            requestMaskUpdate(&request, BIOS_WAIT_FOREVER);
+        }
+        SegmentMaskRequest request = (SegmentMaskRequest ) {
+                                    calculateFadedSegState(thisState),
+                                    SEG_LED_ID_HOURS_TENS };
+                    requestMaskUpdate(&request, BIOS_WAIT_FOREVER);
+        Task_sleep(longDelayTime*192 / 255);
 //		if (diffSuperDelta.rawWord != 0) {
 //			Task_sleep(longDelayTime);
 //		} else {
@@ -211,53 +226,57 @@ void sysMonitor(UArg arg0, UArg arg1) {
 //				Task_sleep(longDelayTime - shortDelayTime);
 //		}
 
-		lastState = thisState;
-		lastDiffSuperDelta = diffSuperDelta;
-		++loopCount;
-	}
+        lastState = thisState;
+        lastDiffSuperDelta = diffSuperDelta;
+        ++loopCount;
+    }
 }
 
 /*
  *  ======== main ========
  */
-int main(void) {
+int main(void)
+{
 
-	init();
+    init();
 
-	/* Construct heartBeat Task  thread */
-	Task_Params heartBeatParams;
-	Task_Params_init(&heartBeatParams);
-	heartBeatParams.arg0 = 1000;
-	heartBeatParams.stackSize = TASKSTACKSIZE;
-	heartBeatParams.stack = &heartbeatStack;
-	heartBeatParams.priority = 1;
-	Task_construct(&heartbeatStruct, (Task_FuncPtr) heartBeatFxn, &heartBeatParams, NULL);
+    /* Construct heartBeat Task  thread */
+    Task_Params heartBeatParams;
+    Task_Params_init(&heartBeatParams);
+    heartBeatParams.arg0 = 1000;
+    heartBeatParams.stackSize = TASKSTACKSIZE;
+    heartBeatParams.stack = &heartbeatStack;
+    heartBeatParams.priority = 1;
+    Task_construct(&heartbeatStruct, (Task_FuncPtr) heartBeatFxn,
+                   &heartBeatParams, NULL);
 
-	/* Construct updateLEDs Task  thread */
-	Task_Params updateLEDsParams;
-	Task_Params_init(&updateLEDsParams);
-	updateLEDsParams.stackSize = TASKSTACKSIZE;
-	updateLEDsParams.stack = &updateLEDsStack;
-	updateLEDsParams.priority = 6;
-	Task_construct(&updateLEDsStruct, (Task_FuncPtr) updateLeds, &updateLEDsParams, NULL);
+    /* Construct updateLEDs Task  thread */
+    Task_Params updateLEDsParams;
+    Task_Params_init(&updateLEDsParams);
+    updateLEDsParams.stackSize = TASKSTACKSIZE;
+    updateLEDsParams.stack = &updateLEDsStack;
+    updateLEDsParams.priority = 6;
+    Task_construct(&updateLEDsStruct, (Task_FuncPtr) updateLeds,
+                   &updateLEDsParams, NULL);
 
-	/* Construct sysMonitor Task  thread */
-	Task_Params sysMonitorParams;
-	Task_Params_init(&sysMonitorParams);
-	sysMonitorParams.stackSize = TASKSTACKSIZE;
-	sysMonitorParams.stack = &sysMonitorStack;
-	sysMonitorParams.priority = 7;
-	Task_construct(&sysMonitorStruct, (Task_FuncPtr) sysMonitor, &sysMonitorParams, NULL);
+    /* Construct sysMonitor Task  thread */
+    Task_Params sysMonitorParams;
+    Task_Params_init(&sysMonitorParams);
+    sysMonitorParams.stackSize = TASKSTACKSIZE;
+    sysMonitorParams.stack = &sysMonitorStack;
+    sysMonitorParams.priority = 7;
+    Task_construct(&sysMonitorStruct, (Task_FuncPtr) sysMonitor,
+                   &sysMonitorParams, NULL);
 
-	System_printf("Starting the example\nSystem provider is set to SysMin. "
-			"Halt the target to view any SysMin contents in ROV.\n");
-	/* SysMin will only print to the console when you call flush or exit */
-	System_flush();
+    System_printf("Starting the example\nSystem provider is set to SysMin. "
+                  "Halt the target to view any SysMin contents in ROV.\n");
+    /* SysMin will only print to the console when you call flush or exit */
+    System_flush();
 
-	GPIO_toggle(LAUNCHPAD_LED_GREEN);
+    GPIO_toggle(LAUNCHPAD_LED_GREEN);
 
-	/* Start BIOS */
-	BIOS_start();
+    /* Start BIOS */
+    BIOS_start();
 
-	return (0);
+    return (0);
 }
