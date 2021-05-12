@@ -2,7 +2,9 @@
 #include "boardInit.h"
 #include "config/gpioConfig.h"
 #include "config/adcConfig.h"
-extern void initLeds();//Leds.h
+#include "digit.h"
+
+extern void initLeds();//Leds.h needed for C linkage
 
 void init() {
 	initGPIO();
@@ -10,4 +12,5 @@ void init() {
 	initI2C();
 	initADC();
 	initLeds();
+	initDigit(&hoursTensStruct);
 }

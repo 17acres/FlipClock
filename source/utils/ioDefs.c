@@ -44,6 +44,10 @@ SegState unionSeg(SegState s0, SegState s1) {
 	return s0;
 }
 
+SegState unionSegPriority(SegState newState, SegState oldState) {
+    return unionSeg(subtractSeg(newState,oldState),unionSeg(newState,oldState));
+}
+
 SegState subtractSeg(SegState newState, SegState oldState) {
 
 	if (oldState.a == newState.a)
@@ -86,7 +90,7 @@ SegStateFade calculateFadedSegState(SegState segState){
 	};
 }
 
-SegStateFade rampSegStage(SegState oldState, SegState newState, uint8_t amountOfOverlay){
+SegStateFade rampSegState(SegState oldState, SegState newState, uint8_t amountOfOverlay){
     SegStateFade oldFaded=calculateFadedSegState(oldState);
     SegStateFade newFaded=calculateFadedSegState(newState);
     return (SegStateFade){
@@ -105,6 +109,10 @@ bool applySegState(uint8_t slaveAddress, SegState state, uint32_t onTimeMs){
 	writeData(slaveAddress, state.rawWord);
 	Task_sleep(onTimeMs);
 	return writeData(slaveAddress, segValOff.rawWord);
+}
+
+bool setSegStateNonBlocking(uint8_t slaveAddress, SegState state){
+    return writeData(slaveAddress, state.rawWord);
 }
 
 bool applySegDelta(uint8_t slaveAddress, SegState oldState, SegState newState, uint32_t onTimeMs){

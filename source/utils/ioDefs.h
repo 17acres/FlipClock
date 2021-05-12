@@ -69,28 +69,28 @@
  */
 
 typedef union SegState {
-	struct { //right ordering for io driver
-		uint16_t a :2;
-		uint16_t b :2;
-		uint16_t extra :2;
-		uint16_t c :2;
-		uint16_t d :2;
-		uint16_t e :2;
-		uint16_t g :2;
-		uint16_t f :2;
-	};
-	uint16_t rawWord;
+    struct { //right ordering for io driver
+        uint16_t a :2;
+        uint16_t b :2;
+        uint16_t extra :2;
+        uint16_t c :2;
+        uint16_t d :2;
+        uint16_t e :2;
+        uint16_t g :2;
+        uint16_t f :2;
+    };
+    uint16_t rawWord;
 } SegState;
 
-typedef struct SegStateFade{ //255 means full brightness. like SegState but for variable brightness
-	uint8_t a;
-	uint8_t b;
-	uint8_t extra;
-	uint8_t c;
-	uint8_t d;
-	uint8_t e;
-	uint8_t g;
-	uint8_t f;
+typedef struct SegStateFade { //255 means full brightness. like SegState but for variable brightness
+    uint8_t a;
+    uint8_t b;
+    uint8_t extra;
+    uint8_t c;
+    uint8_t d;
+    uint8_t e;
+    uint8_t g;
+    uint8_t f;
 } SegStateFade;
 
 extern const SegState segVal0;
@@ -145,17 +145,26 @@ extern const SegState segValEOnly;
 extern const SegState segValFOnly;
 extern const SegState segValGOnly;
 
-//if any conflict or brake, do coast
+/*Bitwise OR of everything.
+ * So if you OR segValShowExtra with segVal_r you get r with extra.
+ * But if you OR Blank with Hide you get Off.
+ */
 SegState unionSeg(SegState s0, SegState s1);
+
+//If new is off then return old, but if new is something different than old, new has priority.
+//Useful for extra things
+SegState unionSegPriority(SegState newState, SegState oldState);
 
 //Return new state or 0 if new state is the same is old. Does not care if anything is set to brake. Only periodically do a full set, usually just delta segments
 SegState subtractSeg(SegState newState, SegState oldState);
 
 SegStateFade calculateFadedSegState(SegState state);
-SegStateFade rampSegStage(SegState oldState, SegState newState, uint8_t amountOfOverlay);
+SegStateFade rampSegState(SegState oldState, SegState newState, uint8_t amountOfOverlay);
 
 //set state then turn off after delayms
 bool applySegState(uint8_t slaveAddress, SegState state, uint32_t onTimeMs);
 bool applySegDelta(uint8_t slaveAddress, SegState oldState, SegState newState, uint32_t onTimeMs);
 
+//Simply apply state to motors and return success
+bool setSegStateNonBlocking(uint8_t slaveAddress, SegState state);
 #endif

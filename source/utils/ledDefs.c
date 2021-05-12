@@ -43,6 +43,7 @@ void calculateMask(SegStateFade segState, uint8_t returnMaskArray[], uint8_t num
 	returnMaskArray[numExtraLeds + LEDS_PER_SEG * 6 + 2] = segState.d;
 }
 
+//Message is COPIED into mailbox, no worries about pointer expiration
 void requestMaskUpdate(SegmentMaskRequest *request, uint32_t timeout){
 	Mailbox_post(maskRequestMailbox, request, timeout);
 }

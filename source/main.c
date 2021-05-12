@@ -57,12 +57,10 @@
 #include "hsd.h"
 #include "dtc.h"
 #include "utils/ledDefs.h"
-
-#define TASKSTACKSIZE   1024
-
+#include "digit.h"
 #include "Leds.h"
 
-extern void updateLeds(UArg arg0, UArg arg1);
+extern void updateLeds();//Leds.h needed for C linkage
 
 Task_Struct heartbeatStruct;
 Char heartbeatStack[TASKSTACKSIZE];
@@ -162,8 +160,7 @@ void sysMonitor(UArg arg0, UArg arg1)
 //		segVal0,
 //	};
     uint32_t numStates = sizeof(stateList) / sizeof(stateList[0]);
-    SegState lastState = segValBlank;
-    SegState lastDiffSuperDelta = segValAll; //delay on first time
+
     while (1)
     {
         checkIOPresence(IO_0_ADDR);
@@ -179,55 +176,11 @@ void sysMonitor(UArg arg0, UArg arg1)
         }
 
         SegState thisState = stateList[loopCount % numStates];
-        uint32_t duration = 300;
 
-        applySegDelta(IO_0_ADDR, lastState, thisState, duration);
+        requestNewDigitState(&hoursTensStruct, thisState, BIOS_WAIT_FOREVER);
 
-        SegState nextState = stateList[(loopCount + 1) % numStates];
-        SegState lastThisDiff = subtractSeg(thisState, lastState);
-        SegState thisNextDiff = subtractSeg(nextState, thisState);
-        SegState diffUnion = unionSeg(lastThisDiff, thisNextDiff);
-        SegState diffDiff = subtractSeg(thisNextDiff, lastThisDiff);
+        Task_sleep(5000);
 
-        /*diffUnion will be 00 if a segment was set to something different last time than if it was this time.
-         * But it will return 00 if a se
-         *gment was floating in both cases.
-         * If the difference between the differences is nonzero then that means the segment changed,
-         * or that the segment was off before. So it is only a problem to flip quickly if diffDiff-diffUnion is nonzero
-         * since that means that in the next cycle we will be changing a segment at the next interval and we changed it
-         * differently at the last interval. If it changed from 00 to something then diffDiff and diffUnion will be the same.
-         * But if it changed from 01 to 10 then diffUnion will be 00 and diffDiff will be 10 which is not OK.
-         */
-        SegState diffSuperDelta = subtractSeg(diffDiff, diffUnion);
-
-        uint32_t longDelayTime = 3000;
-        uint32_t shortDelayTime = 1000;
-
-        for (int i = 0; i < 64; i++)
-        {
-            Task_sleep(longDelayTime / 255);
-            SegmentMaskRequest request = (SegmentMaskRequest ) {
-                            rampSegStage(lastState, thisState, i*4),
-                            SEG_LED_ID_HOURS_TENS };
-            requestMaskUpdate(&request, BIOS_WAIT_FOREVER);
-        }
-        SegmentMaskRequest request = (SegmentMaskRequest ) {
-                                    calculateFadedSegState(thisState),
-                                    SEG_LED_ID_HOURS_TENS };
-                    requestMaskUpdate(&request, BIOS_WAIT_FOREVER);
-        Task_sleep(longDelayTime*192 / 255);
-//		if (diffSuperDelta.rawWord != 0) {
-//			Task_sleep(longDelayTime);
-//		} else {
-//			if (lastDiffSuperDelta.rawWord != 0)
-//				Task_sleep(shortDelayTime);
-//			else
-//				//if there are two in a row don't get tricked
-//				Task_sleep(longDelayTime - shortDelayTime);
-//		}
-
-        lastState = thisState;
-        lastDiffSuperDelta = diffSuperDelta;
         ++loopCount;
     }
 }
@@ -255,7 +208,7 @@ int main(void)
     Task_Params_init(&updateLEDsParams);
     updateLEDsParams.stackSize = TASKSTACKSIZE;
     updateLEDsParams.stack = &updateLEDsStack;
-    updateLEDsParams.priority = 6;
+    updateLEDsParams.priority = LED_TASK_PRIORITY;
     Task_construct(&updateLEDsStruct, (Task_FuncPtr) updateLeds,
                    &updateLEDsParams, NULL);
 
@@ -264,7 +217,7 @@ int main(void)
     Task_Params_init(&sysMonitorParams);
     sysMonitorParams.stackSize = TASKSTACKSIZE;
     sysMonitorParams.stack = &sysMonitorStack;
-    sysMonitorParams.priority = 7;
+    sysMonitorParams.priority = SYS_MONITOR_PRIORITY;
     Task_construct(&sysMonitorStruct, (Task_FuncPtr) sysMonitor,
                    &sysMonitorParams, NULL);
 
