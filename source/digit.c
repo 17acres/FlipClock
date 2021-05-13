@@ -44,8 +44,10 @@ void digitTask(UArg arg0, UArg arg1) {
         setSegStateNonBlocking(digit->ioAddr, applyState);
 
         for (uint32_t i = 0; i < numFrames; i++) {
+            uint8_t fadePosition=i * 255 / numFrames;
+            System_printf("%d",fadePosition);
             SegmentMaskRequest request = (SegmentMaskRequest ) {
-                            rampSegState(lastState, actualRequestedState, i * 255 / numFrames),
+                            rampSegState(lastState, actualRequestedState, fadePosition),
                             digit->ledId };
             requestMaskUpdate(&request, BIOS_NO_WAIT);
             Task_sleep(1000 / LED_FPS);
@@ -63,6 +65,11 @@ void digitTask(UArg arg0, UArg arg1) {
             setSegStateNonBlocking(digit->ioAddr, segValOff);
         }
 
+        SegmentMaskRequest request = (SegmentMaskRequest ) {
+                                    calculateFadedSegState(actualRequestedState),
+                                    digit->ledId };
+                    requestMaskUpdate(&request, BIOS_NO_WAIT);
+
         lastState = actualRequestedState;
         //Do segment load management to manage thermals and overall usage
     }
@@ -76,10 +83,11 @@ void initDigit(DigitStruct* digit) {
     digit->lastFullApplyTime = digit->fullApplyOffset;
 
     Task_Params taskParams;
+    Task_Params_init(&taskParams);
     taskParams.arg0 = digit;
     taskParams.stackSize = TASKSTACKSIZE;
     taskParams.stack = &digit->taskStack;
-    taskParams.priority = 16;
+    taskParams.priority = DIGIT_TASK_PRIORITY;
 
     Task_construct(&digit->taskStruct, (Task_FuncPtr) digitTask, &taskParams, NULL);
 }

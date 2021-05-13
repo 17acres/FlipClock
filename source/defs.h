@@ -15,7 +15,7 @@
 #define TASKSTACKSIZE   1024
 
 //Higher is higher priority
-#define DIGIT_TASK_PRIORITY 16
+#define DIGIT_TASK_PRIORITY 10
 #define SYS_MONITOR_PRIORITY 7
 #define LED_TASK_PRIORITY 6
 
