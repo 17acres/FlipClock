@@ -16,7 +16,7 @@
 #include <ti/sysbios/knl/Mailbox.h>
 
 #define DIGIT_APPLY_TIME 300u //ms motor is on
-#define DIGIT_ANIMATION_TIME 1000u //ms
+#define DIGIT_ANIMATION_TIME 200u //ms
 #define DIGIT_FULL_APPLY_INTERVAL (30u*60u*1000u) //ms between applying all digits to ensure they are placed correctly
 #define DIGIT_FULL_APPLY_OFFSET (DIGIT_FULL_APPLY_INTERVAL/4u)
 

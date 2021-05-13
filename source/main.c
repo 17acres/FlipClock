@@ -95,16 +95,16 @@ void sysMonitor(UArg arg0, UArg arg1)
     Task_sleep(100);
     clearMaxAdcVals();
 //segValAOnly, segValBOnly, segValCOnly, segValDOnly,segValEOnly, segValFOnly, segValGOnly,segValShowExtra,
-    SegState stateList[] = { segVal0, segVal1, segVal2, segVal3, segVal4,
-                             segVal5, segVal6, segVal7, segVal8, segVal9,
-                             segVal_A, segVal_b, segVal_C, segVal_c, segVal_d,
-                             segVal_E, segVal_F, segVal_G, segVal_H, segVal_h,
-                             segVal_I, segVal_i, segVal_J, segVal_L, segVal_n,
-                             segVal_O, segVal_o, segVal_P, segVal_q, segVal_r,
-                             segVal_S, segVal_t, segVal_U, segVal_u, segVal_y,
-                             segValQuestion, segValBlank, segValAll };
+//    SegState stateList[] = { segVal0, segVal1, segVal2, segVal3, segVal4,
+//                             segVal5, segVal6, segVal7, segVal8, segVal9,
+//                             segVal_A, segVal_b, segVal_C, segVal_c, segVal_d,
+//                             segVal_E, segVal_F, segVal_G, segVal_H, segVal_h,
+//                             segVal_I, segVal_i, segVal_J, segVal_L, segVal_n,
+//                             segVal_O, segVal_o, segVal_P, segVal_q, segVal_r,
+//                             segVal_S, segVal_t, segVal_U, segVal_u, segVal_y,
+//                             segValQuestion, segValBlank, segValAll };
     //SegState stateList[] = { segVal0, segVal1, segVal2, segVal3, segVal4, segVal5, segVal6, segVal7, segVal8, segVal9 };
-
+    SegState stateList[] = { segVal1, segVal_I};
 //	SegState
 //	stateList[]= {
 //		segValBlank,

@@ -22,6 +22,7 @@ void calculateStateToApply(DigitStruct* digit, SegState requestedState, SegState
     if (currentTime > (digit->lastFullApplyTime + DIGIT_FULL_APPLY_INTERVAL)) {
         *applyState = *actualRequestedState;
         digit->lastFullApplyTime = currentTime;
+        System_printf("Full Apply\n");
     } else {
         *applyState = subtractSeg(*actualRequestedState, lastState);
     }
@@ -45,7 +46,7 @@ void digitTask(UArg arg0, UArg arg1) {
 
         for (uint32_t i = 0; i < numFrames; i++) {
             uint8_t fadePosition=i * 255 / numFrames;
-            System_printf("%d",fadePosition);
+            //System_printf("i: %d, fadepos: %d\n",i,fadePosition);
             SegmentMaskRequest request = (SegmentMaskRequest ) {
                             rampSegState(lastState, actualRequestedState, fadePosition),
                             digit->ledId };
@@ -59,16 +60,18 @@ void digitTask(UArg arg0, UArg arg1) {
             }
         }
 
+        SegmentMaskRequest request = (SegmentMaskRequest ) {
+                                            calculateFadedSegState(actualRequestedState),
+                                            digit->ledId };
+        requestMaskUpdate(&request, BIOS_NO_WAIT);
+
         //Longer apply time than animation time
         if (!segCleared) {
             Task_sleep(DIGIT_APPLY_TIME - DIGIT_ANIMATION_TIME);
             setSegStateNonBlocking(digit->ioAddr, segValOff);
         }
 
-        SegmentMaskRequest request = (SegmentMaskRequest ) {
-                                    calculateFadedSegState(actualRequestedState),
-                                    digit->ledId };
-                    requestMaskUpdate(&request, BIOS_NO_WAIT);
+
 
         lastState = actualRequestedState;
         //Do segment load management to manage thermals and overall usage

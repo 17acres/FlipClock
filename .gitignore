@@ -58,3 +58,4 @@ dkms.conf
 src/
 /preproc only/
 *.pp
+*.obj
