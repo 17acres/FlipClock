@@ -19,6 +19,9 @@
 #include "config/gpioConfig.h"
 #include "utils/ledDefs.h"
 #include "utils/iodefs.h"
+#include "config/gpioConfig.h"
+#include "../Colorimetry/gammaLUT.h"
+#include "../Colorimetry/testcharts.h"//includes data from DisplayCal
 
 void buildFrameBuf();
 void initFrameBuf();
@@ -34,40 +37,40 @@ uint8_t brightness;
 uint8_t frameBuf[BUFSIZE];
 uint8_t rxbuf[BUFSIZE]; //Garbage data, required by RTOS drivers
 
+#define colorArr verificationTestchart
+
 extern "C" void updateLeds(UArg arg0, UArg arg1) {
     uint32_t frameIdx = 0;
-
+    brightness=31;
+    uint32_t colorIdx = 0;
+    System_printf("Brightness: %d, Color: 0x%06x, Idx %d\n",brightness,colorArr[colorIdx], colorIdx+1);
+    System_flush();
     while (1) {
 
         uint32_t startTime = Clock_getTicks();
-
-        fill_rainbow((CRGB *) ledStringVals.fullArray, NUM_LEDS, frameIdx, 20);
-        //fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::Black);
-        //fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::White);
-        if (frameIdx % 60 == 0)
-            brightness++;
-
-        SegmentMaskRequest request;
-
-        while (Mailbox_pend(maskRequestMailbox, &request, BIOS_NO_WAIT)) {
-            uint8_t *selectedMaskArray;
-            switch (request.segmentLedId) {
-                case (SEG_LED_ID_HOURS_TENS):
-                    selectedMaskArray = ledStringMasks.hoursTens;
-                    break;
-//				case (SEG_LED_ID_HOURS_ONES):
-//					selectedMaskArray = ledStringMasks.hoursOnes;
-//					break;
-//				case (SEG_LED_ID_MINUTES_TENS):
-//					selectedMaskArray = ledStringMasks.minutesTens;
-//					break;
-//				case (SEG_LED_ID_MINUTES_TENS):
-//					selectedMaskArray = ledStringMasks.minutesOnes;
-//					break;
-            }
-            if (selectedMaskArray != 0)
-                calculateMask(request.segState, selectedMaskArray, 0);
+        static bool lastSW1State = true;
+        static bool lastSW2State = true;
+        if (!GPIO_read(LAUNCHPAD_SW1) && lastSW1State) {
+//            brightness=(brightness+1)%32;
+//            System_printf("Brightness: %d, Color: 0x%06x\n",brightness,colorArr[colorIdx]);
+//            System_flush();
+            colorIdx=(colorIdx-1)% (sizeof(colorArr) / sizeof(uint32_t));
+            System_printf("Brightness: %d, Color: 0x%06x, Idx %d\n",brightness,colorArr[colorIdx], colorIdx+1);
+            System_flush();
         }
+
+
+        if (!GPIO_read(LAUNCHPAD_SW2) && lastSW2State) {
+            colorIdx=(colorIdx+1)% (sizeof(colorArr) / sizeof(uint32_t));
+            System_printf("Brightness: %d, Color: 0x%06x, Idx %d\n",brightness,colorArr[colorIdx], colorIdx+1);
+            System_flush();
+        }
+        lastSW2State=GPIO_read(LAUNCHPAD_SW2);
+        lastSW1State=GPIO_read(LAUNCHPAD_SW1);
+        //fill_rainbow((CRGB *) ledStringVals.fullArray, NUM_LEDS, frameIdx, 20);
+        fill_solid((CRGB *) ledStringVals.fullArray, 1, colorArr[colorIdx]);
+        ledStringMasks.fullArray[0]=255;
+        //fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::White);
 
         buildFrameBuf();
 
@@ -95,22 +98,22 @@ void buildFrameBuf() {
     for (size_t i = 0; i < NUM_LEDS; i++) {
         size_t bufIdx = i * 4 + 4;
 
-        frameBuf[bufIdx++] = ~(brightness | 0xE0);
-        frameBuf[bufIdx++] = ~(scale8(ledStringVals.fullArray[i].blue, ledStringMasks.fullArray[i]));
-        frameBuf[bufIdx++] = ~(scale8(ledStringVals.fullArray[i].green, ledStringMasks.fullArray[i]));
-        frameBuf[bufIdx] = ~(scale8(ledStringVals.fullArray[i].red, ledStringMasks.fullArray[i]));
+        frameBuf[bufIdx++] = (brightness | 0xE0);
+        frameBuf[bufIdx++] = (gammaLUT[scale8(ledStringVals.fullArray[i].blue, ledStringMasks.fullArray[i])][LUT_BLUE]);
+        frameBuf[bufIdx++] = (gammaLUT[scale8(ledStringVals.fullArray[i].green, ledStringMasks.fullArray[i])][LUT_GREEN]);
+        frameBuf[bufIdx] = (gammaLUT[scale8(ledStringVals.fullArray[i].red, ledStringMasks.fullArray[i])][LUT_RED]);
     }
 
 }
 
 void initFrameBuf() {
-    frameBuf[0] = ~0x00;
-    frameBuf[1] = ~0x00;
-    frameBuf[2] = ~0x00;
-    frameBuf[3] = ~0x00;
+    frameBuf[0] = 0x00;
+    frameBuf[1] = 0x00;
+    frameBuf[2] = 0x00;
+    frameBuf[3] = 0x00;
 
     for (size_t i = BUFSIZE - TERM_BYTES; i < BUFSIZE; i++) {
-        frameBuf[i] = ~0x00;
+        frameBuf[i] = 0x00;
     }
 }
 

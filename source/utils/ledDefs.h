@@ -53,7 +53,7 @@ extern "C" {
  * D		left
  */
 
-#define NUM_LEDS_NO_EXTRA 21
+#define NUM_LEDS_NO_EXTRA 1
 #define MAX_EXRTA_LEDS 2
 #define MAX_LEDS_PER_DIGIT NUM_LEDS_NO_EXTRA+MAX_EXRTA_LEDS
 

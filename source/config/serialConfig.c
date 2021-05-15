@@ -154,7 +154,7 @@ void initSPI(void) {
 	SPI_Params_init(&params);
 	params.bitRate = LED_BITRATE;
 	params.dataSize = 8; //bits
-	params.frameFormat = SPI_POL1_PHA0;
+	params.frameFormat = SPI_POL0_PHA0;
 	params.mode = SPI_MASTER;
 	params.transferMode = SPI_MODE_BLOCKING;
 

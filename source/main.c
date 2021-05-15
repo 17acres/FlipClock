@@ -177,7 +177,7 @@ void sysMonitor(UArg arg0, UArg arg1)
 
         SegState thisState = stateList[loopCount % numStates];
 
-        requestNewDigitState(&hoursTensStruct, thisState, BIOS_WAIT_FOREVER);
+        //requestNewDigitState(&hoursTensStruct, thisState, BIOS_WAIT_FOREVER);
 
         Task_sleep(5000);
 
@@ -193,15 +193,15 @@ int main(void)
 
     init();
 
-    /* Construct heartBeat Task  thread */
-    Task_Params heartBeatParams;
-    Task_Params_init(&heartBeatParams);
-    heartBeatParams.arg0 = 1000;
-    heartBeatParams.stackSize = TASKSTACKSIZE;
-    heartBeatParams.stack = &heartbeatStack;
-    heartBeatParams.priority = 1;
-    Task_construct(&heartbeatStruct, (Task_FuncPtr) heartBeatFxn,
-                   &heartBeatParams, NULL);
+//    /* Construct heartBeat Task  thread */
+//    Task_Params heartBeatParams;
+//    Task_Params_init(&heartBeatParams);
+//    heartBeatParams.arg0 = 1000;
+//    heartBeatParams.stackSize = TASKSTACKSIZE;
+//    heartBeatParams.stack = &heartbeatStack;
+//    heartBeatParams.priority = 1;
+//    Task_construct(&heartbeatStruct, (Task_FuncPtr) heartBeatFxn,
+//                   &heartBeatParams, NULL);
 
     /* Construct updateLEDs Task  thread */
     Task_Params updateLEDsParams;
@@ -212,14 +212,14 @@ int main(void)
     Task_construct(&updateLEDsStruct, (Task_FuncPtr) updateLeds,
                    &updateLEDsParams, NULL);
 
-    /* Construct sysMonitor Task  thread */
-    Task_Params sysMonitorParams;
-    Task_Params_init(&sysMonitorParams);
-    sysMonitorParams.stackSize = TASKSTACKSIZE;
-    sysMonitorParams.stack = &sysMonitorStack;
-    sysMonitorParams.priority = SYS_MONITOR_PRIORITY;
-    Task_construct(&sysMonitorStruct, (Task_FuncPtr) sysMonitor,
-                   &sysMonitorParams, NULL);
+//    /* Construct sysMonitor Task  thread */
+//    Task_Params sysMonitorParams;
+//    Task_Params_init(&sysMonitorParams);
+//    sysMonitorParams.stackSize = TASKSTACKSIZE;
+//    sysMonitorParams.stack = &sysMonitorStack;
+//    sysMonitorParams.priority = SYS_MONITOR_PRIORITY;
+//    Task_construct(&sysMonitorStruct, (Task_FuncPtr) sysMonitor,
+//                   &sysMonitorParams, NULL);
 
     System_printf("Starting the example\nSystem provider is set to SysMin. "
                   "Halt the target to view any SysMin contents in ROV.\n");
