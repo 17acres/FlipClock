@@ -59,3 +59,7 @@ src/
 /preproc only/
 *.pp
 *.obj
+
+*testchart.csv
+Colorimetry/testcharts.c
+Colorimetry/testcharts.h
