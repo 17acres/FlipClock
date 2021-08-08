@@ -25,11 +25,24 @@ typedef struct DigitStruct {
     uint8_t ledId;
     uint32_t fullApplyOffset;
     uint32_t lastFullApplyTime;
+    EK_TM4C123GXL_GPIOName hsdDisableAddr;
     Task_Params taskParams;
     Task_Struct taskStruct;
     Char taskStack[TASKSTACKSIZE];
     Mailbox_Handle mailboxHandle;
 } DigitStruct;
+
+typedef enum ApplyMode{
+    APPLY_MODE_NORMAL,
+    APPLY_MODE_TONE,
+    APPLY_MODE_SLEEP
+} ApplyMode;
+
+typedef struct DigitMail {
+    SegState requestedState;
+    ApplyMode mode = 0;
+    uint8_t pwmFrequency;
+} DigitMail;
 
 extern DigitStruct hoursTensStruct;
 extern DigitStruct hoursOnesStruct;

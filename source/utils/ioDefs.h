@@ -31,7 +31,7 @@
 
 #define SEG_SHOW DRV_REV
 #define SEG_HIDE DRV_FWD
-#define SEG_OFF DRV_COAST //no need for brake mode
+#define SEG_OFF DRV_COAST //no need for brake mode except for power saving
 
 /* Segment Arrangement https://en.wikipedia.org/wiki/Seven-segment_display#/media/File:7_Segment_Display_with_Labeled_Segments.svg
  *    A
@@ -133,6 +133,7 @@ extern const SegState segValQuestion;
 extern const SegState segValBlank;
 extern const SegState segValAll;
 extern const SegState segValOff;
+extern const SegState segValBrake;
 
 extern const SegState segValShowExtra;
 extern const SegState segValHideExtra;

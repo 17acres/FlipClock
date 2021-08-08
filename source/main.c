@@ -166,18 +166,11 @@ void sysMonitor(UArg arg0, UArg arg1)
         checkIOPresence(IO_0_ADDR);
         printDtcs();
 
-        if (getDtcStatus(lookupDtc(IO_0_ADDR)) == DTC_SET)
-        {
-            GPIO_write(HSD_DISABLE_0, true);
-        }
-        else
-        {
-            GPIO_write(HSD_DISABLE_0, false);
-        }
+
 
         SegState thisState = stateList[loopCount % numStates];
 
-        requestNewDigitState(&hoursTensStruct, thisState, BIOS_WAIT_FOREVER);
+        requestNewDigitStateNormal(&hoursTensStruct, thisState, BIOS_WAIT_FOREVER);
 
         Task_sleep(5000);
 
