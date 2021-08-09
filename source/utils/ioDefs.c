@@ -77,6 +77,11 @@ SegState subtractSeg(SegState newState, SegState oldState) {
 	return newState;
 }
 
+SegState invertSegState(SegState state){//passed by value
+    state.rawWord = ~state.rawWord;
+    return state;
+}
+
 SegStateFade calculateFadedSegState(SegState segState){
 	return (SegStateFade){
 		(segState.a == SEG_SHOW)*255,

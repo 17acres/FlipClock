@@ -14,8 +14,11 @@
 #include <ti/sysbios/BIOS.h>
 #include <ti/sysbios/knl/Task.h>
 #include <ti/sysbios/knl/Mailbox.h>
+#include <ti/sysbios/knl/Event.h>
+#include <ti/sysbios/hal/Timer.h>
 
 #define DIGIT_APPLY_TIME 300u //ms motor is on
+#define EXTRA_APPLY_TIME 500u
 #define DIGIT_ANIMATION_TIME 200u //ms
 #define DIGIT_FULL_APPLY_INTERVAL (30u*60u*1000u) //ms between applying all digits to ensure they are placed correctly
 #define DIGIT_FULL_APPLY_OFFSET (DIGIT_FULL_APPLY_INTERVAL/4u)
@@ -30,6 +33,8 @@ typedef struct DigitStruct {
     Task_Struct taskStruct;
     Char taskStack[TASKSTACKSIZE];
     Mailbox_Handle mailboxHandle;
+    Event_Handle eventHandle;
+    Timer_Handle timerHandle;
 } DigitStruct;
 
 typedef enum ApplyMode{
@@ -41,7 +46,7 @@ typedef enum ApplyMode{
 typedef struct DigitMail {
     SegState requestedState;
     ApplyMode mode = 0;
-    uint8_t pwmFrequency;
+    float toneFrequency;
 } DigitMail;
 
 extern DigitStruct hoursTensStruct;

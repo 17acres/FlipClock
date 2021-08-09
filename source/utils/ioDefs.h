@@ -159,6 +159,8 @@ SegState unionSegPriority(SegState newState, SegState oldState);
 //Return new state or 0 if new state is the same is old. Does not care if anything is set to brake. Only periodically do a full set, usually just delta segments
 SegState subtractSeg(SegState newState, SegState oldState);
 
+SegState invertSegState(SegState state);
+
 SegStateFade calculateFadedSegState(SegState state);
 SegStateFade rampSegState(SegState oldState, SegState newState, uint8_t amountOfOverlay);
 

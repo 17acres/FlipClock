@@ -13,6 +13,8 @@
 #include <ti/sysbios/knl/Task.h>
 #include <ti/sysbios/knl/Clock.h>
 
+void timerISR(UArg arg0);
+
 void calculateStateToApply(DigitStruct* digit, SegState requestedState, SegState lastState, SegState *actualRequestedState, SegState *applyState) {
     //Carry through state of extra in case of a non-extra request,
     //or non-extra in case of extra request.
@@ -32,24 +34,58 @@ void digitTask(UArg arg0, UArg arg1) {
     DigitStruct *digit = (DigitStruct *) arg0;
 
     SegState lastState = segValOff;
+
+    bool pwmState;
+    SegState toneSegmentState1, toneSegmentState2;
+
+    bool isPWM;
+
     while (1) {
         DigitMail requestMail;
-        Mailbox_pend(digit->mailboxHandle, &requestMail, BIOS_WAIT_FOREVER);
 
-        SegState actualRequestedState, applyState;
-        calculateStateToApply(digit, requestMail.requestedState, lastState, &actualRequestedState, &applyState);
+        UInt eventID = Event_pend(digit->eventHandle);    //00 is mailbox, 01 is timer
+        if (eventID & Event_Id_00) {
+            Mailbox_pend(digit->mailboxHandle, &requestMail, BIOS_NO_WAIT);    //no wait since event
+            if (requestMail.mode == APPLY_MODE_TONE) {
+                isPWM == true;
+            } else {
+                isPWM == false;
+            }
+        }
 
-        uint32_t numFrames = DIGIT_ANIMATION_TIME * LED_FPS / 1000;
-        bool segCleared = false;
-
-        if (requestMail.mode == APPLY_MODE_TONE) {
-
+        if (eventID & Event_Id_01) {    //doing tone
+            if (pwmState) {
+                setSegStateNonBlocking(digit->ioAddr, toneSegmentState1);
+            } else {
+                setSegStateNonBlocking(digit->ioAddr, toneSegmentState2);
+            }
+            pwmState = !pwmState;
+        }
+        else if (requestMail.mode == APPLY_MODE_TONE) {    //must have been mail event
+            Timer_setPeriodMicroSecs(digit->timerHandle, (500000.0 / requestMail.toneFrequency));    //Period is half of frequency
+            toneSegmentState1 = requestMail.requestedState;
+            toneSegmentState2 = invertSegState(requestMail.requestedState);
+            Timer_start(digit->timerHandle);
         }
         else {
+            Timer_stop(digit->timerHandle);
+
+            uint32_t applyTime;
+
+            uint32_t numFrames = DIGIT_ANIMATION_TIME * LED_FPS / 1000;
+            bool segCleared = false;
+            SegState actualRequestedState, applyState;
+            calculateStateToApply(digit, requestMail.requestedState, lastState, &actualRequestedState, &applyState);
+
+            if (applyState == segValShowExtra || applyState == segValHideExtra) {
+                applyTime == EXTRA_APPLY_TIME;
+            } else {
+                applyTime == DIGIT_APPLY_TIME;
+            }
+
             setSegStateNonBlocking(digit->ioAddr, applyState);
 
-            if (requestMail.mode == APPLY_MODE_SLEEP)
-                    {
+            if (requestMail.mode == APPLY_MODE_NORMAL) {
                 for (uint32_t i = 0; i < numFrames; i++) {
                     uint8_t fadePosition = i * 255 / numFrames;
                     //System_printf("i: %d, fadepos: %d\n",i,fadePosition);
@@ -60,7 +96,7 @@ void digitTask(UArg arg0, UArg arg1) {
                     Task_sleep(1000 / LED_FPS);
 
                     //Longer animation time than apply time
-                    if ((!segCleared) && ((i * 1000 / LED_FPS) > DIGIT_APPLY_TIME)) {
+                    if ((!segCleared) && ((i * 1000 / LED_FPS) > applyTime)) {
                         setSegStateNonBlocking(digit->ioAddr, segValOff);
                         segCleared = true;
                     }
@@ -73,14 +109,13 @@ void digitTask(UArg arg0, UArg arg1) {
 
                 //Longer apply time than animation time
                 if (!segCleared) {
-                    Task_sleep(DIGIT_APPLY_TIME - DIGIT_ANIMATION_TIME);
+                    Task_sleep(applyTime - DIGIT_ANIMATION_TIME);
                     setSegStateNonBlocking(digit->ioAddr, segValOff);
                 }
-            } else {
-                Task_sleep(DIGIT_APPLY_TIME);
-                setSegStateNonBlocking(digit->ioAddr, segValOff);
+                lastState = actualRequestedState; //Don't do this if going into sleep mode
+            } else { //APPLY_MODE_SLEEP. Don't take off of brake mode. Brake mode is low 5V draw
             }
-            lastState = actualRequestedState;
+
         }
 
         //TODO: Do segment load management to manage thermals and monitor overall usage
@@ -88,11 +123,25 @@ void digitTask(UArg arg0, UArg arg1) {
 }
 
 void initDigit(DigitStruct* digit) {
+
+    digit->eventHandle = Event_create(NULL, NULL);
+
     Mailbox_Params mailboxParams;
     Mailbox_Params_init(&mailboxParams);
+    mailboxParams.readerEvent = digit->eventHandle;
+    mailboxParams.readerEventId = Event_Id_00;
+
     digit->mailboxHandle = Mailbox_create(sizeof(DigitMail), 1, &mailboxParams, NULL);
 
     digit->lastFullApplyTime = digit->fullApplyOffset;
+
+    Timer_Params timerParams;
+    Timer_Params_init(&timerParams);
+    timerParams.RunMode = RunMode_CONTINUOUS;
+    timerParams.StartMode = StartMode_USER;
+    timerParams.PeriodType = Period_Type_MICROSECS;
+    timerParams.arg = digit;
+    digit->timerHandle = Timer_create(Timer_ANY, &timerISR, &timerParams, NULL);
 
     Task_Params taskParams;
     Task_Params_init(&taskParams);
@@ -108,6 +157,14 @@ void requestNewDigitStateNormal(DigitStruct* digit, SegState state, uint32_t tim
     DigitMail mail = {
             .mode = APPLY_MODE_NORMAL,
             .requestedState = state };
+    Mailbox_post(digit->mailboxHandle, &mail, timeout);
+}
+
+void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency, uint32_t timeout) {
+    DigitMail mail = {
+            .mode = APPLY_MODE_TONE,
+            .requestedState = state,
+            .toneFrequency = toneFrequency };
     Mailbox_post(digit->mailboxHandle, &mail, timeout);
 }
 
@@ -134,6 +191,10 @@ void requestWake(DigitStruct* digit) {
     {
         GPIO_write(digit->hsdDisableAddr, false);
     }
+}
+
+void timerISR(UArg arg0) {
+    Event_post(((DigitStruct) arg0).eventHandle, Event_Id_01);
 }
 
 DigitStruct hoursTensStruct = {

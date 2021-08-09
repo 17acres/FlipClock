@@ -170,7 +170,13 @@ void sysMonitor(UArg arg0, UArg arg1)
 
         SegState thisState = stateList[loopCount % numStates];
 
-        requestNewDigitStateNormal(&hoursTensStruct, thisState, BIOS_WAIT_FOREVER);
+        //requestNewDigitStateNormal(&hoursTensStruct, thisState, BIOS_WAIT_FOREVER);
+
+        requestTone(&hoursTensStruct, segValShowExtra, 1, BIOS_WAIT_FOREVER);
+
+        if(loopCount%2==0){
+            requestNewExtraState(&hoursTensStruct, false, BIOS_WAIT_FOREVER);
+        }
 
         Task_sleep(5000);
 
