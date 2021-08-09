@@ -6,12 +6,15 @@
  */
 
 #include "digit.h"
+#include "dtc.h"
+#include "iodriver.h"
 #include "utils/ledDefs.h"
 #include <xdc/runtime/System.h>
 
 #include <ti/sysbios/BIOS.h>
 #include <ti/sysbios/knl/Task.h>
 #include <ti/sysbios/knl/Clock.h>
+#include <ti/drivers/GPIO.h>
 
 void timerISR(UArg arg0);
 
@@ -38,19 +41,12 @@ void digitTask(UArg arg0, UArg arg1) {
     bool pwmState;
     SegState toneSegmentState1, toneSegmentState2;
 
-    bool isPWM;
-
     while (1) {
         DigitMail requestMail;
 
-        UInt eventID = Event_pend(digit->eventHandle);    //00 is mailbox, 01 is timer
+        UInt eventID = Event_pend(digit->eventHandle, Event_Id_NONE, Event_Id_00|Event_Id_01, BIOS_WAIT_FOREVER);    //00 is mailbox, 01 is timer
         if (eventID & Event_Id_00) {
             Mailbox_pend(digit->mailboxHandle, &requestMail, BIOS_NO_WAIT);    //no wait since event
-            if (requestMail.mode == APPLY_MODE_TONE) {
-                isPWM == true;
-            } else {
-                isPWM == false;
-            }
         }
 
         if (eventID & Event_Id_01) {    //doing tone
@@ -77,10 +73,10 @@ void digitTask(UArg arg0, UArg arg1) {
             SegState actualRequestedState, applyState;
             calculateStateToApply(digit, requestMail.requestedState, lastState, &actualRequestedState, &applyState);
 
-            if (applyState == segValShowExtra || applyState == segValHideExtra) {
-                applyTime == EXTRA_APPLY_TIME;
+            if (applyState.rawWord == segValShowExtra.rawWord || applyState.rawWord == segValHideExtra.rawWord) {
+                applyTime = EXTRA_APPLY_TIME;
             } else {
-                applyTime == DIGIT_APPLY_TIME;
+                applyTime = DIGIT_APPLY_TIME;
             }
 
             setSegStateNonBlocking(digit->ioAddr, applyState);
@@ -137,15 +133,15 @@ void initDigit(DigitStruct* digit) {
 
     Timer_Params timerParams;
     Timer_Params_init(&timerParams);
-    timerParams.RunMode = RunMode_CONTINUOUS;
-    timerParams.StartMode = StartMode_USER;
-    timerParams.PeriodType = Period_Type_MICROSECS;
-    timerParams.arg = digit;
+    timerParams.runMode = Timer_RunMode_CONTINUOUS;
+    timerParams.startMode = Timer_StartMode_USER;
+    timerParams.periodType = Timer_PeriodType_MICROSECS;
+    timerParams.arg = (UArg)digit;
     digit->timerHandle = Timer_create(Timer_ANY, &timerISR, &timerParams, NULL);
 
     Task_Params taskParams;
     Task_Params_init(&taskParams);
-    taskParams.arg0 = digit;
+    taskParams.arg0 = (UArg)digit;
     taskParams.stackSize = TASKSTACKSIZE;
     taskParams.stack = &digit->taskStack;
     taskParams.priority = DIGIT_TASK_PRIORITY;
@@ -163,38 +159,40 @@ void requestNewDigitStateNormal(DigitStruct* digit, SegState state, uint32_t tim
 void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency, uint32_t timeout) {
     DigitMail mail = {
             .mode = APPLY_MODE_TONE,
-            .requestedState = state,
+            .requestedState = toneSegments,
             .toneFrequency = toneFrequency };
     Mailbox_post(digit->mailboxHandle, &mail, timeout);
 }
 
 void requestNewExtraState(DigitStruct* digit, bool isShow, uint32_t timeout) {
     if (isShow)
-        requestNewDigitState(digit, segValShowExtra, timeout);
+        requestNewDigitStateNormal(digit, segValShowExtra, timeout);
     else
-        requestNewDigitState(digit, segValHideExtra, timeout);
+        requestNewDigitStateNormal(digit, segValHideExtra, timeout);
 }
 
 void requestSleep(DigitStruct* digit, uint32_t timeout) {
     GPIO_write(digit->hsdDisableAddr, true);
     DigitMail mail = {
-            .mode = DigitStruct,
+            .mode = APPLY_MODE_SLEEP,
             .requestedState = segValBrake };
     Mailbox_post(digit->mailboxHandle, &mail, timeout);
 }
 
-void requestWake(DigitStruct* digit) {
+bool requestWake(DigitStruct* digit) {
     if (getDtcStatus(lookupDtc(IO_0_ADDR)) == DTC_SET) {
         GPIO_write(digit->hsdDisableAddr, true);
+        return false;
     }
     else
     {
         GPIO_write(digit->hsdDisableAddr, false);
+        return true;
     }
 }
 
 void timerISR(UArg arg0) {
-    Event_post(((DigitStruct) arg0).eventHandle, Event_Id_01);
+    Event_post(((DigitStruct *) arg0)->eventHandle, Event_Id_01);
 }
 
 DigitStruct hoursTensStruct = {

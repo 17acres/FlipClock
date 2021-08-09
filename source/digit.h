@@ -10,6 +10,7 @@
 
 #include <xdc/std.h>
 #include "defs.h"
+#include "config/gpioConfig.h"
 #include "utils/ioDefs.h"
 #include <ti/sysbios/BIOS.h>
 #include <ti/sysbios/knl/Task.h>
@@ -45,7 +46,7 @@ typedef enum ApplyMode{
 
 typedef struct DigitMail {
     SegState requestedState;
-    ApplyMode mode = 0;
+    ApplyMode mode;
     float toneFrequency;
 } DigitMail;
 
@@ -57,10 +58,11 @@ extern DigitStruct minutesOnesStruct;
 void initDigit(DigitStruct* digit);
 
 //Safe to be called from any thread
-void requestNewDigitState(DigitStruct* digit, SegState state, uint32_t timeout);
+void requestNewDigitStateNormal(DigitStruct* digit, SegState state, uint32_t timeout);
 void requestNewExtraState(DigitStruct* digit, bool isShow, uint32_t timeout);
-
+void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency, uint32_t timeout);
 //Disable HSD maybe
-void requestSleep(DigitStruct* digit);
+void requestSleep(DigitStruct* digit, uint32_t timeout);
+bool requestWake(DigitStruct* digit);
 
 #endif /* SOURCE_DIGIT_H_ */

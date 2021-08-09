@@ -20,6 +20,8 @@
 #include "utils/ledDefs.h"
 #include "utils/iodefs.h"
 
+#include "../Colorimetry/gammaLUT.h"
+
 void buildFrameBuf();
 void initFrameBuf();
 void initMailboxes();

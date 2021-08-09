@@ -90,7 +90,8 @@ void sysMonitor(UArg arg0, UArg arg1)
     GPIO_write(IO_RESET, FALSE);
     GPIO_write(ESP_ENABLE, TRUE);
     GPIO_write(BUF_DISABLE, FALSE);
-    GPIO_write(HSD_DISABLE_0, FALSE);
+    //GPIO_write(HSD_DISABLE_0, FALSE);
+
     int loopCount = 0;
     Task_sleep(100);
     clearMaxAdcVals();
@@ -165,7 +166,7 @@ void sysMonitor(UArg arg0, UArg arg1)
     {
         checkIOPresence(IO_0_ADDR);
         printDtcs();
-
+        requestWake(&hoursTensStruct);
 
 
         SegState thisState = stateList[loopCount % numStates];
