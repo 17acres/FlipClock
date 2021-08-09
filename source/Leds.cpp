@@ -20,6 +20,8 @@
 #include "utils/ledDefs.h"
 #include "utils/iodefs.h"
 
+#include "../Colorimetry/gammaLUT.h"
+
 void buildFrameBuf();
 void initFrameBuf();
 void initMailboxes();
@@ -96,9 +98,9 @@ void buildFrameBuf() {
         size_t bufIdx = i * 4 + 4;
 
         frameBuf[bufIdx++] = ~(brightness | 0xE0);
-        frameBuf[bufIdx++] = ~(scale8(ledStringVals.fullArray[i].blue, ledStringMasks.fullArray[i]));
-        frameBuf[bufIdx++] = ~(scale8(ledStringVals.fullArray[i].green, ledStringMasks.fullArray[i]));
-        frameBuf[bufIdx] = ~(scale8(ledStringVals.fullArray[i].red, ledStringMasks.fullArray[i]));
+        frameBuf[bufIdx++] = ~(gammaLUT[scale8(ledStringVals.fullArray[i].blue, ledStringMasks.fullArray[i])][LUT_BLUE]);
+        frameBuf[bufIdx++] = ~(gammaLUT[scale8(ledStringVals.fullArray[i].green, ledStringMasks.fullArray[i])][LUT_GREEN]);
+        frameBuf[bufIdx] = ~(gammaLUT[scale8(ledStringVals.fullArray[i].red, ledStringMasks.fullArray[i])][LUT_RED]);
     }
 
 }

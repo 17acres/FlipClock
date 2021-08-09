@@ -31,7 +31,7 @@
 
 #define SEG_SHOW DRV_REV
 #define SEG_HIDE DRV_FWD
-#define SEG_OFF DRV_COAST //no need for brake mode
+#define SEG_OFF DRV_COAST //no need for brake mode except for power saving
 
 /* Segment Arrangement https://en.wikipedia.org/wiki/Seven-segment_display#/media/File:7_Segment_Display_with_Labeled_Segments.svg
  *    A
@@ -133,6 +133,7 @@ extern const SegState segValQuestion;
 extern const SegState segValBlank;
 extern const SegState segValAll;
 extern const SegState segValOff;
+extern const SegState segValBrake;
 
 extern const SegState segValShowExtra;
 extern const SegState segValHideExtra;
@@ -157,6 +158,8 @@ SegState unionSegPriority(SegState newState, SegState oldState);
 
 //Return new state or 0 if new state is the same is old. Does not care if anything is set to brake. Only periodically do a full set, usually just delta segments
 SegState subtractSeg(SegState newState, SegState oldState);
+
+SegState invertSegState(SegState state);
 
 SegStateFade calculateFadedSegState(SegState state);
 SegStateFade rampSegState(SegState oldState, SegState newState, uint8_t amountOfOverlay);
