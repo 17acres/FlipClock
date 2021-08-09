@@ -49,6 +49,7 @@
 #include <inc/hw_memmap.h>
 #include <inc/hw_types.h>
 #include <inc/hw_gpio.h>
+#include <inc/hw_i2c.h>
 
 #include <driverlib/rom.h>
 #include <driverlib/rom_map.h>
@@ -173,9 +174,19 @@ void initI2C(void) {
 	MAP_GPIOPinTypeI2CSCL(GPIO_PORTE_BASE, GPIO_PIN_4);
 
 	GPIOPadConfigSet(GPIO_PORTE_BASE, GPIO_PIN_5, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_OD);
-	GPIOPadConfigSet(GPIO_PORTE_BASE, GPIO_PIN_4, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_OD);
+	GPIOPadConfigSet(GPIO_PORTE_BASE, GPIO_PIN_4, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU);
 
 	MAP_I2CMasterInitExpClk(I2C2_BASE, SysCtlClockGet(), true);
+	I2CMasterInitExpClk(I2C2_BASE, SysCtlClockGet(), true);
+
+
+	//fm+
+	uint32_t ui32TPR = ((SysCtlClockGet() + (2 * 10 * 1000000) - 1) /
+	               (2 * 10 * 1000000)) - 1;
+	HWREG(I2C2_BASE + I2C_O_MTPR) = ui32TPR;
+
+
+
 	MAP_I2CMasterTimeoutSet(I2C2_BASE, (10*400)/16);//10ms timeout
 	initIOSemaphore();
 	initIOHwi();

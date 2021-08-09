@@ -15,8 +15,11 @@
 #include <ti/sysbios/knl/Task.h>
 #include <ti/sysbios/knl/Clock.h>
 #include <ti/drivers/GPIO.h>
+#include <xdc/runtime/Error.h>
 
-void timerISR(UArg arg0);
+void timerISR(UArg arg0) {
+    Event_post(((DigitStruct *) arg0)->eventHandle, Event_Id_01);
+}
 
 void calculateStateToApply(DigitStruct* digit, SegState requestedState, SegState lastState, SegState *actualRequestedState, SegState *applyState) {
     //Carry through state of extra in case of a non-extra request,
@@ -56,6 +59,11 @@ void digitTask(UArg arg0, UArg arg1) {
                 setSegStateNonBlocking(digit->ioAddr, toneSegmentState2);
             }
             pwmState = !pwmState;
+        }
+        else if (requestMail.mode == APPLY_MODE_NO_TONE){
+            Timer_stop(digit->timerHandle);
+            setSegStateNonBlocking(digit->ioAddr, segValOff);
+
         }
         else if (requestMail.mode == APPLY_MODE_TONE) {    //must have been mail event
             Timer_setPeriodMicroSecs(digit->timerHandle, (500000.0 / requestMail.toneFrequency));    //Period is half of frequency
@@ -136,8 +144,12 @@ void initDigit(DigitStruct* digit) {
     timerParams.runMode = Timer_RunMode_CONTINUOUS;
     timerParams.startMode = Timer_StartMode_USER;
     timerParams.periodType = Timer_PeriodType_MICROSECS;
+    timerParams.extFreq.lo = 80000000;
+    timerParams.extFreq.hi = 0;
+    timerParams.period = 1000000;
     timerParams.arg = (UArg)digit;
-    digit->timerHandle = Timer_create(Timer_ANY, &timerISR, &timerParams, NULL);
+
+    digit->timerHandle = Timer_create(Timer_ANY, timerISR, &timerParams, NULL);
 
     Task_Params taskParams;
     Task_Params_init(&taskParams);
@@ -162,6 +174,12 @@ void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency,
             .requestedState = toneSegments,
             .toneFrequency = toneFrequency };
     Mailbox_post(digit->mailboxHandle, &mail, timeout);
+}
+
+void requestNoTone(DigitStruct *digit, uint32_t timeout){
+    DigitMail mail = {
+                .mode = APPLY_MODE_NO_TONE };
+        Mailbox_post(digit->mailboxHandle, &mail, timeout);
 }
 
 void requestNewExtraState(DigitStruct* digit, bool isShow, uint32_t timeout) {
@@ -189,10 +207,6 @@ bool requestWake(DigitStruct* digit) {
         GPIO_write(digit->hsdDisableAddr, false);
         return true;
     }
-}
-
-void timerISR(UArg arg0) {
-    Event_post(((DigitStruct *) arg0)->eventHandle, Event_Id_01);
 }
 
 DigitStruct hoursTensStruct = {

@@ -41,7 +41,8 @@ typedef struct DigitStruct {
 typedef enum ApplyMode{
     APPLY_MODE_NORMAL,
     APPLY_MODE_TONE,
-    APPLY_MODE_SLEEP
+    APPLY_MODE_SLEEP,
+    APPLY_MODE_NO_TONE
 } ApplyMode;
 
 typedef struct DigitMail {
@@ -61,7 +62,7 @@ void initDigit(DigitStruct* digit);
 void requestNewDigitStateNormal(DigitStruct* digit, SegState state, uint32_t timeout);
 void requestNewExtraState(DigitStruct* digit, bool isShow, uint32_t timeout);
 void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency, uint32_t timeout);
-//Disable HSD maybe
+void requestNoTone(DigitStruct *digit, uint32_t timeout);
 void requestSleep(DigitStruct* digit, uint32_t timeout);
 bool requestWake(DigitStruct* digit);
 

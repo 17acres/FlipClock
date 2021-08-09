@@ -37,60 +37,60 @@ uint8_t frameBuf[BUFSIZE];
 uint8_t rxbuf[BUFSIZE]; //Garbage data, required by RTOS drivers
 
 extern "C" void updateLeds(UArg arg0, UArg arg1) {
-    uint32_t frameIdx = 0;
-
-    while (1) {
-
-        uint32_t startTime = Clock_getTicks();
-
-        fill_rainbow((CRGB *) ledStringVals.fullArray, NUM_LEDS, frameIdx, 20);
-        //fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::Black);
-        //fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::White);
-        //if (frameIdx % 60 == 0)
-            brightness=31;
-
-        SegmentMaskRequest request;
-
-        while (Mailbox_pend(maskRequestMailbox, &request, BIOS_NO_WAIT)) {
-            uint8_t *selectedMaskArray;
-            switch (request.segmentLedId) {
-                case (SEG_LED_ID_HOURS_TENS):
-                    selectedMaskArray = ledStringMasks.hoursTens;
-                    break;
-//				case (SEG_LED_ID_HOURS_ONES):
-//					selectedMaskArray = ledStringMasks.hoursOnes;
-//					break;
-//				case (SEG_LED_ID_MINUTES_TENS):
-//					selectedMaskArray = ledStringMasks.minutesTens;
-//					break;
-//				case (SEG_LED_ID_MINUTES_TENS):
-//					selectedMaskArray = ledStringMasks.minutesOnes;
-//					break;
-            }
-            if (selectedMaskArray != 0)
-                calculateMask(request.segState, selectedMaskArray, 0);
-        }
-
-        buildFrameBuf();
-
-        SPI_Transaction transaction;
-        transaction.count = sizeof(frameBuf);
-        transaction.txBuf = frameBuf;
-        transaction.rxBuf = rxbuf;
-        transaction.arg = (void *) frameIdx;
-        bool success;
-        success = SPI_transfer(ledSPIHandle, &transaction);
-        if (!success) {
-            System_printf("SPI Transaction Failed, status %d", transaction.status);
-        }
-
-        ++frameIdx;
-        uint32_t delayOffset;
-        uint32_t completeTime = Clock_getTicks();
-        if (completeTime > startTime)
-            delayOffset = completeTime - startTime;
-        Task_sleep(1000 / LED_FPS - delayOffset); //make framerate more consistent
-    }
+//    uint32_t frameIdx = 0;
+//
+//    while (1) {
+//
+//        uint32_t startTime = Clock_getTicks();
+//
+//        fill_rainbow((CRGB *) ledStringVals.fullArray, NUM_LEDS, frameIdx, 20);
+//        //fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::Black);
+//        //fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::White);
+//        //if (frameIdx % 60 == 0)
+//            brightness=31;
+//
+//        SegmentMaskRequest request;
+//
+//        while (Mailbox_pend(maskRequestMailbox, &request, BIOS_NO_WAIT)) {
+//            uint8_t *selectedMaskArray;
+//            switch (request.segmentLedId) {
+//                case (SEG_LED_ID_HOURS_TENS):
+//                    selectedMaskArray = ledStringMasks.hoursTens;
+//                    break;
+////				case (SEG_LED_ID_HOURS_ONES):
+////					selectedMaskArray = ledStringMasks.hoursOnes;
+////					break;
+////				case (SEG_LED_ID_MINUTES_TENS):
+////					selectedMaskArray = ledStringMasks.minutesTens;
+////					break;
+////				case (SEG_LED_ID_MINUTES_TENS):
+////					selectedMaskArray = ledStringMasks.minutesOnes;
+////					break;
+//            }
+//            if (selectedMaskArray != 0)
+//                calculateMask(request.segState, selectedMaskArray, 0);
+//        }
+//
+//        buildFrameBuf();
+//
+//        SPI_Transaction transaction;
+//        transaction.count = sizeof(frameBuf);
+//        transaction.txBuf = frameBuf;
+//        transaction.rxBuf = rxbuf;
+//        transaction.arg = (void *) frameIdx;
+//        bool success;
+//        success = SPI_transfer(ledSPIHandle, &transaction);
+//        if (!success) {
+//            System_printf("SPI Transaction Failed, status %d", transaction.status);
+//        }
+//
+//        ++frameIdx;
+//        uint32_t delayOffset;
+//        uint32_t completeTime = Clock_getTicks();
+//        if (completeTime > startTime)
+//            delayOffset = completeTime - startTime;
+//        Task_sleep(1000 / LED_FPS - delayOffset); //make framerate more consistent
+//    }
 }
 
 void buildFrameBuf() {

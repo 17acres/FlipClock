@@ -78,7 +78,29 @@ SegState subtractSeg(SegState newState, SegState oldState) {
 }
 
 SegState invertSegState(SegState state){//passed by value
-    state.rawWord = ~state.rawWord;
+    if ((state.a == DRV_FWD)||(state.a == DRV_REV))
+          state.a = ~state.a;
+
+    if ((state.b == DRV_FWD)||(state.b == DRV_REV))
+              state.b = ~state.b;
+
+    if ((state.c == DRV_FWD)||(state.c == DRV_REV))
+              state.c = ~state.c;
+
+    if ((state.d == DRV_FWD)||(state.d == DRV_REV))
+              state.d = ~state.d;
+
+    if ((state.e == DRV_FWD)||(state.e == DRV_REV))
+              state.e = ~state.e;
+
+    if ((state.f == DRV_FWD)||(state.f == DRV_REV))
+              state.f = ~state.f;
+
+    if ((state.g == DRV_FWD)||(state.g == DRV_REV))
+              state.g = ~state.g;
+
+    if ((state.extra == DRV_FWD)||(state.extra == DRV_REV))
+              state.extra = ~state.extra;
     return state;
 }
 
