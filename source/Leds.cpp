@@ -44,8 +44,8 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
         fill_rainbow((CRGB *) ledStringVals.fullArray, NUM_LEDS, frameIdx, 20);
         //fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::Black);
         //fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::White);
-        if (frameIdx % 60 == 0)
-            brightness++;
+        //if (frameIdx % 60 == 0)
+            brightness=31;
 
         SegmentMaskRequest request;
 
