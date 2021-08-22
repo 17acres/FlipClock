@@ -76,17 +76,14 @@ Char sysMonitorStack[TASKSTACKSIZE];
  *  Toggle the Board_LED0. The Task_sleep is determined by arg0 which
  *  is configured for the heartBeat Task instance.
  */
-void heartBeatFxn(UArg arg0, UArg arg1)
-{
-    while (1)
-    {
+void heartBeatFxn(UArg arg0, UArg arg1) {
+    while (1) {
         Task_sleep((UInt) arg0);
         GPIO_toggle(LAUNCHPAD_LED_GREEN);
     }
 }
 
-void sysMonitor(UArg arg0, UArg arg1)
-{
+void sysMonitor(UArg arg0, UArg arg1) {
     GPIO_write(IO_RESET, FALSE);
     GPIO_write(ESP_ENABLE, TRUE);
     GPIO_write(BUF_DISABLE, FALSE);
@@ -105,7 +102,9 @@ void sysMonitor(UArg arg0, UArg arg1)
 //                             segVal_S, segVal_t, segVal_U, segVal_u, segVal_y,
 //                             segValQuestion, segValBlank, segValAll };
     //SegState stateList[] = { segVal0, segVal1, segVal2, segVal3, segVal4, segVal5, segVal6, segVal7, segVal8, segVal9 };
-    SegState stateList[] = { segVal1, segVal_I };
+    SegState stateList[] = {
+                             segVal1,
+                             segVal_I };
 //	SegState
 //	stateList[]= {
 //		segValBlank,
@@ -162,8 +161,7 @@ void sysMonitor(UArg arg0, UArg arg1)
 //	};
     uint32_t numStates = sizeof(stateList) / sizeof(stateList[0]);
 
-    while (1)
-    {
+    while (1) {
         checkIOPresence(IO_0_ADDR);
         printDtcs();
         requestWake(&hoursTensStruct);
@@ -171,103 +169,86 @@ void sysMonitor(UArg arg0, UArg arg1)
         SegState thisState = stateList[loopCount % numStates];
 
         //requestNewDigitStateNormal(&hoursTensStruct, thisState, BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 4000, BIOS_WAIT_FOREVER);
+        Task_sleep(800);
 
-        requestTone(&hoursTensStruct, segValShowExtra, 329.63,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 329.63, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
-        requestTone(&hoursTensStruct, segValShowExtra, 415.3,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 415.3, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
-        requestTone(&hoursTensStruct, segValShowExtra, 369.99,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 369.99, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
-        requestTone(&hoursTensStruct, segValShowExtra, 246.94,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 246.94, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
 
-        requestTone(&hoursTensStruct, segValShowExtra, 329.63,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 329.63, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
-        requestTone(&hoursTensStruct, segValShowExtra, 369.99,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 369.99, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
-        requestTone(&hoursTensStruct, segValShowExtra, 415.3,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 415.3, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
-        requestTone(&hoursTensStruct, segValShowExtra, 329.63,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 329.63, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
 
-        requestTone(&hoursTensStruct, segValShowExtra, 415.3,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 415.3, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
-        requestTone(&hoursTensStruct, segValShowExtra, 329.63,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 329.63, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
-        requestTone(&hoursTensStruct, segValShowExtra, 369.99,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 369.99, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
-        requestTone(&hoursTensStruct, segValShowExtra, 246.94,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 246.94, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
 
-        requestTone(&hoursTensStruct, segValShowExtra, 246.94,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 246.94, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
-        requestTone(&hoursTensStruct, segValShowExtra, 369.99,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 369.99, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
-        requestTone(&hoursTensStruct, segValShowExtra, 415.3,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 415.3, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
-        requestTone(&hoursTensStruct, segValShowExtra, 329.63,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 329.63, BIOS_WAIT_FOREVER);
         Task_sleep(800);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(200);
 
-        requestTone(&hoursTensStruct, segValShowExtra, 164.81,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 164.81, BIOS_WAIT_FOREVER);
         Task_sleep(4000);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(1000);
-        requestTone(&hoursTensStruct, segValShowExtra, 164.81,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 164.81, BIOS_WAIT_FOREVER);
         Task_sleep(4000);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(1000);
-        requestTone(&hoursTensStruct, segValShowExtra, 164.81,
-        BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 164.81, BIOS_WAIT_FOREVER);
         Task_sleep(4000);
         requestNoTone(&hoursTensStruct, BIOS_WAIT_FOREVER);
         Task_sleep(1000);
@@ -288,8 +269,7 @@ void sysMonitor(UArg arg0, UArg arg1)
 /*
  *  ======== main ========
  */
-int main(void)
-{
+int main(void) {
 
     init();
 
@@ -301,18 +281,16 @@ int main(void)
     heartBeatParams.stack = &heartbeatStack;
     heartBeatParams.priority = 1;
     heartBeatParams.instance->name = "Heartbeat";
-    Task_construct(&heartbeatStruct, (Task_FuncPtr) heartBeatFxn,
-                   &heartBeatParams, NULL);
+    Task_construct(&heartbeatStruct, (Task_FuncPtr) heartBeatFxn, &heartBeatParams, NULL);
 
     /* Construct updateLEDs Task  thread */
     Task_Params updateLEDsParams;
     Task_Params_init(&updateLEDsParams);
-    updateLEDsParams.stackSize = TASKSTACKSIZE* 2;
+    updateLEDsParams.stackSize = TASKSTACKSIZE * 2;
     updateLEDsParams.stack = &updateLEDsStack;
     updateLEDsParams.priority = LED_TASK_PRIORITY;
     updateLEDsParams.instance->name = "updateLEDs";
-    Task_construct(&updateLEDsStruct, (Task_FuncPtr) updateLeds,
-                   &updateLEDsParams, NULL);
+    Task_construct(&updateLEDsStruct, (Task_FuncPtr) updateLeds, &updateLEDsParams, NULL);
 
     /* Construct sysMonitor Task  thread */
     Task_Params sysMonitorParams;
@@ -321,8 +299,7 @@ int main(void)
     sysMonitorParams.stack = &sysMonitorStack;
     sysMonitorParams.priority = SYS_MONITOR_PRIORITY;
     sysMonitorParams.instance->name = "sysMonitor";
-    Task_construct(&sysMonitorStruct, (Task_FuncPtr) sysMonitor,
-                   &sysMonitorParams, NULL);
+    Task_construct(&sysMonitorStruct, (Task_FuncPtr) sysMonitor, &sysMonitorParams, NULL);
 
     System_printf("Starting the example\nSystem provider is set to SysMin. "
                   "Halt the target to view any SysMin contents in ROV.\n");

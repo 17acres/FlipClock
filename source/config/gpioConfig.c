@@ -77,44 +77,44 @@
  */
 
 GPIO_PinConfig gpioPinConfigs[] = {
-/* RTC_SQW */
-GPIOTiva_PC_4 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
+        /* RTC_SQW */
+        GPIOTiva_PC_4 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
 
-/* LAUNCHPAD_SW1 */
-GPIOTiva_PF_4 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
+        /* LAUNCHPAD_SW1 */
+        GPIOTiva_PF_4 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
 
-/* LAUNCHPAD_SW2 */
-GPIOTiva_PF_0 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
+        /* LAUNCHPAD_SW2 */
+        GPIOTiva_PF_0 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
 
-/* HSD_DISABLE_0 */
-GPIOTiva_PD_7 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
+        /* HSD_DISABLE_0 */
+        GPIOTiva_PD_7 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
 
-/* HSD_DISABLE_1 */
-GPIOTiva_PB_6 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
+        /* HSD_DISABLE_1 */
+        GPIOTiva_PB_6 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
 
-/* HSD_DISABLE_2 */
-GPIOTiva_PC_7 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
+        /* HSD_DISABLE_2 */
+        GPIOTiva_PC_7 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
 
-/* HSD_DISABLE_3 */
-GPIOTiva_PB_7 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
+        /* HSD_DISABLE_3 */
+        GPIOTiva_PB_7 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
 
-/* IO_RESET */
-GPIOTiva_PC_6 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
+        /* IO_RESET */
+        GPIOTiva_PC_6 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
 
-/* ESP_ENABLE */
-GPIOTiva_PC_5 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_LOW,
+        /* ESP_ENABLE */
+        GPIOTiva_PC_5 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_LOW,
 
-/* BUF_DISABLE */
-GPIOTiva_PA_2 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
+        /* BUF_DISABLE */
+        GPIOTiva_PA_2 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
 
-/* LAUNCHPAD_LED_BLUE */
-GPIOTiva_PF_2 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_LOW,
+        /* LAUNCHPAD_LED_BLUE */
+        GPIOTiva_PF_2 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_LOW,
 
-/* LAUNCHPAD_LED_GREEN */
-GPIOTiva_PF_3 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
+        /* LAUNCHPAD_LED_GREEN */
+        GPIOTiva_PF_3 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
 
-/* LAUNCHPAD_LED_RED */
-GPIOTiva_PD_1 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_LOW};
+        /* LAUNCHPAD_LED_RED */
+        GPIOTiva_PD_1 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_LOW };
 
 /*
  * Array of callback function pointers
@@ -125,35 +125,34 @@ GPIOTiva_PD_1 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_LOW};
  */
 
 GPIO_CallbackFxn gpioCallbackFunctions[] = {
-NULL, /* RTC_SQW */
-NULL, /* LAUNCHPAD_SW1 */
-NULL /* LAUNCHPAD_SW2 */
+        NULL, /* RTC_SQW */
+        NULL, /* LAUNCHPAD_SW1 */
+        NULL /* LAUNCHPAD_SW2 */
 };
-
 
 /* The device-specific GPIO_config structure */
 const GPIOTiva_Config GPIOTiva_config = {
-		.pinConfigs = (GPIO_PinConfig *) gpioPinConfigs,
-		.callbacks = (GPIO_CallbackFxn *) gpioCallbackFunctions,
-		.numberOfPinConfigs = sizeof(gpioPinConfigs) / sizeof(GPIO_PinConfig),
-		.numberOfCallbacks = sizeof(gpioCallbackFunctions) / sizeof(GPIO_CallbackFxn),
-		.intPriority = (~0) };
+        .pinConfigs = (GPIO_PinConfig *) gpioPinConfigs,
+        .callbacks = (GPIO_CallbackFxn *) gpioCallbackFunctions,
+        .numberOfPinConfigs = sizeof(gpioPinConfigs) / sizeof(GPIO_PinConfig),
+        .numberOfCallbacks = sizeof(gpioCallbackFunctions) / sizeof(GPIO_CallbackFxn),
+        .intPriority = (~0) };
 
 void initGPIO(void) {
-	MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-	MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
-	MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOC);
-	MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
-	MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE);
-	MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
+    MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+    MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
+    MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOC);
+    MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
+    MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE);
+    MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
 
-	HWREG(GPIO_PORTD_BASE+GPIO_O_LOCK) = GPIO_LOCK_KEY;
-	HWREG(GPIO_PORTD_BASE+GPIO_O_CR) |= GPIO_PIN_7;
-	HWREG(GPIO_PORTD_BASE+GPIO_O_LOCK) = 0x0;
-	HWREG(GPIO_PORTF_BASE+GPIO_O_LOCK) = GPIO_LOCK_KEY;
-	HWREG(GPIO_PORTF_BASE+GPIO_O_CR) |= GPIO_PIN_0;
-	HWREG(GPIO_PORTF_BASE+GPIO_O_LOCK) = 0x0;
+    HWREG(GPIO_PORTD_BASE+GPIO_O_LOCK) = GPIO_LOCK_KEY;
+    HWREG(GPIO_PORTD_BASE+GPIO_O_CR) |= GPIO_PIN_7;
+    HWREG(GPIO_PORTD_BASE+GPIO_O_LOCK) = 0x0;
+    HWREG(GPIO_PORTF_BASE+GPIO_O_LOCK) = GPIO_LOCK_KEY;
+    HWREG(GPIO_PORTF_BASE+GPIO_O_CR) |= GPIO_PIN_0;
+    HWREG(GPIO_PORTF_BASE+GPIO_O_LOCK) = 0x0;
 
-	/* Initialize peripheral and pins */
-	GPIO_init();
+    /* Initialize peripheral and pins */
+    GPIO_init();
 }

@@ -13,8 +13,6 @@
 #include <ti/sysbios/knl/Semaphore.h>
 #include "dtc.h"
 
-Semaphore_Handle ioSemaphore;
-
 bool checkIOPresence(uint8_t slaveAddress);
 void initIOSemaphore();
 void initIOHwi();

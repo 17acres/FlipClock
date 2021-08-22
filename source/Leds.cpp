@@ -31,12 +31,11 @@ void initMailboxes();
 #define TERM_BYTES ((NUM_LEDS+14)/16) //https://github.com/pololu/apa102-arduino/blob/master/APA102.h
 #define BUFSIZE (4+NUM_LEDS*4+TERM_BYTES)
 
-LedStringVals ledStringVals;
-LedStringMasks ledStringMasks; //255 means on
-uint8_t brightness;
-
-uint8_t frameBuf[BUFSIZE];
-uint8_t rxbuf[BUFSIZE]; //Garbage data, required by RTOS drivers
+static LedStringVals ledStringVals;
+static LedStringMasks ledStringMasks; //255 means on
+static uint8_t brightness;
+static uint8_t frameBuf[BUFSIZE];
+static uint8_t rxbuf[BUFSIZE]; //Garbage data, required by RTOS drivers
 
 extern "C" void updateLeds(UArg arg0, UArg arg1) {
     uint32_t frameIdx = 0;
@@ -49,7 +48,7 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
         //fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::Black);
         //fill_solid((CRGB *)ledStringVals.fullArray, NUM_LEDS,CRGB::White);
         //if (frameIdx % 60 == 0)
-            brightness=31;
+        brightness = 31;
 
         SegmentMaskRequest request;
 
@@ -82,7 +81,7 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
         transaction.arg = (void *) frameIdx;
         bool success;
         uint32_t dummy;
-        SSIDataGetNonBlocking(((SPITivaDMA_HWAttrs *)(ledSPIHandle->hwAttrs))->baseAddr, &dummy);
+        SSIDataGetNonBlocking(((SPITivaDMA_HWAttrs *) (ledSPIHandle->hwAttrs))->baseAddr, &dummy);
         success = SPI_transfer(ledSPIHandle, &transaction);
         if (!success) {
             System_printf("SPI Transaction Failed, status %d", transaction.status);

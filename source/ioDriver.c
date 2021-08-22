@@ -23,13 +23,14 @@
 #include "dtc.h"
 #include "utils/ioDefs.h"
 
-Semaphore_Handle ioTxCompleteSemaphore;
-Semaphore_Handle ioBusySemaphore;
-Hwi_Handle hwiHandle;
-volatile uint8_t secondByte;
+static Semaphore_Handle ioTxCompleteSemaphore;
+static Semaphore_Handle ioBusySemaphore;
+static Semaphore_Handle ioSemaphore;
+static Hwi_Handle hwiHandle;
+static volatile uint8_t secondByte;
 void ioIsr(UArg arg);
 void handleIOFailure(Dtc code, uint32_t detail, String message);
-volatile bool transactionStarted = false;
+static volatile bool transactionStarted = false;
 
 bool checkIOPresence(uint8_t slaveAddress) {
 	Dtc possibleCode = lookupDtc(slaveAddress);

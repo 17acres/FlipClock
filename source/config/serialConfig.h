@@ -10,7 +10,7 @@
 
 #include <ti/drivers/SPI.h>
 
-SPI_Handle ledSPIHandle;
+extern SPI_Handle ledSPIHandle;
 
 extern void initSPI();
 extern void initI2C();

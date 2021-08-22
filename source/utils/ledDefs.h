@@ -26,32 +26,32 @@ extern "C" {
 #include <inc/hw_gpio.h>
 #include "iodefs.h"
 
-/* Segment Arrangement https://en.wikipedia.org/wiki/Seven-segment_display#/media/File:7_Segment_Display_with_Labeled_Segments.svg
- *    A
- *  F   B
- *    G
- *  E   C
- *    D
- *
- * MIRRORED ALONG Z:
- *    A
- *  B   F
- *    G
- *  C   E
- *    D
- */
+    /* Segment Arrangement https://en.wikipedia.org/wiki/Seven-segment_display#/media/File:7_Segment_Display_with_Labeled_Segments.svg
+     *    A
+     *  F   B
+     *    G
+     *  E   C
+     *    D
+     *
+     * MIRRORED ALONG Z:
+     *    A
+     *  B   F
+     *    G
+     *  C   E
+     *    D
+     */
 
-/* LED Ordering
- * Segment Index, Direction (increasing index)
- * C		up
- * Extra	??
- * B		up
- * A		left
- * F		down
- * G		left
- * E		down
- * D		left
- */
+    /* LED Ordering
+     * Segment Index, Direction (increasing index)
+     * C		up
+     * Extra	??
+     * B		up
+     * A		left
+     * F		down
+     * G		left
+     * E		down
+     * D		left
+     */
 
 #define NUM_LEDS_NO_EXTRA 21
 #define MAX_EXRTA_LEDS 2
@@ -82,52 +82,49 @@ extern "C" {
 		TYPE hoursTens[NUM_LEDS_NO_EXTRA];\
     }
 
-
 //plain-c version of CRGB
-typedef struct CRGB_C{
-	union {
-		struct {
-			union {
-				uint8_t r;
-				uint8_t red;
-			};
-			union {
-				uint8_t g;
-				uint8_t green;
-			};
-			union {
-				uint8_t b;
-				uint8_t blue;
-			};
-		};
-		uint8_t raw[3];
-	};
-} CRGB_C;
+    typedef struct CRGB_C {
+        union {
+            struct {
+                union {
+                    uint8_t r;
+                    uint8_t red;
+                };
+                union {
+                    uint8_t g;
+                    uint8_t green;
+                };
+                union {
+                    uint8_t b;
+                    uint8_t blue;
+                };
+            };
+            uint8_t raw[3];
+        };
+    }CRGB_C;
 
-typedef union LedStringVals{
-	GEN_LED_STRING_STRUCT_ELEMENTS(CRGB_C);
-	CRGB_C fullArray[0]; //https://stackoverflow.com/questions/23525861/get-sizeof-anonymous-struct-inside-union
-} LedStringVals;
+    typedef union LedStringVals {
+        GEN_LED_STRING_STRUCT_ELEMENTS(CRGB_C);
+        CRGB_C fullArray[0]; //https://stackoverflow.com/questions/23525861/get-sizeof-anonymous-struct-inside-union
+    }LedStringVals;
 
 //255 means on
-typedef union LedStringMasks{
-	GEN_LED_STRING_STRUCT_ELEMENTS(uint8_t);
-	uint8_t fullArray[0];
-} LedStringMasks;
+    typedef union LedStringMasks {
+        GEN_LED_STRING_STRUCT_ELEMENTS(uint8_t);
+        uint8_t fullArray[0];
+    }LedStringMasks;
 
-typedef struct SegmentMaskRequest {
-	SegStateFade segState;
-	uint8_t segmentLedId;
-} SegmentMaskRequest;
+    typedef struct SegmentMaskRequest {
+        SegStateFade segState;
+        uint8_t segmentLedId;
+    }SegmentMaskRequest;
 
-
-void calculateMask(SegStateFade segState, uint8_t returnMaskArray[], uint8_t numExtraLeds); //returnMaskArray of appropriate size
-void requestMaskUpdate(SegmentMaskRequest *request, uint32_t timeout);
+    void calculateMask(SegStateFade segState, uint8_t returnMaskArray[], uint8_t numExtraLeds); //returnMaskArray of appropriate size
+    void requestMaskUpdate(SegmentMaskRequest *request, uint32_t timeout);
 
 #define NUM_LEDS (sizeof(LedStringVals)/sizeof(CRGB_C))
 
-
-Mailbox_Handle maskRequestMailbox;
+    extern Mailbox_Handle maskRequestMailbox;
 #ifdef __cplusplus
 }
 #endif

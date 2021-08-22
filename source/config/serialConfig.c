@@ -90,32 +90,30 @@ static Hwi_Struct dmaHwiStruct;
  *  ======== dmaErrorHwi ========
  */
 static Void dmaErrorHwi(UArg arg) {
-	System_printf("DMA error code: %d\n", uDMAErrorStatusGet());
-	uDMAErrorStatusClear();
-	System_abort("DMA error!!");
+    System_printf("DMA error code: %d\n", uDMAErrorStatusGet());
+    uDMAErrorStatusClear();
+    System_abort("DMA error!!");
 }
 
 void initDMA(void) {
-	Error_Block eb;
-	Hwi_Params hwiParams;
+    Error_Block eb;
+    Hwi_Params hwiParams;
 
-	if (!dmaInitialized) {
-		Error_init(&eb);
-		Hwi_Params_init(&hwiParams);
-		Hwi_construct(&(dmaHwiStruct), INT_UDMAERR, dmaErrorHwi, &hwiParams, &eb);
-		if (Error_check(&eb)) {
-			System_abort("Couldn't construct DMA error hwi");
-		}
+    if (!dmaInitialized) {
+        Error_init(&eb);
+        Hwi_Params_init(&hwiParams);
+        Hwi_construct(&(dmaHwiStruct), INT_UDMAERR, dmaErrorHwi, &hwiParams, &eb);
+        if (Error_check(&eb)) {
+            System_abort("Couldn't construct DMA error hwi");
+        }
 
-		SysCtlPeripheralEnable(SYSCTL_PERIPH_UDMA);
-		uDMAEnable();
-		uDMAControlBaseSet(dmaControlTable);
+        SysCtlPeripheralEnable(SYSCTL_PERIPH_UDMA);
+        uDMAEnable();
+        uDMAControlBaseSet(dmaControlTable);
 
-		dmaInitialized = true;
-	}
+        dmaInitialized = true;
+    }
 }
-
-
 
 SPITivaDMA_Object spiTivaDMAObject;
 
@@ -124,70 +122,74 @@ SPITivaDMA_Object spiTivaDMAObject;
 uint32_t spiTivaDMAscratchBuf;
 
 const SPITivaDMA_HWAttrs spiTivaDMAHWAttr = {
-		.baseAddr = SSI1_BASE,
-		.intNum = INT_SSI1,
-		.intPriority = (~0),
-		.scratchBufPtr = &spiTivaDMAscratchBuf,
-		.defaultTxBufValue = 0,
-		.rxChannelIndex = UDMA_CHANNEL_SSI1RX,
-		.txChannelIndex = UDMA_CHANNEL_SSI1TX,
-		.channelMappingFxn = uDMAChannelAssign,
-		.rxChannelMappingFxnArg = UDMA_CH10_SSI1RX,
-		.txChannelMappingFxnArg = UDMA_CH11_SSI1TX };
+        .baseAddr = SSI1_BASE,
+        .intNum = INT_SSI1,
+        .intPriority = (~0),
+        .scratchBufPtr = &spiTivaDMAscratchBuf,
+        .defaultTxBufValue = 0,
+        .rxChannelIndex = UDMA_CHANNEL_SSI1RX,
+        .txChannelIndex = UDMA_CHANNEL_SSI1TX,
+        .channelMappingFxn = uDMAChannelAssign,
+        .rxChannelMappingFxnArg = UDMA_CH10_SSI1RX,
+        .txChannelMappingFxnArg = UDMA_CH11_SSI1TX };
 
-const SPI_Config SPI_config[] = { { .fxnTablePtr = &SPITivaDMA_fxnTable, .object = &spiTivaDMAObject, .hwAttrs = &spiTivaDMAHWAttr }, { NULL, NULL, NULL } };
+const SPI_Config SPI_config[] = {
+        {
+                .fxnTablePtr = &SPITivaDMA_fxnTable,
+                .object = &spiTivaDMAObject,
+                .hwAttrs = &spiTivaDMAHWAttr },
+        {
+                NULL,
+                NULL,
+                NULL } };
 
 void initSPI(void) {
-	initDMA();
+    initDMA();
 
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_SSI1);
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_SSI1);
 
-	MAP_GPIOPinConfigure(GPIO_PF1_SSI1TX);
-	MAP_GPIOPinTypeSSI(GPIO_PORTF_BASE, GPIO_PIN_1);
+    MAP_GPIOPinConfigure(GPIO_PF1_SSI1TX);
+    MAP_GPIOPinTypeSSI(GPIO_PORTF_BASE, GPIO_PIN_1);
 
-	MAP_GPIOPinConfigure(GPIO_PD0_SSI1CLK);
-	MAP_GPIOPinTypeSSI(GPIO_PORTD_BASE, GPIO_PIN_0);
+    MAP_GPIOPinConfigure(GPIO_PD0_SSI1CLK);
+    MAP_GPIOPinTypeSSI(GPIO_PORTD_BASE, GPIO_PIN_0);
 
-	GPIOPadConfigSet(GPIO_PORTF_BASE, GPIO_PIN_1, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD_WPU);
-	GPIOPadConfigSet(GPIO_PORTD_BASE, GPIO_PIN_0, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD_WPU);
+    GPIOPadConfigSet(GPIO_PORTF_BASE, GPIO_PIN_1, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD_WPU);
+    GPIOPadConfigSet(GPIO_PORTD_BASE, GPIO_PIN_0, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD_WPU);
 
-	SPI_Params params;
-	SPI_Params_init(&params);
-	params.bitRate = LED_BITRATE;
-	params.dataSize = 8; //bits
-	params.frameFormat = SPI_POL1_PHA0;
-	params.mode = SPI_MASTER;
-	params.transferMode = SPI_MODE_BLOCKING;
+    SPI_Params params;
+    SPI_Params_init(&params);
+    params.bitRate = LED_BITRATE;
+    params.dataSize = 8; //bits
+    params.frameFormat = SPI_POL1_PHA0;
+    params.mode = SPI_MASTER;
+    params.transferMode = SPI_MODE_BLOCKING;
 
-	ledSPIHandle = SPI_open(0, &params);
-	if (!ledSPIHandle)
-		System_printf("Failed to open SPI");
+    ledSPIHandle = SPI_open(0, &params);
+    if (!ledSPIHandle)
+        System_printf("Failed to open SPI");
 }
 
 void initI2C(void) {
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C2);
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C2);
 
-	MAP_GPIOPinConfigure(GPIO_PE5_I2C2SDA);
-	MAP_GPIOPinTypeI2C(GPIO_PORTE_BASE, GPIO_PIN_5);
+    MAP_GPIOPinConfigure(GPIO_PE5_I2C2SDA);
+    MAP_GPIOPinTypeI2C(GPIO_PORTE_BASE, GPIO_PIN_5);
 
-	MAP_GPIOPinConfigure(GPIO_PE4_I2C2SCL);
-	MAP_GPIOPinTypeI2CSCL(GPIO_PORTE_BASE, GPIO_PIN_4);
+    MAP_GPIOPinConfigure(GPIO_PE4_I2C2SCL);
+    MAP_GPIOPinTypeI2CSCL(GPIO_PORTE_BASE, GPIO_PIN_4);
 
-	GPIOPadConfigSet(GPIO_PORTE_BASE, GPIO_PIN_5, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_OD);
-	GPIOPadConfigSet(GPIO_PORTE_BASE, GPIO_PIN_4, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU);
+    GPIOPadConfigSet(GPIO_PORTE_BASE, GPIO_PIN_5, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_OD);
+    GPIOPadConfigSet(GPIO_PORTE_BASE, GPIO_PIN_4, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU);
 
-	MAP_I2CMasterInitExpClk(I2C2_BASE, SysCtlClockGet(), true);
-	I2CMasterInitExpClk(I2C2_BASE, SysCtlClockGet(), true);
+    MAP_I2CMasterInitExpClk(I2C2_BASE, SysCtlClockGet(), true);
+    I2CMasterInitExpClk(I2C2_BASE, SysCtlClockGet(), true);
 
+    //fm+
+    uint32_t ui32TPR = ((SysCtlClockGet() + (2 * 10 * 1000000) - 1) / (2 * 10 * 1000000)) - 1;
+    HWREG(I2C2_BASE + I2C_O_MTPR) = ui32TPR;
 
-	//fm+
-	uint32_t ui32TPR = ((SysCtlClockGet() + (2 * 10 * 1000000) - 1) /
-	               (2 * 10 * 1000000)) - 1;
-	HWREG(I2C2_BASE + I2C_O_MTPR) = ui32TPR;
-
-
-
-	MAP_I2CMasterTimeoutSet(I2C2_BASE, (10*400)/16);//10ms timeout
-	initIOSemaphore();
-	initIOHwi();
+    MAP_I2CMasterTimeoutSet(I2C2_BASE, (10 * 400) / 16); //10ms timeout
+    initIOSemaphore();
+    initIOHwi();
 }

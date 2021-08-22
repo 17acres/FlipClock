@@ -34,20 +34,20 @@
 #define __GPIO_CONFIG_H
 
 typedef enum GPIONames {
-	RTC_SQW = 0,
-	LAUNCHPAD_SW1,
-	LAUNCHPAD_SW2,
-	HSD_DISABLE_0, //high is disable
-	HSD_DISABLE_1,
-	HSD_DISABLE_2,
-	HSD_DISABLE_3,
-	IO_RESET, //high is reset
-	ESP_ENABLE, //high is enable
-	BUF_DISABLE, //high is disable
-	LAUNCHPAD_LED_BLUE,
-	LAUNCHPAD_LED_GREEN,
-	LAUNCHPAD_LED_RED,
-	GPIOCOUNT
+    RTC_SQW = 0,
+    LAUNCHPAD_SW1,
+    LAUNCHPAD_SW2,
+    HSD_DISABLE_0, //high is disable
+    HSD_DISABLE_1,
+    HSD_DISABLE_2,
+    HSD_DISABLE_3,
+    IO_RESET, //high is reset
+    ESP_ENABLE, //high is enable
+    BUF_DISABLE, //high is disable
+    LAUNCHPAD_LED_BLUE,
+    LAUNCHPAD_LED_GREEN,
+    LAUNCHPAD_LED_RED,
+    GPIOCOUNT
 } EK_TM4C123GXL_GPIOName;
 
 extern void initGPIO(void);

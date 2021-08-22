@@ -10,17 +10,24 @@
 #include <xdc/std.h>
 
 typedef enum Dtc {
-	IO_0_FAIL_DTC = 0, IO_1_FAIL_DTC, IO_2_FAIL_DTC, IO_3_FAIL_DTC, IO_GENERIC_FAIL_DTC, DTC_COUNT
+    IO_0_FAIL_DTC = 0,
+    IO_1_FAIL_DTC,
+    IO_2_FAIL_DTC,
+    IO_3_FAIL_DTC,
+    IO_GENERIC_FAIL_DTC,
+    DTC_COUNT
 } Dtc;
 typedef enum DtcStatus {
-	DTC_UNSET, DTC_PENDING, DTC_SET
+    DTC_UNSET,
+    DTC_PENDING,
+    DTC_SET
 } DtcStatus;
 
 typedef struct DtcStruct {
-	DtcStatus status;
-	uint8_t count;
-	String errMessage;
-	uint32_t detailVal;
+    DtcStatus status;
+    uint8_t count;
+    String errMessage;
+    uint32_t detailVal;
 } DtcStruct;
 
 void setDtc(Dtc code, uint32_t detailVal, String errMessage);

@@ -17,7 +17,7 @@
 #include <ti/drivers/GPIO.h>
 #include <xdc/runtime/Error.h>
 
-void timerISR(UArg arg0) {
+static void timerISR(UArg arg0) {
     Event_post(((DigitStruct *) arg0)->eventHandle, Event_Id_01);
 }
 
@@ -36,7 +36,7 @@ void calculateStateToApply(DigitStruct* digit, SegState requestedState, SegState
     }
 }
 
-void digitTask(UArg arg0, UArg arg1) {
+static void digitTask(UArg arg0, UArg arg1) {
     DigitStruct *digit = (DigitStruct *) arg0;
 
     SegState lastState = segValOff;
@@ -47,7 +47,7 @@ void digitTask(UArg arg0, UArg arg1) {
     while (1) {
         DigitMail requestMail;
 
-        UInt eventID = Event_pend(digit->eventHandle, Event_Id_NONE, Event_Id_00|Event_Id_01, BIOS_WAIT_FOREVER);    //00 is mailbox, 01 is timer
+        UInt eventID = Event_pend(digit->eventHandle, Event_Id_NONE, Event_Id_00 | Event_Id_01, BIOS_WAIT_FOREVER);    //00 is mailbox, 01 is timer
         if (eventID & Event_Id_00) {
             Mailbox_pend(digit->mailboxHandle, &requestMail, BIOS_NO_WAIT);    //no wait since event
         }
@@ -59,19 +59,16 @@ void digitTask(UArg arg0, UArg arg1) {
                 setSegStateNonBlocking(digit->ioAddr, toneSegmentState2);
             }
             pwmState = !pwmState;
-        }
-        else if (requestMail.mode == APPLY_MODE_NO_TONE){
+        } else if (requestMail.mode == APPLY_MODE_NO_TONE) {
             Timer_stop(digit->timerHandle);
             setSegStateNonBlocking(digit->ioAddr, segValOff);
 
-        }
-        else if (requestMail.mode == APPLY_MODE_TONE) {    //must have been mail event
+        } else if (requestMail.mode == APPLY_MODE_TONE) {    //must have been mail event
             Timer_setPeriodMicroSecs(digit->timerHandle, (500000.0 / requestMail.toneFrequency));    //Period is half of frequency
             toneSegmentState1 = requestMail.requestedState;
             toneSegmentState2 = invertSegState(requestMail.requestedState);
             Timer_start(digit->timerHandle);
-        }
-        else {
+        } else {
             Timer_stop(digit->timerHandle);
 
             uint32_t applyTime;
@@ -147,13 +144,13 @@ void initDigit(DigitStruct* digit) {
     timerParams.extFreq.lo = 80000000;
     timerParams.extFreq.hi = 0;
     timerParams.period = 1000000;
-    timerParams.arg = (UArg)digit;
+    timerParams.arg = (UArg) digit;
 
     digit->timerHandle = Timer_create(Timer_ANY, timerISR, &timerParams, NULL);
 
     Task_Params taskParams;
     Task_Params_init(&taskParams);
-    taskParams.arg0 = (UArg)digit;
+    taskParams.arg0 = (UArg) digit;
     taskParams.stackSize = TASKSTACKSIZE;
     taskParams.stack = &digit->taskStack;
     taskParams.priority = DIGIT_TASK_PRIORITY;
@@ -176,10 +173,10 @@ void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency,
     Mailbox_post(digit->mailboxHandle, &mail, timeout);
 }
 
-void requestNoTone(DigitStruct *digit, uint32_t timeout){
+void requestNoTone(DigitStruct *digit, uint32_t timeout) {
     DigitMail mail = {
-                .mode = APPLY_MODE_NO_TONE };
-        Mailbox_post(digit->mailboxHandle, &mail, timeout);
+            .mode = APPLY_MODE_NO_TONE };
+    Mailbox_post(digit->mailboxHandle, &mail, timeout);
 }
 
 void requestNewExtraState(DigitStruct* digit, bool isShow, uint32_t timeout) {
@@ -201,9 +198,7 @@ bool requestWake(DigitStruct* digit) {
     if (getDtcStatus(lookupDtc(IO_0_ADDR)) == DTC_SET) {
         GPIO_write(digit->hsdDisableAddr, true);
         return false;
-    }
-    else
-    {
+    } else {
         GPIO_write(digit->hsdDisableAddr, false);
         return true;
     }
@@ -213,23 +208,23 @@ DigitStruct hoursTensStruct = {
         .ioAddr = IO_0_ADDR,
         .ledId = SEG_LED_ID_HOURS_TENS,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 0,
-        .hsdDisableAddr = HSD_DISABLE_0 ,
-        .name = "hoursTens"};
+        .hsdDisableAddr = HSD_DISABLE_0,
+        .name = "hoursTens" };
 DigitStruct hoursOnesStruct = {
         .ioAddr = IO_1_ADDR,
         .ledId = SEG_LED_ID_HOURS_ONES,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 1,
-        .hsdDisableAddr = HSD_DISABLE_1 ,
-        .name = "hoursTens"};
+        .hsdDisableAddr = HSD_DISABLE_1,
+        .name = "hoursTens" };
 DigitStruct minutesTensStruct = {
         .ioAddr = IO_2_ADDR,
         .ledId = SEG_LED_ID_MINUTES_TENS,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 2,
-        .hsdDisableAddr = HSD_DISABLE_2 ,
-        .name = "minutesTens"};
+        .hsdDisableAddr = HSD_DISABLE_2,
+        .name = "minutesTens" };
 DigitStruct minutesOnesStruct = {
         .ioAddr = IO_3_ADDR,
         .ledId = SEG_LED_ID_MINUTES_TENS,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 3,
-        .hsdDisableAddr = HSD_DISABLE_3 ,
-        .name = "minutesOnes"};
+        .hsdDisableAddr = HSD_DISABLE_3,
+        .name = "minutesOnes" };
