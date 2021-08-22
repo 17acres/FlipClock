@@ -36,6 +36,7 @@ typedef struct DigitStruct {
     Mailbox_Handle mailboxHandle;
     Event_Handle eventHandle;
     Timer_Handle timerHandle;
+    xdc_String name;
 } DigitStruct;
 
 typedef enum ApplyMode{

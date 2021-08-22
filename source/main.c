@@ -300,15 +300,17 @@ int main(void)
     heartBeatParams.stackSize = TASKSTACKSIZE;
     heartBeatParams.stack = &heartbeatStack;
     heartBeatParams.priority = 1;
+    heartBeatParams.instance->name = "Heartbeat";
     Task_construct(&heartbeatStruct, (Task_FuncPtr) heartBeatFxn,
                    &heartBeatParams, NULL);
 
     /* Construct updateLEDs Task  thread */
     Task_Params updateLEDsParams;
     Task_Params_init(&updateLEDsParams);
-    updateLEDsParams.stackSize = TASKSTACKSIZE * 2;
+    updateLEDsParams.stackSize = TASKSTACKSIZE* 2;
     updateLEDsParams.stack = &updateLEDsStack;
     updateLEDsParams.priority = LED_TASK_PRIORITY;
+    updateLEDsParams.instance->name = "updateLEDs";
     Task_construct(&updateLEDsStruct, (Task_FuncPtr) updateLeds,
                    &updateLEDsParams, NULL);
 
@@ -318,6 +320,7 @@ int main(void)
     sysMonitorParams.stackSize = TASKSTACKSIZE;
     sysMonitorParams.stack = &sysMonitorStack;
     sysMonitorParams.priority = SYS_MONITOR_PRIORITY;
+    sysMonitorParams.instance->name = "sysMonitor";
     Task_construct(&sysMonitorStruct, (Task_FuncPtr) sysMonitor,
                    &sysMonitorParams, NULL);
 

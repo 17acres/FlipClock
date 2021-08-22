@@ -157,7 +157,7 @@ void initDigit(DigitStruct* digit) {
     taskParams.stackSize = TASKSTACKSIZE;
     taskParams.stack = &digit->taskStack;
     taskParams.priority = DIGIT_TASK_PRIORITY;
-
+    taskParams.instance->name = digit->name;
     Task_construct(&digit->taskStruct, (Task_FuncPtr) digitTask, &taskParams, NULL);
 }
 
@@ -213,19 +213,23 @@ DigitStruct hoursTensStruct = {
         .ioAddr = IO_0_ADDR,
         .ledId = SEG_LED_ID_HOURS_TENS,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 0,
-        .hsdDisableAddr = HSD_DISABLE_0 };
+        .hsdDisableAddr = HSD_DISABLE_0 ,
+        .name = "hoursTens"};
 DigitStruct hoursOnesStruct = {
         .ioAddr = IO_1_ADDR,
         .ledId = SEG_LED_ID_HOURS_ONES,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 1,
-        .hsdDisableAddr = HSD_DISABLE_1 };
+        .hsdDisableAddr = HSD_DISABLE_1 ,
+        .name = "hoursTens"};
 DigitStruct minutesTensStruct = {
         .ioAddr = IO_2_ADDR,
         .ledId = SEG_LED_ID_MINUTES_TENS,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 2,
-        .hsdDisableAddr = HSD_DISABLE_2 };
+        .hsdDisableAddr = HSD_DISABLE_2 ,
+        .name = "minutesTens"};
 DigitStruct minutesOnesStruct = {
         .ioAddr = IO_3_ADDR,
         .ledId = SEG_LED_ID_MINUTES_TENS,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 3,
-        .hsdDisableAddr = HSD_DISABLE_3 };
+        .hsdDisableAddr = HSD_DISABLE_3 ,
+        .name = "minutesOnes"};
