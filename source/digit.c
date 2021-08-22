@@ -41,7 +41,7 @@ static void digitTask(UArg arg0, UArg arg1) {
 
     SegState lastState = segValOff;
 
-    bool pwmState;
+    bool pwmState = false;
     SegState toneSegmentState1, toneSegmentState2;
 
     while (1) {
@@ -74,7 +74,6 @@ static void digitTask(UArg arg0, UArg arg1) {
             uint32_t applyTime;
 
             uint32_t numFrames = DIGIT_ANIMATION_TIME * LED_FPS / 1000;
-            bool segCleared = false;
             SegState actualRequestedState, applyState;
             calculateStateToApply(digit, requestMail.requestedState, lastState, &actualRequestedState, &applyState);
 
@@ -87,6 +86,7 @@ static void digitTask(UArg arg0, UArg arg1) {
             setSegStateNonBlocking(digit->ioAddr, applyState);
 
             if (requestMail.mode == APPLY_MODE_NORMAL) {
+                bool segCleared = false;
                 for (uint32_t i = 0; i < numFrames; i++) {
                     uint8_t fadePosition = i * 255 / numFrames;
                     //System_printf("i: %d, fadepos: %d\n",i,fadePosition);

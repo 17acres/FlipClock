@@ -88,7 +88,7 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
         }
 
         ++frameIdx;
-        uint32_t delayOffset;
+        uint32_t delayOffset=0;
         uint32_t completeTime = Clock_getTicks();
         if (completeTime > startTime)
             delayOffset = completeTime - startTime;
