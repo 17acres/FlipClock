@@ -10,8 +10,6 @@
 
 //#include "defs.h"
 
-
 //extern void updateLeds(UArg arg0, UArg arg1);
-
 
 #endif /* SOURCE_LEDS_H_ */
