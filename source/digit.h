@@ -42,14 +42,17 @@ typedef struct DigitStruct {
 typedef enum ApplyMode{
     APPLY_MODE_NORMAL,
     APPLY_MODE_TONE,
+    APPLY_MODE_PWM,
     APPLY_MODE_SLEEP,
-    APPLY_MODE_NO_TONE
+    APPLY_MODE_NO_TIMER
 } ApplyMode;
 
 typedef struct DigitMail {
     SegState requestedState;
     ApplyMode mode;
-    float toneFrequency;
+    float cycleFrequency;
+    uint8_t pwmStepsPerCycle;
+    uint8_t pwmStepsOn;//4 steps on cycle of 8 is 50%
 } DigitMail;
 
 extern DigitStruct hoursTensStruct;
@@ -63,7 +66,8 @@ void initDigit(DigitStruct* digit);
 void requestNewDigitStateNormal(DigitStruct* digit, SegState state, uint32_t timeout);
 void requestNewExtraState(DigitStruct* digit, bool isShow, uint32_t timeout);
 void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency, uint32_t timeout);
-void requestNoTone(DigitStruct *digit, uint32_t timeout);
+void requestDigitPWM(DigitStruct* digit, SegState pwmGoalState, float cycleFrequency, uint8_t pwmStepsPerCycle, uint8_t pwmStepsOn, uint32_t timeout);
+void requestDisableDigitTimer(DigitStruct *digit, uint32_t timeout);
 void requestSleep(DigitStruct* digit, uint32_t timeout);
 bool requestWake(DigitStruct* digit);
 

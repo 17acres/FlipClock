@@ -12,7 +12,7 @@
 
 #define LED_FPS 60
 #define LED_BITRATE 1000000
-#define TONE_MAX_DURATION_MS 5000
+#define DIGIT_TIMER_FUNCTION_MAX_DURATION 5000
 #define TASKSTACKSIZE   1024
 
 //Higher is higher priority

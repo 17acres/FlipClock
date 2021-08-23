@@ -16,6 +16,7 @@
 #include <ti/sysbios/knl/Clock.h>
 #include <ti/drivers/GPIO.h>
 #include <xdc/runtime/Error.h>
+#include <math.h>
 
 static void timerISR(UArg arg0) {
     Event_post(((DigitStruct *) arg0)->eventHandle, Event_Id_01);
@@ -43,38 +44,74 @@ void digitTask(UArg arg0, UArg arg1) {
 
     bool pwmState = false;
     bool timerRunning = false;
-    SegState toneSegmentState1, toneSegmentState2;
-    uint32_t toneStartTime = 0;
+    bool isPWMNotTone = false;
+    SegState timerSegmentStateHigh, timerSegmentStateLow;
+    uint8_t pwmCycleIndex, pwmOnIdx, pwmCycleMax;
+    uint32_t timerStartTime = 0;
     while (1) {
         DigitMail requestMail;
 
         UInt eventID = Event_pend(digit->eventHandle, Event_Id_NONE, Event_Id_00 | Event_Id_01, BIOS_WAIT_FOREVER);    //00 is mailbox, 01 is timer
         if (eventID & Event_Id_00) {
             Mailbox_pend(digit->mailboxHandle, &requestMail, BIOS_NO_WAIT);    //no wait since event
+            if (requestMail.mode == APPLY_MODE_PWM) {    //handle degenerate cases of PWM
+                if (requestMail.pwmStepsOn >= requestMail.pwmStepsPerCycle) {
+                    requestMail.mode = APPLY_MODE_NORMAL;
+                } else if (requestMail.pwmStepsOn == 0) {
+                    requestMail.mode = APPLY_MODE_NORMAL;
+                    requestMail.requestedState = segValBrake;
+                }
+            }
         }
 
-        if (requestMail.mode == APPLY_MODE_NO_TONE || (timerRunning && ((Clock_getTicks() - toneStartTime) > TONE_MAX_DURATION_MS))) {
+        if (requestMail.mode == APPLY_MODE_NO_TIMER || (timerRunning && ((Clock_getTicks() - timerStartTime) > DIGIT_TIMER_FUNCTION_MAX_DURATION))) {
             Timer_stop(digit->timerHandle);
             timerRunning = false;
             setSegStateNonBlocking(digit->ioAddr, segValOff);
-            if ((Clock_getTicks() - toneStartTime) > TONE_MAX_DURATION_MS) {
-                setDtc(TONE_TIMEOUT, 0, "Caught by digit.c toneStartTime check");
+            if ((Clock_getTicks() - timerStartTime) > DIGIT_TIMER_FUNCTION_MAX_DURATION) {
+                setDtc(DIGIT_TIMER_TIMEOUT, 0, "Caught by digit.c timerStartTime check");
             }
-        } else if (eventID & Event_Id_01) {    //doing tone
-            if (pwmState) {
-                setSegStateNonBlocking(digit->ioAddr, toneSegmentState1);
+        } else if (eventID & Event_Id_01) {    //doing tone/PWM
+            if (isPWMNotTone) {
+                if (pwmCycleIndex == pwmOnIdx) { //see file in calculation stuff. Turning on at the end of the nth count and off at the end of the 0th makes n steps with downcounting.
+                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateHigh);
+                } else if (pwmCycleIndex == 0) {
+                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
+                    pwmCycleIndex = pwmCycleMax;
+                }
+                --pwmCycleIndex;
             } else {
-                setSegStateNonBlocking(digit->ioAddr, toneSegmentState2);
+                if (pwmState) {
+                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateHigh);
+                } else {
+                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
+                }
+                pwmState = !pwmState;
             }
-            pwmState = !pwmState;
+
         } else if (requestMail.mode == APPLY_MODE_TONE) {    //must have been mail event
-            Timer_setPeriodMicroSecs(digit->timerHandle, (500000.0 / requestMail.toneFrequency));    //Period is half of frequency
-            toneSegmentState1 = requestMail.requestedState;
-            toneSegmentState2 = invertSegState(requestMail.requestedState);
-            toneStartTime = Clock_getTicks();
+            Timer_setPeriodMicroSecs(digit->timerHandle, (500000.0 / requestMail.cycleFrequency));    //Period is half of 1/frequency
+            timerSegmentStateHigh = requestMail.requestedState;
+            timerSegmentStateLow = invertSegState(requestMail.requestedState);
+            timerStartTime = Clock_getTicks();
             timerRunning = true;
+            isPWMNotTone = false;
             Timer_start(digit->timerHandle);
-        } else {
+        } else if ((requestMail.mode == APPLY_MODE_PWM)) {
+            Timer_setPeriodMicroSecs(digit->timerHandle, (1000000.0 / (requestMail.cycleFrequency * requestMail.pwmStepsPerCycle)));
+            timerSegmentStateHigh = requestMail.requestedState;
+            timerSegmentStateLow = segValBrake;
+            timerStartTime = Clock_getTicks();
+            timerRunning = true;
+            pwmCycleMax = requestMail.pwmStepsPerCycle - 1;
+            pwmCycleIndex = pwmCycleMax;
+            pwmOnIdx = requestMail.pwmStepsOn;
+            isPWMNotTone = true;
+            setSegStateNonBlocking(digit->ioAddr, segValBrake);
+            Timer_start(digit->timerHandle);
+        }
+
+        else {
             Timer_stop(digit->timerHandle);
 
             uint32_t applyTime;
@@ -125,7 +162,7 @@ void digitTask(UArg arg0, UArg arg1) {
 
         }
 
-        //TODO: Do segment load management to manage thermals and monitor overall usage
+//TODO: Do segment load management to manage thermals and monitor overall usage
     }
 }
 
@@ -175,13 +212,37 @@ void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency,
     DigitMail mail = {
             .mode = APPLY_MODE_TONE,
             .requestedState = toneSegments,
-            .toneFrequency = toneFrequency };
+            .cycleFrequency = toneFrequency };
     Mailbox_post(digit->mailboxHandle, &mail, timeout);
 }
 
-void requestNoTone(DigitStruct *digit, uint32_t timeout) {
+static uint8_t calculateGCD(uint8_t a, uint8_t b) { //positive values only
+
+    while (b != 0) {
+        uint16_t tmp;
+        tmp = b;
+        b = a % b;
+        a = tmp;
+    }
+    return a;
+}
+
+void requestDigitPWM(DigitStruct* digit, SegState pwmGoalState, float cycleFrequency, uint8_t pwmStepsPerCycle, uint8_t pwmStepsOn, uint32_t timeout) {
+    uint8_t gcd = calculateGCD(pwmStepsOn, pwmStepsPerCycle);
+
     DigitMail mail = {
-            .mode = APPLY_MODE_NO_TONE };
+            .mode = APPLY_MODE_TONE,
+            .requestedState = pwmGoalState,
+            .cycleFrequency = cycleFrequency,
+            .pwmStepsOn = pwmStepsOn / gcd,
+            .pwmStepsPerCycle = pwmStepsPerCycle / gcd };
+
+    Mailbox_post(digit->mailboxHandle, &mail, timeout);
+}
+
+void requestDisableDigitTimer(DigitStruct *digit, uint32_t timeout) {
+    DigitMail mail = {
+            .mode = APPLY_MODE_NO_TIMER };
     Mailbox_post(digit->mailboxHandle, &mail, timeout);
 }
 

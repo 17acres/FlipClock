@@ -15,7 +15,7 @@ typedef enum Dtc {
     IO_2_FAIL_DTC,
     IO_3_FAIL_DTC,
     IO_GENERIC_FAIL_DTC,
-    TONE_TIMEOUT,
+    DIGIT_TIMER_TIMEOUT,
     DTC_COUNT
 } Dtc;
 typedef enum DtcStatus {
