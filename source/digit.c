@@ -14,6 +14,7 @@
 #include <ti/sysbios/BIOS.h>
 #include <ti/sysbios/knl/Task.h>
 #include <ti/sysbios/knl/Clock.h>
+#include <ti/sysbios/hal/Timer.h>
 #include <ti/drivers/GPIO.h>
 #include <xdc/runtime/Error.h>
 #include <math.h>
@@ -50,28 +51,36 @@ void digitTask(UArg arg0, UArg arg1) {
     uint32_t timerStartTime = 0;
     while (1) {
         DigitMail requestMail;
+        bool mailValid = false;
 
         UInt eventID = Event_pend(digit->eventHandle, Event_Id_NONE, Event_Id_00 | Event_Id_01, BIOS_WAIT_FOREVER);    //00 is mailbox, 01 is timer
-        if (eventID & Event_Id_00) {
-            Mailbox_pend(digit->mailboxHandle, &requestMail, BIOS_NO_WAIT);    //no wait since event
-            if (requestMail.mode == APPLY_MODE_PWM) {    //handle degenerate cases of PWM
-                if (requestMail.pwmStepsOn >= requestMail.pwmStepsPerCycle) {
-                    requestMail.mode = APPLY_MODE_NORMAL;
-                } else if (requestMail.pwmStepsOn == 0) {
-                    requestMail.mode = APPLY_MODE_NORMAL;
-                    requestMail.requestedState = segValBrake;
+        if (eventID & Event_Id_00) { //mail
+            mailValid = Mailbox_pend(digit->mailboxHandle, &requestMail, BIOS_NO_WAIT);    //no wait since event
+            if (mailValid) {
+                if (requestMail.mode == APPLY_MODE_PWM) {    //handle degenerate cases of PWM
+                    if (requestMail.pwmStepsOn >= requestMail.pwmStepsPerCycle) {
+                        requestMail.mode = APPLY_MODE_NORMAL;
+                    } else if (requestMail.pwmStepsOn == 0) {
+                        requestMail.mode = APPLY_MODE_NORMAL;
+                        requestMail.requestedState = segValOff;
+                    }
                 }
+            } else {
+                setDtc(MISSING_DIGIT_REQUEST, 0, "digit.c mail event but no message in mailbox");
             }
+
         }
 
-        if (requestMail.mode == APPLY_MODE_NO_TIMER || (timerRunning && ((Clock_getTicks() - timerStartTime) > DIGIT_TIMER_FUNCTION_MAX_DURATION))) {
+        bool timeoutFault = (timerRunning && ((Clock_getTicks() - timerStartTime) > DIGIT_TIMER_FUNCTION_MAX_DURATION));
+
+        if ((mailValid && (requestMail.mode == APPLY_MODE_NO_TIMER)) || timeoutFault) {
             Timer_stop(digit->timerHandle);
             timerRunning = false;
             setSegStateNonBlocking(digit->ioAddr, segValOff);
-            if ((Clock_getTicks() - timerStartTime) > DIGIT_TIMER_FUNCTION_MAX_DURATION) {
+            if (timeoutFault) {
                 setDtc(DIGIT_TIMER_TIMEOUT, 0, "Caught by digit.c timerStartTime check");
             }
-        } else if (eventID & Event_Id_01) {    //doing tone/PWM
+        } else if (eventID & Event_Id_01) {    //Tone/PWM
             if (isPWMNotTone) {
                 if (pwmCycleIndex == pwmOnIdx) { //see file in calculation stuff. Turning on at the end of the nth count and off at the end of the 0th makes n steps with downcounting.
                     setSegStateNonBlocking(digit->ioAddr, timerSegmentStateHigh);
@@ -88,47 +97,46 @@ void digitTask(UArg arg0, UArg arg1) {
                 }
                 pwmState = !pwmState;
             }
-
-        } else if (requestMail.mode == APPLY_MODE_TONE) {    //must have been mail event
-            Timer_setPeriodMicroSecs(digit->timerHandle, (500000.0 / requestMail.cycleFrequency));    //Period is half of 1/frequency
-            timerSegmentStateHigh = requestMail.requestedState;
-            timerSegmentStateLow = invertSegState(requestMail.requestedState);
-            timerStartTime = Clock_getTicks();
-            timerRunning = true;
-            isPWMNotTone = false;
-            Timer_start(digit->timerHandle);
-        } else if ((requestMail.mode == APPLY_MODE_PWM)) {
-            Timer_setPeriodMicroSecs(digit->timerHandle, (1000000.0 / (requestMail.cycleFrequency * requestMail.pwmStepsPerCycle)));
-            timerSegmentStateHigh = requestMail.requestedState;
-            timerSegmentStateLow = segValBrake;
-            timerStartTime = Clock_getTicks();
-            timerRunning = true;
-            pwmCycleMax = requestMail.pwmStepsPerCycle - 1;
-            pwmCycleIndex = pwmCycleMax;
-            pwmOnIdx = requestMail.pwmStepsOn;
-            isPWMNotTone = true;
-            setSegStateNonBlocking(digit->ioAddr, segValBrake);
-            Timer_start(digit->timerHandle);
         }
 
-        else {
-            Timer_stop(digit->timerHandle);
+        if (mailValid && (eventID & Event_Id_00)) { //Mail
+            if (requestMail.mode == APPLY_MODE_TONE) {    //must have been mail event
+                Timer_setPeriodMicroSecs(digit->timerHandle, (500000.0 / requestMail.cycleFrequency));    //Period is half of 1/frequency
+                timerSegmentStateHigh = requestMail.requestedState;
+                timerSegmentStateLow = invertSegState(requestMail.requestedState);
+                timerStartTime = Clock_getTicks();
+                timerRunning = true;
+                isPWMNotTone = false;
+                Timer_start(digit->timerHandle);
+            } else if (requestMail.mode == APPLY_MODE_PWM) {
+                Timer_setPeriodMicroSecs(digit->timerHandle, (1000000.0 / (requestMail.cycleFrequency * requestMail.pwmStepsPerCycle)));
+                timerSegmentStateHigh = requestMail.requestedState;
+                timerSegmentStateLow = replaceNonOffWithBrake(timerSegmentStateHigh);
+                timerStartTime = Clock_getTicks();
+                timerRunning = true;
+                pwmCycleMax = requestMail.pwmStepsPerCycle - 1;
+                pwmCycleIndex = pwmCycleMax;
+                pwmOnIdx = requestMail.pwmStepsOn;
+                isPWMNotTone = true;
+                setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
+                Timer_start(digit->timerHandle);
+            } else if (requestMail.mode == APPLY_MODE_NORMAL) {
+                Timer_stop(digit->timerHandle);
 
-            uint32_t applyTime;
+                uint32_t applyTime;
 
-            uint32_t numFrames = DIGIT_ANIMATION_TIME * LED_FPS / 1000;
-            SegState actualRequestedState, applyState;
-            calculateStateToApply(digit, requestMail.requestedState, lastState, &actualRequestedState, &applyState);
+                uint32_t numFrames = DIGIT_ANIMATION_TIME * LED_FPS / 1000;
+                SegState actualRequestedState, applyState;
+                calculateStateToApply(digit, requestMail.requestedState, lastState, &actualRequestedState, &applyState);
 
-            if (applyState.rawWord == segValShowExtra.rawWord || applyState.rawWord == segValHideExtra.rawWord) {
-                applyTime = EXTRA_APPLY_TIME;
-            } else {
-                applyTime = DIGIT_APPLY_TIME;
-            }
+                if (applyState.rawWord == segValShowExtra.rawWord || applyState.rawWord == segValHideExtra.rawWord) {
+                    applyTime = EXTRA_APPLY_TIME;
+                } else {
+                    applyTime = DIGIT_APPLY_TIME;
+                }
 
-            setSegStateNonBlocking(digit->ioAddr, applyState);
+                setSegStateNonBlocking(digit->ioAddr, applyState);
 
-            if (requestMail.mode == APPLY_MODE_NORMAL) {
                 bool segCleared = false;
                 for (uint32_t i = 0; i < numFrames; i++) {
                     uint8_t fadePosition = i * 255 / numFrames;
@@ -156,10 +164,13 @@ void digitTask(UArg arg0, UArg arg1) {
                     Task_sleep(applyTime - DIGIT_ANIMATION_TIME);
                     setSegStateNonBlocking(digit->ioAddr, segValOff);
                 }
-                lastState = actualRequestedState; //Don't do this if going into sleep mode
-            } else { //APPLY_MODE_SLEEP. Don't take off of brake mode. Brake mode is low 5V draw
-            }
+                lastState = actualRequestedState;
 
+            } else if (requestMail.mode == APPLY_MODE_SLEEP) { //APPLY_MODE_SLEEP. Don't go to off after. Brake mode is low 5V draw
+                Timer_stop(digit->timerHandle);
+                setSegStateNonBlocking(digit->ioAddr, requestMail.requestedState);
+            }
+            //do nothing if NO_TIMER
         }
 
 //TODO: Do segment load management to manage thermals and monitor overall usage
@@ -261,12 +272,16 @@ void requestSleep(DigitStruct* digit, uint32_t timeout) {
     Mailbox_post(digit->mailboxHandle, &mail, timeout);
 }
 
-bool requestWake(DigitStruct* digit) {
+bool requestWake(DigitStruct* digit, uint32_t timeout) {
     if (getDtcStatus(lookupDtc(IO_0_ADDR)) == DTC_SET) {
         GPIO_write(digit->hsdDisableAddr, true);
         return false;
     } else {
         GPIO_write(digit->hsdDisableAddr, false);
+        DigitMail mail = {
+                .mode = APPLY_MODE_SLEEP,
+                .requestedState = segValOff }; //go back to enhanced-safety mode?
+        Mailbox_post(digit->mailboxHandle, &mail, timeout);
         return true;
     }
 }

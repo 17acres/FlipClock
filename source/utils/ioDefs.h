@@ -160,6 +160,7 @@ SegState unionSegPriority(SegState newState, SegState oldState);
 SegState subtractSeg(SegState newState, SegState oldState);
 
 SegState invertSegState(SegState state);
+SegState replaceNonOffWithBrake(SegState state);
 
 SegStateFade calculateFadedSegState(SegState state);
 SegStateFade rampSegState(SegState oldState, SegState newState, uint8_t amountOfOverlay);

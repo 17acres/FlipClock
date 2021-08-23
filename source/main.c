@@ -169,7 +169,7 @@ void sysMonitor(UArg arg0, UArg arg1) {
     while (1) {
         checkIOPresence(IO_0_ADDR);
         printDtcs();
-        requestWake(&hoursTensStruct);
+        requestWake(&hoursTensStruct, BIOS_WAIT_FOREVER);
 
         //SegState thisState = stateList[loopCount % numStates];
 

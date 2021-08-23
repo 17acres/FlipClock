@@ -125,7 +125,7 @@ void initIOHwi() {
 
 bool writeData(uint8_t slaveAddress, uint16_t data) {
 	Dtc possibleCode = lookupDtc(slaveAddress);
-	if (getDtcStatus(possibleCode) == DTC_SET)
+	if ((getDtcStatus(possibleCode) == DTC_SET) || (getDtcStatus(DIGIT_TIMER_TIMEOUT == DTC_SET)))
 		return false;
 
 	Semaphore_pend(ioSemaphore, BIOS_WAIT_FOREVER);

@@ -69,6 +69,6 @@ void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency,
 void requestDigitPWM(DigitStruct* digit, SegState pwmGoalState, float cycleFrequency, uint8_t pwmStepsPerCycle, uint8_t pwmStepsOn, uint32_t timeout);
 void requestDisableDigitTimer(DigitStruct *digit, uint32_t timeout);
 void requestSleep(DigitStruct* digit, uint32_t timeout);
-bool requestWake(DigitStruct* digit);
+bool requestWake(DigitStruct* digit, uint32_t timeout);
 
 #endif /* SOURCE_DIGIT_H_ */

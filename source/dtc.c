@@ -29,6 +29,7 @@ const String dtcNames[DTC_COUNT] = {
         "Remote IO Module 2 Failure",
         "Remote IO Module 3 Failure",
         "Digit Timer Timeout. Stop request not sent?",
+        "Missing digit request. Event arrived but no message",
         "Generic IO Failure" };
 const uint8_t dtcMaturityThresholds[DTC_COUNT] = {
         3,
