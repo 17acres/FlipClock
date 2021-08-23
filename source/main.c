@@ -60,6 +60,8 @@
 #include "digit.h"
 #include "Leds.h"
 
+#include "safetyBarrier.h"
+
 extern void updateLeds(); //Leds.h needed for C linkage
 
 Task_Struct heartbeatStruct;
@@ -70,6 +72,9 @@ Char updateLEDsStack[TASKSTACKSIZE * 2];
 
 Task_Struct sysMonitorStruct;
 Char sysMonitorStack[TASKSTACKSIZE];
+
+Task_Struct safetyBarrierStruct;
+Char safetyBarrierStack[TASKSTACKSIZE];
 
 /*
  *  ======== heartBeatFxn ========
@@ -103,8 +108,8 @@ void sysMonitor(UArg arg0, UArg arg1) {
 //                             segValQuestion, segValBlank, segValAll };
     //SegState stateList[] = { segVal0, segVal1, segVal2, segVal3, segVal4, segVal5, segVal6, segVal7, segVal8, segVal9 };
     SegState stateList[] = {
-                             segVal1,
-                             segVal_I };
+            segVal1,
+            segVal_I };
 //	SegState
 //	stateList[]= {
 //		segValBlank,
@@ -300,6 +305,14 @@ int main(void) {
     sysMonitorParams.priority = SYS_MONITOR_PRIORITY;
     sysMonitorParams.instance->name = "sysMonitor";
     Task_construct(&sysMonitorStruct, (Task_FuncPtr) sysMonitor, &sysMonitorParams, NULL);
+
+    Task_Params safetyBarrierParams;
+    Task_Params_init(&safetyBarrierParams);
+    safetyBarrierParams.stackSize = TASKSTACKSIZE;
+    safetyBarrierParams.stack = &safetyBarrierStack;
+    safetyBarrierParams.priority = SAFETY_BARRIER_PRIORITY;
+    safetyBarrierParams.instance->name = "safetyBarrier";
+    Task_construct(&safetyBarrierStruct, (Task_FuncPtr) safetyBarrier, &safetyBarrierParams, NULL);
 
     System_printf("Starting the example\nSystem provider is set to SysMin. "
                   "Halt the target to view any SysMin contents in ROV.\n");

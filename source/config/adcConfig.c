@@ -19,7 +19,7 @@
 #include "adcConfig.h"
 #include "../hsd.h"
 
-//remember temp sensor, digital comparator, averaging
+//TODO: remember temp sensor, digital comparator, averaging
 
 void initADC(void) {
     SysCtlPeripheralEnable(SYSCTL_PERIPH_ADC0);

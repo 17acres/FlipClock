@@ -12,6 +12,8 @@
 #include <driverlib/rom.h>
 #include <driverlib/rom_map.h>
 #include <ti/sysbios/hal/Hwi.h>
+#include "config/gpioConfig.h"
+#include <ti/drivers/GPIO.h>
 
 #include "hsd.h"
 
@@ -23,13 +25,14 @@ void updateMaxVals();
 
 static Hwi_Handle hwiHandle;
 
-//do with interrupt and mailbox or smth
+//TODO: do with interrupt and mailbox or smth
 void adcIsr(UArg arg) {
     MAP_ADCIntClear(ADC0_BASE, 0);
     MAP_ADCSequenceDataGet(ADC0_BASE, 0, rawAdcValues);
     processRawAdcValues();
     updateMaxVals();
     MAP_ADCProcessorTrigger(ADC0_BASE, 0);
+    GPIO_toggle(LAUNCHPAD_LED_BLUE);
 }
 
 void initAdcHwi() {

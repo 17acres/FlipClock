@@ -8,8 +8,6 @@
 #ifndef SOURCE_HSD_H_
 #define SOURCE_HSD_H_
 
-volatile uint32_t rawAdcValues[5];
-
 volatile struct processedAdcVals {
     float hsdCurrents[4];
     float mcuTemp;

@@ -28,11 +28,13 @@ const String dtcNames[DTC_COUNT] = {
         "Remote IO Module 1 Failure",
         "Remote IO Module 2 Failure",
         "Remote IO Module 3 Failure",
+        "Tone Timeout. Stop task not ran?",
         "Generic IO Failure" };
 const uint8_t dtcMaturityThresholds[DTC_COUNT] = {
         3,
         3,
         3,
+        1,
         3 };
 
 void setDtc(Dtc code, uint32_t detailVal, String errMessage) {

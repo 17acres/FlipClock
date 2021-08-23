@@ -36,14 +36,15 @@ void calculateStateToApply(DigitStruct* digit, SegState requestedState, SegState
     }
 }
 
-static void digitTask(UArg arg0, UArg arg1) {
+void digitTask(UArg arg0, UArg arg1) {
     DigitStruct *digit = (DigitStruct *) arg0;
 
     SegState lastState = segValOff;
 
     bool pwmState = false;
+    bool timerRunning = false;
     SegState toneSegmentState1, toneSegmentState2;
-
+    uint32_t toneStartTime = 0;
     while (1) {
         DigitMail requestMail;
 
@@ -52,21 +53,26 @@ static void digitTask(UArg arg0, UArg arg1) {
             Mailbox_pend(digit->mailboxHandle, &requestMail, BIOS_NO_WAIT);    //no wait since event
         }
 
-        if (eventID & Event_Id_01) {    //doing tone
+        if (requestMail.mode == APPLY_MODE_NO_TONE || (timerRunning && ((Clock_getTicks() - toneStartTime) > TONE_MAX_DURATION_MS))) {
+            Timer_stop(digit->timerHandle);
+            timerRunning = false;
+            setSegStateNonBlocking(digit->ioAddr, segValOff);
+            if ((Clock_getTicks() - toneStartTime) > TONE_MAX_DURATION_MS) {
+                setDtc(TONE_TIMEOUT, 0, "Caught by digit.c toneStartTime check");
+            }
+        } else if (eventID & Event_Id_01) {    //doing tone
             if (pwmState) {
                 setSegStateNonBlocking(digit->ioAddr, toneSegmentState1);
             } else {
                 setSegStateNonBlocking(digit->ioAddr, toneSegmentState2);
             }
             pwmState = !pwmState;
-        } else if (requestMail.mode == APPLY_MODE_NO_TONE) {
-            Timer_stop(digit->timerHandle);
-            setSegStateNonBlocking(digit->ioAddr, segValOff);
-
         } else if (requestMail.mode == APPLY_MODE_TONE) {    //must have been mail event
             Timer_setPeriodMicroSecs(digit->timerHandle, (500000.0 / requestMail.toneFrequency));    //Period is half of frequency
             toneSegmentState1 = requestMail.requestedState;
             toneSegmentState2 = invertSegState(requestMail.requestedState);
+            toneStartTime = Clock_getTicks();
+            timerRunning = true;
             Timer_start(digit->timerHandle);
         } else {
             Timer_stop(digit->timerHandle);
