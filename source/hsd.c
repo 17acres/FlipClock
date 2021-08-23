@@ -19,6 +19,8 @@
 
 static volatile uint32_t rawAdcValues[5];
 volatile struct processedAdcVals analogData;
+volatile uint16_t recentSelectedRawValue[1024];
+volatile size_t valArrIdx;
 volatile struct processedAdcVals maxAnalogData;
 void processRawAdcValues();
 void updateMaxVals();
@@ -46,6 +48,9 @@ void processRawAdcValues() {
     analogData.hsdCurrents[1] = ((float) rawAdcValues[1]) * 3.3 / 4096;
     analogData.hsdCurrents[2] = ((float) rawAdcValues[2]) * 3.3 / 4096;
     analogData.hsdCurrents[3] = ((float) rawAdcValues[3]) * 3.3 / 4096;
+
+    recentSelectedRawValue[valArrIdx]=rawAdcValues[0];
+    valArrIdx = (valArrIdx+1)%1024;
     if (++analogData.sampleCount == 3) {
         analogData.qf = true;
         clearMaxAdcVals();

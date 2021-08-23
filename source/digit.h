@@ -53,6 +53,7 @@ typedef struct DigitMail {
     float cycleFrequency;
     uint8_t pwmStepsPerCycle;
     uint8_t pwmStepsOn;//4 steps on cycle of 8 is 50%
+    uint32_t timerApplyTimeout;
 } DigitMail;
 
 extern DigitStruct hoursTensStruct;
@@ -65,8 +66,8 @@ void initDigit(DigitStruct* digit);
 //Safe to be called from any thread
 void requestNewDigitStateNormal(DigitStruct* digit, SegState state, uint32_t timeout);
 void requestNewExtraState(DigitStruct* digit, bool isShow, uint32_t timeout);
-void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency, uint32_t timeout);
-void requestDigitPWM(DigitStruct* digit, SegState pwmGoalState, float cycleFrequency, uint8_t pwmStepsPerCycle, uint8_t pwmStepsOn, uint32_t timeout);
+void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency, uint32_t timerApplyTimeout, uint32_t requestTimeout);
+void requestDigitPWM(DigitStruct* digit, SegState pwmGoalState, float cycleFrequency, uint8_t pwmStepsPerCycle, uint8_t pwmStepsOn, uint32_t timerApplyTimeout, uint32_t requestTimeout);
 void requestDisableDigitTimer(DigitStruct *digit, uint32_t timeout);
 void requestSleep(DigitStruct* digit, uint32_t timeout);
 bool requestWake(DigitStruct* digit, uint32_t timeout);

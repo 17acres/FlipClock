@@ -175,12 +175,16 @@ void sysMonitor(UArg arg0, UArg arg1) {
 
         //requestNewDigitStateNormal(&hoursTensStruct, thisState, BIOS_WAIT_FOREVER);
 
-        for(int i=0;i<=10;i++){
-            requestDigitPWM(&hoursTensStruct, segValShowExtra,100,10,i,BIOS_WAIT_FOREVER);
-            Task_sleep(1000);
-        }
-        requestDisableDigitTimer(&hoursTensStruct, BIOS_WAIT_FOREVER);
-//        requestTone(&hoursTensStruct, segValShowExtra, 329.63, BIOS_WAIT_FOREVER);
+        //for(int i=0;i<=10;i++){
+        requestDigitPWM(&hoursTensStruct, segValShowExtra, 60, 50, 7, 500, BIOS_WAIT_FOREVER);
+//            Task_sleep(2000);
+//        //}
+//        requestDisableDigitTimer(&hoursTensStruct, BIOS_WAIT_FOREVER);
+        Task_sleep(1000);
+        Task_sleep(5000);
+        requestDigitPWM(&hoursTensStruct, segValHideExtra, 60, 50, 7, 500, BIOS_WAIT_FOREVER);
+        Task_sleep(5000);
+        //        requestTone(&hoursTensStruct, segValShowExtra, 329.63, BIOS_WAIT_FOREVER);
 //        Task_sleep(800);
 //        requestDisableDigitTimer(&hoursTensStruct, BIOS_WAIT_FOREVER);
 //        Task_sleep(200);
