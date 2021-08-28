@@ -8,14 +8,23 @@
 #define LEDS_PER_SEG 3
 
 //Returns 255 if fully off, 0 if on
-void calculateMask(SegStateFade segState, uint8_t returnMaskArray[], uint8_t numExtraLeds) {
+void calculateMask(SegStateFade segState, uint8_t returnMaskArray[], bool isExtraInSeries, uint8_t extraMaskArray[], uint8_t numExtraLeds) {
 
     returnMaskArray[LEDS_PER_SEG * 0 + 0] = segState.c;
     returnMaskArray[LEDS_PER_SEG * 0 + 1] = segState.c;
     returnMaskArray[LEDS_PER_SEG * 0 + 2] = segState.c;
 
-    for (int i = 0; i < numExtraLeds; i++) {
-        returnMaskArray[3 + i] = segState.extra;
+    if (isExtraInSeries) {
+        for (int i = 0; i < numExtraLeds; i++) {
+            returnMaskArray[3 + i] = segState.extra;
+        }
+    } else {
+        if (extraMaskArray != 0) {
+            for (int i = 0; i < numExtraLeds; i++) {
+                returnMaskArray[i] = segState.extra;
+            }
+        }
+        numExtraLeds = 0; //no offset
     }
 
     returnMaskArray[numExtraLeds + LEDS_PER_SEG * 1 + 0] = segState.b;

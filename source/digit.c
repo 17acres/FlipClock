@@ -31,6 +31,8 @@ void calculateStateToApply(DigitStruct* digit, SegState requestedState, SegState
     uint32_t currentTime = Clock_getTicks();
     if (currentTime > (digit->lastFullApplyTime + DIGIT_FULL_APPLY_INTERVAL)) {
         *applyState = *actualRequestedState;
+        if(!digit->doFullApplyExtra)
+            applyState->extra = SEG_OFF;//Don't destroy extra seg if it is the big motor
         digit->lastFullApplyTime = currentTime;
         System_printf("Full Apply\n");
     } else {
@@ -79,16 +81,14 @@ void digitTask(UArg arg0, UArg arg1) {
             Timer_stop(digit->timerHandle);
             timerRunning = false;
             setSegStateNonBlocking(digit->ioAddr, segValOff);
-//            if (timeoutFault) {
-//                setDtc(DIGIT_TIMER_TIMEOUT, 0, "Caught by digit.c timerStartTime check");
-//            }
             if (isPWMNotTone) {
-                SegState actualRequestedState, applyState;
-                calculateStateToApply(digit, timerSegmentStateHigh, lastState, &actualRequestedState, &applyState);
+                SegState actualRequestedState;
+                actualRequestedState = unionSegPriority(timerSegmentStateHigh, lastState); //basically OR of requested state and other last state
                 SegmentMaskRequest request = (SegmentMaskRequest ) {
                                 calculateFadedSegState(actualRequestedState),
                                 digit->ledId };
                 requestMaskUpdate(&request, BIOS_NO_WAIT);
+                lastState = actualRequestedState; //actually save the state
             }
 
         } else if (eventID & Event_Id_01) {    //Tone/PWM
@@ -239,7 +239,7 @@ void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency,
             .mode = APPLY_MODE_TONE,
             .requestedState = toneSegments,
             .cycleFrequency = toneFrequency,
-            .timerApplyTimeout = timerApplyTimeout};
+            .timerApplyTimeout = timerApplyTimeout };
     Mailbox_post(digit->mailboxHandle, &mail, requestTimeout);
 }
 
@@ -254,7 +254,8 @@ static uint8_t calculateGCD(uint8_t a, uint8_t b) { //positive values only
     return a;
 }
 
-void requestDigitPWM(DigitStruct* digit, SegState pwmGoalState, float cycleFrequency, uint8_t pwmStepsPerCycle, uint8_t pwmStepsOn, uint32_t timerApplyTimeout, uint32_t requestTimeout) {
+void requestDigitPWM(DigitStruct* digit, SegState pwmGoalState, float cycleFrequency, uint8_t pwmStepsPerCycle, uint8_t pwmStepsOn, uint32_t timerApplyTimeout,
+                     uint32_t requestTimeout) {
     uint8_t gcd = calculateGCD(pwmStepsOn, pwmStepsPerCycle);
 
     DigitMail mail = {
@@ -308,22 +309,26 @@ DigitStruct hoursTensStruct = {
         .ledId = SEG_LED_ID_HOURS_TENS,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 0,
         .hsdDisableAddr = HSD_DISABLE_0,
-        .name = "hoursTens" };
+        .name = "hoursTens",
+        .doFullApplyExtra = false};//set true for AP but not alarm icon
 DigitStruct hoursOnesStruct = {
         .ioAddr = IO_1_ADDR,
         .ledId = SEG_LED_ID_HOURS_ONES,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 1,
         .hsdDisableAddr = HSD_DISABLE_1,
-        .name = "hoursTens" };
+        .name = "hoursTens",
+        .doFullApplyExtra = false};
 DigitStruct minutesTensStruct = {
         .ioAddr = IO_2_ADDR,
         .ledId = SEG_LED_ID_MINUTES_TENS,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 2,
         .hsdDisableAddr = HSD_DISABLE_2,
-        .name = "minutesTens" };
+        .name = "minutesTens",
+        .doFullApplyExtra = false};
 DigitStruct minutesOnesStruct = {
         .ioAddr = IO_3_ADDR,
         .ledId = SEG_LED_ID_MINUTES_TENS,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 3,
         .hsdDisableAddr = HSD_DISABLE_3,
-        .name = "minutesOnes" };
+        .name = "minutesOnes",
+        .doFullApplyExtra = false};

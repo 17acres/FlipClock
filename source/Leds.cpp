@@ -53,10 +53,9 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
         SegmentMaskRequest request;
 
         while (Mailbox_pend(maskRequestMailbox, &request, BIOS_NO_WAIT)) {
-            uint8_t *selectedMaskArray;
             switch (request.segmentLedId) {
                 case (SEG_LED_ID_HOURS_TENS):
-                    selectedMaskArray = ledStringMasks.hoursTens;
+                    calculateMask(request.segState, ledStringMasks.hoursTens, false, ledStringMasks.hoursTensExtras, 3);  //3 LEDs after hoursTens are the extra
                     break;
 //				case (SEG_LED_ID_HOURS_ONES):
 //					selectedMaskArray = ledStringMasks.hoursOnes;
@@ -68,8 +67,6 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
 //					selectedMaskArray = ledStringMasks.minutesOnes;
 //					break;
             }
-            if (selectedMaskArray != 0)
-                calculateMask(request.segState, selectedMaskArray, 0);
         }
 
         buildFrameBuf();
@@ -88,7 +85,7 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
         }
 
         ++frameIdx;
-        uint32_t delayOffset=0;
+        uint32_t delayOffset = 0;
         uint32_t completeTime = Clock_getTicks();
         if (completeTime > startTime)
             delayOffset = completeTime - startTime;

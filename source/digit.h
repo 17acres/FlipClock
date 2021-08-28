@@ -37,6 +37,7 @@ typedef struct DigitStruct {
     Event_Handle eventHandle;
     Timer_Handle timerHandle;
     xdc_String name;
+    bool doFullApplyExtra;
 } DigitStruct;
 
 typedef enum ApplyMode{

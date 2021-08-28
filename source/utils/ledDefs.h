@@ -77,12 +77,14 @@ extern "C" {
 		TYPE hoursTens[NUM_LEDS_NO_EXTRA];\
     }
 
-#define GEN_LED_STRING_STRUCT_ELEMENTS(TYPE)\
-	struct{ /*Overall ordering*/\
-		TYPE hoursTens[NUM_LEDS_NO_EXTRA];\
-    }
 
-//plain-c version of CRGB
+#define GEN_LED_STRING_STRUCT_ELEMENTS(TYPE)\
+   struct{ /*Overall ordering*/\
+   TYPE hoursTens[NUM_LEDS_NO_EXTRA];\
+   TYPE hoursTensExtras[3];\
+   }
+
+//plain-c version of CRGB from FastLED
     typedef struct CRGB_C {
         union {
             struct {
@@ -119,7 +121,7 @@ extern "C" {
         uint8_t segmentLedId;
     }SegmentMaskRequest;
 
-    void calculateMask(SegStateFade segState, uint8_t returnMaskArray[], uint8_t numExtraLeds); //returnMaskArray of appropriate size
+    void calculateMask(SegStateFade segState, uint8_t returnMaskArray[], bool isExtraInSeries, uint8_t extraMaskArray[], uint8_t numExtraLeds); //returnMaskArray of appropriate size
     void requestMaskUpdate(SegmentMaskRequest *request, uint32_t timeout);
 
 #define NUM_LEDS (sizeof(LedStringVals)/sizeof(CRGB_C))
