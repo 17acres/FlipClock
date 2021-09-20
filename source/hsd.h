@@ -10,11 +10,13 @@
 
 volatile struct processedAdcVals {
     float hsdCurrents[4];
-    float mcuTemp;
+    float mcuTemp;//deg c
     bool qf;
     uint16_t sampleCount;
 } analogData;
-
+extern volatile struct processedAdcVals maxAnalogData;
+extern volatile struct processedAdcVals filteredAnalogData;
+extern volatile struct processedAdcVals analogData;
 void adcIsr(UArg arg);
 void initAdcHwi();
 void clearMaxAdcVals();

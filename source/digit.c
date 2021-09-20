@@ -18,6 +18,7 @@
 #include <ti/drivers/GPIO.h>
 #include <xdc/runtime/Error.h>
 #include <math.h>
+#include "safetyBarrier.h"
 
 static void timerISR(UArg arg0) {
     Event_post(((DigitStruct *) arg0)->eventHandle, Event_Id_01);
@@ -78,6 +79,7 @@ void digitTask(UArg arg0, UArg arg1) {
         bool timeoutFault = (timerRunning && ((Clock_getTicks() - timerStartTime) > timerApplyTimeout));
 
         if ((mailValid && (requestMail.mode == APPLY_MODE_NO_TIMER)) || timeoutFault) {
+            setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
             Timer_stop(digit->timerHandle);
             timerRunning = false;
             setSegStateNonBlocking(digit->ioAddr, segValOff);
@@ -110,10 +112,13 @@ void digitTask(UArg arg0, UArg arg1) {
                 }
                 pwmState = !pwmState;
             }
+            feedSafetyBarrierWDT(SAFETY_BARRIER_TASK_DIGIT);
         }
 
         if (mailValid && (eventID & Event_Id_00)) { //Mail
             if (requestMail.mode == APPLY_MODE_TONE) {    //must have been mail event
+                setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_DIGIT,5000/ requestMail.cycleFrequency);//5 periods
+                setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, true);
                 Timer_setPeriodMicroSecs(digit->timerHandle, (500000.0 / requestMail.cycleFrequency));    //Period is half of 1/frequency
                 timerSegmentStateHigh = requestMail.requestedState;
                 timerSegmentStateLow = invertSegState(requestMail.requestedState);
@@ -123,6 +128,8 @@ void digitTask(UArg arg0, UArg arg1) {
                 isPWMNotTone = false;
                 Timer_start(digit->timerHandle);
             } else if (requestMail.mode == APPLY_MODE_PWM) {
+                setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_DIGIT,5000/ requestMail.cycleFrequency);//5 periods
+                setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, true);
                 Timer_setPeriodMicroSecs(digit->timerHandle, (1000000.0 / (requestMail.cycleFrequency * requestMail.pwmStepsPerCycle)));
                 timerSegmentStateHigh = requestMail.requestedState;
                 timerSegmentStateLow = replaceNonOffWithBrake(timerSegmentStateHigh);
@@ -136,6 +143,7 @@ void digitTask(UArg arg0, UArg arg1) {
                 setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
                 Timer_start(digit->timerHandle);
             } else if (requestMail.mode == APPLY_MODE_NORMAL) {
+                setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
                 Timer_stop(digit->timerHandle);
 
                 uint32_t applyTime;
@@ -182,6 +190,7 @@ void digitTask(UArg arg0, UArg arg1) {
                 lastState = actualRequestedState;
 
             } else if (requestMail.mode == APPLY_MODE_SLEEP) { //APPLY_MODE_SLEEP. Don't go to off after. Brake mode is low 5V draw
+                setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
                 Timer_stop(digit->timerHandle);
                 setSegStateNonBlocking(digit->ioAddr, requestMail.requestedState);
             }

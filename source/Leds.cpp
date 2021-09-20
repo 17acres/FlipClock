@@ -21,6 +21,7 @@
 #include "config/gpioConfig.h"
 #include "utils/ledDefs.h"
 #include "utils/iodefs.h"
+#include "safetyBarrier.h"
 
 #include "../Colorimetry/gammaLUT.h"
 
@@ -51,6 +52,8 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
         brightness = 31;
 
         SegmentMaskRequest request;
+        setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_LEDS, 10000 / LED_FPS);        //10 frames
+        setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, true);
 
         while (Mailbox_pend(maskRequestMailbox, &request, BIOS_NO_WAIT)) {
             switch (request.segmentLedId) {
@@ -86,6 +89,7 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
 
         ++frameIdx;
         uint32_t delayOffset = 0;
+        feedSafetyBarrierWDT(SAFETY_BARRIER_TASK_LEDS);
         uint32_t completeTime = Clock_getTicks();
         if (completeTime > startTime)
             delayOffset = completeTime - startTime;

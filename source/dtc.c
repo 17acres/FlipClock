@@ -30,13 +30,23 @@ const String dtcNames[DTC_COUNT] = {
         "Remote IO Module 3 Failure",
         "Digit Timer Timeout. Stop request not sent?",
         "Missing digit request. Event arrived but no message",
-        "Generic IO Failure" };
+        "Generic IO Failure",
+        "Digit task WDT not fed",
+        "LED task WDT not fed",
+        "HSD Multisense fault voltage detected",
+        "Average current limit exceeded",
+        "Temperature limit exceeded" };
 const uint8_t dtcMaturityThresholds[DTC_COUNT] = {
         3,
         3,
         3,
         1,
-        3 };
+        3,
+        1,
+        1,
+        1,
+        1,
+        1 };
 
 void setDtc(Dtc code, uint32_t detailVal, String errMessage) {
     if (dtcStructs[code].count++ == 0) {
