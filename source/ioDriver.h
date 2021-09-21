@@ -18,5 +18,7 @@ void initIOSemaphore();
 void initIOHwi();
 bool writeData(uint8_t slaveAddress, uint16_t data);
 Dtc lookupDtc(uint8_t slaveAddress);
+uint16_t *getLastWrittenState(uint8_t slaveAddress);
+extern uint16_t lastWrittenStates[4];
 
 #endif /* SOURCE_IODRIVER_H_ */

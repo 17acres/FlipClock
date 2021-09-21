@@ -27,7 +27,7 @@ volatile struct processedAdcVals maxAnalogData;
 volatile struct processedAdcVals filteredAnalogData;
 void processRawAdcValues();
 void updateMaxVals();
-
+void calculateFilteredVals();
 static Hwi_Handle hwiHandle;
 
 //TODO: do with interrupt and mailbox or smth
@@ -36,6 +36,7 @@ void adcIsr(UArg arg) {
     MAP_ADCSequenceDataGet(ADC0_BASE, 0, rawAdcValues);
     processRawAdcValues();
     updateMaxVals();
+    calculateFilteredVals();
     //MAP_ADCProcessorTrigger(ADC0_BASE, 0);
     GPIO_toggle(LAUNCHPAD_LED_BLUE);
 }

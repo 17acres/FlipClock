@@ -22,6 +22,10 @@ typedef enum Dtc {
     DTC_HSD_FAULT,
     DTC_OVERCURRENT_AVERAGE,
     DTC_OVERTEMPERATURE,
+    DTC_DRIVER_0_STUCK,
+    DTC_DRIVER_1_STUCK,
+    DTC_DRIVER_2_STUCK,
+    DTC_DRIVER_3_STUCK,
     DTC_COUNT
 } Dtc;
 typedef enum DtcStatus {
@@ -36,9 +40,12 @@ typedef struct DtcStruct {
     String errMessage;
     uint32_t detailVal;
 } DtcStruct;
-
+extern DtcStruct dtcStructs[DTC_COUNT];
 void setDtc(Dtc code, uint32_t detailVal, String errMessage);
 DtcStatus getDtcStatus(Dtc code);
 void clearDtc(Dtc code);
 void printDtcs();
+void saveDtcs();
+void ageDtcs();
+void countDownDtc(Dtc code);
 #endif /* SOURCE_DTC_H_ */

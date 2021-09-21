@@ -25,6 +25,8 @@
 #include "safetyBarrier.h"
 #include "hsd.h"
 #include "dtc.h"
+#include "ioDriver.h"
+#include "digit.h"
 
 typedef struct SafetyBarrierTaskParams {
     uint8_t ftti; //ms. If the task is periodic it has a rate here else disable the WDT if the rate of feeding is unknown
@@ -53,6 +55,7 @@ static uint32_t calculateWDTPeriod() { //ms
 }
 
 bool checkAnalogVals();
+bool checkStuckDrivers();
 
 void safetyBarrier(UArg arg0, UArg arg1) {
     //TODO: check current constantly and disable stuff if current continues, feed watchdog.
@@ -108,6 +111,7 @@ void safetyBarrier(UArg arg0, UArg arg1) {
             Watchdog_setReload(wdtHandle, calculateWDTPeriod() * 80000 / 2); //wdt times out twice before resetting
         } else {
             printDtcs();
+            saveDtcs();
             Watchdog_setReload(wdtHandle, 0); //reset now
         }
         Hwi_restore(key);
@@ -161,6 +165,39 @@ bool checkAnalogVals() {
             return false;
         }
     }
+    if (!checkStuckDrivers())
+        return false;
+    return true;
+}
+
+bool checkStuckDriver(DigitStruct *digit) {
+
+    if (((unionSeg((SegState) *getLastWrittenState(digit->ioAddr), (SegState) *getLastWrittenState(digit->ioAddr)).rawWord == segValOff.rawWord) || GPIO_read(
+            digit->hsdDisableAddr))
+        && analogData.hsdCurrents[digit->hsdCurrentIndex] > 0.2) {
+        setDtc(digit->stuckDriverDtc, analogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "");
+    }
+
+    if (getDtcStatus(digit->stuckDriverDtc) == DTC_SET) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+bool checkStuckDrivers() { //Reboot if for two samples the requested state is no current but there is current. True means OK
+
+    if (checkStuckDriver(&hoursTensStruct))
+        return false;
+
+    if (checkStuckDriver(&hoursOnesStruct))
+        return false;
+
+    if (checkStuckDriver(&minutesTensStruct))
+        return false;
+
+    if (checkStuckDriver(&minutesOnesStruct))
+        return false;
 
     return true;
 }

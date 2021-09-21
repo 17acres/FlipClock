@@ -71,7 +71,7 @@ void digitTask(UArg arg0, UArg arg1) {
                     }
                 }
             } else {
-                setDtc(MISSING_DIGIT_REQUEST, 0, "digit.c mail event but no message in mailbox");
+                setDtc(MISSING_DIGIT_REQUEST, digit->hsdCurrentIndex, "digit.c mail event but no message in mailbox");
             }
 
         }
@@ -316,28 +316,36 @@ bool requestWake(DigitStruct* digit, uint32_t timeout) {
 DigitStruct hoursTensStruct = {
         .ioAddr = IO_0_ADDR,
         .ledId = SEG_LED_ID_HOURS_TENS,
+        .hsdCurrentIndex = 0,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 0,
         .hsdDisableAddr = HSD_DISABLE_0,
         .name = "hoursTens",
-        .doFullApplyExtra = false};//set true for AP but not alarm icon
+        .doFullApplyExtra = false,//set true for AP but not alarm icon
+        .stuckDriverDtc = DTC_DRIVER_0_STUCK};
 DigitStruct hoursOnesStruct = {
         .ioAddr = IO_1_ADDR,
         .ledId = SEG_LED_ID_HOURS_ONES,
+        .hsdCurrentIndex = 1,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 1,
         .hsdDisableAddr = HSD_DISABLE_1,
         .name = "hoursTens",
-        .doFullApplyExtra = false};
+        .doFullApplyExtra = false,
+        .stuckDriverDtc = DTC_DRIVER_1_STUCK};
 DigitStruct minutesTensStruct = {
         .ioAddr = IO_2_ADDR,
         .ledId = SEG_LED_ID_MINUTES_TENS,
+        .hsdCurrentIndex = 2,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 2,
         .hsdDisableAddr = HSD_DISABLE_2,
         .name = "minutesTens",
-        .doFullApplyExtra = false};
+        .doFullApplyExtra = false,
+        .stuckDriverDtc = DTC_DRIVER_2_STUCK};
 DigitStruct minutesOnesStruct = {
         .ioAddr = IO_3_ADDR,
         .ledId = SEG_LED_ID_MINUTES_TENS,
+        .hsdCurrentIndex = 3,
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 3,
         .hsdDisableAddr = HSD_DISABLE_3,
         .name = "minutesOnes",
-        .doFullApplyExtra = false};
+        .doFullApplyExtra = false,
+        .stuckDriverDtc = DTC_DRIVER_3_STUCK};

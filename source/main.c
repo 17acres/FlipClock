@@ -287,7 +287,7 @@ int main(void) {
     SysCtlDelay(SysCtlClockGet());//1 second. 2 percent duty cycle if stuff is stuck, given 20ms wdt time should be safet
 
     init();
-
+    ageDtcs();
 
     /* Construct heartBeat Task  thread */
     Task_Params heartBeatParams;

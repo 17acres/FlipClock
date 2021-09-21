@@ -10,6 +10,7 @@
 
 #include <xdc/std.h>
 #include "defs.h"
+#include "dtc.h"
 #include "config/gpioConfig.h"
 #include "utils/ioDefs.h"
 #include <ti/sysbios/BIOS.h>
@@ -27,6 +28,7 @@
 typedef struct DigitStruct {
     uint8_t ioAddr;
     uint8_t ledId;
+    uint8_t hsdCurrentIndex;
     uint32_t fullApplyOffset;
     uint32_t lastFullApplyTime;
     EK_TM4C123GXL_GPIOName hsdDisableAddr;
@@ -38,6 +40,7 @@ typedef struct DigitStruct {
     Timer_Handle timerHandle;
     xdc_String name;
     bool doFullApplyExtra;
+    Dtc stuckDriverDtc;
 } DigitStruct;
 
 typedef enum ApplyMode{
