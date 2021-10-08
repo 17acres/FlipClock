@@ -40,7 +40,9 @@ typedef struct DigitStruct {
     Timer_Handle timerHandle;
     xdc_String name;
     bool doFullApplyExtra;
-    Dtc stuckDriverDtc;
+    Dtc driverPlausibilityDtc;
+    Dtc hsdFaultDtc;
+    Dtc overcurrentAverageDtc;
 } DigitStruct;
 
 typedef enum ApplyMode{

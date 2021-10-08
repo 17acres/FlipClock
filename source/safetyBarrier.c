@@ -55,7 +55,7 @@ static uint32_t calculateWDTPeriod() { //ms
 }
 
 bool checkAnalogVals();
-bool checkStuckDrivers();
+bool checkAllDriversOk();
 
 void safetyBarrier(UArg arg0, UArg arg1) {
     //TODO: check current constantly and disable stuff if current continues, feed watchdog.
@@ -150,53 +150,56 @@ bool checkAnalogVals() {
     if (analogData.mcuTemp > 80)
         return false;
 
-    for (int i = 0; i < 3; i++) {
-        if (analogData.hsdCurrents[i] > 8) {
-            char detail[20];
-            System_sprintf(detail, "Current %f A", analogData.hsdCurrents[i]);
-            setDtc(DTC_HSD_FAULT, i, detail);
-            return false; //vfault
-        }
-
-        if (filteredAnalogData.hsdCurrents[i] > 2) { //will this work with alarm ringing
-            char detail[20];
-            System_sprintf(detail, "Current %f A", filteredAnalogData.hsdCurrents[i]);
-            setDtc(DTC_HSD_FAULT, i, detail);
-            return false;
-        }
-    }
-    if (!checkStuckDrivers())
+    if (!checkAllDriversOk())
         return false;
     return true;
 }
 
-bool checkStuckDriver(DigitStruct *digit) {
+bool isHsdOrMotorDriverFault(DigitStruct *digit) {
+    bool isSegmentCoastOrBrake= (unionSeg((SegState) *getLastWrittenState(digit->ioAddr), (SegState) *getLastWrittenState(digit->ioAddr)).rawWord
+            == segValOff.rawWord);
 
-    if (((unionSeg((SegState) *getLastWrittenState(digit->ioAddr), (SegState) *getLastWrittenState(digit->ioAddr)).rawWord == segValOff.rawWord) || GPIO_read(
-            digit->hsdDisableAddr))
-        && analogData.hsdCurrents[digit->hsdCurrentIndex] > 0.2) {
-        setDtc(digit->stuckDriverDtc, analogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "");
+    if ((isSegmentCoastOrBrake || GPIO_read(digit->hsdDisableAddr)) &&analogData.hsdCurrents[digit->hsdCurrentIndex] > 0.2) {
+        setDtc(digit->driverPlausibilityDtc, analogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA when driver off, short circuit");
+    } else if(!isSegmentCoastOrBrake && !GPIO_read(digit->hsdDisableAddr) && analogData.hsdCurrents[digit->hsdCurrentIndex] < 0.2) {
+        setDtc(digit->driverPlausibilityDtc, analogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA when driver on, open circuit");
     }
 
-    if (getDtcStatus(digit->stuckDriverDtc) == DTC_SET) {
+    if (getDtcStatus(digit->driverPlausibilityDtc) == DTC_SET)
         return false;
+
+    if (analogData.hsdCurrents[digit->hsdCurrentIndex] > 8) {
+        setDtc(digit->hsdFaultDtc, analogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA equivalent V_fault");
     } else {
-        return true;
+        countDownDtc(digit->hsdFaultDtc);
+        //nest so we don't set both DTCs in fault
+        if (filteredAnalogData.hsdCurrents[digit->hsdCurrentIndex] > 2) { //will this work with alarm ringing
+            setDtc(digit->overcurrentAverageDtc, filteredAnalogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA average current");
+        } else {
+            countDownDtc(digit->overcurrentAverageDtc);
+        }
     }
+
+    if (getDtcStatus(digit->hsdFaultDtc) == DTC_SET)
+        return false; //v_fault
+
+    if (getDtcStatus(digit->overcurrentAverageDtc) == DTC_SET)
+        return false; //average overcurrent
+    return true;
 }
 
-bool checkStuckDrivers() { //Reboot if for two samples the requested state is no current but there is current. True means OK
+bool checkAllDriversOk() { //Reboot if for two samples the requested state is no current but there is current. True means OK
 
-    if (checkStuckDriver(&hoursTensStruct))
+    if (isHsdOrMotorDriverFault(&hoursTensStruct))
         return false;
 
-    if (checkStuckDriver(&hoursOnesStruct))
+    if (isHsdOrMotorDriverFault(&hoursOnesStruct))
         return false;
 
-    if (checkStuckDriver(&minutesTensStruct))
+    if (isHsdOrMotorDriverFault(&minutesTensStruct))
         return false;
 
-    if (checkStuckDriver(&minutesOnesStruct))
+    if (isHsdOrMotorDriverFault(&minutesOnesStruct))
         return false;
 
     return true;
