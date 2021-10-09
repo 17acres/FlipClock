@@ -34,7 +34,7 @@ void writeEEPROM(uint32_t *data, EEPROMBlock block) {
 }
 void readEEPROM(uint32_t *data, EEPROMBlock block) {
     uint32_t key = Hwi_disable();
-    EEPROMProgram(data, startAddresses[block], blockSizes[block]);
+    EEPROMRead(data, startAddresses[block], blockSizes[block]);
     Hwi_restore(key);
 }
 

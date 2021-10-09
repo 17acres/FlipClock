@@ -20,7 +20,7 @@ typedef enum SafetyBarrierTask{
 
 extern void safetyBarrier(UArg arg0, UArg arg1);
 
-extern void setSafetyBarrierTaskFtti(SafetyBarrierTask task, uint8_t ftti);
+extern void setSafetyBarrierTaskFtti(SafetyBarrierTask task, uint32_t ftti);
 extern void feedSafetyBarrierWDT(SafetyBarrierTask task);
 extern void setSafetyBarrierWDTMode(SafetyBarrierTask task, bool enableWDT);
 

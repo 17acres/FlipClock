@@ -83,6 +83,7 @@ void setDtc(Dtc code, uint32_t detailVal, String errMessage) {
         //snapshot from first time fault occur
         dtcStructs[code].errMessage = errMessage;
         dtcStructs[code].detailVal = detailVal;
+        //TODO: add snapshot data
     }
 }
 
@@ -91,55 +92,77 @@ DtcStatus getDtcStatus(Dtc code) {
 }
 void clearDtc(Dtc code) {
     dtcStructs[code].count = 0;
-    dtcStructs[code].status = DTC_UNSET;
-    dtcStructs[code].errMessage = "";
-    dtcStructs[code].detailVal = 0;
+    dtcStructs[code].status = DTC_HISTORY;
 }
 
 void countDownDtc(Dtc code) {
-    if (dtcStructs[code].count > 1)
+    if (dtcStructs[code].count >= 1) {
         --dtcStructs[code].count;
-
-    if (dtcStructs[code].count == 0) {
-        dtcStructs[code].errMessage = "";
-        dtcStructs[code].detailVal = 0;
-        dtcStructs[code].status = DTC_PENDING;
-    } else if (dtcStructs[code].count < dtcMaturityThresholds[code]) {
-        dtcStructs[code].status = DTC_UNSET;
+        if (dtcStructs[code].count == 0) {
+            dtcStructs[code].status = DTC_HISTORY;
+        } else if (dtcStructs[code].count < dtcMaturityThresholds[code]) {
+            dtcStructs[code].status = DTC_PENDING;
+        }
     }
 }
 
 void printDtcs() {
+    static bool hasReadDtcsOnStartup = false;
+    static uint32_t dtcAge;
+    static DtcStruct oldDtcStructs[DTC_COUNT];
+
     GPIO_write(LAUNCHPAD_LED_RED, FALSE);
-    System_printf("Current");
+    System_printf("\n*************DTC STATUS**************\n**********Current**********\n");
+    System_printf("Set:\n");
     for (int i = 0; i < DTC_COUNT; i++) {
         if (dtcStructs[i].status == DTC_SET) {
-            System_printf("DTC \"%s\" : %d set, count %u. Message: \"%s\"\n", dtcNames[i], dtcStructs[i].detailVal, dtcStructs[i].count,
+            System_printf("DTC \"%s\" (%u) set, count %u, detail value %d. Message: \"%s\"\n", dtcNames[i], i, dtcStructs[i].count, dtcStructs[i].detailVal,
                           dtcStructs[i].errMessage);
-            GPIO_write(LAUNCHPAD_LED_RED, TRUE);
+        }
+    }
+    System_printf("\nPending:\n");
+    for (int i = 0; i < DTC_COUNT; i++) {
+        if (dtcStructs[i].status == DTC_PENDING) {
+            System_printf("DTC \"%s\" (%u) pending, count %u, detail value %d. Message: \"%s\"\n", dtcNames[i], i, dtcStructs[i].count, dtcStructs[i].detailVal,
+                          dtcStructs[i].errMessage);
+        }
+    }
+    System_printf("\nHistory:\n");
+    for (int i = 0; i < DTC_COUNT; i++) {
+        if (dtcStructs[i].status == DTC_HISTORY) {
+            System_printf("DTC \"%s\" (%u) in history, count %u, detail value %d. Message: \"%s\"\n", dtcNames[i], i, dtcStructs[i].count,
+                          dtcStructs[i].detailVal, dtcStructs[i].errMessage);
         }
     }
 
-    uint32_t dtcAge;
-    readEEPROM(&dtcAge, EEPROMBLOCK_DTC_HISTORY_AGE);
-    System_printf("History: Age %d\n", dtcAge);
-    DtcStruct oldDtcStructs[DTC_COUNT];
-    readEEPROM((uint32_t *) &oldDtcStructs, EEPROMBLOCK_DTC_HISTORY);
+    if (!hasReadDtcsOnStartup) {
+        readEEPROM((uint32_t *) &oldDtcStructs, EEPROMBLOCK_DTC_SAVED);
+        readEEPROM(&dtcAge, EEPROMBLOCK_DTC_SAVED_AGE);
+        hasReadDtcsOnStartup = true;
+    }
+    System_printf("\n*******Previous Boot: Age %d*****\n", dtcAge);
+    System_printf("Set:\n");
     for (int i = 0; i < DTC_COUNT; i++) {
         if (oldDtcStructs[i].status == DTC_SET) {
-            System_printf("DTC \"%s\" : %d set, count %u. Message: \"%s\"\n", dtcNames[i], oldDtcStructs[i].detailVal, oldDtcStructs[i].count,
-                          oldDtcStructs[i].errMessage);
-            GPIO_write(LAUNCHPAD_LED_RED, TRUE);
+            System_printf("DTC \"%s\" (%u) set, count %u, detail value %d. Message: \"%s\"\n", dtcNames[i], i, oldDtcStructs[i].count,
+                          oldDtcStructs[i].detailVal, oldDtcStructs[i].errMessage);
+        }
+    }
+    System_printf("\nPending:\n");
+    for (int i = 0; i < DTC_COUNT; i++) {
+        if (oldDtcStructs[i].status == DTC_PENDING) {
+            System_printf("DTC \"%s\" (%u) pending, count %u, detail value %d. Message: \"%s\"\n", dtcNames[i], i, oldDtcStructs[i].count,
+                          oldDtcStructs[i].detailVal, oldDtcStructs[i].errMessage);
         }
     }
     System_flush();
 }
 void saveDtcs() {
     for (int i = 0; i < DTC_COUNT; i++) {
-        if (dtcStructs[i].status == DTC_SET) {
-            writeEEPROM((uint32_t *) &dtcStructs, EEPROMBLOCK_DTC_HISTORY);
+        if (dtcStructs[i].status == DTC_SET || dtcStructs[i].status == DTC_PENDING) {
+            writeEEPROM((uint32_t *) &dtcStructs, EEPROMBLOCK_DTC_SAVED);
             uint32_t dtcAge = 0;
-            writeEEPROM(&dtcAge, EEPROMBLOCK_DTC_HISTORY_AGE);
+            writeEEPROM(&dtcAge, EEPROMBLOCK_DTC_SAVED_AGE);
             break;
         }
     }
@@ -147,7 +170,7 @@ void saveDtcs() {
 
 void ageDtcs() {
     uint32_t dtcAge;
-    readEEPROM(&dtcAge, EEPROMBLOCK_DTC_HISTORY_AGE);
+    readEEPROM(&dtcAge, EEPROMBLOCK_DTC_SAVED_AGE);
     dtcAge = dtcAge + 1;
-    writeEEPROM(&dtcAge, EEPROMBLOCK_DTC_HISTORY_AGE);
+    writeEEPROM(&dtcAge, EEPROMBLOCK_DTC_SAVED_AGE);
 }

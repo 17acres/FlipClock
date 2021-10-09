@@ -37,7 +37,8 @@ typedef enum Dtc {
 typedef enum DtcStatus {
     DTC_UNSET,
     DTC_PENDING,
-    DTC_SET
+    DTC_SET,
+    DTC_HISTORY
 } DtcStatus;
 
 typedef struct DtcStruct {

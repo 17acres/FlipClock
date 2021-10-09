@@ -29,32 +29,28 @@
 #include "digit.h"
 
 typedef struct SafetyBarrierTaskParams {
-    uint8_t ftti; //ms. If the task is periodic it has a rate here else disable the WDT if the rate of feeding is unknown
+    uint32_t ftti; //ms. If the task is periodic it has a rate here else disable the WDT if the rate of feeding is unknown
     uint32_t count;
     uint32_t lastCheckedCount;
     uint32_t lastCheckedTime;
     bool enableWDT; //disable WDT checking if not periodic
 } SafetyBarrierTaskParams;
 
-static SafetyBarrierTaskParams barrierTaskParams[SAFETY_BARRIER_TASK_LIST_SIZE];
+SafetyBarrierTaskParams barrierTaskParams[SAFETY_BARRIER_TASK_LIST_SIZE];
+uint32_t checkTime;
 
 static uint32_t calculateWDTPeriod() { //ms
-    uint32_t calculatedPeriod = 0;
+    uint32_t calculatedPeriod = 20;
 
     for (int i = 0; i < SAFETY_BARRIER_TASK_LIST_SIZE; i++) {
-        if ((barrierTaskParams[i].enableWDT) && (barrierTaskParams[i].ftti > calculatedPeriod)) {
+        if ((barrierTaskParams[i].enableWDT) && (barrierTaskParams[i].ftti < calculatedPeriod)) {
             calculatedPeriod = barrierTaskParams[i].ftti;
         }
     }
-
-    if (calculatedPeriod > 20) {
-        return 20;
-    } else {
-        return calculatedPeriod;
-    }
+    return calculatedPeriod;
 }
 
-bool checkAnalogVals();
+bool checkAnalogValsOk();
 bool checkAllDriversOk();
 
 void safetyBarrier(UArg arg0, UArg arg1) {
@@ -67,7 +63,7 @@ void safetyBarrier(UArg arg0, UArg arg1) {
 
     if (ENABLE_WDT) {
         wdtParams.resetMode = Watchdog_RESET_ON;
-        wdtParams.debugStallMode = Watchdog_DEBUG_STALL_OFF;
+        wdtParams.debugStallMode = Watchdog_DEBUG_STALL_ON;//TODO: Watchdog_DEBUG_STALL_OFF;
     } else {
         wdtParams.resetMode = Watchdog_RESET_OFF;
         wdtParams.debugStallMode = Watchdog_DEBUG_STALL_ON;
@@ -79,22 +75,22 @@ void safetyBarrier(UArg arg0, UArg arg1) {
         uint32_t key = Hwi_disable();
         bool wdtOk = true;
 
-        uint32_t checkTime = Clock_getTicks();
+        checkTime = Clock_getTicks();
         //TODO: log as DTCs
         for (int i = 0; i < SAFETY_BARRIER_TASK_LIST_SIZE; i++) {
             SafetyBarrierTaskParams * thisTask = &barrierTaskParams[i];
             if (thisTask->enableWDT) {
-                if ((checkTime > (thisTask->lastCheckedTime + thisTask->ftti)) && (thisTask->count == thisTask->lastCheckedCount + 1)) { //better be incremented or else task is bad
+                if (thisTask->count == (thisTask->lastCheckedCount + 1)) { //better be incremented or else task is bad
                     thisTask->lastCheckedCount = thisTask->count;
                     thisTask->lastCheckedTime = checkTime;
-                } else {
+                } else if (checkTime > (thisTask->lastCheckedTime + thisTask->ftti)){
                     wdtOk = false;
                     switch (i) {
                         case SAFETY_BARRIER_TASK_DIGIT:
                             setDtc(DTC_DIGIT_TASK_WDT_FAIL, checkTime - thisTask->lastCheckedTime, "");
                             break;
                         case SAFETY_BARRIER_TASK_LEDS:
-                            setDtc(DTC_DIGIT_TASK_WDT_FAIL, checkTime - thisTask->lastCheckedTime, "");
+                            setDtc(DTC_LED_TASK_WDT_FAIL, checkTime - thisTask->lastCheckedTime, "");
                             break;
                     }
 
@@ -103,12 +99,12 @@ void safetyBarrier(UArg arg0, UArg arg1) {
             }
         }
 
-        if (!checkAnalogVals())
+        if (!checkAnalogValsOk())
             wdtOk = false;
 
         if (wdtOk) {
             Watchdog_clear(wdtHandle);
-            Watchdog_setReload(wdtHandle, calculateWDTPeriod() * 80000 / 2); //wdt times out twice before resetting
+            Watchdog_setReload(wdtHandle, calculateWDTPeriod() * 80000); //wdt times out twice before resetting
         } else {
             printDtcs();
             saveDtcs();
@@ -125,14 +121,15 @@ void safetyBarrier(UArg arg0, UArg arg1) {
     }
 }
 
-void setSafetyBarrierTaskFtti(SafetyBarrierTask task, uint8_t ftti) {
+void setSafetyBarrierTaskFtti(SafetyBarrierTask task, uint32_t ftti) {
     uint32_t key = Hwi_disable();
     barrierTaskParams[task].ftti = ftti;
     Hwi_restore(key);
 }
 void feedSafetyBarrierWDT(SafetyBarrierTask task) {
     uint32_t key = Hwi_disable();
-    barrierTaskParams[task].count = barrierTaskParams[task].count + 1;
+    if(barrierTaskParams[task].count==barrierTaskParams[task].lastCheckedCount)
+        barrierTaskParams[task].count = barrierTaskParams[task].count + 1;//WDT will fail if overfed
     Hwi_restore(key);
 }
 void setSafetyBarrierWDTMode(SafetyBarrierTask task, bool enableWDT) {
@@ -143,7 +140,13 @@ void setSafetyBarrierWDTMode(SafetyBarrierTask task, bool enableWDT) {
 
 }
 
-bool checkAnalogVals() {
+bool checkAnalogValsOk() {
+    static uint16_t lastCheckedSample=0;
+    if(analogData.sampleCount==lastCheckedSample)
+        return true;
+    else
+        ++lastCheckedSample;
+
     if (!analogData.qf)
         return true;
 
@@ -155,7 +158,7 @@ bool checkAnalogVals() {
     return true;
 }
 
-bool isHsdOrMotorDriverFault(DigitStruct *digit) {
+bool isHsdOrMotorDriverOk(DigitStruct *digit) {
     bool isSegmentCoastOrBrake= (unionSeg((SegState) *getLastWrittenState(digit->ioAddr), (SegState) *getLastWrittenState(digit->ioAddr)).rawWord
             == segValOff.rawWord);
 
@@ -165,20 +168,20 @@ bool isHsdOrMotorDriverFault(DigitStruct *digit) {
         setDtc(digit->driverPlausibilityDtc, analogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA when driver on, open circuit");
     }
 
-    if (getDtcStatus(digit->driverPlausibilityDtc) == DTC_SET)
-        return false;
-
-    if (analogData.hsdCurrents[digit->hsdCurrentIndex] > 8) {
+    if (analogData.hsdCurrents[digit->hsdCurrentIndex] > 7) {
         setDtc(digit->hsdFaultDtc, analogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA equivalent V_fault");
     } else {
         countDownDtc(digit->hsdFaultDtc);
         //nest so we don't set both DTCs in fault
-        if (filteredAnalogData.hsdCurrents[digit->hsdCurrentIndex] > 2) { //will this work with alarm ringing
+        if (filteredAnalogData.hsdCurrents[digit->hsdCurrentIndex] > 1) { //will this work with alarm ringing
             setDtc(digit->overcurrentAverageDtc, filteredAnalogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA average current");
         } else {
             countDownDtc(digit->overcurrentAverageDtc);
         }
     }
+
+    if (getDtcStatus(digit->driverPlausibilityDtc) == DTC_SET)
+        return false;
 
     if (getDtcStatus(digit->hsdFaultDtc) == DTC_SET)
         return false; //v_fault
@@ -190,16 +193,16 @@ bool isHsdOrMotorDriverFault(DigitStruct *digit) {
 
 bool checkAllDriversOk() { //Reboot if for two samples the requested state is no current but there is current. True means OK
 
-    if (isHsdOrMotorDriverFault(&hoursTensStruct))
+    if (!isHsdOrMotorDriverOk(&hoursTensStruct))
         return false;
 
-    if (isHsdOrMotorDriverFault(&hoursOnesStruct))
+    if (!isHsdOrMotorDriverOk(&hoursOnesStruct))
         return false;
 
-    if (isHsdOrMotorDriverFault(&minutesTensStruct))
+    if (!isHsdOrMotorDriverOk(&minutesTensStruct))
         return false;
 
-    if (isHsdOrMotorDriverFault(&minutesOnesStruct))
+    if (!isHsdOrMotorDriverOk(&minutesOnesStruct))
         return false;
 
     return true;

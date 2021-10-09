@@ -32,8 +32,8 @@ void calculateStateToApply(DigitStruct* digit, SegState requestedState, SegState
     uint32_t currentTime = Clock_getTicks();
     if (currentTime > (digit->lastFullApplyTime + DIGIT_FULL_APPLY_INTERVAL)) {
         *applyState = *actualRequestedState;
-        if(!digit->doFullApplyExtra)
-            applyState->extra = SEG_OFF;//Don't destroy extra seg if it is the big motor
+        if (!digit->doFullApplyExtra)
+            applyState->extra = SEG_OFF;    //Don't destroy extra seg if it is the big motor
         digit->lastFullApplyTime = currentTime;
         System_printf("Full Apply\n");
     } else {
@@ -117,7 +117,7 @@ void digitTask(UArg arg0, UArg arg1) {
 
         if (mailValid && (eventID & Event_Id_00)) { //Mail
             if (requestMail.mode == APPLY_MODE_TONE) {    //must have been mail event
-                setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_DIGIT,5000/ requestMail.cycleFrequency);//5 periods
+                setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_DIGIT, 5000 / requestMail.cycleFrequency);    //5 periods
                 setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, true);
                 Timer_setPeriodMicroSecs(digit->timerHandle, (500000.0 / requestMail.cycleFrequency));    //Period is half of 1/frequency
                 timerSegmentStateHigh = requestMail.requestedState;
@@ -128,7 +128,7 @@ void digitTask(UArg arg0, UArg arg1) {
                 isPWMNotTone = false;
                 Timer_start(digit->timerHandle);
             } else if (requestMail.mode == APPLY_MODE_PWM) {
-                setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_DIGIT,5000/ requestMail.cycleFrequency);//5 periods
+                setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_DIGIT, 5000 / requestMail.cycleFrequency);    //5 periods
                 setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, true);
                 Timer_setPeriodMicroSecs(digit->timerHandle, (1000000.0 / (requestMail.cycleFrequency * requestMail.pwmStepsPerCycle)));
                 timerSegmentStateHigh = requestMail.requestedState;
@@ -143,9 +143,8 @@ void digitTask(UArg arg0, UArg arg1) {
                 setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
                 Timer_start(digit->timerHandle);
             } else if (requestMail.mode == APPLY_MODE_NORMAL) {
-                setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
                 Timer_stop(digit->timerHandle);
-
+                setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
                 uint32_t applyTime;
 
                 uint32_t numFrames = DIGIT_ANIMATION_TIME * LED_FPS / 1000;
@@ -157,9 +156,9 @@ void digitTask(UArg arg0, UArg arg1) {
                 } else {
                     applyTime = DIGIT_APPLY_TIME;
                 }
-
-                setSegStateNonBlocking(digit->ioAddr, applyState);
-
+                setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_DIGIT, applyTime * 2);
+                setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, true);
+                ///////////////////////////////////////setSegStateNonBlocking(digit->ioAddr, applyState);
                 bool segCleared = false;
                 for (uint32_t i = 0; i < numFrames; i++) {
                     uint8_t fadePosition = i * 255 / numFrames;
@@ -173,6 +172,7 @@ void digitTask(UArg arg0, UArg arg1) {
                     //Longer animation time than apply time
                     if ((!segCleared) && ((i * 1000 / LED_FPS) > applyTime)) {
                         setSegStateNonBlocking(digit->ioAddr, segValOff);
+                        setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
                         segCleared = true;
                     }
                 }
@@ -186,9 +186,9 @@ void digitTask(UArg arg0, UArg arg1) {
                 if (!segCleared) {
                     Task_sleep(applyTime - DIGIT_ANIMATION_TIME);
                     setSegStateNonBlocking(digit->ioAddr, segValOff);
+                    setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
                 }
                 lastState = actualRequestedState;
-
             } else if (requestMail.mode == APPLY_MODE_SLEEP) { //APPLY_MODE_SLEEP. Don't go to off after. Brake mode is low 5V draw
                 setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
                 Timer_stop(digit->timerHandle);
@@ -320,10 +320,10 @@ DigitStruct hoursTensStruct = {
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 0,
         .hsdDisableAddr = HSD_DISABLE_0,
         .name = "hoursTens",
-        .doFullApplyExtra = false,//set true for AP but not alarm icon
+        .doFullApplyExtra = false, //set true for AP but not alarm icon
         .driverPlausibilityDtc = DTC_DRIVER_0_PLAUSIBILITY,
         .hsdFaultDtc = DTC_HSD_0_FAULT,
-        .overcurrentAverageDtc = DTC_HSD_0_AVERAGE_OVERCURRENT};
+        .overcurrentAverageDtc = DTC_HSD_0_AVERAGE_OVERCURRENT };
 DigitStruct hoursOnesStruct = {
         .ioAddr = IO_1_ADDR,
         .ledId = SEG_LED_ID_HOURS_ONES,
@@ -334,7 +334,7 @@ DigitStruct hoursOnesStruct = {
         .doFullApplyExtra = false,
         .driverPlausibilityDtc = DTC_DRIVER_1_PLAUSIBILITY,
         .hsdFaultDtc = DTC_HSD_1_FAULT,
-        .overcurrentAverageDtc = DTC_HSD_1_AVERAGE_OVERCURRENT};
+        .overcurrentAverageDtc = DTC_HSD_1_AVERAGE_OVERCURRENT };
 DigitStruct minutesTensStruct = {
         .ioAddr = IO_2_ADDR,
         .ledId = SEG_LED_ID_MINUTES_TENS,
@@ -345,7 +345,7 @@ DigitStruct minutesTensStruct = {
         .doFullApplyExtra = false,
         .driverPlausibilityDtc = DTC_DRIVER_2_PLAUSIBILITY,
         .hsdFaultDtc = DTC_HSD_2_FAULT,
-        .overcurrentAverageDtc = DTC_HSD_2_AVERAGE_OVERCURRENT};
+        .overcurrentAverageDtc = DTC_HSD_2_AVERAGE_OVERCURRENT };
 DigitStruct minutesOnesStruct = {
         .ioAddr = IO_3_ADDR,
         .ledId = SEG_LED_ID_MINUTES_TENS,
@@ -356,4 +356,4 @@ DigitStruct minutesOnesStruct = {
         .doFullApplyExtra = false,
         .driverPlausibilityDtc = DTC_DRIVER_3_PLAUSIBILITY,
         .hsdFaultDtc = DTC_HSD_3_FAULT,
-        .overcurrentAverageDtc = DTC_HSD_3_AVERAGE_OVERCURRENT};
+        .overcurrentAverageDtc = DTC_HSD_3_AVERAGE_OVERCURRENT };

@@ -38,7 +38,7 @@ void adcIsr(UArg arg) {
     updateMaxVals();
     calculateFilteredVals();
     //MAP_ADCProcessorTrigger(ADC0_BASE, 0);
-    GPIO_toggle(LAUNCHPAD_LED_BLUE);
+    //GPIO_toggle(LAUNCHPAD_LED_BLUE);
 }
 
 void initAdcHwi() {

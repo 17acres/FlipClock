@@ -40,7 +40,8 @@ static uint8_t rxbuf[BUFSIZE]; //Garbage data, required by RTOS drivers
 
 extern "C" void updateLeds(UArg arg0, UArg arg1) {
     uint32_t frameIdx = 0;
-
+    setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_LEDS, 10000 / LED_FPS);        //10 frames
+    setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_LEDS, true);
     while (1) {
 
         uint32_t startTime = Clock_getTicks();
@@ -52,8 +53,7 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
         brightness = 31;
 
         SegmentMaskRequest request;
-        setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_LEDS, 10000 / LED_FPS);        //10 frames
-        setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, true);
+
 
         while (Mailbox_pend(maskRequestMailbox, &request, BIOS_NO_WAIT)) {
             switch (request.segmentLedId) {

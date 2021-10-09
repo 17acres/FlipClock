@@ -98,19 +98,29 @@ void sysMonitor(UArg arg0, UArg arg1) {
     int loopCount = 0;
     Task_sleep(100);
     clearMaxAdcVals();
-//segValAOnly, segValBOnly, segValCOnly, segValDOnly,segValEOnly, segValFOnly, segValGOnly,segValShowExtra,
-//    SegState stateList[] = { segVal0, segVal1, segVal2, segVal3, segVal4,
-//                             segVal5, segVal6, segVal7, segVal8, segVal9,
-//                             segVal_A, segVal_b, segVal_C, segVal_c, segVal_d,
-//                             segVal_E, segVal_F, segVal_G, segVal_H, segVal_h,
-//                             segVal_I, segVal_i, segVal_J, segVal_L, segVal_n,
-//                             segVal_O, segVal_o, segVal_P, segVal_q, segVal_r,
-//                             segVal_S, segVal_t, segVal_U, segVal_u, segVal_y,
-//                             segValQuestion, segValBlank, segValAll };
-    //SegState stateList[] = { segVal0, segVal1, segVal2, segVal3, segVal4, segVal5, segVal6, segVal7, segVal8, segVal9 };
+//    segValAOnly, segValBOnly, segValCOnly, segValDOnly, segValEOnly, segValFOnly, segValGOnly, segValShowExtra, SegState
+//    SegState stateList[] = {segVal0, segVal1, segVal2, segVal3, segVal4,
+//        segVal5, segVal6, segVal7, segVal8, segVal9,
+//        segVal_A, segVal_b, segVal_C, segVal_c, segVal_d,
+//        segVal_E, segVal_F, segVal_G, segVal_H, segVal_h,
+//        segVal_I, segVal_i, segVal_J, segVal_L, segVal_n,
+//        segVal_O, segVal_o, segVal_P, segVal_q, segVal_r,
+//        segVal_S, segVal_t, segVal_U, segVal_u, segVal_y,
+//        segValQuestion, segValBlank, segValAll};
     SegState stateList[] = {
+            segVal0,
             segVal1,
-            segVal_I };
+            segVal2,
+            segVal3,
+            segVal4,
+            segVal5,
+            segVal6,
+            segVal7,
+            segVal8,
+            segVal9 };
+//    SegState stateList[] = {
+//            segVal1,
+//            segVal_I };
 //	SegState
 //	stateList[]= {
 //		segValBlank,
@@ -172,19 +182,19 @@ void sysMonitor(UArg arg0, UArg arg1) {
         printDtcs();
         requestWake(&hoursTensStruct, BIOS_WAIT_FOREVER);
 
-        //SegState thisState = stateList[loopCount % numStates];
+        SegState thisState = stateList[loopCount % numStates];
 
-        //requestNewDigitStateNormal(&hoursTensStruct, thisState, BIOS_WAIT_FOREVER);
+        requestNewDigitStateNormal(&hoursTensStruct, thisState, BIOS_WAIT_FOREVER);
 
         //for(int i=0;i<=10;i++){
-        requestDigitPWM(&hoursTensStruct, segValShowExtra, 60, 50, 7, 500, BIOS_WAIT_FOREVER);
+        //requestDigitPWM(&hoursTensStruct, segValShowExtra, 60, 50, 7, 500, BIOS_WAIT_FOREVER);
 //            Task_sleep(2000);
 //        //}
 //        requestDisableDigitTimer(&hoursTensStruct, BIOS_WAIT_FOREVER);
-        Task_sleep(1000);
-        Task_sleep(5000);
-        requestDigitPWM(&hoursTensStruct, segValHideExtra, 60, 50, 7, 500, BIOS_WAIT_FOREVER);
-        Task_sleep(5000);
+//        Task_sleep(1000);
+//        Task_sleep(5000);
+//        requestDigitPWM(&hoursTensStruct, segValHideExtra, 60, 50, 7, 500, BIOS_WAIT_FOREVER);
+//        Task_sleep(5000);
         //        requestTone(&hoursTensStruct, segValShowExtra, 329.63, BIOS_WAIT_FOREVER);
 //        Task_sleep(800);
 //        requestDisableDigitTimer(&hoursTensStruct, BIOS_WAIT_FOREVER);
@@ -214,7 +224,7 @@ void sysMonitor(UArg arg0, UArg arg1) {
 //        Task_sleep(800);
 //        requestDisableDigitTimer(&hoursTensStruct, BIOS_WAIT_FOREVER);
 //        Task_sleep(200);
-//        requestTone(&hoursTensStruct, segValShowExtra, 329.63, BIOS_WAIT_FOREVER);
+        requestTone(&hoursTensStruct, segValShowExtra, 329.63, 700, BIOS_WAIT_FOREVER);
 //        Task_sleep(800);
 //        requestDisableDigitTimer(&hoursTensStruct, BIOS_WAIT_FOREVER);
 //        Task_sleep(200);
@@ -284,7 +294,7 @@ void sysMonitor(UArg arg0, UArg arg1) {
  */
 int main(void) {
 
-    SysCtlDelay(SysCtlClockGet());//1 second. 2 percent duty cycle if stuff is stuck, given 20ms wdt time should be safet
+    SysCtlDelay(SysCtlClockGet());        //1 second. 2 percent duty cycle if stuff is stuck, given 20ms wdt time should be safet
 
     init();
     ageDtcs();
@@ -314,7 +324,7 @@ int main(void) {
     sysMonitorParams.stackSize = TASKSTACKSIZE;
     sysMonitorParams.stack = &sysMonitorStack;
     sysMonitorParams.priority = SYS_MONITOR_PRIORITY;
-    sysMonitorParams.instance->name = "sysMonitor";
+    sysMonitorParams.instance->name = "Main Random Thread";
     Task_construct(&sysMonitorStruct, (Task_FuncPtr) sysMonitor, &sysMonitorParams, NULL);
 
     Task_Params safetyBarrierParams;
