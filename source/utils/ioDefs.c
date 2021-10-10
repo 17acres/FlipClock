@@ -667,3 +667,25 @@ const SegState segValGOnly = {
         .f = SEG_HIDE,
         .g = SEG_SHOW,
         .extra = SEG_OFF };
+
+char getSegStateLocationName(SegState location) {
+    if (location.rawWord == segValAOnly.rawWord) {
+        return 'A';
+    } else if (location.rawWord == segValBOnly.rawWord) {
+        return 'B';
+    } else if (location.rawWord == segValCOnly.rawWord) {
+        return 'C';
+    } else if (location.rawWord == segValDOnly.rawWord) {
+        return 'D';
+    } else if (location.rawWord == segValEOnly.rawWord) {
+        return 'E';
+    } else if (location.rawWord == segValFOnly.rawWord) {
+        return 'F';
+    } else if (location.rawWord == segValGOnly.rawWord) {
+        return 'G';
+    } else if (location.rawWord == segValShowExtra.rawWord) {
+        return 'X';
+    } else {
+        return '?';
+    }
+}

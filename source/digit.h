@@ -50,6 +50,8 @@ typedef enum ApplyMode{
     APPLY_MODE_TONE,
     APPLY_MODE_PWM,
     APPLY_MODE_SLEEP,
+    APPLY_MODE_WAKE,
+    APPLY_MODE_NONSTOP,
     APPLY_MODE_NO_TIMER
 } ApplyMode;
 

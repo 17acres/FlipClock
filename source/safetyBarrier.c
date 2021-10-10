@@ -27,6 +27,7 @@
 #include "dtc.h"
 #include "ioDriver.h"
 #include "digit.h"
+#include "utils/segWearManager.h"
 
 typedef struct SafetyBarrierTaskParams {
     uint32_t ftti; //ms. If the task is periodic it has a rate here else disable the WDT if the rate of feeding is unknown
@@ -108,6 +109,7 @@ void safetyBarrier(UArg arg0, UArg arg1) {
         } else {
             printDtcs();
             saveDtcs();
+            saveSegWearData(true);
             Watchdog_setReload(wdtHandle, 0); //reset now
         }
         Hwi_restore(key);

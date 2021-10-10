@@ -23,4 +23,6 @@
 
 #define ENABLE_WDT 1
 
+#define EEPROM_SIZE (2048)
+#define EEPROM_SEG_WEAR_FLUSH_MS (1000*60*60*12) //twice per day
 #endif /* SOURCE_DEFS_H_ */

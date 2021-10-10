@@ -15,6 +15,7 @@
 #include <inc/hw_gpio.h>
 #include <xdc/runtime/System.h>
 #include "driverlib/eeprom.h"
+#include "segWearManager.h"
 
 void initEEPROM() {
     SysCtlPeripheralEnable(SYSCTL_PERIPH_EEPROM0);
@@ -22,6 +23,10 @@ void initEEPROM() {
     startAddresses[0]=0;
     for(int i=1;i<EEPROMBLOCK_COUNT;i++){
         startAddresses[i]=startAddresses[i-1]+blockSizes[i-1];
+        if((startAddresses[i]+blockSizes[i])>EEPROM_SIZE){
+            System_printf("**FATAL ERROR. EEPROM OVERFLOW**");
+            SysCtlReset();
+        }
     }
 }
 
@@ -40,6 +45,8 @@ void readEEPROM(uint32_t *data, EEPROMBlock block) {
 
 extern uint32_t blockSizes[]={
    sizeof(dtcStructs),
-   sizeof(uint32_t)
+   sizeof(uint32_t),
+   sizeof(SegWearData),
+   sizeof(uint8_t)//SHOULD BE WARNING EXCESS INITIALIZERS
 };
 uint32_t startAddresses[EEPROMBLOCK_COUNT];

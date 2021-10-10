@@ -169,6 +169,8 @@ SegStateFade rampSegState(SegState oldState, SegState newState, uint8_t amountOf
 bool applySegState(uint8_t slaveAddress, SegState state, uint32_t onTimeMs);
 bool applySegDelta(uint8_t slaveAddress, SegState oldState, SegState newState, uint32_t onTimeMs);
 
+char getSegStateLocationName(SegState location);//only works on segVal*Only or segValShowExtra
+
 //Simply apply state to motors and return success
 bool setSegStateNonBlocking(uint8_t slaveAddress, SegState state);
 #endif

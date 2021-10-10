@@ -19,6 +19,7 @@
 #include <xdc/runtime/Error.h>
 #include <math.h>
 #include "safetyBarrier.h"
+#include "utils/segWearManager.h"
 
 static void timerISR(UArg arg0) {
     Event_post(((DigitStruct *) arg0)->eventHandle, Event_Id_01);
@@ -49,6 +50,7 @@ void digitTask(UArg arg0, UArg arg1) {
     bool pwmState = false;
     bool timerRunning = false;
     bool isPWMNotTone = false;
+    bool flipInhibit = true;
     SegState timerSegmentStateHigh, timerSegmentStateLow;
     uint8_t pwmCycleIndex, pwmOnIdx, pwmCycleMax;
     uint32_t timerStartTime = 0;
@@ -64,9 +66,9 @@ void digitTask(UArg arg0, UArg arg1) {
                 //TODO: move this to the bottom part?
                 if (requestMail.mode == APPLY_MODE_PWM) {    //handle degenerate cases of PWM
                     if (requestMail.pwmStepsOn >= requestMail.pwmStepsPerCycle) {
-                        requestMail.mode = APPLY_MODE_SLEEP; //stay in that requested state
+                        requestMail.mode = APPLY_MODE_NONSTOP; //stay in that requested state
                     } else if (requestMail.pwmStepsOn == 0) {
-                        requestMail.mode = APPLY_MODE_SLEEP; //stay in that state
+                        requestMail.mode = APPLY_MODE_NONSTOP; //stay in that state
                         requestMail.requestedState = segValOff;
                     }
                 }
@@ -79,10 +81,11 @@ void digitTask(UArg arg0, UArg arg1) {
         bool timeoutFault = (timerRunning && ((Clock_getTicks() - timerStartTime) > timerApplyTimeout));
 
         if ((mailValid && (requestMail.mode == APPLY_MODE_NO_TIMER)) || timeoutFault) {
-            setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
             Timer_stop(digit->timerHandle);
+            setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
             timerRunning = false;
-            setSegStateNonBlocking(digit->ioAddr, segValOff);
+            if (!flipInhibit)
+                setSegStateNonBlocking(digit->ioAddr, segValOff);
             if (isPWMNotTone) {
                 SegState actualRequestedState;
                 actualRequestedState = unionSegPriority(timerSegmentStateHigh, lastState); //basically OR of requested state and other last state
@@ -96,19 +99,23 @@ void digitTask(UArg arg0, UArg arg1) {
         } else if (eventID & Event_Id_01) {    //Tone/PWM
             if (isPWMNotTone) {
                 if (pwmCycleIndex == pwmOnIdx) { //see file in calculation stuff. Turning on at the end of the nth count and off at the end of the 0th makes n steps with downcounting.
-                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateHigh);
+                    if (!flipInhibit)
+                        setSegStateNonBlocking(digit->ioAddr, timerSegmentStateHigh);
                     --pwmCycleIndex;
                 } else if (pwmCycleIndex == 0) {
-                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
+                    if (!flipInhibit)
+                        setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
                     pwmCycleIndex = pwmCycleMax;
                 } else {
                     --pwmCycleIndex;
                 }
             } else {
                 if (pwmState) {
-                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateHigh);
+                    if (!flipInhibit)
+                        setSegStateNonBlocking(digit->ioAddr, timerSegmentStateHigh);
                 } else {
-                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
+                    if (!flipInhibit)
+                        setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
                 }
                 pwmState = !pwmState;
             }
@@ -120,6 +127,7 @@ void digitTask(UArg arg0, UArg arg1) {
                 setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_DIGIT, 5000 / requestMail.cycleFrequency);    //5 periods
                 setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, true);
                 Timer_setPeriodMicroSecs(digit->timerHandle, (500000.0 / requestMail.cycleFrequency));    //Period is half of 1/frequency
+                logSegWear(digit, requestMail.requestedState);
                 timerSegmentStateHigh = requestMail.requestedState;
                 timerSegmentStateLow = invertSegState(requestMail.requestedState);
                 timerStartTime = Clock_getTicks();
@@ -131,6 +139,7 @@ void digitTask(UArg arg0, UArg arg1) {
                 setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_DIGIT, 5000 / requestMail.cycleFrequency);    //5 periods
                 setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, true);
                 Timer_setPeriodMicroSecs(digit->timerHandle, (1000000.0 / (requestMail.cycleFrequency * requestMail.pwmStepsPerCycle)));
+                logSegWear(digit, requestMail.requestedState);
                 timerSegmentStateHigh = requestMail.requestedState;
                 timerSegmentStateLow = replaceNonOffWithBrake(timerSegmentStateHigh);
                 timerStartTime = Clock_getTicks();
@@ -140,7 +149,8 @@ void digitTask(UArg arg0, UArg arg1) {
                 pwmOnIdx = requestMail.pwmStepsOn;
                 timerApplyTimeout = requestMail.timerApplyTimeout;
                 isPWMNotTone = true;
-                setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
+                if(!flipInhibit)
+                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
                 Timer_start(digit->timerHandle);
             } else if (requestMail.mode == APPLY_MODE_NORMAL) {
                 Timer_stop(digit->timerHandle);
@@ -150,7 +160,7 @@ void digitTask(UArg arg0, UArg arg1) {
                 uint32_t numFrames = DIGIT_ANIMATION_TIME * LED_FPS / 1000;
                 SegState actualRequestedState, applyState;
                 calculateStateToApply(digit, requestMail.requestedState, lastState, &actualRequestedState, &applyState);
-
+                logSegWear(digit, applyState);
                 if (applyState.rawWord == segValShowExtra.rawWord || applyState.rawWord == segValHideExtra.rawWord) {
                     applyTime = EXTRA_APPLY_TIME;
                 } else {
@@ -158,7 +168,8 @@ void digitTask(UArg arg0, UArg arg1) {
                 }
                 setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_DIGIT, applyTime * 2);
                 setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, true);
-                ///////////////////////////////////////setSegStateNonBlocking(digit->ioAddr, applyState);
+                if(!flipInhibit)
+                    setSegStateNonBlocking(digit->ioAddr, applyState);
                 bool segCleared = false;
                 for (uint32_t i = 0; i < numFrames; i++) {
                     uint8_t fadePosition = i * 255 / numFrames;
@@ -171,7 +182,8 @@ void digitTask(UArg arg0, UArg arg1) {
 
                     //Longer animation time than apply time
                     if ((!segCleared) && ((i * 1000 / LED_FPS) > applyTime)) {
-                        setSegStateNonBlocking(digit->ioAddr, segValOff);
+                        if(!flipInhibit)
+                            setSegStateNonBlocking(digit->ioAddr, segValOff);
                         setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
                         segCleared = true;
                     }
@@ -185,19 +197,24 @@ void digitTask(UArg arg0, UArg arg1) {
                 //Longer apply time than animation time
                 if (!segCleared) {
                     Task_sleep(applyTime - DIGIT_ANIMATION_TIME);
-                    setSegStateNonBlocking(digit->ioAddr, segValOff);
+                    if(!flipInhibit)
+                        setSegStateNonBlocking(digit->ioAddr, segValOff);
                     setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
                 }
                 lastState = actualRequestedState;
-            } else if (requestMail.mode == APPLY_MODE_SLEEP) { //APPLY_MODE_SLEEP. Don't go to off after. Brake mode is low 5V draw
-                setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
+            } else if (requestMail.mode == APPLY_MODE_SLEEP || requestMail.mode == APPLY_MODE_WAKE || requestMail.mode == APPLY_MODE_NONSTOP) { //APPLY_MODE_SLEEP. Don't go to off after. Brake mode is low 5V draw
                 Timer_stop(digit->timerHandle);
-                setSegStateNonBlocking(digit->ioAddr, requestMail.requestedState);
+                setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
+                if(!flipInhibit)
+                    setSegStateNonBlocking(digit->ioAddr, requestMail.requestedState);
+                if (requestMail.mode == APPPLY_MODE_SLEEP) {
+                    flipInhibit = true;
+                } else if (requestMail.mode == APPLY_MODE_WAKE) {
+                    flipInhibit = false;
+                }
             }
             //do nothing if NO_TIMER
         }
-
-//TODO: Do segment load management to manage thermals and monitor overall usage
     }
 }
 
@@ -306,7 +323,7 @@ bool requestWake(DigitStruct* digit, uint32_t timeout) {
     } else {
         GPIO_write(digit->hsdDisableAddr, false);
         DigitMail mail = {
-                .mode = APPLY_MODE_SLEEP,
+                .mode = APPLY_MODE_WAKE,
                 .requestedState = segValOff }; //go back to enhanced-safety mode?
         Mailbox_post(digit->mailboxHandle, &mail, timeout);
         return true;
