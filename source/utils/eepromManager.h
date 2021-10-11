@@ -10,9 +10,11 @@
 #include <xdc/std.h>
 #include "../dtc.h"
 
+#define DATA_VALID_DTC 0xDEADCAAA
+#define DATA_VALID_SEGWEAR 0xDEADCAAA
+
 typedef enum EEPROMBlock{
-    EEPROMBLOCK_DTC_SAVED,
-    EEPROMBLOCK_DTC_SAVED_AGE,
+    EEPROMBLOCK_DTC,
     EEPROMBLOCK_SEG_WEAR,
     EEPROMBLOCK_COUNT
 }EEPROMBlock;

@@ -35,19 +35,29 @@ typedef enum Dtc {
     DTC_COUNT
 } Dtc;
 typedef enum DtcStatus {
-    DTC_UNSET,
+    DTC_UNSET=0,
     DTC_PENDING,
     DTC_SET,
     DTC_HISTORY
 } DtcStatus;
+#define DTC_ERR_MESSAGE_LENGTH 20
 
 typedef struct DtcStruct {
     DtcStatus status;
     uint8_t count;
-    String errMessage;
+    char errMessage[DTC_ERR_MESSAGE_LENGTH];
     uint32_t detailVal;
 } DtcStruct;
-extern DtcStruct dtcStructs[DTC_COUNT];
+
+
+typedef struct DtcDataFrame{
+    DtcStruct dtcStructs[DTC_COUNT];
+    uint32_t age;
+    uint32_t dataValid;
+}DtcDataFrame;
+
+extern DtcDataFrame dtcData;
+
 void setDtc(Dtc code, uint32_t detailVal, String errMessage);
 DtcStatus getDtcStatus(Dtc code);
 void clearDtc(Dtc code);

@@ -44,8 +44,7 @@ void readEEPROM(uint32_t *data, EEPROMBlock block) {
 }
 
 extern uint32_t blockSizes[]={
-   sizeof(dtcStructs),
-   sizeof(uint32_t),
+   sizeof(DtcDataFrame),
    sizeof(SegWearData),
    sizeof(uint8_t)//SHOULD BE WARNING EXCESS INITIALIZERS
 };

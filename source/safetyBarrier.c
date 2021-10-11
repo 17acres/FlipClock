@@ -64,7 +64,7 @@ void safetyBarrier(UArg arg0, UArg arg1) {
 
     if (ENABLE_WDT) {
         wdtParams.resetMode = Watchdog_RESET_ON;
-        wdtParams.debugStallMode = Watchdog_DEBUG_STALL_ON;//TODO: Watchdog_DEBUG_STALL_OFF;
+        wdtParams.debugStallMode = Watchdog_DEBUG_STALL_ON; //TODO: Watchdog_DEBUG_STALL_OFF;
     } else {
         wdtParams.resetMode = Watchdog_RESET_OFF;
         wdtParams.debugStallMode = Watchdog_DEBUG_STALL_ON;
@@ -84,7 +84,7 @@ void safetyBarrier(UArg arg0, UArg arg1) {
                 if (thisTask->count == (thisTask->lastCheckedCount + 1)) { //better be incremented or else task is bad
                     thisTask->lastCheckedCount = thisTask->count;
                     thisTask->lastCheckedTime = checkTime;
-                } else if (checkTime > (thisTask->lastCheckedTime + thisTask->ftti)){
+                } else if (checkTime > (thisTask->lastCheckedTime + thisTask->ftti)) {
                     wdtOk = false;
                     switch (i) {
                         case SAFETY_BARRIER_TASK_DIGIT:
@@ -106,7 +106,17 @@ void safetyBarrier(UArg arg0, UArg arg1) {
         if (wdtOk) {
             Watchdog_clear(wdtHandle);
             Watchdog_setReload(wdtHandle, calculateWDTPeriod() * 80000); //wdt times out twice before resetting
+            static uint32_t lastFlashTime = 0;
+
+            if (checkTime > (lastFlashTime + 1000)) {
+                GPIO_toggle(LAUNCHPAD_LED_GREEN);
+                lastFlashTime = checkTime;
+            }
         } else {
+            GPIO_write(HSD_DISABLE_0, TRUE);
+            GPIO_write(HSD_DISABLE_1, TRUE);
+            GPIO_write(HSD_DISABLE_2, TRUE);
+            GPIO_write(HSD_DISABLE_3, TRUE);
             printDtcs();
             saveDtcs();
             saveSegWearData(true);
@@ -130,8 +140,8 @@ void setSafetyBarrierTaskFtti(SafetyBarrierTask task, uint32_t ftti) {
 }
 void feedSafetyBarrierWDT(SafetyBarrierTask task) {
     uint32_t key = Hwi_disable();
-    if(barrierTaskParams[task].count==barrierTaskParams[task].lastCheckedCount)
-        barrierTaskParams[task].count = barrierTaskParams[task].count + 1;//WDT will fail if overfed
+    if (barrierTaskParams[task].count == barrierTaskParams[task].lastCheckedCount)
+        barrierTaskParams[task].count = barrierTaskParams[task].count + 1; //WDT will fail if overfed
     Hwi_restore(key);
 }
 void setSafetyBarrierWDTMode(SafetyBarrierTask task, bool enableWDT) {
@@ -143,8 +153,8 @@ void setSafetyBarrierWDTMode(SafetyBarrierTask task, bool enableWDT) {
 }
 
 bool checkAnalogValsOk() {
-    static uint16_t lastCheckedSample=0;
-    if(analogData.sampleCount==lastCheckedSample)
+    static uint16_t lastCheckedSample = 0;
+    if (analogData.sampleCount == lastCheckedSample)
         return true;
     else
         ++lastCheckedSample;
@@ -161,13 +171,12 @@ bool checkAnalogValsOk() {
 }
 
 bool isHsdOrMotorDriverOk(DigitStruct *digit) {
-    bool isSegmentCoastOrBrake= (unionSeg((SegState) *getLastWrittenState(digit->ioAddr), (SegState) *getLastWrittenState(digit->ioAddr)).rawWord
+    bool isAllDigitCoastOrBrake = (unionSeg((SegState) *getLastWrittenState(digit->ioAddr), (SegState) *getLastWrittenState(digit->ioAddr)).rawWord
             == segValOff.rawWord);
-
-    if ((isSegmentCoastOrBrake || GPIO_read(digit->hsdDisableAddr)) &&analogData.hsdCurrents[digit->hsdCurrentIndex] > 0.2) {
-        setDtc(digit->driverPlausibilityDtc, analogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA when driver off, short circuit");
-    } else if(!isSegmentCoastOrBrake && !GPIO_read(digit->hsdDisableAddr) && analogData.hsdCurrents[digit->hsdCurrentIndex] < 0.2) {
-        setDtc(digit->driverPlausibilityDtc, analogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA when driver on, open circuit");
+    if ((isAllDigitCoastOrBrake || GPIO_read(digit->hsdDisableAddr)) && analogData.hsdCurrents[digit->hsdCurrentIndex] > 0.2) {
+        setDtc(digit->driverPlausibilityDtc, analogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA off, short circuit");
+    } else if (!isAllDigitCoastOrBrake && !GPIO_read(digit->hsdDisableAddr) && filteredAnalogData.hsdCurrents[digit->hsdCurrentIndex] < 0.2) {
+        setDtc(digit->driverPlausibilityDtc, filteredAnalogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA on, open circuit");//use filtered because it might sample most recently after the flip is done
     }
 
     if (analogData.hsdCurrents[digit->hsdCurrentIndex] > 7) {

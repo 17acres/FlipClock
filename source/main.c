@@ -60,13 +60,10 @@
 #include "digit.h"
 #include "Leds.h"
 #include "driverlib/sysctl.h"
-
+#include "utils/segWearManager.h"
 #include "safetyBarrier.h"
 
 extern void updateLeds(); //Leds.h needed for C linkage
-
-Task_Struct heartbeatStruct;
-Char heartbeatStack[TASKSTACKSIZE];
 
 Task_Struct updateLEDsStruct;
 Char updateLEDsStack[TASKSTACKSIZE * 2];
@@ -298,17 +295,6 @@ int main(void) {
     SysCtlDelay(SysCtlClockGet());        //1 second. 2 percent duty cycle if stuff is stuck, given 20ms wdt time should be safet
 
     init();
-    ageDtcs();
-
-    /* Construct heartBeat Task  thread */
-    Task_Params heartBeatParams;
-    Task_Params_init(&heartBeatParams);
-    heartBeatParams.arg0 = 1000;
-    heartBeatParams.stackSize = TASKSTACKSIZE;
-    heartBeatParams.stack = &heartbeatStack;
-    heartBeatParams.priority = 1;
-    heartBeatParams.instance->name = "Heartbeat";
-    Task_construct(&heartbeatStruct, (Task_FuncPtr) heartBeatFxn, &heartBeatParams, NULL);
 
     /* Construct updateLEDs Task  thread */
     Task_Params updateLEDsParams;

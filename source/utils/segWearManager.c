@@ -21,6 +21,8 @@
 
 SegWearData currentData;
 
+static bool segWearDataLoaded;
+
 static SegWearDigit *getSegWearDigitPointer(DigitStruct *digit) {
     if (digit == &hoursTensStruct) {
         return &(currentData.hoursTens);
@@ -61,6 +63,7 @@ static SegWearItem *getSegWearItemPointer(DigitStruct *digit, SegState location)
 }
 
 void resetSegWear() {
+    memset(&currentData, 0, sizeof(SegWearData));
     currentData.hoursTens.a.serialNumber = 0;
     currentData.hoursTens.b.serialNumber = 1;
     currentData.hoursTens.c.serialNumber = 2;
@@ -93,15 +96,20 @@ void resetSegWear() {
     currentData.minutesOnes.f.serialNumber = 8 * 3 + 5;
     currentData.minutesOnes.g.serialNumber = 8 * 3 + 6;
     currentData.minutesOnes.extra.serialNumber = 8 * 3 + 7;
-    currentData.dataValidCode=0xDEADBEEF;
+    currentData.dataValidCode = DATA_VALID_SEGWEAR;
 }
 
 void loadSegWearData() {
-    readEEPROM((uint32_t *) &currentData, EEPROMBLOCK_SEG_WEAR);
-    if(currentData.dataValidCode!=0xDEADBEEF){//EEPROM invalid
-        printSegWear();
-        resetSegWear();
-        saveSegWearData(true);
+    if (!segWearDataLoaded) {
+        readEEPROM((uint32_t *) &currentData, EEPROMBLOCK_SEG_WEAR);
+        if (currentData.dataValidCode != DATA_VALID_SEGWEAR) { //EEPROM invalid
+            printSegWear();
+            resetSegWear();
+            saveSegWearData(true);
+            System_printf("Seg Wear EEPROM Data Invalid. Reset\n");
+            printSegWear();
+        }
+        segWearDataLoaded=true;
     }
 }
 void saveSegWearData(bool doImmediately) {
@@ -120,6 +128,7 @@ void replaceSeg(DigitStruct *digit, SegState location, SegWearItem newSegInfo) {
 }
 
 void logSegWear(DigitStruct *digit, SegState applyState) {
+    loadSegWearData();
     SegWearDigit *targetLocation = getSegWearDigitPointer(digit);
 
     if (applyState.a == SEG_SHOW || applyState.a == SEG_HIDE) {
@@ -160,7 +169,7 @@ void logSegWear(DigitStruct *digit, SegState applyState) {
 static void printSegWearItem(DigitStruct *digit, SegState location) {
 
     SegWearItem *targetLocation = getSegWearItemPointer(digit, location);
-    System_printf("%12s,%c,%03u,%u\n", digit->name, getSegStateLocationName(location), targetLocation->serialNumber, targetLocation->flipCount);
+    System_printf("%s,%c,%u,%u\n", digit->name, getSegStateLocationName(location), targetLocation->serialNumber, targetLocation->flipCount);
 }
 
 void printSegWear() {

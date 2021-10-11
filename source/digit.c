@@ -207,7 +207,7 @@ void digitTask(UArg arg0, UArg arg1) {
                 setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
                 if(!flipInhibit)
                     setSegStateNonBlocking(digit->ioAddr, requestMail.requestedState);
-                if (requestMail.mode == APPPLY_MODE_SLEEP) {
+                if (requestMail.mode == APPLY_MODE_SLEEP) {
                     flipInhibit = true;
                 } else if (requestMail.mode == APPLY_MODE_WAKE) {
                     flipInhibit = false;

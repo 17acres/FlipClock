@@ -21,7 +21,7 @@ void calculateMask(SegStateFade segState, uint8_t returnMaskArray[], bool isExtr
     } else {
         if (extraMaskArray != 0) {
             for (int i = 0; i < numExtraLeds; i++) {
-                returnMaskArray[i] = segState.extra;
+                extraMaskArray[i] = segState.extra;
             }
         }
         numExtraLeds = 0; //no offset
