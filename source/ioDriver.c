@@ -22,22 +22,23 @@
 #include "config/gpioConfig.h"
 #include "dtc.h"
 #include "utils/ioDefs.h"
+#include <ti/sysbios/gates/GateMutexPri.h>
 
 static Semaphore_Handle ioTxCompleteSemaphore;
 static Semaphore_Handle ioBusySemaphore;
-static Semaphore_Handle ioSemaphore;
+static GateMutexPri_Handle mutexHandle;
 static Hwi_Handle hwiHandle;
 static volatile uint8_t secondByte;
 void ioIsr(UArg arg);
 void handleIOFailure(Dtc code, uint32_t detail, String message);
-static volatile bool transactionStarted = false;
+static volatile bool twoByteBurstSendStarted = false;
 
 bool checkIOPresence(uint8_t slaveAddress) {
     Dtc possibleCode = lookupDtc(slaveAddress);
     if (getDtcStatus(possibleCode) == DTC_SET)
         return false;
 
-    Semaphore_pend(ioSemaphore, BIOS_WAIT_FOREVER);
+    IArg key = GateMutexPri_enter(mutexHandle);
     Semaphore_reset(ioBusySemaphore, 0);
 
     MAP_I2CMasterSlaveAddrSet(I2C2_BASE, 0x7C, false);
@@ -48,9 +49,9 @@ bool checkIOPresence(uint8_t slaveAddress) {
     Semaphore_reset(ioBusySemaphore, 0);
     if (!semResult || MAP_I2CMasterErr(I2C2_BASE)) {
         handleIOFailure(possibleCode, MAP_I2CMasterErr(I2C2_BASE), "presence check send start");
-        Semaphore_post(ioSemaphore);
+        GateMutexPri_leave(mutexHandle, key);
         return (false);
-    }else{
+    } else {
         countDownDtc(possibleCode);
     }
 
@@ -62,15 +63,15 @@ bool checkIOPresence(uint8_t slaveAddress) {
     if (!semResult || MAP_I2CMasterErr(I2C2_BASE)) {
         handleIOFailure(possibleCode, MAP_I2CMasterErr(I2C2_BASE), "presence check receive start");
         MAP_I2CMasterControl(I2C2_BASE, I2C_MASTER_CMD_BURST_SEND_ERROR_STOP);
-        Semaphore_post(ioSemaphore);
+        GateMutexPri_leave(mutexHandle, key);
         return (false);
     } else {
         uint8_t ret = MAP_I2CMasterDataGet(I2C2_BASE);
         if (ret != 0x00) {
             handleIOFailure(possibleCode, ret, "presence check invalid first response byte");
-            Semaphore_post(ioSemaphore);
+            GateMutexPri_leave(mutexHandle, key);
             return (false);
-        }else{
+        } else {
             countDownDtc(possibleCode);
         }
     }
@@ -81,15 +82,15 @@ bool checkIOPresence(uint8_t slaveAddress) {
     Semaphore_reset(ioBusySemaphore, 0);
     if (!semResult || MAP_I2CMasterErr(I2C2_BASE)) {
         handleIOFailure(possibleCode, MAP_I2CMasterErr(I2C2_BASE), "presence check receive byte 2");
-        Semaphore_post(ioSemaphore);
+        GateMutexPri_leave(mutexHandle, key);
         return (false);
     } else {
         uint8_t ret = MAP_I2CMasterDataGet(I2C2_BASE);
         if (ret != 0x02) {
             handleIOFailure(possibleCode, ret, "presence check invalid second response byte");
-            Semaphore_post(ioSemaphore);
+            GateMutexPri_leave(mutexHandle, key);
             return (false);
-        }else{
+        } else {
             countDownDtc(possibleCode);
         }
     }
@@ -100,28 +101,30 @@ bool checkIOPresence(uint8_t slaveAddress) {
     Semaphore_reset(ioBusySemaphore, 0);
     if (!semResult || MAP_I2CMasterErr(I2C2_BASE)) {
         handleIOFailure(possibleCode, MAP_I2CMasterErr(I2C2_BASE), "presence check receive byte 3");
-        Semaphore_post(ioSemaphore);
+        GateMutexPri_leave(mutexHandle, key);
         return (false);
     } else {
         uint8_t ret = MAP_I2CMasterDataGet(I2C2_BASE);
         if (ret != 0x20) {
             handleIOFailure(possibleCode, ret, "presence check invalid third response byte");
-            Semaphore_post(ioSemaphore);
+            GateMutexPri_leave(mutexHandle, key);
             return (false);
-        }else{
+        } else {
             countDownDtc(possibleCode);
         }
     }
 
-    Semaphore_post(ioSemaphore);
+    GateMutexPri_leave(mutexHandle, key);
     return (true);
 }
 
 void initIOSemaphore() {
+    GateMutexPri_Params mutexParams;
+    GateMutexPri_Params_init(&mutexParams);
+    mutexHandle = GateMutexPri_create(&mutexParams, NULL);
     Semaphore_Params params;
     Semaphore_Params_init(&params);
     params.mode = Semaphore_Mode_BINARY_PRIORITY;
-    ioSemaphore = Semaphore_create(1, &params, NULL);
     ioTxCompleteSemaphore = Semaphore_create(0, &params, NULL);
     ioBusySemaphore = Semaphore_create(0, &params, NULL);
 }
@@ -133,20 +136,20 @@ void initIOHwi() {
 
 uint16_t lastWrittenStates[4];
 
-uint16_t *getLastWrittenState(uint8_t slaveAddress){
+uint16_t *getLastWrittenState(uint8_t slaveAddress) {
     switch (slaveAddress) {
-            case IO_0_ADDR:
-                return &lastWrittenStates[0];
-            case IO_1_ADDR:
-                return &lastWrittenStates[1];
-            case IO_2_ADDR:
-                return &lastWrittenStates[2];
-            case IO_3_ADDR:
-                return &lastWrittenStates[3];
-            default:
-                return 0;
+        case IO_0_ADDR:
+            return &lastWrittenStates[0];
+        case IO_1_ADDR:
+            return &lastWrittenStates[1];
+        case IO_2_ADDR:
+            return &lastWrittenStates[2];
+        case IO_3_ADDR:
+            return &lastWrittenStates[3];
+        default:
+            return 0;
             //crash if invalid
-        }
+    }
 }
 
 bool writeData(uint8_t slaveAddress, uint16_t data) {
@@ -154,9 +157,9 @@ bool writeData(uint8_t slaveAddress, uint16_t data) {
     if ((getDtcStatus(possibleCode) == DTC_SET) || (getDtcStatus(DIGIT_TIMER_TIMEOUT) == DTC_SET))
         return false;
 
-    Semaphore_pend(ioSemaphore, BIOS_WAIT_FOREVER);
+    IArg key = GateMutexPri_enter(mutexHandle);
     secondByte = data & 0xFF;
-    transactionStarted = true;
+    twoByteBurstSendStarted = true;
     MAP_I2CMasterSlaveAddrSet(I2C2_BASE, slaveAddress, false);
     MAP_I2CMasterDataPut(I2C2_BASE, data >> 8);
     MAP_I2CMasterControl(I2C2_BASE, I2C_MASTER_CMD_BURST_SEND_START);
@@ -165,41 +168,42 @@ bool writeData(uint8_t slaveAddress, uint16_t data) {
     Semaphore_reset(ioTxCompleteSemaphore, 0);
     if (!semResult || MAP_I2CMasterErr(I2C2_BASE)) {
         handleIOFailure(possibleCode, data, "writing byte 1");
-        Semaphore_post(ioSemaphore);
+        GateMutexPri_leave(mutexHandle, key);
         return (false);
-    }else{
+    } else {
         countDownDtc(possibleCode);
     }
 
+    //ISR will automatically send the next byte then post ioBusySemaphore when done
     semResult = Semaphore_pend(ioBusySemaphore, 100);
     Semaphore_reset(ioBusySemaphore, 0);
     if (!semResult || MAP_I2CMasterErr(I2C2_BASE)) {
         handleIOFailure(possibleCode, data, "writing byte 2");
-        Semaphore_post(ioSemaphore);
+        GateMutexPri_leave(mutexHandle, key);
         return (false);
-    }else{
+    } else {
         countDownDtc(possibleCode);
     }
 
-    transactionStarted = false;
+    *getLastWrittenState(slaveAddress) = data;
 
-    *getLastWrittenState(slaveAddress)=data;
-
-    Semaphore_post(ioSemaphore);
+    GateMutexPri_leave(mutexHandle, key);
     return true;
 }
 
 void ioIsr(UArg arg) {
     MAP_I2CMasterIntClear(I2C2_BASE);
-    if (transactionStarted) {
+    if (twoByteBurstSendStarted) {
         if (MAP_I2CMasterErr(I2C2_BASE) == I2C_MASTER_ERR_NONE) {
             MAP_I2CMasterDataPut(I2C2_BASE, secondByte);
             MAP_I2CMasterControl(I2C2_BASE, I2C_MASTER_CMD_BURST_SEND_FINISH);
+            twoByteBurstSendStarted=false;
         }
-        Semaphore_post(ioTxCompleteSemaphore);
-        Semaphore_reset(ioBusySemaphore, 0);
+        Semaphore_post(ioTxCompleteSemaphore);//signal first byte sent
+        Semaphore_reset(ioBusySemaphore, 0);//hold IO busy since the second byte will be sent next
+    }else{
+        Semaphore_post(ioBusySemaphore);
     }
-    Semaphore_post(ioBusySemaphore);
 }
 
 void handleIOFailure(Dtc code, uint32_t detail, String message) {

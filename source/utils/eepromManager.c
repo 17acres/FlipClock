@@ -16,10 +16,18 @@
 #include <xdc/runtime/System.h>
 #include "driverlib/eeprom.h"
 #include "segWearManager.h"
+#include <ti/sysbios/gates/GateMutexPri.h>
+static GateMutexPri_Handle mutexHandle;
 
 void initEEPROM() {
+    GateMutexPri_Params params;
+    GateMutexPri_Params_init(&params);
+    mutexHandle=GateMutexPri_create(&params, NULL);
+
+    IArg key=GateMutexPri_enter(mutexHandle);
     SysCtlPeripheralEnable(SYSCTL_PERIPH_EEPROM0);
     EEPROMInit();
+    GateMutexPri_leave(mutexHandle, key);
     startAddresses[0]=0;
     for(int i=1;i<EEPROMBLOCK_COUNT;i++){
         startAddresses[i]=startAddresses[i-1]+blockSizes[i-1];
@@ -28,19 +36,22 @@ void initEEPROM() {
             SysCtlReset();
         }
     }
+
 }
 
 void writeEEPROM(uint32_t *data, EEPROMBlock block) {
-    uint32_t key = Hwi_disable();
+    IArg key=GateMutexPri_enter(mutexHandle);
 
     EEPROMProgram(data, startAddresses[block], blockSizes[block]);
 
-    Hwi_restore(key);
+    GateMutexPri_leave(mutexHandle, key);
 }
 void readEEPROM(uint32_t *data, EEPROMBlock block) {
-    uint32_t key = Hwi_disable();
+    IArg key=GateMutexPri_enter(mutexHandle);
+
     EEPROMRead(data, startAddresses[block], blockSizes[block]);
-    Hwi_restore(key);
+
+    GateMutexPri_leave(mutexHandle, key);
 }
 
 extern uint32_t blockSizes[]={
