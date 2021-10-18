@@ -46,6 +46,7 @@ typedef struct DigitStruct {
 } DigitStruct;
 
 typedef enum ApplyMode{
+    APPLY_MODE_INVALID=0,
     APPLY_MODE_NORMAL,
     APPLY_MODE_TONE,
     APPLY_MODE_PWM,

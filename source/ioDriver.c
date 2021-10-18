@@ -24,7 +24,7 @@
 #include "utils/ioDefs.h"
 #include <ti/sysbios/gates/GateMutexPri.h>
 
-static Semaphore_Handle ioTxCompleteSemaphore;
+static Semaphore_Handle ioTxFirstByteSemaphore;
 static Semaphore_Handle ioBusySemaphore;
 static GateMutexPri_Handle mutexHandle;
 static Hwi_Handle hwiHandle;
@@ -125,7 +125,7 @@ void initIOSemaphore() {
     Semaphore_Params params;
     Semaphore_Params_init(&params);
     params.mode = Semaphore_Mode_BINARY_PRIORITY;
-    ioTxCompleteSemaphore = Semaphore_create(0, &params, NULL);
+    ioTxFirstByteSemaphore = Semaphore_create(0, &params, NULL);
     ioBusySemaphore = Semaphore_create(0, &params, NULL);
 }
 
@@ -164,8 +164,8 @@ bool writeData(uint8_t slaveAddress, uint16_t data) {
     MAP_I2CMasterDataPut(I2C2_BASE, data >> 8);
     MAP_I2CMasterControl(I2C2_BASE, I2C_MASTER_CMD_BURST_SEND_START);
 
-    bool semResult = Semaphore_pend(ioTxCompleteSemaphore, 100);
-    Semaphore_reset(ioTxCompleteSemaphore, 0);
+    bool semResult = Semaphore_pend(ioTxFirstByteSemaphore, 100);
+    Semaphore_reset(ioTxFirstByteSemaphore, 0);
     if (!semResult || MAP_I2CMasterErr(I2C2_BASE)) {
         handleIOFailure(possibleCode, data, "writing byte 1");
         GateMutexPri_leave(mutexHandle, key);
@@ -199,7 +199,7 @@ void ioIsr(UArg arg) {
             MAP_I2CMasterControl(I2C2_BASE, I2C_MASTER_CMD_BURST_SEND_FINISH);
             twoByteBurstSendStarted=false;
         }
-        Semaphore_post(ioTxCompleteSemaphore);//signal first byte sent
+        Semaphore_post(ioTxFirstByteSemaphore);//signal first byte sent
         Semaphore_reset(ioBusySemaphore, 0);//hold IO busy since the second byte will be sent next
     }else{
         Semaphore_post(ioBusySemaphore);
