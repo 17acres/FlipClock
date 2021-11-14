@@ -350,7 +350,7 @@ void requestSleep(DigitStruct* digit, uint32_t timeout) {
 }
 
 bool requestWake(DigitStruct* digit, uint32_t timeout) {
-    if (getDtcStatus(lookupDtc(IO_0_ADDR)) == DTC_SET) {
+    if (getDtcStatus(lookupDtc(digit->ioAddr)) == DTC_SET || !ENABLE_WDT) {//don't melt stuff
         GPIO_write(digit->hsdDisableAddr, true);
         return false;
     } else {
@@ -403,7 +403,7 @@ DigitStruct minutesOnesStruct = {
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 3,
         .hsdDisableAddr = HSD_DISABLE_3,
         .name = "minutesOnes",
-        .doFullApplyExtra = false,
+        .doFullApplyExtra = true,//AM/PM
         .driverPlausibilityDtc = DTC_DRIVER_3_PLAUSIBILITY,
         .hsdFaultDtc = DTC_HSD_3_FAULT,
         .overcurrentAverageDtc = DTC_HSD_3_AVERAGE_OVERCURRENT };
