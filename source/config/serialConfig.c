@@ -171,6 +171,7 @@ void initSPI(void) {
 }
 
 void initI2C(void) {
+    //IO expander I2C
     SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C2);
 
     MAP_GPIOPinConfigure(GPIO_PE5_I2C2SDA);
@@ -192,4 +193,38 @@ void initI2C(void) {
     MAP_I2CMasterTimeoutSet(I2C2_BASE, (10 * 400) / 16); //10ms timeout
     initIOSemaphore();
     initIOHwi();
+
+    //RTC
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C0);
+
+    MAP_GPIOPinConfigure(GPIO_PB3_I2C0SDA);
+    MAP_GPIOPinTypeI2C(GPIO_PORTB_BASE, GPIO_PIN_3);
+
+    MAP_GPIOPinConfigure(GPIO_PB2_I2C0SCL);
+    MAP_GPIOPinTypeI2CSCL(GPIO_PORTB_BASE, GPIO_PIN_2);
+
+    GPIOPadConfigSet(GPIO_PORTB_BASE, GPIO_PIN_3, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_OD);
+    GPIOPadConfigSet(GPIO_PORTB_BASE, GPIO_PIN_2, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU); //actually open drain internally
+
+    MAP_I2CMasterInitExpClk(I2C0_BASE, SysCtlClockGet(), false);
+    I2CMasterInitExpClk(I2C0_BASE, SysCtlClockGet(), false);
+
+    MAP_I2CMasterTimeoutSet(I2C0_BASE, (10 * 100) / 16); //10ms timeout
+
+    //ESP
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C1);
+
+    MAP_GPIOPinConfigure (GPIO_PA7_I2C1SDA);
+    MAP_GPIOPinTypeI2C(GPIO_PORTA_BASE, GPIO_PIN_7);
+
+    MAP_GPIOPinConfigure (GPIO_PA6_I2C1SCL);
+    MAP_GPIOPinTypeI2CSCL(GPIO_PORTA_BASE, GPIO_PIN_6);
+
+    GPIOPadConfigSet(GPIO_PORTA_BASE, GPIO_PIN_7, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_OD);
+    GPIOPadConfigSet(GPIO_PORTA_BASE, GPIO_PIN_6, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU); //actually open drain internally
+
+    MAP_I2CMasterInitExpClk(I2C1_BASE, SysCtlClockGet(), true);
+    I2CMasterInitExpClk(I2C1_BASE, SysCtlClockGet(), true);
+
+    MAP_I2CMasterTimeoutSet(I2C1_BASE, (10 * 400) / 16); //10ms timeout
 }

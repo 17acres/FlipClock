@@ -50,6 +50,7 @@ const String dtcNames[DTC_COUNT] = {
         "HSD 1 Average current limit exceeded",
         "HSD 2 Average current limit exceeded",
         "HSD 3 Average current limit exceeded",
+        "DS1307 I2C failure",
         "EXTRA. THIS MUST GET A WARNING" };
 const uint8_t dtcMaturityThresholds[DTC_COUNT] = {
         3,
@@ -74,6 +75,7 @@ const uint8_t dtcMaturityThresholds[DTC_COUNT] = {
         5,
         5,
         5,
+        3,
         1 }; //EXTRA. THIS MUST BE A WARNING
 
 void initDtc(){

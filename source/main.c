@@ -62,6 +62,7 @@
 #include "driverlib/sysctl.h"
 #include "utils/segWearManager.h"
 #include "safetyBarrier.h"
+#include "timeManager.h"
 
 extern void updateLeds(); //Leds.h needed for C linkage
 
@@ -73,6 +74,9 @@ Char sysMonitorStack[TASKSTACKSIZE];
 
 Task_Struct safetyBarrierStruct;
 Char safetyBarrierStack[TASKSTACKSIZE];
+
+Task_Struct timeManagerStruct;
+Char timeManagerStack[TASKSTACKSIZE];
 
 /*
  *  ======== heartBeatFxn ========
@@ -87,6 +91,7 @@ void heartBeatFxn(UArg arg0, UArg arg1) {
 }
 
 void sysMonitor(UArg arg0, UArg arg1) {
+    return false;
     GPIO_write(IO_RESET, FALSE);
     GPIO_write(ESP_ENABLE, TRUE);
     GPIO_write(BUF_DISABLE, FALSE);
@@ -321,6 +326,14 @@ int main(void) {
     safetyBarrierParams.priority = SAFETY_BARRIER_PRIORITY;
     safetyBarrierParams.instance->name = "safetyBarrier";
     Task_construct(&safetyBarrierStruct, (Task_FuncPtr) safetyBarrier, &safetyBarrierParams, NULL);
+
+    Task_Params timeManagerParams;
+    Task_Params_init(&timeManagerParams);
+    timeManagerParams.stackSize = TASKSTACKSIZE;
+    timeManagerParams.stack = &timeManagerStack;
+    timeManagerParams.priority = TIME_MANAGER_PRIORITY;
+    timeManagerParams.instance->name = "timeManager";
+    Task_construct(&timeManagerStruct, (Task_FuncPtr) timeThread, &timeManagerParams, NULL);
 
     System_printf("Starting the example\nSystem provider is set to SysMin. "
                   "Halt the target to view any SysMin contents in ROV.\n");

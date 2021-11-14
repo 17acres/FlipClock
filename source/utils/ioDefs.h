@@ -146,6 +146,8 @@ extern const SegState segValEOnly;
 extern const SegState segValFOnly;
 extern const SegState segValGOnly;
 
+extern const SegState *segValNumberArray[10];
+
 /*Bitwise OR of everything.
  * So if you OR segValShowExtra with segVal_r you get r with extra.
  * But if you OR Blank with Hide you get Off.

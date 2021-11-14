@@ -32,6 +32,7 @@ typedef enum Dtc {
     DTC_HSD_1_AVERAGE_OVERCURRENT,
     DTC_HSD_2_AVERAGE_OVERCURRENT,
     DTC_HSD_3_AVERAGE_OVERCURRENT,
+    DS1307_I2C_FAILURE,
     DTC_COUNT
 } Dtc;
 typedef enum DtcStatus {

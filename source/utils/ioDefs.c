@@ -689,3 +689,5 @@ char getSegStateLocationName(SegState location) {
         return '?';
     }
 }
+
+const SegState *segValNumberArray[]={&segVal0, &segVal1, &segVal2, &segVal3, &segVal4, &segVal5, &segVal6, &segVal7, &segVal8, &segVal9};
