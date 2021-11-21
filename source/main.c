@@ -91,7 +91,7 @@ void heartBeatFxn(UArg arg0, UArg arg1) {
 }
 
 void sysMonitor(UArg arg0, UArg arg1) {
-    return false;
+    return;
     GPIO_write(IO_RESET, FALSE);
     GPIO_write(ESP_ENABLE, TRUE);
     GPIO_write(BUF_DISABLE, FALSE);

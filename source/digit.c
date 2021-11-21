@@ -180,57 +180,61 @@ void digitTask(UArg arg0, UArg arg1) {
                 uint32_t numFrames = DIGIT_ANIMATION_TIME * LED_FPS / 1000;
                 SegState actualRequestedState, applyState;
                 calculateStateToApply(digit, requestMail.requestedState, lastState, &actualRequestedState, &applyState);
-                //calculate apply time
-                uint32_t applyTime;
-                if (applyState.rawWord == segValShowExtra.rawWord || applyState.rawWord == segValHideExtra.rawWord) {
-                    applyTime = EXTRA_APPLY_TIME;
-                } else {
-                    applyTime = DIGIT_APPLY_TIME;
-                }
-                setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_DIGIT, applyTime * 2);
-                setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, true);
 
-                //start flip
-                if (!flipInhibit) {
-                    logSegWear(digit, applyState);
-                    setSegStateNonBlocking(digit->ioAddr, applyState);
-                }
+                if (applyState.rawWord != segValOff.rawWord) {    //do nothing if no change
+                    //calculate apply time
+                    uint32_t applyTime;
+                    if (applyState.rawWord == segValShowExtra.rawWord || applyState.rawWord == segValHideExtra.rawWord) {
+                        applyTime = EXTRA_APPLY_TIME;
+                    } else {
+                        applyTime = DIGIT_APPLY_TIME;
+                    }
+                    setSafetyBarrierTaskFtti(SAFETY_BARRIER_TASK_DIGIT, applyTime * 2);
+                    setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, true);
 
-                //animate LEDs
-                bool segCleared = false;
-                for (uint32_t i = 0; i < numFrames; i++) {
-                    uint8_t fadePosition = (i * 255) / numFrames;
-                    //System_printf("i: %d, fadepos: %d\n",i,fadePosition);
+                    //start flip
+                    if (!flipInhibit) {
+                        logSegWear(digit, applyState);
+                        setSegStateNonBlocking(digit->ioAddr, applyState);
+                    }
+
+                    //animate LEDs
+                    bool segCleared = false;
+                    for (uint32_t i = 0; i < numFrames; i++) {
+                        uint8_t fadePosition = (i * 255) / numFrames;
+                        //System_printf("i: %d, fadepos: %d\n",i,fadePosition);
+                        SegmentMaskRequest request = (SegmentMaskRequest ) {
+                                        rampSegState(lastState, actualRequestedState, fadePosition),
+                                        digit->ledId };
+                        requestMaskUpdate(&request, BIOS_NO_WAIT);
+                        Task_sleep(1000 / LED_FPS);
+
+                        //if longer animation time than apply time, flip before animation is done
+                        if ((!segCleared) && ((i * 1000 / LED_FPS) > applyTime)) {
+                            if (!flipInhibit)
+                                setSegStateNonBlocking(digit->ioAddr, segValOff);
+                            setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
+                            segCleared = true;
+                        }
+                    }
+
+                    //set final mask state
                     SegmentMaskRequest request = (SegmentMaskRequest ) {
-                                    rampSegState(lastState, actualRequestedState, fadePosition),
+                                    calculateFadedSegState(actualRequestedState),
                                     digit->ledId };
                     requestMaskUpdate(&request, BIOS_NO_WAIT);
-                    Task_sleep(1000 / LED_FPS);
 
-                    //if longer animation time than apply time, flip before animation is done
-                    if ((!segCleared) && ((i * 1000 / LED_FPS) > applyTime)) {
+                    //if longer apply time than animation time, wait then stop flip
+                    if (!segCleared) {
+                        Task_sleep(applyTime - DIGIT_ANIMATION_TIME);
                         if (!flipInhibit)
                             setSegStateNonBlocking(digit->ioAddr, segValOff);
                         setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
-                        segCleared = true;
                     }
+
+                    lastState = actualRequestedState;
                 }
 
-                //set final mask state
-                SegmentMaskRequest request = (SegmentMaskRequest ) {
-                                calculateFadedSegState(actualRequestedState),
-                                digit->ledId };
-                requestMaskUpdate(&request, BIOS_NO_WAIT);
-
-                //if longer apply time than animation time, wait then stop flip
-                if (!segCleared) {
-                    Task_sleep(applyTime - DIGIT_ANIMATION_TIME);
-                    if (!flipInhibit)
-                        setSegStateNonBlocking(digit->ioAddr, segValOff);
-                    setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
-                }
-
-                lastState = actualRequestedState;
             } else if (requestMail.mode == APPLY_MODE_SLEEP || requestMail.mode == APPLY_MODE_WAKE || requestMail.mode == APPLY_MODE_NONSTOP) {
                 //Don't go to off after
 
@@ -345,12 +349,12 @@ void requestSleep(DigitStruct* digit, uint32_t timeout) {
     GPIO_write(digit->hsdDisableAddr, true);
     DigitMail mail = {
             .mode = APPLY_MODE_SLEEP,
-            .requestedState = segValBrake };//brake mode is lower 5V draw but less safe than Off if HSD is still on.
+            .requestedState = segValBrake }; //brake mode is lower 5V draw but less safe than Off if HSD is still on.
     Mailbox_post(digit->mailboxHandle, &mail, timeout);
 }
 
 bool requestWake(DigitStruct* digit, uint32_t timeout) {
-    if (getDtcStatus(lookupDtc(digit->ioAddr)) == DTC_SET || !ENABLE_WDT) {//don't melt stuff
+    if (getDtcStatus(lookupDtc(digit->ioAddr)) == DTC_SET || !ENABLE_WDT) { //don't melt stuff
         GPIO_write(digit->hsdDisableAddr, true);
         return false;
     } else {
@@ -403,7 +407,7 @@ DigitStruct minutesOnesStruct = {
         .fullApplyOffset = DIGIT_FULL_APPLY_OFFSET * 3,
         .hsdDisableAddr = HSD_DISABLE_3,
         .name = "minutesOnes",
-        .doFullApplyExtra = true,//AM/PM
+        .doFullApplyExtra = true, //AM/PM
         .driverPlausibilityDtc = DTC_DRIVER_3_PLAUSIBILITY,
         .hsdFaultDtc = DTC_HSD_3_FAULT,
         .overcurrentAverageDtc = DTC_HSD_3_AVERAGE_OVERCURRENT };

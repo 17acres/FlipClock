@@ -20,9 +20,9 @@
 
 //time is stored in UTC
 #define RTC_ADDRESS 0x68
-bool oscEnabled = false;
+bool dataValid = false;
 bool isRtcValid() {
-    return oscEnabled;
+    return dataValid;
 }
 
 //TODO: might be in the wrong order, implementation-dependent
@@ -69,11 +69,6 @@ bool readDs1307Data(uint8_t rtcAddress, uint8_t startAddress, uint8_t *data, uin
 void initDs1307() {
     Ds1307Data data;
     bool result = readDs1307Data(RTC_ADDRESS, 0x00, data.allData, 8);
-    if ((!result)) { //bit 7 means it is running and probably has time
-        if (!data.clockHalt) {
-            oscEnabled = true;
-        }
-    }
 }
 
 bool setDs1307Time(time_t currentTime) { //call this on the second. not sure if it does dst right
@@ -91,25 +86,28 @@ bool setDs1307Time(time_t currentTime) { //call this on the second. not sure if 
     rtcData.dayOfMonthTens = (time.tm_mday + 1) / 10;
     rtcData.monthOnes = (time.tm_mon + 1) % 10;
     rtcData.monthTens = (time.tm_mon + 1) / 10;
-    rtcData.yearOnes = (time.tm_year - 100) % 10;
-    rtcData.yearTens = (time.tm_year - 100) / 10;
+    rtcData.yearOnes = (time.tm_year - 30) % 10;
+    rtcData.yearTens = (time.tm_year - 30) / 10;
     return writeDs1307Data(RTC_ADDRESS, 0x00, rtcData.allData, 8);
 }
 
 time_t readDs1307Time() {
     Ds1307Data rtcData;
     bool result = readDs1307Data(RTC_ADDRESS, 0x00, rtcData.allData, 8);
-    if (!result)
+    if (!result){
+        dataValid=false;
         return 0;
+    }
+
     struct tm time;
     time.tm_sec = rtcData.secondsTens * 10 + rtcData.secondsOnes;
     time.tm_min = rtcData.minutesTens * 10 + rtcData.minutesOnes;
     time.tm_hour = rtcData.hoursTens * 10 + rtcData.hoursOnes;
     time.tm_mday = rtcData.dayOfMonthTens * 10 + rtcData.dayOfMonthOnes - 1;
     time.tm_mon = rtcData.monthTens * 10 + rtcData.monthOnes - 1;
-    time.tm_year = rtcData.yearTens * 10 + rtcData.yearOnes + 100;
+    time.tm_year = rtcData.yearTens * 10 + rtcData.yearOnes + 30;
     time.tm_isdst = 0;
-
+    dataValid=(!rtcData.clockHalt)&&(time.tm_year>30);//bit 7 being cleared means it is running and probably has time, also check if year is above 0
     _tz.daylight = false;
     _tz.timezone = 0; //go to UTC
     time_t timestamp = mktime(&time); //wday and yday are ignored but it assumes local time
