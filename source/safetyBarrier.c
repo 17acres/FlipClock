@@ -64,7 +64,7 @@ void safetyBarrier(UArg arg0, UArg arg1) {
 
     if (ENABLE_WDT) {
         wdtParams.resetMode = Watchdog_RESET_ON;
-        wdtParams.debugStallMode = Watchdog_DEBUG_STALL_ON; //TODO: Watchdog_DEBUG_STALL_OFF;
+        wdtParams.debugStallMode = Watchdog_DEBUG_STALL_OFF;
     } else {
         wdtParams.resetMode = Watchdog_RESET_OFF;
         wdtParams.debugStallMode = Watchdog_DEBUG_STALL_ON;

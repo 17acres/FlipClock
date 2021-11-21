@@ -59,8 +59,9 @@ SegState getTimeSegState(DigitStruct *digit, struct tm timeStruct);
 
 void timeThread(UArg arg0, UArg arg1) {
     initTimeZone();
-    bool firstBoot = true;
     struct tm time;
+    time_t currentTimestamp;
+    time_t ds1307ReturnTimestamp;
     uint8_t lastRanSeconds = 0;
     uint8_t lastRanMinutes = 0;
     uint8_t lastRanHour = 0;
@@ -82,20 +83,20 @@ void timeThread(UArg arg0, UArg arg1) {
 
     //actual logic
 
-    time_t returnTime = readDs1307Time();
+    ds1307ReturnTimestamp = readDs1307Time();
     if (isRtcValid()) {
-        setTime(returnTime);
+        setTime(ds1307ReturnTimestamp);
     }
     //TODO:try to get ntp time, if NTP time is valid, program RTC
 
     for (;;) {
-        time_t currentTimestamp = getTimestamp();
+        currentTimestamp = getTimestamp();
         time = convertToLocalTime(currentTimestamp);
         if (time.tm_year < 1971) { //clock is not set
             //TODO:log fault or something
-            time_t returnTime = readDs1307Time();
+            ds1307ReturnTimestamp = readDs1307Time();
             if (isRtcValid()) {
-                setTime(returnTime);
+                setTime(ds1307ReturnTimestamp);
             }
             //TODO:try to get ntp time, if NTP time is valid, program RTC
             //TODO:need some kind of exponential backoff strategy.

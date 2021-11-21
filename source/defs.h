@@ -22,7 +22,7 @@
 #define SAFETY_BARRIER_PRIORITY 15
 #define TIME_MANAGER_PRIORITY 5
 
-#define ENABLE_WDT 1
+#define ENABLE_WDT 0
 
 #define EEPROM_SIZE (2048)
 #define EEPROM_SEG_WEAR_FLUSH_MS (1000*60*60*12) //twice per day
