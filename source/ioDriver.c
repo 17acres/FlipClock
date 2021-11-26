@@ -22,6 +22,7 @@
 #include "config/gpioConfig.h"
 #include "dtc.h"
 #include "utils/ioDefs.h"
+#include "defs.h"
 #include <ti/sysbios/gates/GateMutexPri.h>
 
 static Semaphore_Handle ioTxFirstByteSemaphore;
@@ -34,6 +35,9 @@ void handleIOFailure(Dtc code, uint32_t detail, String message);
 static volatile bool twoByteBurstSendStarted = false;
 
 bool checkIOPresence(uint8_t slaveAddress) {
+    if (VIRTUAL_SEG) {
+        return true;
+    }
     Dtc possibleCode = lookupDtc(slaveAddress);
     if (getDtcStatus(possibleCode) == DTC_SET)
         return false;
@@ -197,11 +201,11 @@ void ioIsr(UArg arg) {
         if (MAP_I2CMasterErr(I2C2_BASE) == I2C_MASTER_ERR_NONE) {
             MAP_I2CMasterDataPut(I2C2_BASE, secondByte);
             MAP_I2CMasterControl(I2C2_BASE, I2C_MASTER_CMD_BURST_SEND_FINISH);
-            twoByteBurstSendStarted=false;
+            twoByteBurstSendStarted = false;
         }
-        Semaphore_post(ioTxFirstByteSemaphore);//signal first byte sent
-        Semaphore_reset(ioBusySemaphore, 0);//hold IO busy since the second byte will be sent next
-    }else{
+        Semaphore_post(ioTxFirstByteSemaphore); //signal first byte sent
+        Semaphore_reset(ioBusySemaphore, 0); //hold IO busy since the second byte will be sent next
+    } else {
         Semaphore_post(ioBusySemaphore);
     }
 }

@@ -99,9 +99,10 @@ void safetyBarrier(UArg arg0, UArg arg1) {
                 }
             }
         }
-
-        if (!checkAnalogValsOk())
-            wdtOk = false;
+        if (!VIRTUAL_SEG) {
+            if (!checkAnalogValsOk())
+                wdtOk = false;
+        }
 
         if (wdtOk) {
             Watchdog_clear(wdtHandle);
@@ -111,6 +112,12 @@ void safetyBarrier(UArg arg0, UArg arg1) {
             if (checkTime > (lastFlashTime + 1000)) {
                 GPIO_toggle(LAUNCHPAD_LED_GREEN);
                 lastFlashTime = checkTime;
+                static uint8_t dtcTime = 0;
+                if (dtcTime % 64 == 0) {
+                    printDtcs();
+                    dtcTime++;
+                }
+
             }
         } else {
             GPIO_write(HSD_DISABLE_0, TRUE);
@@ -176,7 +183,7 @@ bool isHsdOrMotorDriverOk(DigitStruct *digit) {
     if ((isAllDigitCoastOrBrake || GPIO_read(digit->hsdDisableAddr)) && analogData.hsdCurrents[digit->hsdCurrentIndex] > 0.2) {
         setDtc(digit->driverPlausibilityDtc, analogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA off, short circuit");
     } else if (!isAllDigitCoastOrBrake && !GPIO_read(digit->hsdDisableAddr) && filteredAnalogData.hsdCurrents[digit->hsdCurrentIndex] < 0.2) {
-        setDtc(digit->driverPlausibilityDtc, filteredAnalogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA on, open circuit");//use filtered because it might sample most recently after the flip is done
+        setDtc(digit->driverPlausibilityDtc, filteredAnalogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA on, open circuit"); //use filtered because it might sample most recently after the flip is done
     }
 
     if (analogData.hsdCurrents[digit->hsdCurrentIndex] > 7) {
@@ -189,6 +196,10 @@ bool isHsdOrMotorDriverOk(DigitStruct *digit) {
         } else {
             countDownDtc(digit->overcurrentAverageDtc);
         }
+    }
+
+    if (getDtcStatus(lookupDtc(digit->ioAddr)) == DTC_SET) {//actually an I2C fault but whatever
+        return false;
     }
 
     if (getDtcStatus(digit->driverPlausibilityDtc) == DTC_SET)

@@ -23,6 +23,7 @@
 #define TIME_MANAGER_PRIORITY 5
 
 #define ENABLE_WDT 0
+#define VIRTUAL_SEG 1
 
 #define EEPROM_SIZE (2048)
 #define EEPROM_SEG_WEAR_FLUSH_MS (1000*60*60*12) //twice per day
