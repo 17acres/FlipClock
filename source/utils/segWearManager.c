@@ -16,6 +16,7 @@
 #include <xdc/runtime/System.h>
 #include <ti/sysbios/knl/Clock.h>
 #include "driverlib/eeprom.h"
+#include <string.h>
 
 #include "segWearManager.h"
 

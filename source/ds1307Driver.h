@@ -10,6 +10,7 @@
 #include <xdc/std.h>
 #include "defs.h"
 #include <time.h>
+bool isRtcValid();
 void initDs1307();
 bool setDs1307Time(time_t currentTime);
 time_t readDs1307Time();
