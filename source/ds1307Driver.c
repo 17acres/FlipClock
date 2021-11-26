@@ -39,7 +39,8 @@ typedef union Ds1307Data {
         //byte 2
         uint8_t hoursOnes :4;
         uint8_t hoursTens :2;
-        uint8_t garbage2 :2;
+        uint8_t twelveHourMode :1;
+        uint8_t garbage2 :1;
         //byte 3
         uint8_t dayOfWeek :3;
         uint8_t garbage3 :5;
@@ -79,6 +80,8 @@ void initDs1307() {
 bool setDs1307Time(time_t currentTime) { //call this on the second. not sure if it does dst right
     Ds1307Data rtcData;
     rtcData.clockHalt = false;
+    rtcData.sqwEn=false;
+    rtcData.twelveHourMode=false;
     struct tm time = *gmtime(&currentTime);
     rtcData.secondsOnes = time.tm_sec % 10;
     rtcData.secondsTens = time.tm_sec / 10;
@@ -91,8 +94,8 @@ bool setDs1307Time(time_t currentTime) { //call this on the second. not sure if 
     rtcData.dayOfMonthTens = (time.tm_mday + 1) / 10;
     rtcData.monthOnes = (time.tm_mon + 1) % 10;
     rtcData.monthTens = (time.tm_mon + 1) / 10;
-    rtcData.yearOnes = (time.tm_year - 100) % 10;
-    rtcData.yearTens = (time.tm_year - 100) / 10;
+    rtcData.yearOnes = (time.tm_year - 30) % 10;//year relative to 1970
+    rtcData.yearTens = (time.tm_year - 30) / 10;
     return writeDs1307Data(RTC_ADDRESS, 0x00, rtcData.allData, 8);
 }
 
@@ -107,7 +110,7 @@ time_t readDs1307Time() {
     time.tm_hour = rtcData.hoursTens * 10 + rtcData.hoursOnes;
     time.tm_mday = rtcData.dayOfMonthTens * 10 + rtcData.dayOfMonthOnes - 1;
     time.tm_mon = rtcData.monthTens * 10 + rtcData.monthOnes - 1;
-    time.tm_year = rtcData.yearTens * 10 + rtcData.yearOnes + 100;
+    time.tm_year = rtcData.yearTens * 10 + rtcData.yearOnes + 30;
     time.tm_isdst = 0;
 
     _tz.daylight = false;
