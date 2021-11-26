@@ -47,10 +47,10 @@ void timeThread(UArg arg0, UArg arg1) {
         setDs1307Time(currentTime);
         time_t returnTime = readDs1307Time();
         if (currentTime != returnTime) {
-            System_printf("Source Time %d, Return time %d", currentTime, returnTime);
+            System_printf("Source Time %d, Return time %d\n", currentTime, returnTime);
             System_flush();
         }
-        currentTime += 5000000;
+        currentTime += 50000;
     }
 
     return; //TODO: do the rest of it
