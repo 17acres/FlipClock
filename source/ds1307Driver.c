@@ -41,7 +41,7 @@ bool setDs1307Time(time_t currentTime) { //call this on the second. not sure if 
     rtcData.clockHalt = false;
     rtcData.sqwEn = false;
     rtcData.twelveHourMode = false;
-    struct tm time = *gmtime(&currentTime);
+    struct tm time = convertToGmtTime(currentTime);
     rtcData.secondsOnes = time.tm_sec % 10;
     rtcData.secondsTens = time.tm_sec / 10;
     rtcData.minutesOnes = time.tm_min % 10;
@@ -53,7 +53,7 @@ bool setDs1307Time(time_t currentTime) { //call this on the second. not sure if 
     rtcData.dayOfMonthTens = (time.tm_mday ) / 10;
     rtcData.monthOnes = (time.tm_mon + 1) % 10;
     rtcData.monthTens = (time.tm_mon + 1) / 10;
-    rtcData.yearOnes = (time.tm_year - 100) % 10; //year relative to 1970
+    rtcData.yearOnes = (time.tm_year - 100) % 10; //year relative to 1900
     rtcData.yearTens = (time.tm_year - 100) / 10;
     return writeDs1307Data(RTC_ADDRESS, 0x00, rtcData.allData, 8);
 }
@@ -75,10 +75,9 @@ time_t readDs1307Time() {
     time.tm_year = rtcData.yearTens * 10 + rtcData.yearOnes + 100;
     time.tm_isdst = 0;
     dataValid = (!rtcData.clockHalt) && (time.tm_year > 30); //bit 7 being cleared means it is running and probably has time, also check if year is above 0
-    _tz.daylight = false;
-    _tz.timezone = 0; //go to UTC
-    time_t timestamp = mktime(&time); //wday and yday are ignored but it assumes local time
-    initTimeZone();
+
+    time_t timestamp=mkgmtime(time);
+
     return timestamp;
 }
 

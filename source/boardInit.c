@@ -16,6 +16,9 @@ void init() {
     loadSegWearData();
     ageDtcs();
     initDigit(&hoursTensStruct);
+    initDigit(&hoursOnesStruct);
+    initDigit(&minutesTensStruct);
+    initDigit(&minutesOnesStruct);
     //SPI AND I2C0 INIT MUST BE AFTER TIMER INIT BECAUSE TIMER INIT DISABLES SPI PERIPHERALS https://e2e.ti.com/support/legacy_forums/embedded/tirtos/f/ti-rtos-forum-read-only-archived/499599/tiva-c-bus-fault-when-accessing-ssi-peripheral
     initSPI();
     initI2C();

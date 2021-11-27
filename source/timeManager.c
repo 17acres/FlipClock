@@ -22,22 +22,37 @@
 //since Seconds is a uint32 that means you have until 2106 not 2038
 
 time_t getTimestamp() {
-    return Seconds_get();
+    return Seconds_get();//(Seconds_get()-1640908000)*10+1640908000;//TODO: make real
 }
 
-struct tm convertToLocalTime(time_t timestamp) {
+struct tm convertToLocalTime(time_t timestamp) {//tm year is relative to 1970
     uint32_t key = Hwi_disable();
+    //timestamp+=2208967200;//convert to 1900 epoch
     struct tm ret = *localtime(&timestamp); //not reentrant
+    //ret.tm_year+=70;
     Hwi_restore(key);
     return ret;
 }
 
-struct tm convertToGmtTime(time_t timestamp) {
+struct tm convertToGmtTime(time_t timestamp) {//tm year is relative to 1970
     uint32_t key = Hwi_disable();
+    //timestamp+=2208967200;//convert to 1900 epoch
     struct tm ret = *gmtime(&timestamp); //not reentrant
     Hwi_restore(key);
     return ret;
 }
+
+time_t mkgmtime(struct tm time){
+    uint32_t key = Hwi_disable();
+    _tz.daylight = false;
+    _tz.timezone = 0; //go to UTC
+    time_t timestamp = mktime(&time); //wday and yday are ignored but it assumes local time
+    //timestamp-=2208967200;//convert back to unix epoch
+    initTimeZone();
+    Hwi_restore(key);
+    return timestamp;
+}
+
 
 struct tm getLocalTime() {
     return convertToLocalTime(getTimestamp());
@@ -57,10 +72,13 @@ void setTime(time_t timestamp) {
 
 SegState getTimeSegState(DigitStruct *digit, struct tm timeStruct);
 
+struct tm currentTimeStruct;
+struct tm currentGmTimeStruct;
+time_t currentTimestamp;
+
 void timeThread(UArg arg0, UArg arg1) {
     initTimeZone();
-    struct tm time;
-    time_t currentTimestamp;
+
     time_t ds1307ReturnTimestamp;
     uint8_t lastRanSeconds = 0;
     uint8_t lastRanMinutes = 0;
@@ -68,46 +86,31 @@ void timeThread(UArg arg0, UArg arg1) {
     time_t lastRanHourTimestamp = 0;
     //TODO:init time
     initDs1307();
-    time_t currentTime = 1640908000;
-    for (;;) {
-        setDs1307Time(currentTime);
-        time_t returnTime = readDs1307Time();
-
-
-        if ((currentTime - returnTime)>1 ||(returnTime-currentTime)>1 ) {
-            int32_t time32 = currentTime;
-            int32_t return32 = returnTime;
-            int32_t deltaTime = return32 - time32;
-            System_printf("Source Time %d, Return time %d, Time Ahead %d, RTC valid %d\n", time32, return32, deltaTime, isRtcValid());
-            System_flush();
-            //Task_sleep(1000);
-        }
-        currentTime += 1000;
-    }
-
-    return; //TODO: do the rest of it
-
     //actual logic
 
     ds1307ReturnTimestamp = readDs1307Time();
     if (isRtcValid()) {
         setTime(ds1307ReturnTimestamp);
+    }else{//TODO:try to get ntp time, if NTP time is valid, program RTC
+        //setDs1307Time(1637985571);//Friday 11/26/2021 10:59:31PM EST
+        setDs1307Time(1627359643);//Tuesday 07/27/2021 12:20:43AM EST
     }
-    //TODO:try to get ntp time, if NTP time is valid, program RTC
+
 
     for (;;) {
         currentTimestamp = getTimestamp();
-        time = convertToLocalTime(currentTimestamp);
-        if (time.tm_year < 1971) { //clock is not set
+        currentTimeStruct = convertToLocalTime(currentTimestamp);
+        currentGmTimeStruct = convertToGmtTime(currentTimestamp);
+        if (currentTimeStruct.tm_year < 77) { //clock is not set
             //TODO:log fault or something
             ds1307ReturnTimestamp = readDs1307Time();
             if (isRtcValid()) {
                 setTime(ds1307ReturnTimestamp);
             }
-            //TODO:try to get ntp time, if NTP time is valid, program RTC
+            //TODO:try to get ntp time, if NTP time is valid, program RTC and Seconds
             //TODO:need some kind of exponential backoff strategy.
 
-        } else if (time.tm_sec >= ((lastRanSeconds + 10) % 60)) { //if we are on the 0,10,20,30,...
+        } else if (currentTimeStruct.tm_sec >= ((lastRanSeconds + 10) % 60)) { //if we are on the 0,10,20,30,...
             /*
              * If the time jumps from 19 to 21,
              * round last ran time to the most recent multiple of 10.
@@ -122,7 +125,7 @@ void timeThread(UArg arg0, UArg arg1) {
              */
 
             //correct the time to the time which was missed and also save back into the struct, so we can use simpler logic below
-            lastRanSeconds = time.tm_sec = (time.tm_sec / 10) * 10;
+            lastRanSeconds = currentTimeStruct.tm_sec = (currentTimeStruct.tm_sec / 10) * 10;
 
             /*
              * This block will run every 10 seconds. In some cases it might run twice in a row real-world time,
@@ -130,34 +133,34 @@ void timeThread(UArg arg0, UArg arg1) {
              * it will capture every 10 second interval of RTC time
              */
 
-            //TODO: Check for NTP and program RTC if valid, if NTP has not been learned this operation cycle
+            //TODO: Check for NTP and program RTC and Seconds if valid, if NTP has not been learned this operation cycle
             //TODO: do light stuff. Unless this is for weeks indication. Unmask partially chunks of the outline every 10 seconds or whatever like left side, top left, top right, right, bot right, bot left
             //no reason not to call this every 10 seconds since it will only do anything if there's a change
-            requestNewDigitStateNormal(&hoursTensStruct, getTimeSegState(&hoursTensStruct, time), 100);
-            requestNewDigitStateNormal(&hoursOnesStruct, getTimeSegState(&hoursOnesStruct, time), 100);
-            requestNewDigitStateNormal(&minutesTensStruct, getTimeSegState(&minutesTensStruct, time), 100);
-            requestNewDigitStateNormal(&minutesOnesStruct, getTimeSegState(&minutesOnesStruct, time), 100);
-            requestNewExtraState(&minutesOnesStruct, (time.tm_hour < 12), 100); //AM/PM
+            requestNewDigitStateNormal(&hoursTensStruct, getTimeSegState(&hoursTensStruct, currentTimeStruct), 100);
+            requestNewDigitStateNormal(&hoursOnesStruct, getTimeSegState(&hoursOnesStruct, currentTimeStruct), 100);
+            requestNewDigitStateNormal(&minutesTensStruct, getTimeSegState(&minutesTensStruct, currentTimeStruct), 100);
+            requestNewDigitStateNormal(&minutesOnesStruct, getTimeSegState(&minutesOnesStruct, currentTimeStruct), 100);
+            requestNewExtraState(&minutesOnesStruct, (currentTimeStruct.tm_hour < 12), 100); //AM/PM
 
             //TODO:Save alarm by unix timestamp and check all the time like here if we are past or at the target timestamp
-            if (time.tm_min >= ((lastRanMinutes + 15) % 60)) {
+            if (currentTimeStruct.tm_min >= ((lastRanMinutes + 15) % 60)) {
                 /*
                  * For minutes, if it goes from 1:06:59 to 1:07:01, we will run this at 1:07:10
                  * If it goes from 1:07:01 to 1:06:59, then it won't run at 1:07:00,
                  * since lastRanMinutes is already 7
                  */
 
-                lastRanMinutes = time.tm_min = (time.tm_min / 15) * 15;
+                lastRanMinutes = currentTimeStruct.tm_min = (currentTimeStruct.tm_min / 15) * 15;
                 //TODO: quarter-hour chimes
 
-                if ((time.tm_hour >= ((lastRanHour + 1) % 24)) || ((time.tm_hour == lastRanHour) && (currentTimestamp >= (lastRanHourTimestamp + 3600)))) {
+                if ((currentTimeStruct.tm_hour >= ((lastRanHour + 1) % 24)) || ((currentTimeStruct.tm_hour == lastRanHour) && (currentTimestamp >= (lastRanHourTimestamp + 3600)))) {
                     /*
                      * Only difference here is that DST means we go from 1:59:59 to 1:00:00 at 1636264800
                      * and from 1:59:59 to 3:00:00 at 1615705200
                      * So run if either we are at the next (or more) hour OR we are at the same hour but an hour of time has passed
                      */
                     lastRanHourTimestamp = (currentTimestamp / 3600) * 3600; //round to start of this hour if we caught this late
-                    lastRanHour = time.tm_hour;
+                    lastRanHour = currentTimeStruct.tm_hour;
                     //TODO: hourly chimes
                     //TODO: Check for NTP and program RTC if valid
                 } //end hourly
@@ -167,7 +170,7 @@ void timeThread(UArg arg0, UArg arg1) {
     } //end for
 }
 
-void initTimeZone() { //probably doesn't work
+void initTimeZone() { //TODO: doesn't do dst probably doesn't work
     _tz.daylight = true;
     strcpy(_tz.dstname, "EDT");
     strcpy(_tz.tzname, "EST");
@@ -179,7 +182,10 @@ SegState getTimeSegState(DigitStruct *digit, struct tm timeStruct) {
         timeStruct.tm_hour = timeStruct.tm_hour - 12;
     }
     if (digit == &hoursTensStruct) {
-        return *segValNumberArray[timeStruct.tm_hour / 10];
+        if((timeStruct.tm_hour/10)==0)
+            return segValBlank;
+        else
+            return *segValNumberArray[timeStruct.tm_hour / 10];
     } else if (digit == &hoursOnesStruct) {
         return *segValNumberArray[timeStruct.tm_hour % 10];
     } else if (digit == &minutesTensStruct) {

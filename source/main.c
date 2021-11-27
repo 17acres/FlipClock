@@ -91,6 +91,10 @@ void heartBeatFxn(UArg arg0, UArg arg1) {
 }
 
 void sysMonitor(UArg arg0, UArg arg1) {
+    requestWake(&hoursTensStruct, BIOS_WAIT_FOREVER);
+    requestWake(&hoursOnesStruct, BIOS_WAIT_FOREVER);
+    requestWake(&minutesTensStruct, BIOS_WAIT_FOREVER);
+    requestWake(&minutesOnesStruct, BIOS_WAIT_FOREVER);
     return;
     GPIO_write(IO_RESET, FALSE);
     GPIO_write(ESP_ENABLE, TRUE);

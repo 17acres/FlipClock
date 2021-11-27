@@ -17,6 +17,7 @@
 #include <ti/sysbios/hal/Timer.h>
 #include <ti/drivers/GPIO.h>
 #include <xdc/runtime/Error.h>
+#include <xdc/runtime/Types.h>
 #include <math.h>
 #include "safetyBarrier.h"
 #include "utils/segWearManager.h"
@@ -264,7 +265,12 @@ void initDigit(DigitStruct* digit) {
     mailboxParams.readerEvent = digit->eventHandle;
     mailboxParams.readerEventId = Event_Id_00;
 
+
     digit->mailboxHandle = Mailbox_create(sizeof(DigitMail), 1, &mailboxParams, NULL);
+    Types_Label label;
+    label.iname=digit->name;
+    label.named=true;
+    Mailbox_Handle_label(digit->mailboxHandle,&label);
 
     digit->lastFullApplyTime = digit->fullApplyOffset;
 

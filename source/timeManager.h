@@ -11,4 +11,6 @@
 #include <xdc/std.h>
 void initTimeZone();
 void timeThread(UArg arg0, UArg arg1);
+struct tm convertToGmtTime(time_t timestamp);
+time_t mkgmtime(struct tm time);
 #endif /* SOURCE_UTILS_TIMEMANAGER_H_ */
