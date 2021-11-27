@@ -111,6 +111,6 @@ void EK_TM4C123GXL_initWatchdog(void)
 {
     /* Enable peripherals used by Watchdog */
     SysCtlPeripheralEnable(SYSCTL_PERIPH_WDOG0);
-
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_WDOG0)){}
     Watchdog_init();
 }

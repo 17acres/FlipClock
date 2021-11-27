@@ -65,18 +65,24 @@ void timeThread(UArg arg0, UArg arg1) {
     uint8_t lastRanSeconds = 0;
     uint8_t lastRanMinutes = 0;
     uint8_t lastRanHour = 0;
-    time_t lastRanHourTimestamp=0;
+    time_t lastRanHourTimestamp = 0;
     //TODO:init time
     initDs1307();
-    time_t currentTime = 1636925690;
+    time_t currentTime = 1640908000;
     for (;;) {
         setDs1307Time(currentTime);
         time_t returnTime = readDs1307Time();
-        if (currentTime != returnTime) {
-            System_printf("Source Time %d, Return time %d\n", currentTime, returnTime);
+
+
+        if ((currentTime - returnTime)>1 ||(returnTime-currentTime)>1 ) {
+            int32_t time32 = currentTime;
+            int32_t return32 = returnTime;
+            int32_t deltaTime = return32 - time32;
+            System_printf("Source Time %d, Return time %d, Time Ahead %d, RTC valid %d\n", time32, return32, deltaTime, isRtcValid());
             System_flush();
+            //Task_sleep(1000);
         }
-        currentTime += 50000;
+        currentTime += 1000;
     }
 
     return; //TODO: do the rest of it
@@ -125,9 +131,7 @@ void timeThread(UArg arg0, UArg arg1) {
              */
 
             //TODO: Check for NTP and program RTC if valid, if NTP has not been learned this operation cycle
-
             //TODO: do light stuff. Unless this is for weeks indication. Unmask partially chunks of the outline every 10 seconds or whatever like left side, top left, top right, right, bot right, bot left
-
             //no reason not to call this every 10 seconds since it will only do anything if there's a change
             requestNewDigitStateNormal(&hoursTensStruct, getTimeSegState(&hoursTensStruct, time), 100);
             requestNewDigitStateNormal(&hoursOnesStruct, getTimeSegState(&hoursOnesStruct, time), 100);

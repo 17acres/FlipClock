@@ -1,7 +1,7 @@
 #ifndef __INC_FL_DELAY_H
 #define __INC_FL_DELAY_H
 
-#include "FastLED.h"
+//#include "FastLED.h"
 
 ///@file fastled_delay.h
 ///Utility functions and classes for managing delaycycles

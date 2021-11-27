@@ -91,7 +91,7 @@ void heartBeatFxn(UArg arg0, UArg arg1) {
 }
 
 void sysMonitor(UArg arg0, UArg arg1) {
-    //return;
+    return;
     GPIO_write(IO_RESET, FALSE);
     GPIO_write(ESP_ENABLE, TRUE);
     GPIO_write(BUF_DISABLE, FALSE);
@@ -227,7 +227,7 @@ void sysMonitor(UArg arg0, UArg arg1) {
 //        Task_sleep(800);
 //        requestDisableDigitTimer(&hoursTensStruct, BIOS_WAIT_FOREVER);
 //        Task_sleep(200);
-        requestTone(&hoursTensStruct, segValShowExtra, 329.63, 700, BIOS_WAIT_FOREVER);
+//        requestTone(&hoursTensStruct, segValShowExtra, 329.63, 700, BIOS_WAIT_FOREVER);
 //        Task_sleep(800);
 //        requestDisableDigitTimer(&hoursTensStruct, BIOS_WAIT_FOREVER);
 //        Task_sleep(200);

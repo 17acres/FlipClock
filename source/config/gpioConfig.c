@@ -145,7 +145,7 @@ void initGPIO(void) {
     MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
     MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE);
     MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
-
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOF)){}
     HWREG(GPIO_PORTD_BASE+GPIO_O_LOCK) = GPIO_LOCK_KEY;
     HWREG(GPIO_PORTD_BASE+GPIO_O_CR) |= GPIO_PIN_7;
     HWREG(GPIO_PORTD_BASE+GPIO_O_LOCK) = 0x0;

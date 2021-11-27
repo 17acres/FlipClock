@@ -14,5 +14,6 @@ extern SPI_Handle ledSPIHandle;
 
 extern void initSPI();
 extern void initI2C();
-
+extern void initDs1307I2C();
+extern void resetDs1307I2C();
 #endif /* SOURCE_CONFIG_SERIALCONFIG_H_ */

@@ -354,7 +354,7 @@ void requestSleep(DigitStruct* digit, uint32_t timeout) {
 }
 
 bool requestWake(DigitStruct* digit, uint32_t timeout) {
-    if (getDtcStatus(lookupDtc(digit->ioAddr)) == DTC_SET || !ENABLE_WDT) { //don't melt stuff
+    if ((!VIRTUAL_SEG) && (getDtcStatus(lookupDtc(digit->ioAddr)) == DTC_SET || !ENABLE_WDT)) { //don't melt stuff
         GPIO_write(digit->hsdDisableAddr, true);
         return false;
     } else {

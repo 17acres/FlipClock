@@ -108,6 +108,8 @@ void initDMA(void) {
         }
 
         SysCtlPeripheralEnable(SYSCTL_PERIPH_UDMA);
+        while (!SysCtlPeripheralReady(SYSCTL_PERIPH_UDMA)) {
+        }
         uDMAEnable();
         uDMAControlBaseSet(dmaControlTable);
 
@@ -147,7 +149,8 @@ void initSPI(void) {
     initDMA();
 
     SysCtlPeripheralEnable(SYSCTL_PERIPH_SSI1);
-
+    while (!SysCtlPeripheralReady(SYSCTL_PERIPH_SSI1)) {
+    }
     MAP_GPIOPinConfigure(GPIO_PF1_SSI1TX);
     MAP_GPIOPinTypeSSI(GPIO_PORTF_BASE, GPIO_PIN_1);
 
@@ -170,10 +173,49 @@ void initSPI(void) {
         System_printf("Failed to open SPI");
 }
 
+void initDs1307I2C() {
+    //RTC
+    MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C0);
+    while (!MAP_SysCtlPeripheralReady(SYSCTL_PERIPH_I2C0)) {
+    }
+    MAP_GPIOPinConfigure(GPIO_PB3_I2C0SDA);
+    MAP_GPIOPinTypeI2C(GPIO_PORTB_BASE, GPIO_PIN_3);
+
+    MAP_GPIOPinConfigure(GPIO_PB2_I2C0SCL);
+    MAP_GPIOPinTypeI2CSCL(GPIO_PORTB_BASE, GPIO_PIN_2);
+
+    MAP_GPIOPadConfigSet(GPIO_PORTB_BASE, GPIO_PIN_3, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_OD);
+    MAP_GPIOPadConfigSet(GPIO_PORTB_BASE, GPIO_PIN_2, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU); //actually open drain internally
+
+    MAP_I2CMasterInitExpClk(I2C0_BASE, SysCtlClockGet(), false);
+    MAP_I2CMasterInitExpClk(I2C0_BASE, SysCtlClockGet(), false);
+
+    MAP_I2CMasterTimeoutSet(I2C0_BASE, (10 * 100) / 16); //10ms timeout
+}
+
+void resetDs1307I2C() {
+    //https://e2e.ti.com/support/microcontrollers/arm-based-microcontrollers-group/arm-based-microcontrollers/f/arm-based-microcontrollers-forum/559368/i2c-initialisation-technique-when-sda-is-stuck-low#:~:text=What%20happens%20is%2C%20on%20reset,slave%20releases%20the%20SDA%20line.
+    MAP_GPIOPinTypeGPIOInput(GPIO_PORTB_BASE, GPIO_PIN_3); //float sda
+    MAP_GPIOPinTypeGPIOOutput(GPIO_PORTB_BASE, GPIO_PIN_2); //drive scl
+    uint8_t toggleCount = 0;
+    while (((MAP_GPIOPinRead(GPIO_PORTB_BASE, GPIO_PIN_3)) || (toggleCount < 20)) && (toggleCount < 255)) {
+        MAP_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_2, 0x00);
+        for (uint16_t cnt = 0; cnt < 400; cnt++)//optimization safe
+            asm(" nop");
+        MAP_GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_2, GPIO_PIN_2);
+        for (uint16_t cnt = 0; cnt < 400; cnt++)
+            asm(" nop");
+        ++toggleCount;
+    }
+
+    MAP_SysCtlPeripheralReset(SYSCTL_PERIPH_I2C0);
+    initDs1307I2C();
+}
 void initI2C(void) {
     //IO expander I2C
     SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C2);
-
+    while (!SysCtlPeripheralReady(SYSCTL_PERIPH_I2C2)) {
+    }
     MAP_GPIOPinConfigure(GPIO_PE5_I2C2SDA);
     MAP_GPIOPinTypeI2C(GPIO_PORTE_BASE, GPIO_PIN_5);
 
@@ -194,30 +236,16 @@ void initI2C(void) {
     initIOSemaphore();
     initIOHwi();
 
-    //RTC
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C0);
-
-    MAP_GPIOPinConfigure(GPIO_PB3_I2C0SDA);
-    MAP_GPIOPinTypeI2C(GPIO_PORTB_BASE, GPIO_PIN_3);
-
-    MAP_GPIOPinConfigure(GPIO_PB2_I2C0SCL);
-    MAP_GPIOPinTypeI2CSCL(GPIO_PORTB_BASE, GPIO_PIN_2);
-
-    GPIOPadConfigSet(GPIO_PORTB_BASE, GPIO_PIN_3, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_OD);
-    GPIOPadConfigSet(GPIO_PORTB_BASE, GPIO_PIN_2, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU); //actually open drain internally
-
-    MAP_I2CMasterInitExpClk(I2C0_BASE, SysCtlClockGet(), false);
-    I2CMasterInitExpClk(I2C0_BASE, SysCtlClockGet(), false);
-
-    MAP_I2CMasterTimeoutSet(I2C0_BASE, (10 * 100) / 16); //10ms timeout
+    initDs1307I2C();
 
     //ESP
     SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C1);
-
-    MAP_GPIOPinConfigure (GPIO_PA7_I2C1SDA);
+    while (!SysCtlPeripheralReady(SYSCTL_PERIPH_I2C1)) {
+    }
+    MAP_GPIOPinConfigure(GPIO_PA7_I2C1SDA);
     MAP_GPIOPinTypeI2C(GPIO_PORTA_BASE, GPIO_PIN_7);
 
-    MAP_GPIOPinConfigure (GPIO_PA6_I2C1SCL);
+    MAP_GPIOPinConfigure(GPIO_PA6_I2C1SCL);
     MAP_GPIOPinTypeI2CSCL(GPIO_PORTA_BASE, GPIO_PIN_6);
 
     GPIOPadConfigSet(GPIO_PORTA_BASE, GPIO_PIN_7, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_OD);

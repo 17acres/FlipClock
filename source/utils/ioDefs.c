@@ -694,8 +694,11 @@ char getSegStateLocationName(SegState location) {
         return '?';
     }
 }
-#define getStateChar(a) ((a==SEG_SHOW)?'O':((a==SEG_HIDE)?'|':'?'))
+#define getStateChar(a) ((a==SEG_SHOW)?'O':((a==SEG_HIDE)?'·':'?'))
 void printAllDigits(SegState newApplyState, uint8_t slaveAddress) {
+    if((newApplyState.rawWord==segValOff.rawWord)||(newApplyState.rawWord==segValBrake.rawWord)){
+        return;
+    }
     static SegState hoursTensActl;
     static SegState hoursOnesActl;
     static SegState minutesTensActl;
@@ -709,23 +712,23 @@ void printAllDigits(SegState newApplyState, uint8_t slaveAddress) {
     } else if (slaveAddress == minutesOnesStruct.ioAddr) {
         minutesOnesActl = unionSegPriority(newApplyState, minutesOnesActl);
     }
-    System_printf("*****************************************");
-    System_printf("*    %c%c       %c%c         %c%c       %c%c    *", getStateChar(hoursTensActl.a), getStateChar(hoursTensActl.a),
+    System_printf("\n*****************************************\n");
+    System_printf("*    %c%c       %c%c         %c%c       %c%c    *\n", getStateChar(hoursTensActl.a), getStateChar(hoursTensActl.a),
                   getStateChar(hoursOnesActl.a), getStateChar(hoursOnesActl.a), getStateChar(minutesTensActl.a), getStateChar(minutesTensActl.a),
                   getStateChar(minutesOnesActl.a), getStateChar(minutesOnesActl.a));
-    System_printf("*  %c    %c   %c    %c  X  %c    %c   %c    %c  *", getStateChar(hoursTensActl.f), getStateChar(hoursTensActl.b),
+    System_printf("*  %c    %c   %c    %c  X  %c    %c   %c    %c  *\n", getStateChar(hoursTensActl.f), getStateChar(hoursTensActl.b),
                       getStateChar(hoursOnesActl.f), getStateChar(hoursOnesActl.b), getStateChar(minutesTensActl.f), getStateChar(minutesTensActl.b),
                       getStateChar(minutesOnesActl.f), getStateChar(minutesOnesActl.b));
-    System_printf("*    %c%c       %c%c         %c%c       %c%c    *", getStateChar(hoursTensActl.g), getStateChar(hoursTensActl.g),
+    System_printf("*    %c%c       %c%c         %c%c       %c%c    *\n", getStateChar(hoursTensActl.g), getStateChar(hoursTensActl.g),
                   getStateChar(hoursOnesActl.g), getStateChar(hoursOnesActl.g), getStateChar(minutesTensActl.g), getStateChar(minutesTensActl.g),
                   getStateChar(minutesOnesActl.g), getStateChar(minutesOnesActl.g));
-    System_printf("*  %c    %c   %c    %c  X  %c    %c   %c    %c  *", getStateChar(hoursTensActl.e), getStateChar(hoursTensActl.c),
+    System_printf("*  %c    %c   %c    %c  X  %c    %c   %c    %c  *\n", getStateChar(hoursTensActl.e), getStateChar(hoursTensActl.c),
                       getStateChar(hoursOnesActl.e), getStateChar(hoursOnesActl.c), getStateChar(minutesTensActl.e), getStateChar(minutesTensActl.c),
                       getStateChar(minutesOnesActl.e), getStateChar(minutesOnesActl.c));
-    System_printf("*    %c%c       %c%c         %c%c       %c%c    *", getStateChar(hoursTensActl.d), getStateChar(hoursTensActl.d),
+    System_printf("*    %c%c       %c%c         %c%c       %c%c    *\n", getStateChar(hoursTensActl.d), getStateChar(hoursTensActl.d),
                   getStateChar(hoursOnesActl.d), getStateChar(hoursOnesActl.d), getStateChar(minutesTensActl.d), getStateChar(minutesTensActl.d),
                   getStateChar(minutesOnesActl.d), getStateChar(minutesOnesActl.d));
-    System_printf("*****************************************");
+    System_printf("*****************************************\n\n");
     System_flush();
 }
 const SegState *segValNumberArray[] = {
