@@ -53,7 +53,7 @@ bool setDs1307Time(time_t currentTime) { //call this on the second. not sure if 
     rtcData.dayOfMonthTens = (time.tm_mday ) / 10;
     rtcData.monthOnes = (time.tm_mon + 1) % 10;
     rtcData.monthTens = (time.tm_mon + 1) / 10;
-    rtcData.yearOnes = (time.tm_year - 100) % 10; //year relative to 1900
+    rtcData.yearOnes = (time.tm_year - 100) % 10; //convert to 2000 epoch
     rtcData.yearTens = (time.tm_year - 100) / 10;
     return writeDs1307Data(RTC_ADDRESS, 0x00, rtcData.allData, 8);
 }
@@ -72,7 +72,7 @@ time_t readDs1307Time() {
     time.tm_hour = rtcData.hoursTens * 10 + rtcData.hoursOnes;
     time.tm_mday = rtcData.dayOfMonthTens * 10 + rtcData.dayOfMonthOnes;
     time.tm_mon = rtcData.monthTens * 10 + rtcData.monthOnes - 1;
-    time.tm_year = rtcData.yearTens * 10 + rtcData.yearOnes + 100;
+    time.tm_year = rtcData.yearTens * 10 + rtcData.yearOnes + 100;//convert to 1900 epoch
     time.tm_isdst = 0;
     dataValid = (!rtcData.clockHalt) && (time.tm_year > 30); //bit 7 being cleared means it is running and probably has time, also check if year is above 0
 

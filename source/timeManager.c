@@ -22,37 +22,65 @@
 //since Seconds is a uint32 that means you have until 2106 not 2038
 
 time_t getTimestamp() {
-    return Seconds_get();//(Seconds_get()-1640908000)*10+1640908000;//TODO: make real
+    return Seconds_get();
 }
 
-struct tm convertToLocalTime(time_t timestamp) {//tm year is relative to 1970
+struct tm convertToLocalTime(time_t timestamp) { //tm year is relative to 1970
     uint32_t key = Hwi_disable();
-    //timestamp+=2208967200;//convert to 1900 epoch
-    struct tm ret = *localtime(&timestamp); //not reentrant
-    //ret.tm_year+=70;
+
+    //Account for DST
+    long baseTz = _tz.timezone;
+    struct tm rawLocal = *__localtime64(&timestamp); //current localtime without DST
+    //see DST math.xlsx
+    if (rawLocal.tm_mon == 2) {    //in March
+        uint8_t dstStartDay = ((rawLocal.tm_mday - rawLocal.tm_wday + 6) % 7) + 8;//second sunday
+        if (rawLocal.tm_mday == dstStartDay) {    //on the first day of DST
+            if (rawLocal.tm_hour >= 2) {
+                _tz.timezone -= 60 * 60;
+            }
+        } else if (rawLocal.tm_mday > dstStartDay) {    //after DST started
+            _tz.timezone -= 60 * 60;
+        }
+    } else if (rawLocal.tm_mon > 2) {    //after month DST started
+        _tz.timezone -= 60 * 60;
+    }
+
+    //Account for end of DST
+    if (rawLocal.tm_mon == 10) {    //in November
+        uint8_t dstEndDay = ((rawLocal.tm_mday - rawLocal.tm_wday + 6) % 7) + 1;//first sunday
+        if (rawLocal.tm_mday == dstEndDay) {    //on the last day of DST
+            if (rawLocal.tm_hour >= 2-1) {//subtract extra hour since 2AM EDT is 1AM EST
+                _tz.timezone += 60 * 60;
+            }
+        } else if (rawLocal.tm_mday > dstEndDay) {    //after DST ended
+            _tz.timezone += 60 * 60;
+        }
+    } else if (rawLocal.tm_mon > 10) {    //after month DST ended
+        _tz.timezone += 60 * 60;
+    }
+
+    struct tm ret = *__localtime64(&timestamp); //not reentrant
+    _tz.timezone = baseTz;
     Hwi_restore(key);
     return ret;
 }
 
-struct tm convertToGmtTime(time_t timestamp) {//tm year is relative to 1970
+struct tm convertToGmtTime(time_t timestamp) { //tm year is relative to 1970
     uint32_t key = Hwi_disable();
-    //timestamp+=2208967200;//convert to 1900 epoch
-    struct tm ret = *gmtime(&timestamp); //not reentrant
+    struct tm ret = *__gmtime64(&timestamp); //not reentrant
     Hwi_restore(key);
     return ret;
 }
 
-time_t mkgmtime(struct tm time){
+time_t mkgmtime(struct tm time) {
     uint32_t key = Hwi_disable();
     _tz.daylight = false;
     _tz.timezone = 0; //go to UTC
-    time_t timestamp = mktime(&time); //wday and yday are ignored but it assumes local time
-    //timestamp-=2208967200;//convert back to unix epoch
+    time_t timestamp = __mktime64(&time); //wday and yday are ignored but it assumes local time
     initTimeZone();
     Hwi_restore(key);
     return timestamp;
 }
-
 
 struct tm getLocalTime() {
     return convertToLocalTime(getTimestamp());
@@ -91,11 +119,12 @@ void timeThread(UArg arg0, UArg arg1) {
     ds1307ReturnTimestamp = readDs1307Time();
     if (isRtcValid()) {
         setTime(ds1307ReturnTimestamp);
-    }else{//TODO:try to get ntp time, if NTP time is valid, program RTC
-        //setDs1307Time(1637985571);//Friday 11/26/2021 10:59:31PM EST
-        setDs1307Time(1627359643);//Tuesday 07/27/2021 12:20:43AM EST
+    } else { //TODO:try to get ntp time, if NTP time is valid, program RTC
+             //setDs1307Time(1637985571);//Friday 11/26/2021 10:59:31PM EST
+        //setDs1307Time(1627359643);        //Tuesday 07/27/2021 12:20:43AM EST
+        //setDs1307Time(1615705183); //Sunday, March 14, 2021 1:59:43 AM GMT-05:00 (DST start)
+        setDs1307Time(1636264783); //Sunday, November 7, 2021 1:59:43 AM GMT-04:00 (DST end)
     }
-
 
     for (;;) {
         currentTimestamp = getTimestamp();
@@ -153,7 +182,8 @@ void timeThread(UArg arg0, UArg arg1) {
                 lastRanMinutes = currentTimeStruct.tm_min = (currentTimeStruct.tm_min / 15) * 15;
                 //TODO: quarter-hour chimes
 
-                if ((currentTimeStruct.tm_hour >= ((lastRanHour + 1) % 24)) || ((currentTimeStruct.tm_hour == lastRanHour) && (currentTimestamp >= (lastRanHourTimestamp + 3600)))) {
+                if ((currentTimeStruct.tm_hour >= ((lastRanHour + 1) % 24)) || ((currentTimeStruct.tm_hour == lastRanHour)
+                        && (currentTimestamp >= (lastRanHourTimestamp + 3600)))) {
                     /*
                      * Only difference here is that DST means we go from 1:59:59 to 1:00:00 at 1636264800
                      * and from 1:59:59 to 3:00:00 at 1615705200
@@ -182,7 +212,7 @@ SegState getTimeSegState(DigitStruct *digit, struct tm timeStruct) {
         timeStruct.tm_hour = timeStruct.tm_hour - 12;
     }
     if (digit == &hoursTensStruct) {
-        if((timeStruct.tm_hour/10)==0)
+        if ((timeStruct.tm_hour / 10) == 0)
             return segValBlank;
         else
             return *segValNumberArray[timeStruct.tm_hour / 10];
