@@ -121,6 +121,13 @@ iGPIO7["0"].io = "outputOpenDrain";
 iGPIO7["0"].$assign = "PA2"; // pin number - 19
 // Name
 iGPIO7.$name = "BUF_OE";
+var iGPIO8 = scripting.addPeripheral("GPIO");
+// PU/PD
+iGPIO8["0"].pu_pd = "pu";
+// Assign pin
+iGPIO8["0"].$assign = "PA5"; // pin number - 22
+// Name
+iGPIO8.$name = "SMBALERT";
 var iI2C1 = scripting.addPeripheral("I2C");
 // Name
 iI2C1.$name = "IO";

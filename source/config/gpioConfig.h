@@ -43,6 +43,7 @@ typedef enum GPIONames {
     HSD_DISABLE_3,
     IO_RESET, //high is reset
     ESP_ENABLE, //high is enable
+    SMBALERT, //low is IRQ
     BUF_DISABLE, //high is disable
     LAUNCHPAD_LED_BLUE,
     LAUNCHPAD_LED_GREEN,

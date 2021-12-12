@@ -104,6 +104,9 @@ GPIO_PinConfig gpioPinConfigs[] = {
         /* ESP_ENABLE */
         GPIOTiva_PC_5 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_LOW,
 
+        /* SMBALERT */
+        GPIOTiva_PA_5 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
+
         /* BUF_DISABLE */
         GPIOTiva_PA_2 | GPIO_CFG_OUT_OD_PU | GPIO_CFG_OUT_STR_LOW | GPIO_CFG_OUT_HIGH,
 
@@ -127,7 +130,8 @@ GPIO_PinConfig gpioPinConfigs[] = {
 GPIO_CallbackFxn gpioCallbackFunctions[] = {
         NULL, /* RTC_SQW */
         NULL, /* LAUNCHPAD_SW1 */
-        NULL /* LAUNCHPAD_SW2 */
+        NULL, /* LAUNCHPAD_SW2 */
+        NULL//TODO: SMBALERT interrupt
 };
 
 /* The device-specific GPIO_config structure */
@@ -145,7 +149,8 @@ void initGPIO(void) {
     MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
     MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE);
     MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
-    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOF)){}
+    while (!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOF)) {
+    }
     HWREG(GPIO_PORTD_BASE+GPIO_O_LOCK) = GPIO_LOCK_KEY;
     HWREG(GPIO_PORTD_BASE+GPIO_O_CR) |= GPIO_PIN_7;
     HWREG(GPIO_PORTD_BASE+GPIO_O_LOCK) = 0x0;
