@@ -177,6 +177,8 @@
 					</fileInfo>
 					<sourceEntries>
 						<entry excluding="ESPCode|excluded|Sigrok Decoder|src" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="ESPCode/noGit"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="ESPCode/New folder"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
