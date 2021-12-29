@@ -27,31 +27,8 @@ DtcDataFrame dtcData;
 static DtcDataFrame oldDtcData;
 static bool hasReadDtcsOnStartup = false;
 
-const String dtcNames[DTC_COUNT] = {
-        "Remote IO Module 0 I2C Failure",
-        "Remote IO Module 1 I2C Failure",
-        "Remote IO Module 2 I2C Failure",
-        "Remote IO Module 3 I2C Failure",
-        "Generic Remote IO Module I2C Failure",
-        "Digit Timer Timeout. Stop request not sent?",
-        "Missing digit request. Event arrived but no message",
-        "Digit task WDT not fed",
-        "LED task WDT not fed",
-        "Temperature limit exceeded",
-        "High-Side Driver or Motor Driver Plausibility Fail 0",
-        "High-Side Driver or Motor Driver Plausibility Fail 1",
-        "High-Side Driver or Motor Driver Plausibility Fail 2",
-        "High-Side Driver or Motor Driver Plausibility Fail 3",
-        "HSD 0 Multisense Fault Voltage Detected",
-        "HSD 1 Multisense Fault Voltage Detected",
-        "HSD 2 Multisense Fault Voltage Detected",
-        "HSD 3 Multisense Fault Voltage Detected",
-        "HSD 0 Average current limit exceeded",
-        "HSD 1 Average current limit exceeded",
-        "HSD 2 Average current limit exceeded",
-        "HSD 3 Average current limit exceeded",
-        "DS1307 I2C failure",
-        "EXTRA. THIS MUST GET A WARNING" };
+//dtcNames in SMBusIM.h
+
 const uint8_t dtcMaturityThresholds[DTC_COUNT] = {
         3,
         3,

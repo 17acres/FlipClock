@@ -1,9 +1,7 @@
 #ifndef WEBSERVER
 #define WEBSERVER
 #include <ESP8266WebServer.h>
-#include "animationManager.hpp"
 #include "defs.hpp"
-#include "lightSwitch.hpp"
 #include "emailSender.hpp"
 
 #include <AsyncPing.h>
@@ -12,7 +10,7 @@
 #include <ESP8266WiFi.h>
 #include <ArduinoJson.h>
 
-#include "../noGit/auth.hpp"
+#include "auth.hpp"
 
 extern "C"
 {

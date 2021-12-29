@@ -12,29 +12,10 @@
 #include "../digit.h"
 #include "ioDefs.h"
 
-typedef struct SegWearItem{
-    uint8_t serialNumber;
-    uint32_t flipCount;
-}SegWearItem;
+#include "../../ESPCode/SMBusIM.h" //segWear structs there
 
-typedef struct SegWearDigit{
-    SegWearItem a;
-    SegWearItem b;
-    SegWearItem c;
-    SegWearItem d;
-    SegWearItem e;
-    SegWearItem f;
-    SegWearItem g;
-    SegWearItem extra;
-}SegWearDigit;
 
-typedef struct SegWearData{
-    SegWearDigit hoursTens;
-    SegWearDigit hoursOnes;
-    SegWearDigit minutesTens;
-    SegWearDigit minutesOnes;
-    uint32_t dataValidCode;
-}SegWearData;
+
 
 void resetSegWear();
 void loadSegWearData();

@@ -1,10 +1,6 @@
 //#include <GDBStub.h>
-#include "hvLeds.hpp"
-#include "addrLeds.hpp"
 #include "utils.hpp"
-#include "animationManager.hpp"
 #include "timeManager.hpp"
-#include "lightSwitch.hpp"
 #include <ESP_EEPROM.h>
 #include "webServer.hpp"
 #include "defs.hpp"

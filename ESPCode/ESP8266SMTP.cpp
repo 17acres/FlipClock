@@ -8,7 +8,7 @@
 
 #include "ESP8266SMTP.hpp"
 #include <base64.h>
-#include "../utils.hpp"
+#include "utils.hpp"
 ESP8266SMTPHelper::ESP8266SMTPHelper(const char* login, const char* password) :
 	_base64_login(strdup(login)),
 	_base64_password(strdup(password)){}
