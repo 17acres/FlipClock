@@ -8,15 +8,13 @@
 #ifndef SOURCE_HSD_H_
 #define SOURCE_HSD_H_
 
-volatile struct processedAdcVals {
-    float hsdCurrents[4];
-    float mcuTemp;//deg c
-    bool qf;
-    uint16_t sampleCount;
-} analogData;
-extern volatile struct processedAdcVals maxAnalogData;
-extern volatile struct processedAdcVals filteredAnalogData;
-extern volatile struct processedAdcVals analogData;
+#include "../ESPCode/SMBusIM.h"
+
+//processedAdcVals in SMBusIM
+
+extern volatile ProcessedAdcVals maxAnalogData;
+extern volatile ProcessedAdcVals filteredAnalogData;
+extern volatile ProcessedAdcVals analogData;
 void adcIsr(UArg arg);
 void initAdcHwi();
 void clearMaxAdcVals();

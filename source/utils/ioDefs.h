@@ -1,3 +1,6 @@
+#ifndef SOURCE_IODEFS_H_
+#define SOURCE_IODEFS_H_
+
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -11,8 +14,7 @@
 #include <inc/hw_types.h>
 #include <inc/hw_gpio.h>
 
-#ifndef SOURCE_IODEFS_H_
-#define SOURCE_IODEFS_H_
+
 
 #include <ti/drivers/I2C.h>
 
@@ -67,20 +69,7 @@
  * P16	S0F	Left Bot	C
  * P17	S0R
  */
-
-typedef union SegState {
-    struct { //right ordering for io driver
-        uint16_t a :2;
-        uint16_t b :2;
-        uint16_t extra :2;
-        uint16_t c :2;
-        uint16_t d :2;
-        uint16_t e :2;
-        uint16_t g :2;
-        uint16_t f :2;
-    };
-    uint16_t rawWord;
-} SegState;
+#include "../../ESPCode/SMBusIM.h" //SegState
 
 typedef struct SegStateFade { //255 means full brightness. like SegState but for variable brightness
     uint8_t a;

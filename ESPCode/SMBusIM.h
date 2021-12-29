@@ -4,7 +4,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#pragma pack(1)
+
 #define ESP_SMBus_ADDR 0x4B // NOT shifted
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // SMBus command codes
 enum SMBusCommandCodes
@@ -146,6 +152,49 @@ typedef struct DtcDataFrame{
 
 extern const char *dtcNames[];
 
+typedef struct processedAdcVals {
+    float hsdCurrents[4];
+    float mcuTemp;//deg c
+    bool qf;
+    uint16_t sampleCount;
+} processedAdcVals;
+
+typedef union SegState {
+    struct { //right ordering for io driver
+        uint16_t a :2;
+        uint16_t b :2;
+        uint16_t extra :2;
+        uint16_t c :2;
+        uint16_t d :2;
+        uint16_t e :2;
+        uint16_t g :2;
+        uint16_t f :2;
+    };
+    uint16_t rawWord;
+} SegState;
+
+//CC_BW_READ_STATUS
+typedef struct BW_ReadStatusStruct{
+    uint32_t tm4cMillisSinceBoot;
+    processedAdcVals mostRecentAnalogData;
+    processedAdcVals filteredAnalogData;
+    processedAdcVals maxAnalogData;
+    bool hoursTensHsdEnabled;
+    bool hoursOnesHsdEnabled;
+    bool minutesTensHsdEnabled;
+    bool minutesOnesHsdEnabled;
+    SegState hoursTensLastRequestedState;
+    SegState hoursOnesLastRequestedState;
+    SegState minutesTensLastRequestedState;
+    SegState minutesOnesLastRequestedState;
+    bool ioResetGpioOn;
+    bool bufDisableGpioOn;
+    bool launchpadLedBlueOn;
+    bool launchpadLedGreenOn;
+    bool launchpadLedRedOn;
+}BW_ReadStatusStruct;
+
+
 //CC_BW_SET_EMAIL_TO_ADDR, CC_BW_SET_EMAIL_SUBJECT, CC_BW_SET_EMAIL_BODY char of variable length (up to 255 max)
 
 
@@ -158,4 +207,9 @@ extern const char *dtcNames[];
 //     };
 //     uint8_t rawData[];
 // } RemoteCommandRequestData;
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

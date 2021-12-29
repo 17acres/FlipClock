@@ -11,7 +11,7 @@
 #include <inc/hw_ints.h>
 #include <driverlib/rom.h>
 #include <driverlib/rom_map.h>
-#include <ti/sysbios/hal/Hwi.h>
+//#include <ti/sysbios/hal/Hwi.h>
 #include "config/gpioConfig.h"
 #include <ti/drivers/GPIO.h>
 
@@ -20,11 +20,11 @@
 #include "safetyBarrier.h"
 
 static volatile uint32_t rawAdcValues[5];
-volatile struct processedAdcVals analogData;
+volatile ProcessedAdcVals analogData;
 volatile uint16_t recentSelectedRawValue[100];
 volatile size_t valArrIdx;
-volatile struct processedAdcVals maxAnalogData;
-volatile struct processedAdcVals filteredAnalogData;
+volatile ProcessedAdcVals maxAnalogData;
+volatile ProcessedAdcVals filteredAnalogData;
 void processRawAdcValues();
 void updateMaxVals();
 void calculateFilteredVals();

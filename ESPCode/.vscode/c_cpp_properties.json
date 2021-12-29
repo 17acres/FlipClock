@@ -2,46 +2,6 @@
     "version": 4,
     "configurations": [
         {
-            "name": "Win32",
-            "compilerPath": "C:\\Users\\Dan\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\xtensa-lx106-elf-gcc\\2.5.0-4-b40a506\\bin\\xtensa-lx106-elf-gcc.exe",
-            "compilerArgs": [],
-            "intelliSenseMode": "clang-arm",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "C:\\Users\\Dan\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
-                "C:\\Users\\Dan\\OneDrive\\Documents\\Arduino\\libraries\\**",
-                "C:\\Users\\Dan\\OneDrive\\Documents\\Arduino\\libraries\\NTPClient\\**",
-                "C:\\Users\\Dan\\OneDrive\\Documents\\Arduino\\libraries\\Adafruit_TLC59711\\**",
-                "C:\\Users\\Dan\\OneDrive\\Documents\\Arduino\\libraries\\PubSubClient\\**",
-                "C:\\Users\\Dan\\OneDrive\\Documents\\Arduino\\libraries\\FastLED\\**",
-                "C:\\Users\\Dan\\OneDrive\\Documents\\Arduino\\libraries\\ESP_EEPROM\\**",
-                "C:\\Users\\Dan\\OneDrive\\Documents\\Arduino\\libraries\\AsyncPing-1.1.0\\**",
-                "C:\\Users\\Dan\\OneDrive\\Documents\\Arduino\\libraries\\ArduinoJSON\\**",
-                "C:\\Users\\Dan\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.1\\variants\\d1_mini\\**",
-                "C:\\Users\\Dan\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.1\\cores\\esp8266\\**",
-                "C:\\Program Files (x86)\\Arduino\\libraries\\**",
-                "C:\\Users\\Dan\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.1\\libraries\\**"
-            ],
-            "forcedInclude": [
-                "C:\\Users\\Dan\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.1\\cores\\esp8266\\Arduino.h"
-            ],
-            "cStandard": "c17",
-            "cppStandard": "c++20",
-            "defines": [
-                "F_CPU=160000000L",
-                "WIP_OPEN_SRC",
-                "TCP_MSS=536",
-                "LWIP_FEATURES=1",
-                "DLWIP_IPV6=0",
-                "DEBUG_ESP_PORT=Serial",
-                "ARDUINO=10809",
-                "ARDUINO_ESP8266_WEMOS_D1MINI",
-                "ARDUINO_ARCH_ESP8266",
-                "ESP8266",
-                "USBCON"
-            ]
-        },
-        {
             "name": "Arduino",
             "compilerPath": "C:\\Users\\Dan\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\xtensa-lx106-elf-gcc\\2.5.0-4-b40a506\\bin\\xtensa-lx106-elf-g++",
             "compilerArgs": [
@@ -53,7 +13,7 @@
                 "-falign-functions=4",
                 "-std=gnu++11"
             ],
-            "intelliSenseMode": "gcc-x64",
+            "intelliSenseMode": "gcc-arm",
             "includePath": [
                 "C:\\Users\\Dan\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.1\\tools\\sdk\\include",
                 "C:\\Users\\Dan\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.7.1\\tools\\sdk\\lwip2\\include",
@@ -167,7 +127,7 @@
                 "__DEC32_MIN_EXP__=(-94)",
                 "__INT_FAST16_TYPE__=int",
                 "__LDBL_HAS_DENORM__=1",
-                "__cplusplus=199711L",
+                /*"__cplusplus=199711L",*/
                 "__DEC128_MAX__=9.999999999999999999999999999999999E6144DL",
                 "__INT_LEAST32_MAX__=2147483647L",
                 "__DEC32_MIN__=1E-95DF",

@@ -42,6 +42,7 @@
 #include <xdc/std.h>
 #include <xdc/runtime/Error.h>
 #include <xdc/runtime/System.h>
+@pragma
 #include <ti/sysbios/family/arm/m3/Hwi.h>
 
 #include <inc/hw_ints.h>

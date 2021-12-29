@@ -64,7 +64,9 @@
         "xhash": "cpp",
         "xstring": "cpp",
         "xtree": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "stdint.h": "c",
+        "stdbool.h": "c"
     },
     "files.exclude": {
         "**/build": true
@@ -74,6 +76,7 @@
         "CHSV",
         "CRGB",
         "EEPROM",
+        "IFDEBUG",
         "Leds",
         "println",
         "SLOWON"

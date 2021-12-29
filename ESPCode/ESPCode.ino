@@ -2,15 +2,12 @@
 #include "utils.hpp"
 #include "timeManager.hpp"
 #include <ESP_EEPROM.h>
+
 #include "webServer.hpp"
 #include "defs.hpp"
 #include <time.h>
 //#define SETEEPROM
 
-
-HvLeds *hvLeds;
-AddrLeds *addrLeds;
-Animations::AnimationManager *animMan;
 
 void setup()
 {
@@ -23,9 +20,6 @@ void setup()
 #endif
 
     Serial.begin(115200);//Do this before RX pin is repurposed for dma LEDs (i2s)
-    hvLeds = HvLeds::getInstance();
-    addrLeds = AddrLeds::getInstance();
-    animMan = Animations::AnimationManager::getInstance();
 
     //gdbstub_init();
 
@@ -40,7 +34,7 @@ void setup()
     digitalWrite(LED_BUILTIN, LOW);
     digitalWrite(LED_BUILTIN, HIGH);
 
-    Wifi.begin(AUTH_WIFI_SSID,AUTH_WIFI_PWD);
+    WiFi.begin(AUTH_WIFI_SSID,AUTH_WIFI_PWD);
     uint8_t i = 0;
     
     while (WiFi.status() != WL_CONNECTED && ++i < 20)
@@ -68,6 +62,8 @@ void setup()
     // Serial.print(asctime(localtime(&time)));
     WebServer::setup();
     EmailSender::setup();
+    
+    //TODO: read SMbus to get TM4C status
     EmailSender::sendEmail("Ceiling light started - On Mode Hours: " + String(((double)numSeconds) / (60.0 * 60.0)), false);
 }
 

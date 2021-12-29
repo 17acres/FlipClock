@@ -13,7 +13,7 @@
 #include <xdc/runtime/System.h>
 #include <ti/sysbios/BIOS.h>
 #include <ti/drivers/GPIO.h>
-#include <ti/sysbios/hal/Hwi.h>
+//#include <ti/sysbios/hal/Hwi.h>
 #include <ti/sysbios/knl/Task.h>
 #include <inc/hw_memmap.h>
 #include <ti/sysbios/knl/Semaphore.h>
