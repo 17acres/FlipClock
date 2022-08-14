@@ -93,9 +93,9 @@ void heartBeatFxn(UArg arg0, UArg arg1) {
 void sysMonitor(UArg arg0, UArg arg1) {
     requestWake(&hoursTensStruct, BIOS_WAIT_FOREVER);
     requestWake(&hoursOnesStruct, BIOS_WAIT_FOREVER);
-    requestWake(&minutesTensStruct, BIOS_WAIT_FOREVER);
-    requestWake(&minutesOnesStruct, BIOS_WAIT_FOREVER);
-    return;
+    //requestWake(&minutesTensStruct, BIOS_WAIT_FOREVER);
+    //requestWake(&minutesOnesStruct, BIOS_WAIT_FOREVER);
+    //return;
     GPIO_write(IO_RESET, FALSE);
     GPIO_write(ESP_ENABLE, TRUE);
     GPIO_write(BUF_DISABLE, FALSE);
@@ -113,22 +113,23 @@ void sysMonitor(UArg arg0, UArg arg1) {
 //        segVal_O, segVal_o, segVal_P, segVal_q, segVal_r,
 //        segVal_S, segVal_t, segVal_U, segVal_u, segVal_y,
 //        segValQuestion, segValBlank, segValAll};
-    SegState stateList[] = {
-            segVal0,
-            segVal1,
-            segVal2,
-            segVal3,
-            segVal4,
-            segVal5,
-            segVal6,
-            segVal7,
-            segVal8,
-            segVal9 };
+//    SegState stateList[] = {
+//            segVal0,
+//            segVal1,
+//            segVal2,
+//            segVal3,
+//            segVal4,
+//            segVal5,
+//            segVal6,
+//            segVal7,
+//            segVal8,
+//            segVal9 };
 //    SegState stateList[] = {
 //            segVal1,
 //            segVal_I };
-//	SegState
-//	stateList[]= {
+	SegState
+	stateList[]= {
+		segValBlank,
 //		segValBlank,
 //		segValBlank,
 //		segValBlank,
@@ -138,21 +139,20 @@ void sysMonitor(UArg arg0, UArg arg1) {
 //		segValBlank,
 //		segValBlank,
 //		segValBlank,
-//		segValBlank,
-//		(SegState) {.a=SEG_SHOW},
-//		(SegState) {.b=SEG_SHOW},
-//		(SegState) {.c=SEG_SHOW},
-//		(SegState) {.d=SEG_SHOW},
-//		(SegState) {.e=SEG_SHOW},
-//		(SegState) {.f=SEG_SHOW},
-//		(SegState) {.g=SEG_SHOW},
-//		(SegState) {.a=SEG_HIDE},
-//		(SegState) {.b=SEG_HIDE},
-//		(SegState) {.c=SEG_HIDE},
-//		(SegState) {.d=SEG_HIDE},
-//		(SegState) {.e=SEG_HIDE},
-//		(SegState) {.f=SEG_HIDE},
-//		(SegState) {.g=SEG_HIDE},
+		(SegState) {.a=SEG_SHOW},
+		(SegState) {.a=SEG_HIDE},
+		(SegState) {.b=SEG_SHOW},
+		(SegState) {.b=SEG_HIDE},
+		(SegState) {.c=SEG_SHOW},
+		(SegState) {.c=SEG_HIDE},
+		(SegState) {.d=SEG_SHOW},
+		(SegState) {.d=SEG_HIDE},
+		(SegState) {.e=SEG_SHOW},
+		(SegState) {.e=SEG_HIDE},
+		(SegState) {.f=SEG_SHOW},
+		(SegState) {.f=SEG_HIDE},
+		(SegState) {.g=SEG_SHOW},
+		(SegState) {.g=SEG_HIDE},
 //		(SegState) {.a=SEG_SHOW},
 //		(SegState) {.b=SEG_SHOW},
 //		(SegState) {.c=SEG_SHOW},
@@ -180,19 +180,30 @@ void sysMonitor(UArg arg0, UArg arg1) {
 //		segVal0,
 //		segVal0,
 //		segVal0,
-//	};
+	};
     uint32_t numStates = sizeof(stateList) / sizeof(stateList[0]);
 
     while (1) {
         checkIOPresence(IO_0_ADDR);
+        checkIOPresence(IO_1_ADDR);
         printDtcs();
-        printSegWear();
+        //printSegWear();
         requestWake(&hoursTensStruct, BIOS_WAIT_FOREVER);
+        requestWake(&hoursOnesStruct, BIOS_WAIT_FOREVER);
 
-        SegState thisState = stateList[loopCount % numStates];
+        //SegState thisState = stateList[loopCount % numStates];
 
-        requestNewDigitStateNormal(&hoursTensStruct, thisState, BIOS_WAIT_FOREVER);
-
+       //requestNewDigitStateNormal(&hoursTensStruct, *segValNumberArray[(loopCount%100) / 10], BIOS_WAIT_FOREVER);
+        requestNewDigitStateNormal(&hoursTensStruct, *segValNumberArray[(loopCount % 10)], BIOS_WAIT_FOREVER);
+       Task_sleep(5000);
+        requestNewDigitStateNormal(&hoursOnesStruct, *segValNumberArray[loopCount % 10], BIOS_WAIT_FOREVER);
+        Task_sleep(5000);
+        //requestNewDigitStateNormal(&hoursTensStruct, stateList[loopCount % numStates], BIOS_WAIT_FOREVER);
+        //Task_sleep(1000);
+//        if((loopCount/numStates) %2==1)
+//            requestNewDigitStateNormal(&hoursOnesStruct, stateList[numStates - 1 - loopCount % numStates], BIOS_WAIT_FOREVER);
+//        else
+           //requestNewDigitStateNormal(&hoursOnesStruct, stateList[loopCount % numStates], BIOS_WAIT_FOREVER);
         //for(int i=0;i<=10;i++){
         //requestDigitPWM(&hoursTensStruct, segValShowExtra, 60, 50, 7, 500, BIOS_WAIT_FOREVER);
 //            Task_sleep(2000);
@@ -284,7 +295,7 @@ void sysMonitor(UArg arg0, UArg arg1) {
 //        Task_sleep(1000);
 //        requestDisableDigitTimer(&hoursTensStruct, BIOS_WAIT_FOREVER);
 
-        Task_sleep(10000);
+        //Task_sleep(1000);
 //        if (loopCount % 2 == 0)
 //        {
 //            requestNewExtraState(&hoursTensStruct, false, BIOS_WAIT_FOREVER);
@@ -337,7 +348,7 @@ int main(void) {
     timeManagerParams.stack = &timeManagerStack;
     timeManagerParams.priority = TIME_MANAGER_PRIORITY;
     timeManagerParams.instance->name = "timeManager";
-    Task_construct(&timeManagerStruct, (Task_FuncPtr) timeThread, &timeManagerParams, NULL);
+    //Task_construct(&timeManagerStruct, (Task_FuncPtr) timeThread, &timeManagerParams, NULL);
 
     System_printf("Starting the example\nSystem provider is set to SysMin. "
                   "Halt the target to view any SysMin contents in ROV.\n");

@@ -80,6 +80,7 @@ extern "C" {
 
 #define GEN_LED_STRING_STRUCT_ELEMENTS(TYPE)\
    struct{ /*Overall ordering*/\
+   TYPE hoursOnes[NUM_LEDS_NO_EXTRA];\
    TYPE hoursTens[NUM_LEDS_NO_EXTRA];\
    TYPE hoursTensExtras[3];\
    }

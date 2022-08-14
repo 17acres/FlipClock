@@ -19,7 +19,7 @@
 #include <ti/sysbios/knl/Event.h>
 #include <ti/sysbios/hal/Timer.h>
 
-#define DIGIT_APPLY_TIME 300u //ms motor is on
+#define DIGIT_APPLY_TIME 500u //ms motor is on
 #define EXTRA_APPLY_TIME 500u
 #define DIGIT_ANIMATION_TIME 200u //ms
 #define DIGIT_FULL_APPLY_INTERVAL (30u*60u*1000u) //ms between applying all digits to ensure they are placed correctly
@@ -43,6 +43,7 @@ typedef struct DigitStruct {
     Dtc driverPlausibilityDtc;
     Dtc hsdFaultDtc;
     Dtc overcurrentAverageDtc;
+    SegInvertMask invertMask;
 } DigitStruct;
 
 typedef enum ApplyMode{

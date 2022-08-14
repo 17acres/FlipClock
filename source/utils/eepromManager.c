@@ -54,7 +54,7 @@ void readEEPROM(uint32_t *data, EEPROMBlock block) {
     GateMutexPri_leave(mutexHandle, key);
 }
 
-extern uint32_t blockSizes[]={
+extern uint32_t blockSizes[]={ //must be a multiple of 4 bytes
    sizeof(DtcDataFrame),
    sizeof(SegWearData),
    sizeof(uint8_t)//SHOULD BE WARNING EXCESS INITIALIZERS

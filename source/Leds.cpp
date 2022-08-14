@@ -58,11 +58,12 @@ extern "C" void updateLeds(UArg arg0, UArg arg1) {
         while (Mailbox_pend(maskRequestMailbox, &request, BIOS_NO_WAIT)) {
             switch (request.segmentLedId) {
                 case (SEG_LED_ID_HOURS_TENS):
-                    calculateMask(request.segState, ledStringMasks.hoursTens, false, ledStringMasks.hoursTensExtras, 3);  //3 LEDs after hoursTens are the extra
+                        calculateMask(request.segState, ledStringMasks.hoursTens, false, 0, 0);
+                    //calculateMask(request.segState, ledStringMasks.hoursTens, false, ledStringMasks.hoursTensExtras, 3);  //3 LEDs after hoursTens are the extra
                     break;
-//				case (SEG_LED_ID_HOURS_ONES):
-//					selectedMaskArray = ledStringMasks.hoursOnes;
-//					break;
+				case (SEG_LED_ID_HOURS_ONES):
+                    calculateMask(request.segState, ledStringMasks.hoursOnes, false, 0, 0);
+					break;
 //				case (SEG_LED_ID_MINUTES_TENS):
 //					selectedMaskArray = ledStringMasks.minutesTens;
 //					break;

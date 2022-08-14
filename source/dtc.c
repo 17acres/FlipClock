@@ -40,10 +40,10 @@ const uint8_t dtcMaturityThresholds[DTC_COUNT] = {
         1,
         1,
         1,
-        2,
-        2,
-        2,
-        2,
+        4,
+        4,
+        4,
+        4,
         5,
         5,
         5,
@@ -158,6 +158,7 @@ void saveDtcs() {
 }
 
 void ageDtcs() {
+
     readEEPROM((uint32_t *)&oldDtcData, EEPROMBLOCK_DTC);
     oldDtcData.age = oldDtcData.age + 1;
     writeEEPROM((uint32_t *)&oldDtcData, EEPROMBLOCK_DTC);

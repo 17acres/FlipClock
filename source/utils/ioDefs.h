@@ -22,8 +22,8 @@
 
 //AD0, AD1 (AD0 is MSB)
 #define IO_0_ADDR (0x48>>1)
-#define IO_1_ADDR (0x4C>>1)
-#define IO_2_ADDR (0x4A>>1)
+#define IO_1_ADDR (0x4A>>1)
+#define IO_2_ADDR (0x4C>>1)
 #define IO_3_ADDR (0x4E>>1)
 
 #define DRV_FWD 0x2
@@ -70,6 +70,17 @@
  * P17	S0R
  */
 #include "../../ESPCode/SMBusIM.h" //SegState
+
+typedef struct SegInvertMask {
+    bool a;
+    bool b;
+    bool c;
+    bool d;
+    bool e;
+    bool f;
+    bool g;
+    bool extra;
+}SegInvertMask;
 
 typedef struct SegStateFade { //255 means full brightness. like SegState but for variable brightness
     uint8_t a;
@@ -137,6 +148,9 @@ extern const SegState segValGOnly;
 
 extern const SegState *segValNumberArray[10];
 
+extern const SegInvertMask segInvNone;
+extern const SegInvertMask segInvAll;
+
 /*Bitwise OR of everything.
  * So if you OR segValShowExtra with segVal_r you get r with extra.
  * But if you OR Blank with Hide you get Off.
@@ -151,17 +165,18 @@ SegState unionSegPriority(SegState newState, SegState oldState);
 SegState subtractSeg(SegState newState, SegState oldState);
 
 SegState invertSegState(SegState state);
+SegState invertSegStateWithMask(SegState state,SegInvertMask invertMask);
 SegState replaceNonOffWithBrake(SegState state);
 
 SegStateFade calculateFadedSegState(SegState state);
 SegStateFade rampSegState(SegState oldState, SegState newState, uint8_t amountOfOverlay);
 
 //set state then turn off after delayms
-bool applySegState(uint8_t slaveAddress, SegState state, uint32_t onTimeMs);
-bool applySegDelta(uint8_t slaveAddress, SegState oldState, SegState newState, uint32_t onTimeMs);
+bool applySegState(uint8_t slaveAddress, SegState state, SegInvertMask invertMask, uint32_t onTimeMs);
+bool applySegDelta(uint8_t slaveAddress, SegState oldState, SegState newState, SegInvertMask invertMask, uint32_t onTimeMs);
 
 char getSegStateLocationName(SegState location);//only works on segVal*Only or segValShowExtra
 void printAllDigits(SegState applyState, uint8_t slaveAddress);
 //Simply apply state to motors and return success
-bool setSegStateNonBlocking(uint8_t slaveAddress, SegState state);
+bool setSegStateNonBlocking(uint8_t slaveAddress, SegState state, SegInvertMask invertMask);
 #endif

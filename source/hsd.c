@@ -21,7 +21,7 @@
 
 static volatile uint32_t rawAdcValues[5];
 volatile ProcessedAdcVals analogData;
-volatile uint16_t recentSelectedRawValue[100];
+volatile ProcessedAdcVals recentVals[20];//todo debug only
 volatile size_t valArrIdx;
 volatile ProcessedAdcVals maxAnalogData;
 volatile ProcessedAdcVals filteredAnalogData;
@@ -53,8 +53,8 @@ void processRawAdcValues() {
     analogData.hsdCurrents[2] = ((float) rawAdcValues[2]) * 3.3 / 4096 * HSD_VOLTS_PER_AMP;
     analogData.hsdCurrents[3] = ((float) rawAdcValues[3]) * 3.3 / 4096 * HSD_VOLTS_PER_AMP;
 
-    recentSelectedRawValue[valArrIdx] = rawAdcValues[0];
-    valArrIdx = (valArrIdx + 1) % 100;
+    recentVals[valArrIdx] = analogData;
+    valArrIdx = (valArrIdx + 1) % 20;
     if (++analogData.sampleCount == 3) {
         analogData.qf = true;
         clearMaxAdcVals();
@@ -79,7 +79,7 @@ void updateMaxVals() {
 }
 
 void calculateFilteredVals() {
-    const float alpha=0.05;//10hz sampling rate
+    const float alpha=0.005;//10hz sampling rate
     const float oldFactor=1-alpha;
     for (int i = 0; i < 4; i++) {
         filteredAnalogData.hsdCurrents[i] = alpha*analogData.hsdCurrents[i]+oldFactor*filteredAnalogData.hsdCurrents[i];
