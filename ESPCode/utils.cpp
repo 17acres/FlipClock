@@ -1,8 +1,4 @@
 #include "utils.hpp"
-#include "hvLeds.hpp"
-#include "animationManager.hpp"
-#include "addrLeds.hpp"
-#include "lightSwitch.hpp"
 #include "webServer.hpp"
 
 double Utils::temperature = 72;

@@ -9,7 +9,7 @@
 #include <PubSubClient.h>
 #include <ESP8266WiFi.h>
 #include <ArduinoJson.h>
-
+#include "BufferedSerial.hpp"
 #include "auth.hpp"
 
 extern "C"
@@ -49,12 +49,12 @@ public:
         // char errStr[120];
         // errStr[0]=0;
         // wiFiClient.getLastSSLError(errStr,120);
-        // IFDEBUG(Serial.println(errStr));
+        // IFDEBUG(BufferedSerial::println(errStr));
 
         mqttClient.setCallback(mqttHandler);
         mqttClient.setBufferSize(512);
         mqttClient.setSocketTimeout(1);
-        IFDEBUG(Serial.println("Web Server Initialized"));
+        IFDEBUG(BufferedSerial::println("Web Server Initialized"));
     }
     static void update()
     {
@@ -66,7 +66,7 @@ public:
             isWakeupSoon = false;
             if (Animations::AnimationManager::getInstance()->getCurrentAnimation() == Animations::Off::getInstance())
             {
-                IFDEBUG(Serial.println("Slow On Started"));
+                IFDEBUG(BufferedSerial::println("Slow On Started"));
                 Animations::AnimationManager::getInstance()->setAnimation(Animations::SlowOn::getInstance());
                 Animations::AnimationManager::getInstance()->restartAnimation();
             }
@@ -105,14 +105,14 @@ public:
         String topicStr = String(topic);
         if (topicStr.indexOf("control") != -1)
         {
-            IFDEBUG(Serial.println((char *)payload));
+            IFDEBUG(BufferedSerial::println((char *)payload));
             StaticJsonDocument<128> root;
             DeserializationError err = deserializeJson(root, payload);
 
             // Test if parsing succeeds.
             if (err.code() != DeserializationError::Ok)
             {
-                IFDEBUG(Serial.println("parseObject() failed"));
+                IFDEBUG(BufferedSerial::println("parseObject() failed"));
                 return;
             }
             String requestStr = root["data"];
@@ -131,8 +131,8 @@ public:
             {
                 String path = requestStr.substring(0, min(requestStr.indexOf('?'), (int)requestStr.length()));
                 String args = requestStr.substring(max(requestStr.indexOf('=') + 1, 0), (int)requestStr.length());
-                IFDEBUG(Serial.println(path));
-                IFDEBUG(Serial.println(args));
+                IFDEBUG(BufferedSerial::println(path));
+                IFDEBUG(BufferedSerial::println(args));
                 if (path == "/lightOn")
                 {
                     handleSwitchRequest();
@@ -171,7 +171,7 @@ public:
             sprintf(topic, "%s/%s", "ceilinglight", "control");
             mqttClient.subscribe(topic);
 
-            IFDEBUG(Serial.println("Connected to Beebotte MQTT"));
+            IFDEBUG(BufferedSerial::println("Connected to Beebotte MQTT"));
         }
         return mqttClient.connected();
     }
@@ -187,16 +187,16 @@ public:
             {
                 lastReconnectAttempt = now;
                 // Attempt to reconnect
-                IFDEBUG(Serial.println("Reconnecting MQTT"));
+                IFDEBUG(BufferedSerial::println("Reconnecting MQTT"));
                 if (reconnectMQTT())
                 {
-                    IFDEBUG(Serial.println("MQTT Reconnected"));
+                    IFDEBUG(BufferedSerial::println("MQTT Reconnected"));
                     lastReconnectAttempt = 0;
                     reconnectDelayTime = 5000;
                 }
                 else
                 {
-                    IFDEBUG(Serial.println("MQTT Not Reconnected"));
+                    IFDEBUG(BufferedSerial::println("MQTT Not Reconnected"));
                     if(reconnectDelayTime<1000*60*60)//12 hrs max retry time
                         reconnectDelayTime=reconnectDelayTime*4; //exponential backoff
                 }
@@ -210,7 +210,7 @@ public:
 
     static String handleSwitchRequest()
     {
-        IFDEBUG(Serial.println("Switch request received\n"));
+        IFDEBUG(BufferedSerial::println("Switch request received\n"));
         EmailSender::sendDebugEmail("Switch web request received", true);
         LightSwitch::getInstance()->handleSwitchToggle();
         return "Switch request received\n";
@@ -227,7 +227,7 @@ public:
         else
         {
 
-            IFDEBUG(Serial.println("Wakeup request received: " + args + "\n"));
+            IFDEBUG(BufferedSerial::println("Wakeup request received: " + args + "\n"));
             EmailSender::sendDebugEmail("Wakeup light request received", "Args: " + args, true);
 
             int minutesBefore = args.substring(args.indexOf(';') + 1).toInt();
@@ -246,7 +246,7 @@ public:
 
             wakeupStartTime -= minutesBefore * 60; //subtract number of seconds
             int timeUntil = wakeupStartTime - currentTime;
-            IFDEBUG(Serial.println(timeUntil));
+            IFDEBUG(BufferedSerial::println(timeUntil));
             isWakeupSoon = true;
             EmailSender::sendDebugEmail("Wakeup light request received", "Args: " + args + "<br>Alarm Time: " + asctime(alarmTimeStruct) + "<br>Start Time: " + asctime(localtime(&wakeupStartTime)) + "<br>Time Until Target: " + (timeUntil / (60 * 60)) + ":" + (timeUntil % (60 * 60) / 60) + ":" + (timeUntil % 60), true);
             return "Wakeup request received: " + args + "\n";
@@ -255,37 +255,37 @@ public:
 
     static String handleSetModeRequest(String args)
     {
-        IFDEBUG(Serial.println("Mode selection received: " + args + "\n"));
+        IFDEBUG(BufferedSerial::println("Mode selection received: " + args + "\n"));
         args.toLowerCase();
         EmailSender::sendDebugEmail("Mode selection received", "Args: " + args, true);
         if (args.indexOf("slow") >= 0)
         {
             Animations::AnimationManager::getInstance()->doTransition(Animations::SlowOn::getInstance());
-            IFDEBUG(Serial.println("Slow On mode by direct request"));
+            IFDEBUG(BufferedSerial::println("Slow On mode by direct request"));
         }
         else if (args.indexOf("on") >= 0)
         {
             Animations::AnimationManager::getInstance()->doTransition(Animations::On::getInstance());
-            IFDEBUG(Serial.println("On mode by direct request"));
+            IFDEBUG(BufferedSerial::println("On mode by direct request"));
         }
         else if (args.indexOf("party") >= 0)
         {
             Animations::AnimationManager::getInstance()->doTransition(Animations::Party::getInstance());
-            IFDEBUG(Serial.println("Party mode by direct request"));
+            IFDEBUG(BufferedSerial::println("Party mode by direct request"));
         }
         else if (args.indexOf("night") >= 0)
         {
             Animations::AnimationManager::getInstance()->doTransition(Animations::NightLight::getInstance());
-            IFDEBUG(Serial.println("Night light mode by direct request"));
+            IFDEBUG(BufferedSerial::println("Night light mode by direct request"));
         }
         else if (args.indexOf("off") >= 0)
         {
             Animations::AnimationManager::getInstance()->doTransition(Animations::Off::getInstance());
-            IFDEBUG(Serial.println("Off mode by direct request"));
+            IFDEBUG(BufferedSerial::println("Off mode by direct request"));
         }
         else
         {
-            IFDEBUG(Serial.println("Invalid selection"));
+            IFDEBUG(BufferedSerial::println("Invalid selection"));
         }
         return "Mode selection received: " + args + "\n";
     }

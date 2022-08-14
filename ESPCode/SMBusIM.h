@@ -37,6 +37,7 @@ enum SMBusCommandCodes
     CC_BW_SET_EMAIL_TO_ADDR,
     CC_BW_SET_EMAIL_SUBJECT,
     CC_BW_SET_EMAIL_BODY,
+    CC_BW_SEND_MQTT_LOG,//throw a note saying that reset caused by tm4c. just put in bufferedSerial
 
     // No Action (remote command only)
     CC_RC_PAUSE_SEGMENTS,
@@ -195,7 +196,7 @@ typedef struct BW_ReadStatusStruct{
 }BW_ReadStatusStruct;
 
 
-//CC_BW_SET_EMAIL_TO_ADDR, CC_BW_SET_EMAIL_SUBJECT, CC_BW_SET_EMAIL_BODY char of variable length (up to 255 max)
+//CC_BW_SET_EMAIL_TO_ADDR, CC_BW_SET_EMAIL_SUBJECT, CC_BW_SET_EMAIL_BODY, CC_BW_SEND_MQTT_LOG null-terminated char array of variable length (up to 255 max)
 
 
 // typedef union RemoteCommandRequestData

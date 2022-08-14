@@ -22,7 +22,7 @@ public:
     static void sendEmail(String subject, String body, bool isLog);
     static void sendEmail(String subject, bool isLog);
     static void runSpooler(std::function<void(void)> whileWaiting);
-    static void sendActualSMTP();
+    static void sendActualSMTP(std::function<void(void)> whileWaiting);
     static void sendActualMQTT();
 };
 #endif

@@ -1,4 +1,7 @@
 #include "webServer.hpp"
+#include "BufferedSerial.hpp"
+#include <ESP_EEPROM.h>
+
 ESP8266WebServer WebServer::server(80);
 WiFiClient WebServer::wiFiClient;
 PubSubClient WebServer::mqttClient(wiFiClient);
@@ -6,7 +9,7 @@ bool WebServer::isWakeupSoon;
 bool WebServer::hackFlag;
 time_t WebServer::wakeupStartTime;
 AsyncPing WebServer::ping;
-//BearSSL::X509List WebServer::cert;
+// BearSSL::X509List WebServer::cert;
 char WebServer::mqttId[17];
 const char WebServer::validMQTTIdChars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
@@ -49,16 +52,16 @@ const char WebServer::validMQTTIdChars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJ
 
 void WebServer::runPingTest()
 {
-    ping.on(false,[](const AsyncPingResponse &response) {
+    ping.on(false, [](const AsyncPingResponse &response)
+            {
         if (response.total_recv == 0)
         { //no ping responses
-            if (Animations::AnimationManager::getInstance()->getCurrentAnimation() != Animations::SlowOn::getInstance()){
-                Serial.println("Ping Failed!!!!!!!!!");
-                ESP.reset();
-            }
+            BufferedSerial::println("Ping Failed!!!!!!!!!");
+            EEPROM.put(0,1);
+            EEPROM.commit();
+            ESP.reset();
         }
-        return true;
-    });
+        return true; });
     ping.begin(WiFi.gatewayIP(), 5, 1000);
-    //ping.begin(IPAddress(192,168,11,99), 5, 1000);
+    // ping.begin(IPAddress(192,168,11,99), 5, 1000);
 }

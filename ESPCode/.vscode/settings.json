@@ -78,7 +78,9 @@
         "EEPROM",
         "IFDEBUG",
         "Leds",
+        "Mqtt",
         "println",
-        "SLOWON"
+        "SLOWON",
+        "SSID"
     ]
 }

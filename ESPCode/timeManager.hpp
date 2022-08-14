@@ -26,7 +26,7 @@ public:
     {
         settimeofday_cb(time_is_set);
         configTime(TZ_America_Detroit, "pool.ntp.org");
-        IFDEBUG(Serial.println("Time Manager Initialized"));
+        IFDEBUG(BufferedSerial::println("Time Manager Initialized"));
     }
     static time_t getTime()
     {

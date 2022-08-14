@@ -5,30 +5,25 @@
 
 #include "webServer.hpp"
 #include "defs.hpp"
+#include "BufferedSerial.hpp"
 #include <time.h>
 //#define SETEEPROM
 
 
 void setup()
 {
-    EEPROM.begin(5);
-#ifdef SETEEPROM
-#pragma message "WRITING EEPROM"
-    EEPROM.put(0,(unsigned int)2533914);
-    EEPROM.put(4, 0);
+    BufferedSerial::setup();
+
+    uint8_t val;
+    EEPROM.get(0,val);
+    if(val==0){
+        BufferedSerial::println("Unknown Reset Cause");
+    }else if(val==1){
+        BufferedSerial::println("Reset Due to Ping Failed");
+    }
+    EEPROM.put(0,0);
     EEPROM.commit();
-#endif
-
-    Serial.begin(115200);//Do this before RX pin is repurposed for dma LEDs (i2s)
-
     //gdbstub_init();
-
-
-
-    unsigned int numSeconds;
-    EEPROM.get(0, numSeconds);
-    IFDEBUG(Serial.print("On Mode Second Count "));
-    IFDEBUG(Serial.println(numSeconds));
 
     pinMode(LED_BUILTIN, OUTPUT);
     digitalWrite(LED_BUILTIN, LOW);
@@ -46,11 +41,11 @@ void setup()
     if (WiFi.status() != WL_CONNECTED)
     {
         Utils::wifiPresent = false;
-        IFDEBUG(Serial.println("No WiFi"));
+        IFDEBUG(BufferedSerial::println("No WiFi"));
     }
     else{
         
-        IFDEBUG(Serial.println("WiFi Connected"));
+        IFDEBUG(BufferedSerial::println("WiFi Connected"));
     }
         
     TimeManager::setup();
@@ -64,7 +59,11 @@ void setup()
     EmailSender::setup();
     
     //TODO: read SMbus to get TM4C status
-    EmailSender::sendEmail("Ceiling light started - On Mode Hours: " + String(((double)numSeconds) / (60.0 * 60.0)), false);
+    //EmailSender::sendEmail("Ceiling light started - On Mode Hours: ", false);
+
+
+    Serial.println("Full Buffer");
+    Serial.println(BufferedSerial::buffer);
 }
 
 void loop()
