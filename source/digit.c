@@ -22,8 +22,11 @@
 #include "safetyBarrier.h"
 #include "utils/segWearManager.h"
 
-static void timerISR(UArg arg0) {
-    Event_post(((DigitStruct *) arg0)->eventHandle, Event_Id_01);
+//order by hsdCurrentIdx
+DigitStruct* digitArr[]={&hoursTensStruct,&hoursOnesStruct,&minutesOnesStruct,&minutesTensStruct};
+
+static void timerISR(UArg arg) {//for some stupid reason the first byte is trashed
+    Event_post((digitArr[arg&&0xf])->eventHandle, Event_Id_01);
 }
 
 void calculateStateToApply(DigitStruct* digit, SegState requestedState, SegState lastState, SegState *actualRequestedState, SegState *applyState) {
@@ -84,7 +87,7 @@ void digitTask(UArg arg0, UArg arg1) {
             timerRunning = false;
 
             if (!flipInhibit)
-                setSegStateNonBlocking(digit->ioAddr, segValOff);
+                setSegStateNonBlocking(digit->ioAddr, segValOff, digit->invertMask);
 
             if (isPWMNotTone) {    //set mask based on PWM'd-to state
                 SegState actualRequestedState;
@@ -98,19 +101,19 @@ void digitTask(UArg arg0, UArg arg1) {
         } else if (eventIsTimer) {    //Tone/PWM
             if (isPWMNotTone) {
                 if (pwmCycleIndex == pwmOnIdx) { //see file in calculation stuff. Turning on at the end of the nth count and off at the end of the 0th makes n steps with downcounting.
-                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateHigh);
+                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateHigh, digit->invertMask);
                     --pwmCycleIndex;
                 } else if (pwmCycleIndex == 0) {
-                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
+                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow, digit->invertMask);
                     pwmCycleIndex = pwmCycleMax;
                 } else {
                     --pwmCycleIndex;
                 }
             } else {
                 if (pwmState) {
-                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateHigh);
+                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateHigh, digit->invertMask);
                 } else {
-                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
+                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow, digit->invertMask);
                 }
                 pwmState = !pwmState;
             }
@@ -170,7 +173,7 @@ void digitTask(UArg arg0, UArg arg1) {
                     setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, true);
                     timerStartTime = Clock_getTicks();
                     timerRunning = true;
-                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow);
+                    setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow, digit->invertMask);
                     Timer_start(digit->timerHandle);
                 }
             } else if (requestMail.mode == APPLY_MODE_NORMAL) {
@@ -196,7 +199,7 @@ void digitTask(UArg arg0, UArg arg1) {
                     //start flip
                     if (!flipInhibit) {
                         logSegWear(digit, applyState);
-                        setSegStateNonBlocking(digit->ioAddr, applyState);
+                        setSegStateNonBlocking(digit->ioAddr, applyState, digit->invertMask);
                     }
 
                     //animate LEDs
@@ -213,7 +216,7 @@ void digitTask(UArg arg0, UArg arg1) {
                         //if longer animation time than apply time, flip before animation is done
                         if ((!segCleared) && ((i * 1000 / LED_FPS) > applyTime)) {
                             if (!flipInhibit)
-                                setSegStateNonBlocking(digit->ioAddr, segValOff);
+                                setSegStateNonBlocking(digit->ioAddr, segValOff, digit->invertMask);
                             setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
                             segCleared = true;
                         }
@@ -229,10 +232,10 @@ void digitTask(UArg arg0, UArg arg1) {
                     if (!segCleared) {
                         Task_sleep(applyTime - DIGIT_ANIMATION_TIME);
                         if (!flipInhibit)
-                            setSegStateNonBlocking(digit->ioAddr, segValOff);
+                            setSegStateNonBlocking(digit->ioAddr, segValOff, digit->invertMask);
                         setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
                     }
-
+//                    requestDigitPWM(digit, requestMail.requestedState, 100, 20, 5, 1000, 0);
                     lastState = actualRequestedState;
                 }
 
@@ -243,7 +246,7 @@ void digitTask(UArg arg0, UArg arg1) {
                 setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
 
                 if (!flipInhibit)
-                    setSegStateNonBlocking(digit->ioAddr, requestMail.requestedState);
+                    setSegStateNonBlocking(digit->ioAddr, requestMail.requestedState, digit->invertMask);
 
                 if (requestMail.mode == APPLY_MODE_SLEEP) {
                     flipInhibit = true;
@@ -282,7 +285,7 @@ void initDigit(DigitStruct* digit) {
     timerParams.extFreq.lo = 80000000;
     timerParams.extFreq.hi = 0;
     timerParams.period = 1000000;
-    timerParams.arg = (UArg) digit;
+    timerParams.arg = (UArg) digit->hsdCurrentIndex<<16;//for some reason the first byte is trashed
 
     digit->timerHandle = Timer_create(Timer_ANY, timerISR, &timerParams, NULL);
 
@@ -360,7 +363,13 @@ void requestSleep(DigitStruct* digit, uint32_t timeout) {
 }
 
 bool requestWake(DigitStruct* digit, uint32_t timeout) {
-    if ((!VIRTUAL_SEG) && (getDtcStatus(lookupDtc(digit->ioAddr)) == DTC_SET || !ENABLE_WDT)) { //don't melt stuff
+    if (
+           (!VIRTUAL_SEG)
+           && (
+                  (getDtcStatus(lookupDtc(digit->ioAddr)) == DTC_SET)
+                  || !ENABLE_WDT
+              )
+       ) { //don't melt stuff
         GPIO_write(digit->hsdDisableAddr, true);
         return false;
     } else {
@@ -383,7 +392,16 @@ DigitStruct hoursTensStruct = {
         .doFullApplyExtra = false, //set true for AP but not alarm icon
         .driverPlausibilityDtc = DTC_DRIVER_0_PLAUSIBILITY,
         .hsdFaultDtc = DTC_HSD_0_FAULT,
-        .overcurrentAverageDtc = DTC_HSD_0_AVERAGE_OVERCURRENT };
+        .overcurrentAverageDtc = DTC_HSD_0_AVERAGE_OVERCURRENT,
+        .invertMask = {
+                .a = false,
+                .b = false,
+                .c = false,
+                .d = false,
+                .e = false,
+                .f = false,
+                .g = false,
+                .extra = false }};
 DigitStruct hoursOnesStruct = {
         .ioAddr = IO_1_ADDR,
         .ledId = SEG_LED_ID_HOURS_ONES,
@@ -394,7 +412,16 @@ DigitStruct hoursOnesStruct = {
         .doFullApplyExtra = false,
         .driverPlausibilityDtc = DTC_DRIVER_1_PLAUSIBILITY,
         .hsdFaultDtc = DTC_HSD_1_FAULT,
-        .overcurrentAverageDtc = DTC_HSD_1_AVERAGE_OVERCURRENT };
+        .overcurrentAverageDtc = DTC_HSD_1_AVERAGE_OVERCURRENT,
+        .invertMask = {
+                .a = true,
+                .b = true,
+                .c = false,
+                .d = true,
+                .e = false,
+                .f = false,
+                .g = true,
+                .extra = false }};
 DigitStruct minutesTensStruct = {
         .ioAddr = IO_2_ADDR,
         .ledId = SEG_LED_ID_MINUTES_TENS,
@@ -405,7 +432,16 @@ DigitStruct minutesTensStruct = {
         .doFullApplyExtra = false,
         .driverPlausibilityDtc = DTC_DRIVER_2_PLAUSIBILITY,
         .hsdFaultDtc = DTC_HSD_2_FAULT,
-        .overcurrentAverageDtc = DTC_HSD_2_AVERAGE_OVERCURRENT };
+        .overcurrentAverageDtc = DTC_HSD_2_AVERAGE_OVERCURRENT,
+        .invertMask = {//TODO make this runtime changeable with segwear
+                .a = false,
+                .b = false,
+                .c = false,
+                .d = false,
+                .e = false,
+                .f = false,
+                .g = false,
+                .extra = false }};
 DigitStruct minutesOnesStruct = {
         .ioAddr = IO_3_ADDR,
         .ledId = SEG_LED_ID_MINUTES_TENS,
@@ -416,4 +452,13 @@ DigitStruct minutesOnesStruct = {
         .doFullApplyExtra = true, //AM/PM
         .driverPlausibilityDtc = DTC_DRIVER_3_PLAUSIBILITY,
         .hsdFaultDtc = DTC_HSD_3_FAULT,
-        .overcurrentAverageDtc = DTC_HSD_3_AVERAGE_OVERCURRENT };
+        .overcurrentAverageDtc = DTC_HSD_3_AVERAGE_OVERCURRENT,
+        .invertMask = {
+                .a = false,
+                .b = false,
+                .c = false,
+                .d = false,
+                .e = false,
+                .f = false,
+                .g = false,
+                .extra = false }};

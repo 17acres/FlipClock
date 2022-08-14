@@ -79,28 +79,32 @@ SegState subtractSeg(SegState newState, SegState oldState) {
 }
 
 SegState invertSegState(SegState state) { //passed by value
-    if ((state.a == DRV_FWD) || (state.a == DRV_REV))
+    return invertSegStateWithMask(state, segInvAll);
+}
+
+SegState invertSegStateWithMask(SegState state,SegInvertMask invertMask) { //passed by value
+    if ( invertMask.a && ((state.a == DRV_FWD) || (state.a == DRV_REV)) )
         state.a = ~state.a;
 
-    if ((state.b == DRV_FWD) || (state.b == DRV_REV))
+    if ( invertMask.b && ((state.b == DRV_FWD) || (state.b == DRV_REV)) )
         state.b = ~state.b;
 
-    if ((state.c == DRV_FWD) || (state.c == DRV_REV))
+    if ( invertMask.c && ((state.c == DRV_FWD) || (state.c == DRV_REV)) )
         state.c = ~state.c;
 
-    if ((state.d == DRV_FWD) || (state.d == DRV_REV))
+    if ( invertMask.d && ((state.d == DRV_FWD) || (state.d == DRV_REV)) )
         state.d = ~state.d;
 
-    if ((state.e == DRV_FWD) || (state.e == DRV_REV))
+    if ( invertMask.e && ((state.e == DRV_FWD) || (state.e == DRV_REV)) )
         state.e = ~state.e;
 
-    if ((state.f == DRV_FWD) || (state.f == DRV_REV))
+    if ( invertMask.f && ((state.f == DRV_FWD) || (state.f == DRV_REV)) )
         state.f = ~state.f;
 
-    if ((state.g == DRV_FWD) || (state.g == DRV_REV))
+    if ( invertMask.g && ((state.g == DRV_FWD) || (state.g == DRV_REV)) )
         state.g = ~state.g;
 
-    if ((state.extra == DRV_FWD) || (state.extra == DRV_REV))
+    if ( invertMask.extra && ((state.extra == DRV_FWD) || (state.extra == DRV_REV)) )
         state.extra = ~state.extra;
     return state;
 }
@@ -165,22 +169,22 @@ SegStateFade rampSegState(SegState oldState, SegState newState, uint8_t amountOf
     return ret;
 }
 
-bool applySegState(uint8_t slaveAddress, SegState state, uint32_t onTimeMs) {
-    writeData(slaveAddress, state.rawWord);
+bool applySegState(uint8_t slaveAddress, SegState state, SegInvertMask invertMask, uint32_t onTimeMs) {
+    writeData(slaveAddress, invertSegStateWithMask(state, invertMask).rawWord);
     Task_sleep(onTimeMs);
     return writeData(slaveAddress, segValOff.rawWord);
 }
 
-bool setSegStateNonBlocking(uint8_t slaveAddress, SegState state) {
+bool setSegStateNonBlocking(uint8_t slaveAddress, SegState state, SegInvertMask invertMask) {
     if(VIRTUAL_SEG){
         printAllDigits(state, slaveAddress);
         return true;
     }
-    return writeData(slaveAddress, state.rawWord);
+    return writeData(slaveAddress, invertSegStateWithMask(state, invertMask).rawWord);
 }
 
-bool applySegDelta(uint8_t slaveAddress, SegState oldState, SegState newState, uint32_t onTimeMs) {
-    return applySegState(slaveAddress, subtractSeg(newState, oldState), onTimeMs);
+bool applySegDelta(uint8_t slaveAddress, SegState oldState, SegState newState, SegInvertMask invertMask, uint32_t onTimeMs) {
+    return applySegState(slaveAddress, subtractSeg(newState, oldState), invertMask, onTimeMs);
 }
 
 const SegState segVal0 = {
@@ -672,6 +676,26 @@ const SegState segValGOnly = {
         .f = SEG_HIDE,
         .g = SEG_SHOW,
         .extra = SEG_OFF };
+
+const SegInvertMask segInvNone = {
+        .a = false,
+        .b = false,
+        .c = false,
+        .d = false,
+        .e = false,
+        .f = false,
+        .g = false,
+        .extra = false };
+
+const SegInvertMask segInvAll = {
+        .a = true,
+        .b = true,
+        .c = true,
+        .d = true,
+        .e = true,
+        .f = true,
+        .g = true,
+        .extra = true };
 
 char getSegStateLocationName(SegState location) {
     if (location.rawWord == segValAOnly.rawWord) {

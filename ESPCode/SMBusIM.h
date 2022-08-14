@@ -149,16 +149,17 @@ typedef struct DtcDataFrame{
     DtcStruct dtcStructs[DTC_COUNT];
     uint32_t age;
     uint32_t dataValid;
+    uint16_t EEPROM_PADDING;//size on eeprom must be multiple of 4 bytes, this rounds it up.
 }DtcDataFrame;
 
 extern const char *dtcNames[];
 
-typedef struct processedAdcVals {
+typedef struct ProcessedAdcVals {
     float hsdCurrents[4];
     float mcuTemp;//deg c
     bool qf;
     uint16_t sampleCount;
-} processedAdcVals;
+} ProcessedAdcVals;
 
 typedef union SegState {
     struct { //right ordering for io driver
@@ -177,9 +178,9 @@ typedef union SegState {
 //CC_BW_READ_STATUS
 typedef struct BW_ReadStatusStruct{
     uint32_t tm4cMillisSinceBoot;
-    processedAdcVals mostRecentAnalogData;
-    processedAdcVals filteredAnalogData;
-    processedAdcVals maxAnalogData;
+    ProcessedAdcVals mostRecentAnalogData;
+    ProcessedAdcVals filteredAnalogData;
+    ProcessedAdcVals maxAnalogData;
     bool hoursTensHsdEnabled;
     bool hoursOnesHsdEnabled;
     bool minutesTensHsdEnabled;

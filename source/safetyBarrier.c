@@ -64,7 +64,7 @@ void safetyBarrier(UArg arg0, UArg arg1) {
 
     if (ENABLE_WDT) {
         wdtParams.resetMode = Watchdog_RESET_ON;
-        wdtParams.debugStallMode = Watchdog_DEBUG_STALL_OFF;
+        wdtParams.debugStallMode = Watchdog_DEBUG_STALL_ON;//Watchdog_DEBUG_STALL_OFF;
     } else {
         wdtParams.resetMode = Watchdog_RESET_OFF;
         wdtParams.debugStallMode = Watchdog_DEBUG_STALL_ON;
@@ -100,8 +100,12 @@ void safetyBarrier(UArg arg0, UArg arg1) {
             }
         }
         if (!VIRTUAL_SEG) {
-            if (!checkAnalogValsOk())
+            if (!checkAnalogValsOk()){
                 wdtOk = false;
+                System_printf("Analog vals Not OK");
+                System_flush();
+            }
+
         }
 
         if (wdtOk) {
@@ -127,6 +131,8 @@ void safetyBarrier(UArg arg0, UArg arg1) {
             printDtcs();
             saveDtcs();
             saveSegWearData(true);
+            System_printf("******************* SYSTEM RESETTING ***************");
+            System_flush();
             Watchdog_setReload(wdtHandle, 0); //reset now
         }
         Hwi_restore(key);
@@ -137,6 +143,7 @@ void safetyBarrier(UArg arg0, UArg arg1) {
         }
 
         Task_sleep(calculateWDTPeriod() / 2);
+        //Task_sleep(calculateWDTPeriod() *4/3);
     }
 }
 
@@ -180,10 +187,13 @@ bool checkAnalogValsOk() {
 bool isHsdOrMotorDriverOk(DigitStruct *digit) {
     bool isAllDigitCoastOrBrake = (unionSeg((SegState) *getLastWrittenState(digit->ioAddr), (SegState) *getLastWrittenState(digit->ioAddr)).rawWord
             == segValOff.rawWord);
-    if ((isAllDigitCoastOrBrake || GPIO_read(digit->hsdDisableAddr)) && analogData.hsdCurrents[digit->hsdCurrentIndex] > 0.2) {
+    if ((isAllDigitCoastOrBrake || GPIO_read(digit->hsdDisableAddr)) && analogData.hsdCurrents[digit->hsdCurrentIndex] > 0.2) {//todo make this better to count each separate, open circuit kinda doesnt work
         setDtc(digit->driverPlausibilityDtc, analogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA off, short circuit");
-    } else if (!isAllDigitCoastOrBrake && !GPIO_read(digit->hsdDisableAddr) && filteredAnalogData.hsdCurrents[digit->hsdCurrentIndex] < 0.2) {
-        setDtc(digit->driverPlausibilityDtc, filteredAnalogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA on, open circuit"); //use filtered because it might sample most recently after the flip is done
+    } else if (!isAllDigitCoastOrBrake && !GPIO_read(digit->hsdDisableAddr) && analogData.hsdCurrents[digit->hsdCurrentIndex] < 0.2) {
+        setDtc(digit->driverPlausibilityDtc, analogData.hsdCurrents[digit->hsdCurrentIndex] * 1000, "mA on, open circuit");
+    }
+    else{
+        countDownDtc(digit->driverPlausibilityDtc);
     }
 
     if (analogData.hsdCurrents[digit->hsdCurrentIndex] > 7) {
