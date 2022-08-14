@@ -29,13 +29,14 @@ static void timerISR(UArg arg) {//for some stupid reason the first byte is trash
     Event_post((digitArr[arg&&0xf])->eventHandle, Event_Id_01);
 }
 
-void calculateStateToApply(DigitStruct* digit, SegState requestedState, SegState lastState, SegState *actualRequestedState, SegState *applyState) {
+void calculateStateToApply(DigitStruct* digit, SegState requestedState, SegState lastState, SegState *actualRequestedState, SegState *applyState, bool enableFullApply) {
     //Carry through state of extra in case of a non-extra request,
     //or non-extra in case of extra request.
+    //or with cascade apply
     *actualRequestedState = unionSegPriority(requestedState, lastState);
 
     uint32_t currentTime = Clock_getTicks();
-    if (currentTime > (digit->lastFullApplyTime + DIGIT_FULL_APPLY_INTERVAL)) {
+    if (currentTime > (digit->lastFullApplyTime + DIGIT_FULL_APPLY_INTERVAL) && enableFullApply) {
         *applyState = *actualRequestedState;
         if (!digit->doFullApplyExtra)
             applyState->extra = SEG_OFF;    //Don't destroy extra seg if it is the big motor
@@ -97,6 +98,7 @@ void digitTask(UArg arg0, UArg arg1) {
                                 digit->ledId };
                 requestMaskUpdate(&request, BIOS_NO_WAIT);
                 lastState = actualRequestedState; //actually save the state
+                digit->lastState=lastState; //RO copy to other threads
             }
         } else if (eventIsTimer) {    //Tone/PWM
             if (isPWMNotTone) {
@@ -147,6 +149,7 @@ void digitTask(UArg arg0, UArg arg1) {
                                     digit->ledId };
                     requestMaskUpdate(&request, BIOS_NO_WAIT);
                     lastState = actualRequestedState; //actually save the state
+                    digit->lastState=lastState; //RO copy to other threads
                 } else {
                     //process request
                     timerSegmentStateHigh = requestMail.requestedState;
@@ -176,14 +179,14 @@ void digitTask(UArg arg0, UArg arg1) {
                     setSegStateNonBlocking(digit->ioAddr, timerSegmentStateLow, digit->invertMask);
                     Timer_start(digit->timerHandle);
                 }
-            } else if (requestMail.mode == APPLY_MODE_NORMAL) {
+            } else if (requestMail.mode == APPLY_MODE_NORMAL||requestMail.mode == APPLY_MODE_CASCADE) {
                 Timer_stop(digit->timerHandle);
                 setSafetyBarrierWDTMode(SAFETY_BARRIER_TASK_DIGIT, false);
 
                 //process request
                 uint32_t numFrames = DIGIT_ANIMATION_TIME * LED_FPS / 1000;
                 SegState actualRequestedState, applyState;
-                calculateStateToApply(digit, requestMail.requestedState, lastState, &actualRequestedState, &applyState);
+                calculateStateToApply(digit, requestMail.requestedState, lastState, &actualRequestedState, &applyState, (requestMail.mode == APPLY_MODE_NORMAL) );
 
                 if (applyState.rawWord != segValOff.rawWord) {    //do nothing if no change
                     //calculate apply time
@@ -237,6 +240,7 @@ void digitTask(UArg arg0, UArg arg1) {
                     }
 //                    requestDigitPWM(digit, requestMail.requestedState, 100, 20, 5, 1000, 0);
                     lastState = actualRequestedState;
+                    digit->lastState=lastState; //RO copy to other threads
                 }
 
             } else if (requestMail.mode == APPLY_MODE_SLEEP || requestMail.mode == APPLY_MODE_WAKE || requestMail.mode == APPLY_MODE_NONSTOP) {
@@ -269,7 +273,7 @@ void initDigit(DigitStruct* digit) {
     mailboxParams.readerEventId = Event_Id_00;
 
 
-    digit->mailboxHandle = Mailbox_create(sizeof(DigitMail), 1, &mailboxParams, NULL);
+    digit->mailboxHandle = Mailbox_create(sizeof(DigitMail), 7, &mailboxParams, NULL);
     Types_Label label;
     label.iname=digit->name;
     label.named=true;
@@ -304,6 +308,46 @@ void requestNewDigitStateNormal(DigitStruct* digit, SegState state, uint32_t tim
             .mode = APPLY_MODE_NORMAL,
             .requestedState = state };
     Mailbox_post(digit->mailboxHandle, &mail, timeout);
+}
+void requestNewDigitStateCascade(DigitStruct* digit, SegState state, uint32_t timeout) {
+    //SegState segsToAdd=subtractSeg(state,digit->lastState);
+    //SegState segsToRemove=invertSegState(subtractSeg(digit->lastState,state));
+    SegState applyState = subtractSeg(unionSegPriority(state, digit->lastState), digit->lastState);
+    DigitMail mail = {.mode = APPLY_MODE_CASCADE};
+    if(applyState.a != DRV_COAST){
+        mail.requestedState=(SegState){.a=applyState.a};
+        Mailbox_post(digit->mailboxHandle, &mail, timeout);
+    }
+    if(applyState.f != DRV_COAST){
+        mail.requestedState=(SegState){.f=applyState.f};
+        Mailbox_post(digit->mailboxHandle, &mail, timeout);
+    }
+    if(applyState.b != DRV_COAST){
+        mail.requestedState=(SegState){.b=applyState.b};
+        Mailbox_post(digit->mailboxHandle, &mail, timeout);
+    }
+    if(applyState.g != DRV_COAST){
+        mail.requestedState=(SegState){.g=applyState.g};
+        Mailbox_post(digit->mailboxHandle, &mail, timeout);
+    }
+    if(applyState.e != DRV_COAST){
+        mail.requestedState=(SegState){.e=applyState.e};
+        Mailbox_post(digit->mailboxHandle, &mail, timeout);
+    }
+    if(applyState.c != DRV_COAST){
+        mail.requestedState=(SegState){.c=applyState.c};
+        Mailbox_post(digit->mailboxHandle, &mail, timeout);
+    }
+    if(applyState.d != DRV_COAST){
+        mail.requestedState=(SegState){.d=applyState.d};
+        Mailbox_post(digit->mailboxHandle, &mail, timeout);
+    }
+    //does full apply if needed, also handles extra
+    mail.requestedState=state;
+    mail.mode=APPLY_MODE_NORMAL;
+    Mailbox_post(digit->mailboxHandle, &mail, timeout);
+
+
 }
 
 void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency, uint32_t timerApplyTimeout, uint32_t requestTimeout) {

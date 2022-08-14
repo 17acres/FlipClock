@@ -194,9 +194,9 @@ void sysMonitor(UArg arg0, UArg arg1) {
         //SegState thisState = stateList[loopCount % numStates];
 
        //requestNewDigitStateNormal(&hoursTensStruct, *segValNumberArray[(loopCount%100) / 10], BIOS_WAIT_FOREVER);
-        requestNewDigitStateNormal(&hoursTensStruct, *segValNumberArray[(loopCount % 10)], BIOS_WAIT_FOREVER);
+        requestNewDigitStateCascade(&hoursTensStruct, *segValNumberArray[(loopCount % 10)], BIOS_WAIT_FOREVER);
        Task_sleep(5000);
-        requestNewDigitStateNormal(&hoursOnesStruct, *segValNumberArray[loopCount % 10], BIOS_WAIT_FOREVER);
+       requestNewDigitStateCascade(&hoursOnesStruct, *segValNumberArray[loopCount % 10], BIOS_WAIT_FOREVER);
         Task_sleep(5000);
         //requestNewDigitStateNormal(&hoursTensStruct, stateList[loopCount % numStates], BIOS_WAIT_FOREVER);
         //Task_sleep(1000);

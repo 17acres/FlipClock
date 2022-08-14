@@ -44,11 +44,13 @@ typedef struct DigitStruct {
     Dtc hsdFaultDtc;
     Dtc overcurrentAverageDtc;
     SegInvertMask invertMask;
+    SegState lastState;
 } DigitStruct;
 
 typedef enum ApplyMode{
     APPLY_MODE_INVALID=0,
     APPLY_MODE_NORMAL,
+    APPLY_MODE_CASCADE,
     APPLY_MODE_TONE,
     APPLY_MODE_PWM,
     APPLY_MODE_SLEEP,
@@ -75,6 +77,7 @@ void initDigit(DigitStruct* digit);
 
 //Safe to be called from any thread
 void requestNewDigitStateNormal(DigitStruct* digit, SegState state, uint32_t timeout);
+void requestNewDigitStateCascade(DigitStruct* digit, SegState state, uint32_t timeout);
 void requestNewExtraState(DigitStruct* digit, bool isShow, uint32_t timeout);
 void requestTone(DigitStruct* digit, SegState toneSegments, float toneFrequency, uint32_t timerApplyTimeout, uint32_t requestTimeout);
 void requestDigitPWM(DigitStruct* digit, SegState pwmGoalState, float cycleFrequency, uint8_t pwmStepsPerCycle, uint8_t pwmStepsOn, uint32_t timerApplyTimeout, uint32_t requestTimeout);
